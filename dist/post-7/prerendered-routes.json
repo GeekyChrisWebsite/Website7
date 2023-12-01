@@ -1,0 +1,14 @@
+{
+  "routes": [
+    "/",
+    "/contact-us",
+    "/forget",
+    "/home",
+    "/listing",
+    "/login",
+    "/posting",
+    "/register",
+    "/reset",
+    "/terms"
+  ]
+}
