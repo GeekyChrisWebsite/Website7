@@ -1,0 +1,109 @@
+.header {
+    .container {
+        .fliter {
+            display: block;
+
+            form {
+                .p-dropdown {
+                    justify-content: center;
+                    align-items: center;
+                    display: flex;
+                    height: 40px;
+                    width: 220px;
+
+                    span {
+                        text-align: center !important;
+                    }
+                }
+
+                input {
+                    border-radius: 4px;
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    -ms-border-radius: 4px;
+                    -o-border-radius: 4px;
+                    outline: none;
+                    border: 1px solid gray;
+                }
+
+                button {
+                    background-color: black;
+                    color: white;
+                    height: 40px;
+                    width: 200px;
+                    border-radius: 4px;
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    -ms-border-radius: 4px;
+                    -o-border-radius: 4px;
+                    border: none;
+                    .p-button-icon{
+                        margin-left: 50px;
+                        align-items: center;
+                        display: flex;
+                        justify-content: center;
+                    }	
+                }
+
+            }
+        }
+    }
+
+}
+.Explore {
+    .container {
+        .three-box {
+            .row {
+                .one {
+                    background-image: url("../../../assets/img/home/Rectangle 88.png");
+                    background-size: cover;
+                    height: 239px;
+                    width: 327px;
+                }
+
+                .two {
+                    background-image: url("../../../assets/img/home/Rectangle 7.png");
+                    background-size: cover;
+                    height: 239px;
+                    width: 327px;
+                }
+
+                .three {
+                    background-image: url("../../../assets/img/home/Rectangle 87.png");
+                    background-size: cover;
+                    height: 239px;
+                    width: 327px;
+                }
+            }
+        }
+    }
+}
+.p-tag-value {
+    width: 77px;
+    height: 21px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+@media (max-width: 767px) {
+    .header{
+        .container{
+            .fliter{
+                display: none !important;
+            }
+        }
+    }
+    
+   
+  
+}
+@media (min-width:768px) and (max-width:1400px) {
+    .header{
+        .container{
+            .fliter{
+                display: none !important;
+            }
+        }
+    }
+   
+}

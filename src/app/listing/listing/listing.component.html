@@ -1,0 +1,100 @@
+<section class="listing py-5">
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center py-5 gap-5 fliter d-lg-block d-md-none">
+        <form  class="gap-3 d-flex">
+          <p-dropdown [options]="" optionlabel="name" placeholder="Listings"></p-dropdown>
+            <p-dropdown formControlName="state" [options]="" optionLabel="name" placeholder="State">
+  
+          </p-dropdown>
+          <p-dropdown [options]="" optionLabel="name" placeholder="Category"></p-dropdown>
+          
+          <p-button label="Search" ></p-button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="Area py-5">
+    <div class="container">
+      <div class="row justify-content-between align-items-center d-flex">
+        <div class="">
+          <div class="d-flex justify-content-between align-items-center gap-3">
+            <h2 class="h1 p-0 m-0 me-3">Suggested Spa’s in your Area:</h2>
+  
+            <div>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                  type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                  <div class="par d-flex align-items-center justify-content-center gap-1">
+                    <i class="bx bx-list-ul fs-3" style="color: #020101"></i>
+                    <p class="p-0 m-0 hide">Grid View</p>
+                  </div>
+                </button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                  type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                  <div class="par d-flex align-items-center justify-content-center gap-1">
+                    <i class="bx bxs-image fs-3" style="color: #020101"></i>
+                    <p class="p-0 m-0 hide">  Gallery View</p>
+                  </div>
+                </button>
+                <button class="nav-link" id="nav-map-tab" data-bs-toggle="tab" data-bs-target="#nav-map"
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                <div class="par d-flex align-items-center justify-content-center gap-1">
+                  <i class='bx bx-map-alt fs-3' style="color: #020101"></i>
+                  <p class="p-0 m-0 hide">  Map View</p>
+                </div>
+              </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="tab-content py-5" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"tabindex="0">
+            <div class="row d-flex align-items-center justify-content-center gap-2">
+              <div class="col-md-5 " style="height: fit-content"  *ngFor="let item of data">
+                <div class="row d-flex flex-lg-row flex-md-column align-items-start gap-2 justify-content-start mx-1 ">
+                  <div class=" d-flex grid border p-0"  routerLink="/details/{{ item.id }}" >
+                    <div>
+                      <img src="{{ item.logo }}" alt="" height="140" width="130" />
+                    </div>
+                    <div class="contant m-2">
+                      <div class="d-flex align-items-between justify-content-between gap-md-5 gap-2 py-2">
+                        <h6 class=" text-start">{{ item.name }}</h6>
+                        <i class="bx bx-like fs-5" style="color: #0c0c0d"></i>
+                      </div>
+                      <small>{{ item.state + ", " + item.street }}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <div class="row d-flex align-items-start justify-content-start">
+              <div class="col-md-3" *ngFor="let item of data">
+                <div class="row gap-4 justify-content-center align-items-center">
+                  <div class="" >
+                    <p-card header="" >
+                      <ng-template pTemplate="header">
+                          <img alt="Card" src="{{item.logo}}"  width="300" height="200"/>
+                      </ng-template>
+                       <h6 class="text-center py-3">{{item.name}}</h6>
+                 
+                  </p-card>
+                  </div>
+                </div>
+               
+            
+              </div>
+            
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab" tabindex="0">
+            <img src="../../../assets/img/listing/map.png" alt="" class="justify-content-center align-items-center d-flex">
+            </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </section>

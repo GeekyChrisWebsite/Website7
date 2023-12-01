@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;500;600;700;800&display=swap');
+@import "primeicons/primeicons.css";
+
+*{
+    padding: 0;
+    margin: 0;
+
+}
+body{
+    font-family: 'Sarabun', sans-serif;
+}
+li a {
+    cursor: pointer;
+}
+

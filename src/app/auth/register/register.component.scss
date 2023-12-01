@@ -1,0 +1,71 @@
+
+
+
+@media (max-width: 767px) {
+    .mob{
+     justify-content: center;
+     align-items: center;
+     display: flex;
+    }
+     .hide-from-web {
+         display: none !important;
+     }
+ 
+     .p-input-icon-right>.p-inputtext {
+         padding-right:  2.75rem !important;
+     }
+     .right{
+         padding: 0px 0px !important;
+     }
+     .p-input-icon-right>.p-inputtext {
+         padding-right: .5rem !important;
+     }
+ 
+ 
+ }
+ 
+ button {
+     background-color: black;
+     border-radius: 4px;
+     -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+     -ms-border-radius: 4px;
+     -o-border-radius: 4px;
+     height: 48px;
+     width: 512px;
+     color: white;
+     border: none;
+     outline: none;
+ }
+ .left{
+     height: 100vh;
+     background-image: url("../../../assets/img/auth/login.png");
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     width: 35%;
+ }
+ .right{
+     width: 65%;
+     padding: 0px 200px;
+ }
+ 
+ .p-input-icon-right>.p-inputtext {
+     border: none;
+     height: 39px;
+ }
+ 
+ .p-password-panel {
+     display: none !important;
+ }
+ 
+ .p-inputtext:enabled:focus:first-child {
+     box-shadow: none;
+ }
+ 
+ .p-inputtext:enabled:focus:last-child {
+     box-shadow: none;
+     border: #000000 solid 1px;
+ }
+ .p-input-icon-right>.p-inputtext {
+     padding-right: 20.5rem;
+ }
