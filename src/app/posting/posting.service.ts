@@ -15,4 +15,7 @@ export class PostingService {
   GetPostingByID(id:any){
     return this._http.get(`${environment.BACKEND_DOMAIN}/get-post-website_request/${id}`);
   }
+  vipposts(){
+    return this._http.get(`${environment.BACKEND_DOMAIN}/vip-posts`);
+  }
 }

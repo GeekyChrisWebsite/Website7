@@ -14,6 +14,8 @@ export const routes: Routes = [
     {path:'reset',loadComponent:()=> import('./auth/resetpassword/resetpassword.component').then(m=>m.ResetpasswordComponent)},
     {path:'contact-us',loadComponent:()=> import('./auth/contact-us/contact-us.component').then(m=>m.ContactUsComponent)},
     {path:'terms',loadComponent:()=> import('./shared/terms-conditions/terms-conditions.component').then(m=>m.TermsConditionsComponent)},
+    {path:'state',title:'State',loadComponent:()=> import('./shared/state/state.component').then(m=>m.StateComponent)},
+    {path:'city',title:'City',loadComponent:()=> import('./shared/city/city.component').then(m=>m.CityComponent)}
 
 
    

@@ -1,4 +1,46 @@
+<section class="slider py-5" ngSkipHydration>
+  <div class="container py-5" *ngIf="vip">
+    <h2 class="text-center py-3 h1">VIP Post</h2>
+    <div>
+      <p-carousel  class="gap-5" [value]="vip" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions"  [autoplayInterval]="3000">
+        <ng-template let-product pTemplate="item"  class="gap-5">
+          <div class="row justify-content-center align-items-center gap-5" >
+            <div class="col-md-3  " style="width: 95%;">
+              <div>
+                <img src="{{product.images[0]}}" alt="" class="w-100 rounded-top rounded-2">
+              </div>
+              <img src="../../../assets/img/posting/VIP TAG.png" alt="" class="corner-image">
 
+              <div class="body bg-white rounded-bottom py-3">
+                <div class="title py-2">
+                  <div class="d-flex justify-content-center align-items-center gap-5">
+                    <div class="justify-content-center align-items-center d-flex">
+                      <i class='bx bx-like fs-3' style='color:#DDAC17'></i>
+                      <small>166</small>
+                    </div>
+                    <div>
+                      <h5 class="gold text-center m-0">{{product.title}}</h5>
+                      <div class="d-flex align-items-center">
+                        <img src="../../../assets/img/posting/image 2.png" alt="" class="w-100">
+                        <p class="m-0 text-location text-nowrap">{{ product.business.state + ',' + product.business.street }}</p>                      </div>
+                    </div>
+                    <div></div>
+                  </div>
+                </div>
+                <div class="btns d-flex justify-content-center align-items-center gap-3 py-1">
+                  <button class="date"><img src="../../../assets/img/posting/image 3.png" alt=""></button>
+                  <button class="call"><img src="../../../assets/img/posting/image 1.png" alt=""></button>
+                  <button class="location"><img src="../../../assets/img/posting/image 2.png" alt=""></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        </ng-template>
+      </p-carousel>
+      </div>
+      </div>
+</section>
 <section class="Area py-5">
     <div class="container">
       <div class="row justify-content-between align-items-center d-flex">

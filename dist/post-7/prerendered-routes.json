@@ -1,6 +1,7 @@
 {
   "routes": [
     "/",
+    "/city",
     "/contact-us",
     "/forget",
     "/home",
@@ -9,6 +10,7 @@
     "/posting",
     "/register",
     "/reset",
+    "/state",
     "/terms"
   ]
 }
