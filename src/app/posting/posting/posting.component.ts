@@ -57,6 +57,13 @@ export class PostingComponent {
 
     })
    }
+   makePhoneCall(phoneNumber: string): void {
+    // You can perform additional actions before initiating the call
+    console.log('Initiating phone call to:', phoneNumber);
+
+    // Use window.location.href to initiate the call
+    window.location.href = 'tel:' + phoneNumber;
+  }
  
   ngOnInit(): void {
     this.responsiveOptions = [
