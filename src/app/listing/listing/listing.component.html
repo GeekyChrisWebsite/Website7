@@ -91,10 +91,22 @@
             </div>
           </div>
           <div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab" tabindex="0">
-            <img src="../../../assets/img/listing/map.png" alt="" class="justify-content-center align-items-center d-flex">
+            <ng-container *ngIf="(apiLoaded | async) as isApiLoaded">
+              <google-map height="400px" width="750px" #map>
+                <ng-container *ngIf="isApiLoaded">
+                  <ng-container *ngFor="let position of data;">
+                    <map-marker [position]="position.geo_direction" [options]="options"></map-marker>
+                  </ng-container>
+                </ng-container>
+              </google-map>
+            </ng-container>
+             
+            
             </div>
         </div>
-        <div></div>
+        <div>
+
+        </div>
       </div>
     </div>
   </section>
