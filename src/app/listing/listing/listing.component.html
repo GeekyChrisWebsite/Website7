@@ -1,0 +1,74 @@
+<section class="searchBar py-5">
+  <div class="container">
+    <div class="div-searchBar2 py-2 form-control w-100 justify-content-center align-items-center d-flex">
+      <div class="form-group">
+        <div class="div-searchBar justify-content-center align-items-center d-flex" style="gap: 10rem">
+          <form *ngIf="filterform" [formGroup]="filterform" (ngSubmit)="onSubmit()">
+
+            <p-dropdown formControlName="categories" [options]="categories" placeholder="Select a Category"
+              (onChange)="oncategorychange($event)"></p-dropdown>
+            <p-dropdown formControlName="states" [options]="states" placeholder="Select a State"
+              (onChange)="onstatechange($event)"></p-dropdown>
+            <p-dropdown formControlName="cities" [options]="cities" placeholder="Select a City"
+              (onChange)="oncitychange($event)"></p-dropdown>
+            <button class="Search-btn ms-5" [disabled]="!filterform.valid" (click)="getDataAll()">Search</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="listing py-5 mx-3">
+  <div class="spas">
+    <div class="container">
+      <div class="title mb-4">
+        <h3>Top businesses in your Area</h3>
+      </div>
+      <div class="view d-flex justify-content-between">
+        <div class="suggest">
+          <h6 class="m-0">Suggested Results:</h6>
+        </div>
+        <div class="views d-flex gap-3">
+          <div (click)="showList()" class="box d-flex gap-2" [ngClass]="listView ? 'active' : null">
+            <i class="bx bx-grid bx-flip-horizontal fs-3" style="color: #8dd3bb"></i>
+
+            <p class="m-0 d-none d-lg-block">List View</p>
+          </div>
+          <div (click)="showGallery()" class="box d-flex gap-2" [ngClass]="galleyView ? 'active' : null">
+            <i class="bx bx-photo-album bx-flip-horizontal fs-3" style="color: #8dd3bb"></i>
+            <p class="m-0 d-none d-lg-block">Gallery View</p>
+          </div>
+          <div (click)="showMap()" class="box d-flex gap-2" [ngClass]="mapView ? 'active' : null">
+            <i class="bx bx-map-alt bx-flip-horizontal fs-3" style="color: #8dd3bb"></i>
+
+            <p class="m-0 d-none d-lg-block">Map View</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @if(listView){
+  <div class="view-data">
+    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
+      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
+      animationDuration=".5s"></p-progressSpinner>
+
+    <app-list-view [listingArray]="listingArray" [filterarray]="filterarray" [distances]="distances"></app-list-view>
+  </div>
+  } @if(galleyView){
+  <div class="view-data">
+    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
+      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
+      animationDuration=".5s"></p-progressSpinner>
+    <app-gallery-view [listingArray]="listingArray" [filterarray]="filterarray"></app-gallery-view>
+  </div>
+  } @if(mapView){
+  <div class="view-data">
+    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
+      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
+      animationDuration=".5s"></p-progressSpinner>
+    <app-map-view [listingArray]="listingArray" [filterarray]="filterarray"></app-map-view>
+  </div>
+  }
+</section>

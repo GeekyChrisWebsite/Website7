@@ -1,0 +1,41 @@
+.list-img{
+    .container{
+        .row{
+            .col-md-3{
+                .card{
+                    border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                    box-shadow: 0px 4px 4px 0px #00000040;
+                    img
+                          {
+                        height:250px;
+                        border-radius: 7px!important;
+                        -webkit-border-radius: 7px !important;
+                        -moz-border-radius: 7px !important;
+                        -ms-border-radius: 7px !important;
+                        -o-border-radius: 7px !important;
+                        .title
+                        {
+                       
+
+                            background-color: white;
+                            box-shadow: 0px 4px 4px 0px #00000040;
+
+                            h5{
+                                font-weight: 600;
+                                font-family: 'Lato', sans-serif;
+                                color: #0F3D3E;
+                                font-size: 25px;
+                                
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

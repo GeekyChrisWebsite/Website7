@@ -4,8 +4,8 @@ import { HomeComponent } from './shared/home/home.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'home', component: HomeComponent },
-    // { path: 'listing', loadComponent: () => import('./listing/listing/listing.component').then(m => m.ListingComponent) },
-    // { path: 'details/:id', loadComponent: () => import('./listing/detalis-listing/detalis-listing.component').then(m => m.DetalisListingComponent) },
+    { path: 'listing', loadComponent: () => import('./listing/listing/listing.component').then(m => m.ListingComponent) },
+    { path: 'details/:id', loadComponent: () => import('./listing/details-listing/details-listing.component').then(m => m.DetailsListingComponent) },
     // { path: 'posting', loadComponent: () => import('./posting/posting/posting.component').then(m => m.PostingComponent) },
     // { path: 'postingdetails/:id', loadComponent: () => import('./posting/details-posting/details-posting.component').then(m => m.DetailsPostingComponent) },
     { path: 'login', loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent) },

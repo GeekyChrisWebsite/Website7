@@ -1,0 +1,12 @@
+<div class="container py-3">
+
+  <div class="container-map">
+    @if (apiLoaded | async) {
+    <google-map [options]="options" #map>
+      @for (position of listingArray ; track position) {
+      <map-marker [position]="position.geo_direction" [options]="markerOptions" (mapClick)="handleMapClick($event)" />
+      }
+    </google-map>
+    }
+
+  </div>

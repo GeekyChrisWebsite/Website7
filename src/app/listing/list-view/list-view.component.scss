@@ -1,0 +1,75 @@
+.rania {
+  // padding: 0 10px !important;
+
+  .card {
+    // justify-content: center;
+    // align-items: center;
+    // display: flex;
+
+    .row {
+      .col-5 {
+        img {
+          height: 270px;
+        }
+      }
+
+      .col-7 {
+        .card-body {
+          .d-flex {
+            h5 {
+              font-family: "Lato", sans-serif;
+              font-size: 19px;
+              line-height: 33px;
+              font-weight: 900 !important;
+              white-space: nowrap;
+            }
+
+            span {
+              color: #ff8682;
+              width: 107px;
+              height: 59px;
+              font-weight: 700;
+              font-size: 17px;
+              padding: 0;
+              font-family: "Lato", sans-serif;
+              gap: 0 !important;
+            }
+
+            small {
+              font-family: "Lato", sans-serif;
+            }
+          }
+
+          .heartt {
+            .heart {
+              i {
+                border: 1px #258a8b solid !important;
+                height: 48px;
+                width: 48px;
+                border-radius: 10px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -ms-border-radius: 10px;
+                -o-border-radius: 10px;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+              }
+            }
+          }
+
+          .btn {
+            button {
+              height: 44px;
+              border-radius: 10px;
+              width: 86px;
+              background-color: #8dd3bb;
+              outline: none;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
