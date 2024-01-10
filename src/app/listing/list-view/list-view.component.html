@@ -10,17 +10,18 @@
 
           <div class="col-7">
             <div class="card-body">
-              <div class="d-flex justify-content-start align-items-start">
-                <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center gap-5">
                   <h5 class="me-3">{{ item.name }}</h5>
+                  <i class='bx bxs-like fs-4' undefined></i>
                 </div>
                 <div></div>
               </div>
-              <div class="d-flex">
-                <i class="bx bxs-location-plus"></i>
+              <div class="d-flex gap-1">
+                <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
                 <small>{{ item.state + ", " + item.street }}</small>
               </div>
-              <div class="d-flex gap-3">
+              <!-- <div class="d-flex gap-3">
                 <div class="d-flex justify-content-center align-items-center">
                   <i class="bx bxs-star" style="color: #ff8682"></i>
                   <i class="bx bxs-star" style="color: #ff8682"></i>
@@ -31,11 +32,11 @@
                 <div>
                   <small>371 reviews</small>
                 </div>
-              </div>
+              </div> -->
               <div class="heartt d-flex py-4 gap-1 justify-content-start align-items-start">
-                <div class="heart">
-                  <i class="bx bxs-heart fs-5" style="color: #101010"></i>
-                </div>
+                <!-- <div class="heart">
+                  <i class="pi pi-heart-fill" style="color: #101010;font-size: 1.3rem;"></i>
+                </div> -->
                 <div class="btn">
                   <button class="View Place" routerLink="/details/{{ item.id }}">
                     View Place

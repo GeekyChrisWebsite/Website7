@@ -1,12 +1,14 @@
 {
   "routes": [
     "/",
+    "/buysell",
     "/city",
     "/contact-us",
     "/forget",
     "/home",
     "/listing",
     "/login",
+    "/posting",
     "/register",
     "/reset",
     "/state",

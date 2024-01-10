@@ -1,0 +1,40 @@
+<section class="posting py-5">
+    <div class="container" *ngIf="detalisArray">
+        <div class="box-white">
+            <div class="div-info d-flex align-items-center justify-content-start gap-3 py-3">
+                <img src="{{detalisArray.business.logo}}" alt="" width="50" height="50" class="rounded-circle" />
+                <div>
+                    <p class="p-0 m-0">{{ detalisArray.business.name}}</p>
+                    <div class="d-flex gap-1 justify-content-start align-items-center">
+                        <i class='bx bx-world fs-6' style='color:#6b6666'></i>
+                        <p class="title-time text-muted m-0">{{detalisArray.buySellTime}}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="justify-content-center align-items-center d-flex">
+                <p-galleria [value]="detalisArray.images" [showItemNavigators]="true"
+                    [responsiveOptions]="responsiveOptions" [circular]="true" [numVisible]="5"
+                    [showThumbnailNavigators]="false">
+                    <ng-template pTemplate="item" let-item>
+                        <img [src]="item" class="w-75" />
+                    </ng-template>
+                    <ng-template pTemplate="thumbnail" let-item>
+                        <div class="d-grid justify-content-center align-items-center d-flex">
+                            <img [src]="item" class="img-fluid w-50" />
+                        </div>
+                    </ng-template>
+                </p-galleria>
+
+            </div>
+            <div>
+                <p class="text-start" [innerHTML]="(detalisArray.content)"></p>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</section>

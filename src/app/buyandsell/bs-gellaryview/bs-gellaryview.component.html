@@ -1,0 +1,14 @@
+<section class="list-img" *ngIf="BuySellArray">
+    <div class="container">
+        <div class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0 p-5">
+            <div class="col-md-3 col-12 mb-3" *ngFor="let item of BuySellArray">
+                <div class="card justify-content-between align-items-center d-flex">
+                    <img src="{{ item.business.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
+                    <div class="title py-2">
+                        <h5>{{ item.title }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

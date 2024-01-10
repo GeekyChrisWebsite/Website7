@@ -31,7 +31,7 @@ export class FilterService {
     return this._http.get<State[]>(`${environment.BACKEND_DOMAIN}/filter/businesses/`, { params });
 
   }
-  getpostsfilter(state: string, category: string, city: string): Observable<any> {
+  getpostsfilter(category: string, state: string, city: string): Observable<any> {
     let params = new HttpParams()
       .set('category', category)
       .set('state', state)

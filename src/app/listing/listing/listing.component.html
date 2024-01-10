@@ -31,16 +31,18 @@
         </div>
         <div class="views d-flex gap-3">
           <div (click)="showList()" class="box d-flex gap-2" [ngClass]="listView ? 'active' : null">
-            <i class="bx bx-grid bx-flip-horizontal fs-3" style="color: #8dd3bb"></i>
+            <i class="pi  pi-list" style="font-size: 1.5rem"></i>
 
             <p class="m-0 d-none d-lg-block">List View</p>
           </div>
           <div (click)="showGallery()" class="box d-flex gap-2" [ngClass]="galleyView ? 'active' : null">
-            <i class="bx bx-photo-album bx-flip-horizontal fs-3" style="color: #8dd3bb"></i>
+            <i class="pi pi-image" style="font-size: 1.5rem"></i>
+
             <p class="m-0 d-none d-lg-block">Gallery View</p>
           </div>
           <div (click)="showMap()" class="box d-flex gap-2" [ngClass]="mapView ? 'active' : null">
-            <i class="bx bx-map-alt bx-flip-horizontal fs-3" style="color: #8dd3bb"></i>
+            <i class="pi pi-map" style="font-size: 1.5rem"></i>
+
 
             <p class="m-0 d-none d-lg-block">Map View</p>
           </div>
