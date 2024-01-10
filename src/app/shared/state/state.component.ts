@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilterByLettersPipe } from "../../pipe/filter-by-letters.pipe";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-state',
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './state.component.html',
     styleUrl: './state.component.scss',
     encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, FilterByLettersPipe,FormsModule]
+    imports: [CommonModule, FilterByLettersPipe,FormsModule,ReactiveFormsModule]
 })
 export class StateComponent {
   searchText: string = '';

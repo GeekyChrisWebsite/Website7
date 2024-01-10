@@ -68,20 +68,20 @@ nav {
             -o-border-radius: 4px;
             width: 111px;
             height: 38px;
-            margin: 20px 0px;
-         
+            // margin: 20px 0px;
+
         }
 
         .p-dropdown,
         input {
-            border: 1px solid black;
-            width: 160px;
-            background-color: transparent;
-            margin: 10px;
-            justify-content: center;
-            align-items: center;
-            display: flex;
-            height: 40px;
+            // border: 1px solid black;
+            // // width: 160px;
+            // background-color: transparent;
+            // margin: 10px;
+            // justify-content: center;
+            // align-items: center;
+            // display: flex;
+            // height: 40px;
 
             span {
                 align-items: center;
@@ -104,7 +104,8 @@ nav {
 
     }
 }
- li {
+
+li {
     cursor: pointer !important;
 }
 
