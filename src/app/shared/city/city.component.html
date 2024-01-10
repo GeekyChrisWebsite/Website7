@@ -1,23 +1,24 @@
 <section class="py-5 state">
     <div class="container">
         <h2 class="h1 text-center">Select city</h2>
-          <div class="div-searchBar py-5">
-            <div class="form-group justify-content-center align-items-center d-flex">
-                <input type="text"[(ngModel)]="searchText" class="form-control justify-content-center align-items-center d-flex w-50"
-                    placeholder="             Search ...      ">
-                <button class="Search-btn">Search</button>
-            </div>
-        </div> 
+        <div class="justify-content-center align-items-center d-flex py-2">
+            <input type="text" id="myInput" class="w-50" placeholder="Search for Cities..">
+        </div>
         <div class="row py-4 gap-3 justify-content-center align-items-center d-flex">
-            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" 
-            *ngFor="let item of items | filterByLetters: searchText">
-                <div class="">
-                    {{ item.name }}
-
-                </div>
+            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/listing"
+                [queryParams]="{ category: category, city: item ,states: states }"
+                *ngFor="let item of cityarray | filterByLetters : searchText">
+                <a class="ci" routerLink="/listing"
+                    [queryParams]="{ category: category, city: item ,states: states }">{{ item
+                    }}</a>
             </div>
         </div>
-       
-      
+        <div *ngIf="loading" class="justify-content-center align-items-center d-flex">
+            <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
+                styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--maskbg)"
+                animationDuration=".5s"></p-progressSpinner>
+        </div>
     </div>
+
+
 </section>

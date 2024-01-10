@@ -1,233 +1,215 @@
-<!-- <section class="header py-5">
-    <div class="container">
-        <div>
-            <h1 class="text-center">Find the best Spa’s, Salons and Restaurants around you.</h1>
-        </div>
-        <div  class="d-flex justify-content-center align-items-start py-5 gap-3 fliter">
-            <form class="gap-3 d-flex">
-                <p-dropdown [options]="" optionlabel="name" placeholder="Listings"></p-dropdown>
-                <p-dropdown formControlName="state" [options]="" optionLabel="name" placeholder="State">
-                </p-dropdown>
-                <p-dropdown [options]="" optionLabel="name" placeholder="Category"></p-dropdown>     
-                <input type="text" pInputText placeholder="    Zip Code" />
-                <p-button label="Search   "></p-button>
-
-         </form>
-        </div>
-
-    </div>
-</section> -->
-<section  class="wellpaper">
-    <div class="pic">
-        <!-- <img src="../../../assets/img/home/Rectangle 96.png" class="w-100"> -->
-    </div>
-</section>
 <section class="Explore">
-    <div class="container">
-        <h3 class="text-center py-5 text-white">Find the best Spa’s, Salons and Restaurants around you..</h3>
-          <div class="three-box py-3">
-            <div class="row align-items-center justify-content-center d-flex gap-5">
-                <div class="col-md-3 col-6 top">
-                  <img src="../../../assets/img/home/Rectangle 88.png" alt=""     class="w-100 py-2">
-                  <div class="align-items-center justify-content-center d-flex bg py-3">
+  <div class="container">
+    <h3 class="text-center py-5 text-white">Find the best Spa’s, Salons and Restaurants around you..</h3>
+    <div class="three-box py-3">
+      <div class="row align-items-center justify-content-center d-flex gap-5">
+        <div class="col-md-3 col-6 top">
+          <img src="../../../assets/img/home/Rectangle 88.png" alt="" class="w-100 py-2" routerLink="/state"
+            [queryParams]="{ category: 'RESTAURANTS' }">
+          <div class="align-items-center justify-content-center d-flex bg py-3">
 
-                    <p class="pt-3 text-center text-white"  routerLink="/state">Restaurants</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6 top" routerLink="/state">
-                  <img src="../../../assets/img/home/Rectangle 7.png" alt=""  class="w-100 py-2" routerLink="/state">
-                        <div class="align-items-center justify-content-center d-flex bg">
-                          <p class="pt-3 text-center text-white "  routerLink="/state"> Massage</p>
-
-                        </div>
-
-                </div>
-                <div class="col-md-3 col-6 three top">
-                  <img src="../../../assets/img/home/Rectangle 87.png" alt=""  class="w-100 py-2" routerLink="/state">
-                  <div class="align-items-center justify-content-center d-flex bg py-3">
-
-                    <p class="pt-3 text-center text-white"  routerLink="/state">Spa & Salons</p>
-                    </div>
-
-                </div>
-            </div>
+            <p class="pt-3 text-center text-white" routerLink="/state" [queryParams]="{ category: 'RESTAURANTS' }">
+              Restaurants</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 top" routerLink="/state">
+          <img src="../../../assets/img/home/Rectangle 7.png" alt="" class="w-100 py-2" routerLink="/state"
+            [queryParams]="{ category: 'MASSAGE SPA' }">
+          <div class="align-items-center justify-content-center d-flex bg">
+            <p class="pt-3 text-center text-white " routerLink="/state" [queryParams]="{ category: 'MASSAGE SPA' }">
+              Massage</p>
 
           </div>
+
+        </div>
+        <div class="col-md-3 col-6 three top">
+          <img src="../../../assets/img/home/Rectangle 87.png" alt="" class="w-100 py-2" routerLink="/state"
+            [queryParams]="{ category: 'BEAUTY SALON SPA' }">
+          <div class="align-items-center justify-content-center d-flex bg py-3">
+
+            <p class="pt-3 text-center text-white" routerLink="/state" [queryParams]="{ category: 'BEAUTY SALON SPA' }">
+              Spa & Salons</p>
+          </div>
+
+        </div>
+      </div>
+
     </div>
+  </div>
 
 </section>
 <section class="cards py-5">
   <div class="container">
     <div class="Restaurant py-4">
-      
-       <div class="d-flex justify-content-between align-items-center">
+
+      <div class="d-flex justify-content-between align-items-center">
         <h4 class="py-3">Top Restaurant Listings</h4>
         <a href="">View All</a>
-       </div>
-       <div class="row align-items-start justify-content-center gx-0" style="gap: 7rem;">
-          <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-            <div>
-                <img src="../../../assets/img/home/Rectangle 18.png" alt="" height="140" width="130">
-            </div>
-            <div  class="contant">
-              <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
-
-              <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-              </div>
-              <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-            </div>
+      </div>
+      <div class="row align-items-start justify-content-center gx-0" style="gap: 7rem;">
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/Rectangle 18.png" alt="" height="140" width="130">
           </div>
-          <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-            <div>
-                <img src="../../../assets/img/home/Rectangle 22.png" alt="" height="140" width="130">
-            </div>
-            <div  class="contant">
-              <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
 
-              <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-              </div>
-              <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
             </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
           </div>
-          <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-            <div>
-                <img src="../../../assets/img/home/Rectangle 25.png" alt="" height="140" width="130">
-            </div>
-            <div  class="contant">
-              <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+        </div>
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/Rectangle 22.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
 
-              <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-              </div>
-              <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
             </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
           </div>
-         
-        
-        
-        
-       
-      
-       </div>
+        </div>
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/Rectangle 25.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+            </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
     </div>
     <div class="Salon py-4">
-      
-        <div class="d-flex justify-content-between align-items-center">
-         <h4 class="py-3">Top Salon’s Listings</h4>
-         <a href="">View All</a>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="py-3">Top Salon’s Listings</h4>
+        <a href="">View All</a>
+      </div>
+      <div class="row align-items-start justify-content-center gx-0" style="gap: 7rem;">
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/s1.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+            </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+          </div>
         </div>
-        <div class="row align-items-start justify-content-center gx-0" style="gap: 7rem;">
-           <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-             <div>
-                 <img src="../../../assets/img/home/s1.png" alt="" height="140" width="130">
-             </div>
-             <div  class="contant">
-               <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
- 
-               <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                 <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                 <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-               </div>
-               <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-             </div>
-           </div>
-           <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-             <div>
-                 <img src="../../../assets/img/home/s2.png" alt="" height="140" width="130">
-             </div>
-             <div  class="contant">
-               <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
- 
-               <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                 <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                 <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-               </div>
-               <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-             </div>
-           </div>
-           <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-             <div>
-                 <img src="../../../assets/img/home/s3.png" alt="" height="140" width="130">
-             </div>
-             <div  class="contant">
-               <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
- 
-               <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                 <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                 <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-               </div>
-               <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-             </div>
-           </div>
-          
-         
-         
-         
-        
-       
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/s2.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+            </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+          </div>
         </div>
-     </div>
-     <div class="Spa py-4">
-      
-        <div class="d-flex justify-content-between align-items-center">
-         <h4 class="py-3">Top Spa’s Listings</h4>
-         <a href="">View All</a>
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/s3.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+            </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+          </div>
         </div>
-        <div class="row align-items-start justify-content-center gx-0" style="gap: 7rem;">
-           <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-             <div>
-                 <img src="../../../assets/img/home/spa1.png" alt="" height="140" width="130">
-             </div>
-             <div  class="contant">
-               <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
- 
-               <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                 <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                 <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-               </div>
-               <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-             </div>
-           </div>
-           <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-             <div>
-                 <img src="../../../assets/img/home/spa2.png" alt="" height="140" width="130">
-             </div>
-             <div  class="contant">
-               <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
- 
-               <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                 <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                 <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-               </div>
-               <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-             </div>
-           </div>
-           <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-             <div>
-                 <img src="../../../assets/img/home/sap3.png" alt="" height="140" width="130">
-             </div>
-             <div  class="contant">
-               <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
- 
-               <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-                 <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-                 <i class='bx bx-like fs-5' style='color:#0c0c0d'  ></i>
-               </div>
-               <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-             </div>
-           </div>
-          
-         
-         
-         
-        
-       
+
+
+
+
+
+
+      </div>
+    </div>
+    <div class="Spa py-4">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="py-3">Top Spa’s Listings</h4>
+        <a href="">View All</a>
+      </div>
+      <div class="row align-items-start justify-content-center gx-0" style="gap: 7rem;">
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/spa1.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+            </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+          </div>
         </div>
-     </div>
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/spa2.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+            </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
+          <div>
+            <img src="../../../assets/img/home/sap3.png" alt="" height="140" width="130">
+          </div>
+          <div class="contant">
+            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+
+            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
+              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
+              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+            </div>
+            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+    </div>
   </div>
 </section>
