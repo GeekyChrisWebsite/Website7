@@ -15,12 +15,13 @@ import { DistanceService } from '../../services/distance.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { FilterSharedComponent } from '../../shared/filter-shared/filter-shared.component';
 
 
 @Component({
   selector: 'app-listing',
   standalone: true,
-  imports: [DropdownModule, PaginatorModule, ConfirmDialogModule, RouterModule, FormsModule, ToastModule, CommonModule, GalleryViewComponent, MapViewComponent, ListViewComponent, ProgressSpinnerModule, ReactiveFormsModule],
+  imports: [DropdownModule, PaginatorModule, FilterSharedComponent, ConfirmDialogModule, RouterModule, FormsModule, ToastModule, CommonModule, GalleryViewComponent, MapViewComponent, ListViewComponent, ProgressSpinnerModule, ReactiveFormsModule],
   templateUrl: './listing.component.html',
   styleUrl: './listing.component.scss',
   providers: [ListingService, MessageService, ConfirmationService],

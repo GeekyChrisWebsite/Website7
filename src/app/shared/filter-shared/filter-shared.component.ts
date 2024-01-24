@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, NgZone, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidebarModule } from 'primeng/sidebar';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -9,19 +8,15 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ListingService } from '../../services/listing.service';
 import { FilterService } from '../../services/filter.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { FilterSharedComponent } from '../filter-shared/filter-shared.component';
-
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-filter-shared',
   standalone: true,
-  imports: [CommonModule, SidebarModule, DropdownModule, ButtonModule, RouterLink, ReactiveFormsModule, FilterSharedComponent],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
-  encapsulation: ViewEncapsulation.None,
-  providers: [MessageService, ConfirmationService],
-
+  imports: [CommonModule, DropdownModule, ReactiveFormsModule, ButtonModule],
+  templateUrl: './filter-shared.component.html',
+  styleUrl: './filter-shared.component.scss',
+  providers: [ConfirmationService, MessageService]
 })
-export class NavbarComponent {
+export class FilterSharedComponent {
   sidebarVisible: boolean = false;
   sidebarVisible1: boolean = false;
   sidebarVisible2: boolean = false;
@@ -164,8 +159,6 @@ export class NavbarComponent {
         this.sidebarVisible = true;
       });
     });
+
   }
-
-
-
 }
