@@ -2,7 +2,7 @@
     <div class="container">
         <h2 class="h1 text-center">Select city</h2>
         <div class="justify-content-center align-items-center d-flex py-2">
-            <input type="text" id="myInput" class="w-50" placeholder="Search for Cities..">
+            <input type="text" id="myInput" [(ngModel)]="searchText" class="w-50" placeholder="Search for Cities..">
         </div>
         <div class="row py-4 gap-3 justify-content-center align-items-center d-flex">
             <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/listing"
