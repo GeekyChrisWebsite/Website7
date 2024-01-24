@@ -18,7 +18,8 @@ export const routes: Routes = [
     { path: 'city', title: 'City', loadComponent: () => import('./shared/city/city.component').then(m => m.CityComponent) },
     // { path: 'mapviewlisting', loadComponent: () => import('./listing/list-map/list-map.component').then(m => m.ListMapComponent) },
     { path: 'buysell', loadComponent: () => import('./buyandsell/buy-sell/buy-sell.component').then(m => m.BuySellComponent) },
-    { path: 'BuySelldetails/:id', loadComponent: () => import('./buyandsell/buy-sell-detalis/buy-sell-detalis.component').then(m => m.BuySellDetalisComponent) }
+    { path: 'BuySelldetails/:id', loadComponent: () => import('./buyandsell/buy-sell-detalis/buy-sell-detalis.component').then(m => m.BuySellDetalisComponent) },
+    { path: 'Category', loadComponent: () => import('./shared/category/category.component').then(m => m.CategoryComponent) },
 
 
 

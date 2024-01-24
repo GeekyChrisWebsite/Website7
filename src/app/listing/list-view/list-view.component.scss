@@ -9,7 +9,8 @@
     .row {
       .col-5 {
         img {
-          height: 270px;
+          height: 210px;
+          cursor: pointer;
         }
       }
 
@@ -40,23 +41,7 @@
             }
           }
 
-          .heartt {
-            .heart {
-              i {
-                border: 1px #258a8b solid !important;
-                height: 48px;
-                width: 48px;
-                border-radius: 10px;
-                -webkit-border-radius: 10px;
-                -moz-border-radius: 10px;
-                -ms-border-radius: 10px;
-                -o-border-radius: 10px;
-                justify-content: center;
-                align-items: center;
-                display: flex;
-              }
-            }
-          }
+
 
           .btn {
             button {
@@ -68,8 +53,60 @@
               border: none;
             }
           }
+
+          .btns {
+            .call-now {
+              background-color: #aefcc9;
+              width: 90px;
+              height: 30px;
+              border: none;
+              outline: none;
+              border-radius: 4px;
+              -webkit-border-radius: 4px;
+              -moz-border-radius: 4px;
+              -ms-border-radius: 4px;
+              -o-border-radius: 4px;
+            }
+
+            .Directions {
+              background-color: #ffbf9d;
+              width: 90px;
+              height: 30px;
+              border: none;
+              outline: none;
+              border-radius: 4px;
+              -webkit-border-radius: 4px;
+              -moz-border-radius: 4px;
+              -ms-border-radius: 4px;
+              -o-border-radius: 4px;
+
+            }
+          }
         }
       }
     }
   }
+}
+
+#likeIcon {
+  color: black;
+  /* Initial color */
+  cursor: pointer;
+}
+
+/* Add your styles for the liked state */
+#likeContainer.liked #likeIcon {
+  color: rgb(144, 144, 230);
+  /* Change color when liked */
+}
+
+@media (max-width: 767px) {
+
+  /* Adjust the breakpoint to your needs */
+  .mobile-font-size {
+    font-size: 14px !important;
+    /* Important to override existing styles */
+  }
+
+
 }

@@ -2,6 +2,7 @@
   "routes": [
     "/",
     "/buysell",
+    "/Category",
     "/city",
     "/contact-us",
     "/forget",

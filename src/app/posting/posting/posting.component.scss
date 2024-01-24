@@ -670,71 +670,6 @@ i,
     cursor: pointer;
 }
 
-// .searchBar {
-//     .container {
-//       .div-searchBar2 {
-//         height: 65px;
-//         justify-content: center;
-//         align-items: center;
-//         display: flex;
-//       }
-
-//       .form-group {
-//         flex: 1;
-//         position: relative;
-//         margin: 0;
-//         padding: 0;
-
-//         .div-searchBar {
-//           form {
-//             display: flex !important;
-//             justify-content: center !important;
-//             align-items: center !important;
-//             gap: 5rem !important;
-//             margin-right: 228px;
-
-//             .p-dropdown {
-//               border: none;
-//               width: 100%;
-//               background-color: transparent;
-//               // margin: 0 15px;
-//             }
-
-//             input,
-//             input:focus,
-//             input:active {
-//               border: none;
-//               outline: none;
-//             }
-
-//             small {
-//               white-space: nowrap;
-//               font-family: "Lato", sans-serif;
-//               font-size: 14px !important;
-//             }
-
-//             .Search-btn {
-//               background-color: #0f3d3e;
-//               color: #ffff;
-//               position: absolute;
-//               right: -6px;
-//               border-radius: 12px;
-//               -webkit-border-radius: 12px;
-//               -moz-border-radius: 12px;
-//               -ms-border-radius: 12px;
-//               -o-border-radius: 12px;
-//               width: 100px;
-//               height: 38px;
-//             }
-
-//             small {
-//               font-size: 12px;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
 .posting {
     .box {
         .container {
@@ -746,12 +681,14 @@ i,
                         justify-content: center !important;
                         align-items: center !important;
                         background-color: rgb(249, 247, 247);
-                        padding: 11px;
+                        padding: 13px;
 
                         .p-dropdown {
                             border: none;
                             width: 100%;
                             background-color: transparent;
+                            margin: 0px;
+                            padding: 0px;
                         }
 
                         .Search-btn {
@@ -771,4 +708,27 @@ i,
             }
         }
     }
+}
+
+.clear-btn {
+    background-color: #f04a4a;
+    color: #ffff;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    width: 100px;
+    height: 38px;
+    outline: none;
+    border: none;
+}
+
+
+ul {
+    padding-left: 0px;
+}
+
+.p-datatable>.p-datatable-wrapper {
+    overflow: hidden !important;
 }

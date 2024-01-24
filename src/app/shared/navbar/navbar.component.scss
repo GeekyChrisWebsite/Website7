@@ -16,9 +16,14 @@ nav {
 .p-sidebar-left {
     top: 0;
     right: 0;
-    width: 190px !important;
+    width: 270px !important;
     height: 100%;
 }
+
+.p-sidebar-left {
+    background-color: black;
+}
+
 
 .p-button.p-button-icon-only {
     margin: 0px 17px;
@@ -53,61 +58,96 @@ nav {
     margin: 0 6px;
 }
 
-.div-searchBar2 {
-    background-color: #ffff;
-    margin: 0px 10px;
+// .div-searchBar2 {
+//     background-color: #ffff;
+//     margin: 0px 10px;
 
-    .form-group {
-        .Search-btn {
-            background-color: black;
-            color: #ffff;
-            border-radius: 4px;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            -o-border-radius: 4px;
-            width: 111px;
-            height: 38px;
-            // margin: 20px 0px;
+//     .form-group {
+//         .Search-btn {
+//             background-color: black;
+//             color: #ffff;
+//             border-radius: 4px;
+//             -webkit-border-radius: 4px;
+//             -moz-border-radius: 4px;
+//             -ms-border-radius: 4px;
+//             -o-border-radius: 4px;
+//             width: 111px;
+//             height: 38px;
+//             // margin: 20px 0px;
 
-        }
+//         }
 
-        .p-dropdown,
-        input {
-            // border: 1px solid black;
-            // // width: 160px;
-            // background-color: transparent;
-            // margin: 10px;
-            // justify-content: center;
-            // align-items: center;
-            // display: flex;
-            // height: 40px;
+//         .p-dropdown,
+//         input {
+//             // border: 1px solid black;
+//             // // width: 160px;
+//             // background-color: transparent;
+//             // margin: 10px;
+//             // justify-content: center;
+//             // align-items: center;
+//             // display: flex;
+//             // height: 40px;
 
-            span {
-                align-items: center;
-                justify-content: center;
-                display: flex;
-            }
-        }
+//             span {
+//                 align-items: center;
+//                 justify-content: center;
+//                 display: flex;
+//             }
+//         }
 
-        input {
-            justify-content: center;
-            align-items: center;
-            display: flex;
-            border-radius: 4px;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            -o-border-radius: 4px;
-        }
+//         input {
+//             justify-content: center;
+//             align-items: center;
+//             display: flex;
+//             border-radius: 4px;
+//             -webkit-border-radius: 4px;
+//             -moz-border-radius: 4px;
+//             -ms-border-radius: 4px;
+//             -o-border-radius: 4px;
+//         }
 
 
-    }
-}
+//     }
+// }
 
 li {
     cursor: pointer !important;
 }
+
+.form-navbar {
+
+    form {
+        .p-dropdown {
+            width: 230px;
+        }
+
+        .Search-btn-nav {
+            background-color: white;
+            color: #0f3d3e;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            width: 100px;
+            height: 38px;
+        }
+
+        .clear-btn-nav {
+            background-color: red;
+            color: white;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            width: 100px;
+            height: 38px;
+        }
+
+    }
+}
+
 
 
 @media (max-width: 767px) {
@@ -135,4 +175,12 @@ li {
         display: block;
 
     }
+}
+
+.messi {
+    background-color: #000000;
+    width: 30px;
+    height: 100%;
+    display: inline-block;
+    /* Make it inline block so it takes the height of the parent */
 }

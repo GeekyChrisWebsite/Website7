@@ -1,6 +1,6 @@
 <section class="slider py-5" ngSkipHydration>
-  <div class="container py-5" *ngIf="vippostarray">
-    <h2 class="text-center py-3 h1">VIP Post</h2>
+  <div class="container" *ngIf="vippostarray">
+    <h2 class="text-center py-3 h1">VIP Posts</h2>
     <div>
       <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
         styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
@@ -52,7 +52,6 @@
     </div>
   </div>
 </section>
-
 <section class="posting mt-4 py-5">
   <div class=" box mb-4 mt-lg-0 mt-4">
     <div class="container">
@@ -61,17 +60,20 @@
           <h3>Top businesses in your Area</h3>
 
         </div>
-        <div class="form-group d-none d-lg-block">
-          <div class="div-searchBar justify-content-center align-items-center d-flex">
-            <form [formGroup]="filterformposting" (ngSubmit)="onSubmit()">
+        <div class="form-group d-lg-block d-none">
+          <div class="div-searchBar justify-content-start align-items-start d-flex">
+            <form [formGroup]="filterformposting" (ngSubmit)="onSubmit()"
+              class="justify-content-start align-items-start d-flex gap-2">
               <p-dropdown formControlName="categories" [options]="categories" placeholder="Select a Category"
                 (onChange)="oncategorychange($event)"></p-dropdown>
               <p-dropdown formControlName="states" [options]="state" placeholder="Select a State"
                 (onChange)="onstatechange($event)"></p-dropdown>
               <p-dropdown formControlName="cities" [options]="city" placeholder="Select a City"
                 (onChange)="oncitychange($event)"></p-dropdown>
-              <button class="Search-btn" [disabled]="!filterformposting.valid"
-                (click)="getDatafiltedposting()">Search</button>
+              <button class="Search-btn" [disabled]="!filterformposting.valid" (click)="getDatafiltedposting()">Search<i
+                  class="pi pi-search ms-2"></i></button>
+              <button class="clear-btn" (click)="clear()">Clear<i class='bx bx-trash-alt ms-2 fs-5'></i></button>
+
             </form>
 
           </div>
@@ -82,17 +84,19 @@
           <h6 class="m-0">Suggested Results:</h6>
         </div>
         <div class="views d-flex gap-3">
+          <div (click)="showList()" class="box d-flex gap-2" [ngClass]="listView ? 'active' : null">
+            <i class=" pi pi-list fs-4" style="color: black"></i>
 
-          <div (click)="showList()" class=" d-flex gap-2" [ngClass]="listView ? 'active' : null">
-            <i class="pi  pi-list" style="font-size: 1.5rem"></i>
             <p class="m-0 d-none d-lg-block">List View</p>
           </div>
           <div (click)="showGallery()" class="box d-flex gap-2" [ngClass]="galleyView ? 'active' : null">
-            <i class="pi pi-image" style="font-size: 1.5rem"></i>
+            <i class="pi-th-large pi fs-4" style="color: black"></i>
             <p class="m-0 d-none d-lg-block">Gallery View</p>
           </div>
           <div (click)="showMap()" class="box d-flex gap-2" [ngClass]="mapView ? 'active' : null">
-            <i class="pi pi-map" style="font-size: 1.5rem"></i>
+            <i class="pi pi-map
+            fs-4" style="color: black"></i>
+
             <p class="m-0 d-none d-lg-block">Map View</p>
           </div>
         </div>
@@ -100,11 +104,11 @@
     </div>
   </div>
   @if(listView){
-  <div class="view-data  mx-5">
+  <div class="view-data  ">
     <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
       styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
       animationDuration=".5s"></p-progressSpinner>
-    <app-listview-posting [postingarray]="postingarray" [filterposts]="filterposts">
+    <app-listview-posting [postingarray]="postingarray" [filterposts]="filterposts" [distances]="distances">
     </app-listview-posting>
   </div>
   } @if(galleyView){
@@ -112,11 +116,12 @@
     <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
       styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
       animationDuration=".5s"></p-progressSpinner>
-    <app-gellaryview-posting [postingarray]="postingarray" [filterposts]="filterposts"></app-gellaryview-posting>
+    <app-gellaryview-posting [postingarray]="postingarray" [filterposts]="filterposts"
+      [distances]="distances"></app-gellaryview-posting>
 
   </div>
   } @if(mapView){
-  <div class="view-data">
+  <div class="view-data mx-3">
     <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
       styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
       animationDuration=".5s"></p-progressSpinner>

@@ -17,6 +17,8 @@ import { map } from 'rxjs/internal/operators/map';
 })
 export class BsMapviewComponent {
   apiLoaded?: Observable<boolean>;
+  @Input() distances!: any;
+
   options: any = {
     mapTypeControl: false,
     streetViewControl: false,

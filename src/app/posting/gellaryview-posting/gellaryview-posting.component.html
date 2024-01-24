@@ -1,43 +1,34 @@
-<!-- <section class="list-img" *ngIf="postingarray">
-    <div class="container">
-        <div class="row justify-content-start align-items-center d-flex gap-3 py-3  gap-lg-0 p-5">
-            <div class="col-md-3 col-12" *ngFor="let item of postingarray">
-                <div class="card justify-content-between align-items-center d-flex">
-                    <img src="{{ item.business.logo}}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
-                    <div class="title py-2">
-                        <h5>{{ item.title}}</h5>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section> -->
-<!-- <section class="list-img" *ngIf="filterposts">
-    <div class="container">
-        <div class="row justify-content-start align-items-center d-flex gap-3 py-3  gap-lg-0 p-5">
-            <div class="col-md-3 col-12" *ngFor="let item of filterposts">
-                <div class="card justify-content-between align-items-center d-flex">
-                    <img src="{{ item.business.logo}}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
-                    <div class="title py-2">
-                        <h5>{{ item.title}}</h5>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section> -->
 <section class="list-img" *ngIf="postingarray">
     <div class="container">
-        <div class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0 p-5">
-            <div class="col-md-3 col-12 mb-3" *ngFor="let item of postingarray">
+        <div class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0 ">
+            <div class="col-md-3 col-12 mb-3" *ngFor="let item of postingarray; let i = index">
                 <div class="card justify-content-between align-items-center d-flex">
+                    <div class="div-like gap-2 d-flex flex-column">
+                        <i class="pi pi-thumbs-up"></i>
+                    </div>
+                    <small class="likes">{{ item.likes }}</small>
+
                     <img src="{{ item.business.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
                     <div class="title py-2">
-                        <h5>{{ item.title }}</h5>
+                        <h5>{{ item.business.name }}</h5>
+                    </div>
+                    <div class="d-flex gap-1 py-2">
+                        <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
+                        <small>{{ item.business.state + "," + item.business.state }}</small>
+                    </div>
+                    <div *ngIf="distances && distances.length > 0" class="py-2">
+                        <div class="d-flex justify-content-center align-items-center gap-1">
+                            <i class="pi pi-directions fs-4"></i>
+                            <p class="p-0 m-0">Distance: {{ distances[i] | number:'1.0-0' }} <span>Miles</span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="mx-3 text-center">{{item.content}}</p>
+                    </div>
+                    <div class="btns justify-content-start align-items-start d-flex gap-3 py-3">
+                        <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call Now</button>
+                        <button class="Directions"
+                            (click)="handleMapClick(item.business.geo_direction)">Directions</button>
                     </div>
                 </div>
             </div>

@@ -2,15 +2,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;500;600;700;800&display=swap');
 @import "primeicons/primeicons.css";
 
-*{
-    padding: 0;
-    margin: 0;
-
-}
-body{
+body {
     font-family: 'Sarabun', sans-serif;
 }
+
 li a {
     cursor: pointer;
 }
 
+.btns {
+    .call-now {
+        background-color: #aefcc9;
+        width: 90px;
+        height: 30px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+    }
+
+    .Directions {
+        background-color: #ffbf9d;
+        width: 90px;
+        height: 30px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+
+    }
+}

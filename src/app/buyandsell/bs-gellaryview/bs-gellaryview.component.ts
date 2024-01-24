@@ -10,5 +10,31 @@ import { Component, Input } from '@angular/core';
 })
 export class BsGellaryviewComponent {
   @Input() BuySellArray: any
+  @Input() distances!: any;
+  maxDescriptionLength: number = 40;
+  showFullText: boolean = false;
 
+  makePhoneCall(phoneNumber: string): void {
+    console.log('Initiating phone call to:', phoneNumber);
+    window.location.href = 'tel:' + phoneNumber;
+  }
+  handleMapClick(dir: { lat: Number, lng: Number }) {
+    console.log(dir)
+
+    if (dir) {
+      const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
+      window.open(link, '_blank');
+    }
+  }
+
+
+
+  isLiked: boolean[] = [];
+  likeCountValue: number[] = [];
+  truncateText(content: string, maxLength: number): string {
+    if (content.length <= maxLength) {
+      return content;
+    }
+    return content.substr(0, maxLength) + '... see more';
+  }
 }

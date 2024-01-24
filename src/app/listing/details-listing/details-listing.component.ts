@@ -153,4 +153,9 @@ export class DetailsListingComponent {
         );
         this.map.fitBounds(bounds);
     }
+
+    makePhoneCall(phoneNumber: string): void {
+        console.log('Initiating phone call to:', phoneNumber);
+        window.location.href = 'tel:' + phoneNumber;
+    }
 }

@@ -1,6 +1,7 @@
 export interface PostingData {
   author: string;
   bold: boolean;
+  likes: number
   business: {
     city1: string;
     geo_direction: {
@@ -26,9 +27,10 @@ export interface PostingData {
   integrations: any[];
   title: string;
   italic: boolean;
-  postTime: string;
-  updated_at:number
+  updated_at: number;
+  phone_number: string;
+  postTime: Date;
+
 
 }
-      
-  
+

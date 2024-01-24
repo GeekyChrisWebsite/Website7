@@ -35,6 +35,8 @@ export interface BuysellDetalis {
     video: string;
     vip: boolean;
     websites: null;
+    state: string;
+    street: string;
 
 
 }

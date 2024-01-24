@@ -4,6 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DistanceService {
+  private currentLocation: { latitude: number; longitude: number } | null = null;
+  private distances: number[] = [];
+  private localStorageKey = 'distances';
+
   calculateDistance(
     currentLocation: { latitude: number; longitude: number },
     otherLocation: { latitude: number; longitude: number }
@@ -18,27 +22,50 @@ export class DistanceService {
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in kilometers
+    const distanceInKilometers = R * c;
 
-    return distance;
+    // Convert distance to miles
+    const distanceInMiles = distanceInKilometers * 0.621371;
+
+    return distanceInMiles;
   }
 
   private deg2rad(deg: number): number {
     return deg * (Math.PI / 180);
   }
-  private localStorageKey = 'distances';
 
+  setCurrentLocation(location: { latitude: number; longitude: number }) {
+    this.currentLocation = location;
+  }
 
-  setDistances(distances: number[]) {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(distances));
-    console.log('Distances saved to localStorage:', distances);
+  getCurrentLocation(): { latitude: number; longitude: number } | null {
+    return this.currentLocation;
+  }
+
+  setDistances(distances: number[]): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      try {
+        this.distances = distances;
+        localStorage.setItem(this.localStorageKey, JSON.stringify(distances));
+        // console.log('Distances saved to localStorage:', distances);
+        resolve();
+      } catch (error) {
+        console.error('Error saving distances to localStorage:', error);
+        reject(error);
+      }
+    });
   }
 
   getDistances(): number[] {
-    const storedDistances = localStorage.getItem(this.localStorageKey);
-    const parsedDistances = storedDistances ? JSON.parse(storedDistances) : [];
-    console.log('Distances retrieved from localStorage:', parsedDistances);
-    return parsedDistances;
+    try {
+      const storedDistances = localStorage.getItem(this.localStorageKey);
+      const parsedDistances = storedDistances ? JSON.parse(storedDistances) : [];
+      // console.log('Distances retrieved from localStorage:', parsedDistances);
+      return parsedDistances;
+    } catch (error) {
+      // console.error('Error retrieving distances from localStorage:', error);
+      return [];
+    }
   }
 
 }

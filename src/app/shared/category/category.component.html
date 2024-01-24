@@ -1,0 +1,22 @@
+<section class="Category py-5">
+    <div class="container">
+        <h3 class="text-center py-3">Select Category</h3>
+
+        <div class="row py-4 gap-3 justify-content-center align-items-center d-flex flex-column">
+            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/state"
+                [queryParams]="{ category: 'RESTAURANTS' }">
+                <h6>RESTAURANTS</h6>
+            </div>
+            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/state"
+                [queryParams]="{ category: 'MASSAGE SPA' }">
+                <h6>MASSAGE SPA</h6>
+            </div>
+            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/state"
+                [queryParams]="{ category: 'BEAUTY SALON SPA' }">
+                <h6>Spa & Salons</h6>
+            </div>
+
+
+        </div>
+    </div>
+</section>

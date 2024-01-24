@@ -1,0 +1,28 @@
+.mobileb-view {
+    display: none;
+}
+
+.web-view {
+    display: block;
+}
+
+.miles {
+    color: #258a8b;
+    font-weight: bold;
+}
+
+.pi-directions {
+    color: #258a8b;
+
+}
+
+@media (max-width: 767px) {
+    .mobileb-view {
+        display: block;
+    }
+
+    .web-view {
+        display: none;
+    }
+
+}
