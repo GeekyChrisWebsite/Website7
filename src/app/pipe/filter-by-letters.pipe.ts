@@ -14,10 +14,11 @@ export class FilterByLettersPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
 
     return items.filter(item => {
-      const itemName: string = item.name.toLowerCase();
+      // Assuming 'item' is a string
+      const itemName: string = item.toLowerCase();
       return itemName.includes(searchText);
     });
   }
-  }
+}
 
 

@@ -65,7 +65,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
       <div *ngIf="postingarray" class=" data d-flex gap-2 justify-content-center align-items-center py-3 row px-4">
-        <div class="card my-0 py-0 px-0" style="max-width: 1250px;">
+        <div class="card my-0 py-0 px-0" style="max-width: 1200px;">
           <div class="row g-0">
             <div class="col-4">
               <img src="{{customer.images[0]}}" class="rounded-start" alt="..." class="w-100" height="200"
@@ -78,24 +78,19 @@
                     <h5 class="title-name">{{customer.title}}</h5>
 
                   </div>
-                  <div class="d-flex justify-content-center align-items-center gap-1" (click)="toggleLike(rowIndex)"
-                    [class.liked]="isLiked[customer]">
-                    <i class='bx bxs-like fs-4' id="likeIcon"
-                      [style.color]="isLiked[rowIndex] ? '#0069D9' : 'black'"></i>
-                    <p id="likeCount" class="m-0">{{ likeCountValue[rowIndex] || customer.likes }}</p>
-                  </div>
+
                 </div>
                 <div class="d-flex gap-1 justify-content-start align-items-center">
                   <i class='bx bx-world fs-6' style='color:#6b6666'></i>
                   <p class="title-time text-muted m-0">{{customer.postTime}}</p>
                 </div>
-                <div class="d-none d-lg-block">
-                  <p class="description"
+                <!-- <div class="d-none d-lg-block">
+                  <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }"
-                    [innerHTML]="(customer?.content)"></p>
-                </div>
-                <div class="d-lg-none d-block">
-                  <p class="description"
+                    [innerHTML]="(customer?.content)"></small>
+                </div> -->
+                <div class="">
+                  <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
                     {{ showFullText ? customer?.content : (customer?.content |
                     slice:0:maxDescriptionLength) }}
@@ -103,7 +98,7 @@
                       (click)="showFullText = !showFullText">
                       {{ showFullText ? 'Less' : '...' }}
                     </span>
-                  </p>
+                  </small>
                 </div>
                 <div *ngIf="distances && distances.length > 0" class="py-1">
                   <div class="d-flex justify-content-start align-items-start gap-1">
@@ -116,6 +111,12 @@
                   <button class="call-now" (click)="makePhoneCall(customer.phone_number)">Call Now</button>
                   <button class="Directions"
                     (click)="handleMapClick(customer. business.geo_direction)">Directions</button>
+                  <div class="d-flex justify-content-center align-items-center gap-1" (click)="toggleLike(rowIndex)"
+                    [class.liked]="isLiked[customer]">
+                    <i class='bx bxs-like fs-4' id="likeIcon"
+                      [style.color]="isLiked[rowIndex] ? '#0069D9' : 'black'"></i>
+                    <p id="likeCount" class="m-0">{{ likeCountValue[rowIndex] || customer.likes }}</p>
+                  </div>
 
                 </div>
               </div>
@@ -149,22 +150,14 @@
                 <small class="title-name">{{customer.title}}</small>
 
               </div>
-              <div class="d-flex justify-content-center align-items-center gap-1" (click)="toggleLike(rowIndex)"
-                [class.liked]="isLiked[customer]">
-                <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[rowIndex] ? '#0069D9' : 'black'"></i>
-                <p id="likeCount" class="m-0">{{ likeCountValue[rowIndex] || customer.likes }}</p>
-              </div>
+
             </div>
             <div class="d-flex gap-1 justify-content-start align-items-center">
               <i class='bx bx-world fs-6' style='color:#6b6666'></i>
               <p class="title-time text-muted m-0">{{customer.postTime}}</p>
             </div>
-            <div class="d-none d-lg-block">
-              <small class="description"
-                [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }"
-                [innerHTML]="(customer?.content)"></small>
-            </div>
-            <div class="d-lg-none d-block">
+
+            <div class="">
               <small class="description"
                 [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
                 {{ showFullText ? customer?.content : (customer?.content |
@@ -184,6 +177,11 @@
             <div class="btns justify-content-start align-items-start d-flex gap-2 py-2">
               <button class="call-now" (click)="makePhoneCall(customer.phone_number)">Call</button>
               <button class="Directions" (click)="handleMapClick(customer.business. geo_direction)">Directions</button>
+              <div class="d-flex justify-content-center align-items-center gap-1" (click)="toggleLike(rowIndex)"
+                [class.liked]="isLiked[customer]">
+                <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[rowIndex] ? '#0069D9' : 'black'"></i>
+                <p id="likeCount" class="m-0">{{ likeCountValue[rowIndex] || customer.likes }}</p>
+              </div>
 
             </div>
           </div>
