@@ -31,7 +31,12 @@ export class ListViewComponent {
       window.open(link, '_blank');
     }
   }
-
+  truncateText(content: string, maxLength: number): string {
+    if (content.length <= maxLength) {
+      return content;
+    }
+    return content.slice(0, maxLength) + '...';
+  }
   toggleLike(index: number) {
     this.isLiked[index] = !this.isLiked[index];
 

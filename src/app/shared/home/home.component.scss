@@ -31,6 +31,13 @@
     display: flex;
 }
 
+// img {
+
+//     height: 145px;
+//     cursor: pointer;
+
+// }
+
 @media (max-width: 767px) {
     .header {
         .container {
@@ -48,6 +55,16 @@
         // margin: 6px 20px !important;
 
 
+    }
+
+    .btns {
+        .call-now {
+            width: 40px !important;
+        }
+
+        .Directions {
+            width: 82px;
+        }
     }
 
 

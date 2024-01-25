@@ -28,7 +28,7 @@ export class ListviewPostingComponent {
     if (content.length <= maxLength) {
       return content;
     }
-    return content.substr(0, maxLength) + '... see more';
+    return content.substr(0, maxLength) + '...';
   }
   makePhoneCall(phoneNumber: string): void {
     console.log('Initiating phone call to:', phoneNumber);

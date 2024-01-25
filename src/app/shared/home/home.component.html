@@ -52,49 +52,51 @@
 
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="py-3">Top Restaurant Listings</h4>
-        <a href="">View All</a>
+        <a href="" routerLink="/listing">View All</a>
       </div>
       <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/Rectangle 18.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+        <div *ngIf="RESTAURANTSarray" class="rania d-flex gap-4 justify-content-start align-items-center py-3 row">
+          <div *ngFor="let item of RESTAURANTSarray.slice(first, first + rows);let i = index"
+            class="card my-0 py-0 px-0" style="max-width: 600px">
+            <div class="row g-0">
+              <div class="col-5">
+                <img src="{{ item.logo }}" class="img-fluid rounded-start w-100" routerLink="/details/{{ item.id }}"
+                  style="height: 100%;" />
+              </div>
+              <div class="col-7">
+                <div class="card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
+                  style="height: 100%">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center gap-3">
+                      <div>
+                        <h5 class="me-lg-5 me-0 mobile-font-size">{{ item.name }}</h5>
+                      </div>
 
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+                    </div>
+                    <div></div>
+                  </div>
+                  <div class="d-flex gap-1 py-2">
+                    <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
+                    <small>{{ truncateText(item.state,10) + ", " + truncateText(item.street,10) }}</small>
+                  </div>
+                  <div class="d-flex justify-content-start align-items-start gap-1">
+                    <i class="pi pi-directions fs-5"></i>
+                    <small>Distance: {{ distances[i] | number:'1.0-0' }} KM</small>
+                  </div>
+                  <div class="btns justify-content-between align-items-end d-flex gap-1 py-2">
+                    <div class="btns d-flex gap-2">
+                      <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call</button>
+                      <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center gap-1" (click)="toggleLike(i)"
+                      [class.liked]="isLiked[i]">
+                      <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
+                      <p id="likeCount" class="m-0">{{ likeCountValue[i] || item.likes }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-          </div>
-        </div>
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/Rectangle 22.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
-
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
-            </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-          </div>
-        </div>
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/Rectangle 25.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
-
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
-            </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
           </div>
         </div>
 
@@ -109,50 +111,60 @@
 
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="py-3">Top Salon’s Listings</h4>
-        <a href="">View All</a>
+        <a href="" routerLink="/listing">View All</a>
       </div>
       <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/s1.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+        <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
+          <div *ngIf="MASSAGEarray" class="rania d-flex gap-4 justify-content-start align-items-center py-3 row">
+            <div *ngFor="let item of MASSAGEarray.slice(first, first + rows);let i = index" class="card my-0 py-0 px-0"
+              style="max-width: 600px">
+              <div class="row g-0">
+                <div class="col-5">
+                  <img src="{{ item.logo }}" class="img-fluid rounded-start w-100" routerLink="/details/{{ item.id }}"
+                    style="height: 100%;" />
+                </div>
+                <div class="col-7">
+                  <div class="card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
+                    style="height: 100%">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex justify-content-between align-items-center gap-3">
+                        <div>
+                          <h5 class="me-lg-5 me-0 mobile-font-size">{{ item.name }}</h5>
+                        </div>
 
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="d-flex gap-1 py-2">
+                      <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
+                      <small>{{ truncateText(item.state,10) + ", " + truncateText(item.street,10) }}</small>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-start gap-1">
+                      <i class="pi pi-directions fs-5"></i>
+                      <small>Distance: {{ distances[i] | number:'1.0-0' }} KM</small>
+                    </div>
+                    <div class="btns justify-content-between align-items-end d-flex gap-1 py-2">
+                      <div class="btns d-flex gap-2">
+                        <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call</button>
+                        <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
+                      </div>
+                      <div class="d-flex justify-content-center align-items-center gap-1" (click)="toggleLike(i)"
+                        [class.liked]="isLiked[i]">
+                        <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
+                        <p id="likeCount" class="m-0">{{ likeCountValue[i] || item.likes }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
           </div>
-        </div>
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/s2.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1 ">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
 
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
-            </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-          </div>
-        </div>
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/s3.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
 
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
-            </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-          </div>
+
+
+
+
         </div>
 
 
@@ -166,52 +178,61 @@
 
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="py-3">Top Spa’s Listings</h4>
-        <a href="">View All</a>
+        <a href="" routerLink="/listing">View All</a>
       </div>
       <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/spa1.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
+        <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
+          <div *ngIf="spa" class="rania d-flex gap-4 justify-content-start align-items-center py-3 row">
+            <div *ngFor="let item of spa.slice(first, first + rows);let i = index" class="card my-0 py-0 px-0"
+              style="max-width: 600px">
+              <div class="row g-0">
+                <div class="col-5">
+                  <img src="{{ item.logo }}" class="img-fluid rounded-start w-100" routerLink="/details/{{ item.id }}"
+                    style="height: 100%;" />
+                </div>
+                <div class="col-7">
+                  <div class="card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
+                    style="height: 100%">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex justify-content-between align-items-center gap-3">
+                        <div>
+                          <h5 class="me-lg-5 me-0 mobile-font-size">{{ item.name }}</h5>
+                        </div>
 
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="d-flex gap-1 py-2">
+                      <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
+                      <small>{{ truncateText(item.state,10) + ", " + truncateText(item.street,10) }}</small>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-start gap-1">
+                      <i class="pi pi-directions fs-5"></i>
+                      <small>Distance: {{ distances[i] | number:'1.0-0' }} KM</small>
+                    </div>
+                    <div class="btns justify-content-between align-items-end d-flex gap-1 py-2">
+                      <div class="btns d-flex gap-2">
+                        <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call</button>
+                        <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
+                      </div>
+                      <div class="d-flex justify-content-center align-items-center gap-1" (click)="toggleLike(i)"
+                        [class.liked]="isLiked[i]">
+                        <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
+                        <p id="likeCount" class="m-0">{{ likeCountValue[i] || item.likes }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
           </div>
-        </div>
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/spa2.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
 
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
-            </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-          </div>
-        </div>
-        <div class="col-md-3 col-11 d-flex gap-2 bg-white border p-0">
-          <div>
-            <img src="../../../assets/img/home/sap3.png" alt="" height="140" width="130">
-          </div>
-          <div class="contant py-1">
-            <p-tag severity="warning" value="Restaurant" [rounded]="true"></p-tag>
 
-            <div class="d-flex align-items-between  justify-content-start  gap-md-5 gap-2 py-2">
-              <h6 class="text-nowrap text-start">Cafe Maribelle</h6>
-              <i class='bx bx-like fs-5' style='color:#0c0c0d'></i>
-            </div>
-            <small class="">1036 Cambell St, Rapid City, South Dakota, 57701</small>
-          </div>
-        </div>
 
+
+
+
+        </div>
 
 
 
