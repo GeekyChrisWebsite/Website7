@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div>
-                        <p class="mx-3 text-center">{{item.content}}</p>
+                        <p class="mx-3 text-center">{{truncateText(item.content,30)}}</p>
                     </div>
                     <div class="btns justify-content-start align-items-start d-flex gap-3 py-3">
                         <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call Now</button>

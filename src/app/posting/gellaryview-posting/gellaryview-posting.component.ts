@@ -45,4 +45,10 @@ export class GellaryviewPostingComponent {
     }
 
   }
+  truncateText(content: string, maxLength: number): string {
+    if (content.length <= maxLength) {
+      return content;
+    }
+    return content.slice(0, maxLength) + '...';
+  }
 }

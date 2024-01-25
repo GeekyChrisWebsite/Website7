@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, NgZone, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
 import { DropdownModule } from 'primeng/dropdown';
@@ -21,7 +21,7 @@ import { FilterSharedComponent } from '../filter-shared/filter-shared.component'
   providers: [MessageService, ConfirmationService],
 
 })
-export class NavbarComponent {
+export class NavbarComponent implements DoCheck {
   sidebarVisible: boolean = false;
   sidebarVisible1: boolean = false;
   sidebarVisible2: boolean = false;
@@ -58,16 +58,7 @@ export class NavbarComponent {
     this.filterservice.updateListingArray(this.listingArray);
 
   }
-  ngDoCheck(): void {
-    if (this.route.url == '/home') {
-      this.isrouteHome = false;
 
-    } else {
-      this.isrouteHome = true;
-
-    }
-
-  }
   getDataAll() {
     this.filterservice
       .getbusinessesbycategory(this.category, this.state, this.city)
@@ -166,6 +157,15 @@ export class NavbarComponent {
     });
   }
 
+  ngDoCheck(): void {
+    if (this.route.url == '/home') {
+      this.isrouteHome = false;
 
+    } else {
+      this.isrouteHome = true;
+
+    }
+
+  }
 
 }
