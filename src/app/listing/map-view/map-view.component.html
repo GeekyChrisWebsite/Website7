@@ -1,6 +1,6 @@
 <div class="container py-3">
 
-  <div class="container-map">
+  <div class="container-map  justify-content-center align-items-center d-flex">
     @if (apiLoaded | async) {
     <google-map [options]="options" #map>
       @for (position of listingArray ; track position) {

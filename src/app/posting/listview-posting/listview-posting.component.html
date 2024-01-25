@@ -52,7 +52,6 @@
     </ng-template>
   </p-table>
 </div> -->
-
 <div *ngIf="postingarray" class="web-view">
   <p-table [value]="postingarray" sortField="id" sortMode="single" [scrollable]="true" rowGroupMode="subheader"
     groupRowsBy="postTime">
@@ -67,11 +66,11 @@
       <div *ngIf="postingarray" class=" data d-flex gap-2 justify-content-center align-items-center py-3 row px-4">
         <div class="card my-0 py-0 px-0" style="max-width: 1200px;">
           <div class="row g-0">
-            <div class="col-3" style="width: 17%;">
-              <img src="{{customer.images[0]}}" class="rounded-start" alt="..." height="180" width="200"
+            <div class="col-3" style="width: 27%;">
+              <img src="{{customer.images[0]}}" class="rounded-start" alt="..." height="100%" width="310"
                 routerLink="/postingdetails/{{ customer.id }}" />
             </div>
-            <div class="col-9" style="width:82%">
+            <div class="col-9" style="width:70%">
               <div class="card-body card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
                 style="height: 100%">
                 <div class="d-flex gap-1 justify-content-between align-items-center">
@@ -85,11 +84,11 @@
                   <i class='bx bx-world fs-6' style='color:#6b6666'></i>
                   <p class="title-time text-muted m-0">{{customer.postTime}}</p>
                 </div>
-                <!-- <div class="d-none d-lg-block">
+                <div class="d-none d-lg-block">
                   <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }"
                     [innerHTML]="(customer?.content)"></small>
-                </div> -->
+                </div>
                 <div class="">
                   <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
@@ -143,16 +142,16 @@
       <div *ngIf="postingarray" class=" data d-flex gap-2 justify-content-center align-items-center py-3 row px-4">
         <div class="card my-0 py-0 px-0" style="max-width: 1200px;">
           <div class="row g-0">
-            <div class="col-3" style="width: 38%;">
-              <img src="{{customer.images[0]}}" class="rounded-start" alt="..." height="180" width="200"
+            <div class="col-3" style="width: 44%;">
+              <img src="{{customer.images[0]}}" class="rounded-start w-100" alt="..." height="100%"
                 routerLink="/postingdetails/{{ customer.id }}" />
             </div>
-            <div class="col-9" style="width:50%">
+            <div class="col-9" style="width:56%">
               <div class="card-body card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
                 style="height: 100%">
                 <div class="d-flex gap-1 justify-content-between align-items-center">
                   <div class="">
-                    <h5 class="title-name">{{customer.title}}</h5>
+                    <h5 class="title-name" style="font-size: 14px;">{{customer.title}}</h5>
 
                   </div>
 
@@ -161,11 +160,11 @@
                   <i class='bx bx-world fs-6' style='color:#6b6666'></i>
                   <p class="title-time text-muted m-0">{{customer.postTime}}</p>
                 </div>
-                <!-- <div class="d-none d-lg-block">
+                <div class="d-none d-lg-block">
                   <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }"
                     [innerHTML]="(customer?.content)"></small>
-                </div> -->
+                </div>
                 <div class="">
                   <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
@@ -178,8 +177,8 @@
                   </small>
                 </div>
                 <div *ngIf="distances && distances.length > 0" class="py-1">
-                  <div class="d-flex justify-content-start align-items-start gap-1">
-                    <i class="pi pi-directions fs-4"></i>
+                  <div class="d-flex justify-content-start align-items-start gap-1" style="font-size: 13px;">
+                    <i class="pi pi-directions fs-6"></i>
                     <p class="p-0 m-0"> Distance: {{ distances[rowIndex] | number:'1.0-0' }} <span
                         class="miles">Miles</span></p>
                   </div>
