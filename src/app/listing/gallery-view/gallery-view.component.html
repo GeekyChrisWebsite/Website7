@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div>
-                        <p class="text-muted">{{item.description}}</p>
+                        <p class="text-muted">{{truncateText(item.description,20)}}</p>
                     </div>
                     <div class="btns justify-content-start align-items-start d-flex gap-3 py-3">
                         <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call Now</button>
