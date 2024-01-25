@@ -11,7 +11,7 @@ import { TableModule } from 'primeng/table';
   styleUrl: './bs-listview.component.scss'
 })
 export class BsListviewComponent {
-  maxDescriptionLength: number = 10;
+  maxDescriptionLength: number = 20;
   showFullText: boolean = false;
   @Input() BuySellArray: any;
   @Input() distances!: any;
