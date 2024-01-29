@@ -3,6 +3,7 @@ import { PostingData } from '../../interface/posting-data';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-listview-posting',
@@ -21,9 +22,12 @@ export class ListviewPostingComponent {
   @Input() distances: any[] = [];
   maxDescriptionLength: number = 20;
   showFullText: boolean = false;
-
-  isLiked: boolean[] = [];
   likeCountValue: number[] = [];
+  isLiked: boolean[] = Array(this.postingarray?.length).fill(false)
+
+  constructor(private _filterservie: FilterService) {
+
+  }
   truncateText(content: string, maxLength: number): string {
     if (content.length <= maxLength) {
       return content;
@@ -40,19 +44,30 @@ export class ListviewPostingComponent {
       window.open(link, '_blank');
     }
   }
+  likeBusiness(busId: number, index: number) {
+    const businessId = this.postingarray[index].business_id;
+    const updatedPosts = this.postingarray.filter((post) => post.business_id === businessId);
 
-  toggleLike(index: number) {
-    this.isLiked[index] = !this.isLiked[index];
+    console.log(updatedPosts);
 
-    // Increment the likes count by 1 when liked, otherwise decrement
-    this.likeCountValue[index] = this.isLiked[index] ? this.likeCountValue[index] + 1 : this.likeCountValue[index] - 1;
-
-    // Update the 'likes' property of the corresponding item
-    if (this.isLiked[index]) {
-      this.postingarray[index].likes += 1;
+    if (!this.isLiked[index]) {
+      this._filterservie.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          updatedPosts.forEach((post, idx) => {
+            post.likes += 1;
+            this.isLiked[this.postingarray.indexOf(post)] = true;
+          });
+        }
+      });
     } else {
-      this.postingarray[index].likes -= 1;
+      this._filterservie.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false;
+          this.postingarray[index].likes -= 1;
+        }
+      });
     }
-
   }
 }

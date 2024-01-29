@@ -1,7 +1,6 @@
 export interface PostingData {
   author: string;
   bold: boolean;
-  likes: number
   business: {
     city1: string;
     geo_direction: {
@@ -13,6 +12,7 @@ export interface PostingData {
     phone_number: string;
     state: string;
     street: string;
+    likes: number;
   };
   business_id: number;
   content: string;
@@ -30,6 +30,7 @@ export interface PostingData {
   updated_at: number;
   phone_number: string;
   postTime: Date;
+  likes: number;
 
 
 }

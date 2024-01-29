@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ListingData } from '../../interface/listing-data';
 import { CommonModule } from '@angular/common';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-gallery-view',
@@ -14,6 +15,9 @@ export class GalleryViewComponent {
   listingArray!: ListingData[];
   @Input() filterarray: any;
   @Input() distances!: any;
+  constructor(private filterservice: FilterService) {
+
+  }
   makePhoneCall(phoneNumber: string): void {
     console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
@@ -29,27 +33,31 @@ export class GalleryViewComponent {
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
 
-  // Your existing code...
-
-  toggleLike(index: number) {
-    this.isLiked[index] = !this.isLiked[index];
-
-    // Increment the likes count by 1 when liked, otherwise decrement
-    this.likeCountValue[index] = this.isLiked[index] ? this.likeCountValue[index] + 1 : this.likeCountValue[index] - 1;
-
-    // Update the 'likes' property of the corresponding item
-    if (this.isLiked[index]) {
-      this.listingArray[index].likes += 1;
-    } else {
-      this.listingArray[index].likes -= 1;
-    }
-  }
   truncateText(content: string, maxLength: number): string {
     if (content.length <= maxLength) {
       return content;
     }
     return content.slice(0, maxLength) + '...';
   }
+  likeBusiness(busId: number, index: number) {
+    if (!this.isLiked[index] == true) {
+      this.filterservice.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = true
+          this.listingArray[index].likes += 1
+        }
+      })
+    } else {
+      this.filterservice.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false
+          this.listingArray[index].likes -= 1
 
+        }
+      })
+    }
+  }
 
 }

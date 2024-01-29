@@ -39,7 +39,7 @@ export class FilterService {
       .set('category', category)
       .set('state', states)
       .set('city', city)
-    return this._http.get(`${environment.BACKEND_DOMAIN}/posts/`, { params });
+    return this._http.get(`${environment.BACKEND_DOMAIN}/website-filtered-posts/`, { params });
 
 
   }
@@ -65,6 +65,16 @@ export class FilterService {
     this.bparm.next(params);
   }
 
+
+  likeBusinessById(busId: number) {
+    let body = { "bus_id": busId };
+    return this._http.put(`${environment.BACKEND_DOMAIN}/like-business-by-bus-id`, body);
+  }
+
+  dislikeBusinessById(busId: number) {
+    let body = { "bus_id": busId };
+    return this._http.put(`${environment.BACKEND_DOMAIN}/dislike-business-by-bus-id`, body);
+  }
 
 
 }

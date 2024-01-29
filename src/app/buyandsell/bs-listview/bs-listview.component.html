@@ -206,11 +206,11 @@
                                             (click)="handleMapClick(customer.geo_direction)">Directions</button>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center gap-1"
-                                        (click)="toggleLike(rowIndex)" [class.liked]="isLiked[customer]">
+                                        (click)="likeBusiness(customer.business_id, rowIndex)"
+                                        [class.liked]="isLiked[rowIndex]">
                                         <i class='bx bxs-like fs-4' id="likeIcon"
-                                            [style.color]="isLiked[customer] ? '#0069D9' : 'black'"></i>
-                                        <p id="likeCount" class="m-0">{{ likeCountValue[customer] || customer.likes }}
-                                        </p>
+                                            [style.color]="isLiked[rowIndex] ? '#0069D9' : 'black'"></i>
+                                        <p id="likeCount" class="m-0">{{customer.business.likes}}</p>
                                     </div>
 
                                 </div>

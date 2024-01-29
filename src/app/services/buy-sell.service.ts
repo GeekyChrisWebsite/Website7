@@ -23,7 +23,7 @@ export class BuySellService {
     params = params.set('category', category);
     params = params.set('state', state);
     params = params.set('city', city);
-    return this.httpClient.get(`${environment.BACKEND_DOMAIN}/buysells`, {
+    return this.httpClient.get(`${environment.BACKEND_DOMAIN}/website-filtered-buysells`, {
       params: params,
     });
   }

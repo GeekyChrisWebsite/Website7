@@ -3,10 +3,12 @@
         <div class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0 ">
             <div class="col-md-3 col-12 mb-3" *ngFor="let item of listingArray; let i = index">
                 <div class="card justify-content-between align-items-center d-flex">
-                    <div class="div-like gap-2 d-flex flex-column">
-                        <i class="pi pi-thumbs-up"></i>
+                    <div class="d-flex justify-content-center align-items-center gap-1 div-like"
+                        (click)="likeBusiness(item.id, i)" [class.liked]="isLiked[i]">
+                        <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
                     </div>
-                    <small class="likes">{{ item.likes }}</small>
+                    <p id="likeCount" class="m-0 likes">{{item.likes}}</p>
+
 
                     <img src="{{ item.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
                     <div class="title py-2">

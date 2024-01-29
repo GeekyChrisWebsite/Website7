@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { PostingData } from '../../interface/posting-data';
 import { CommonModule } from '@angular/common';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-gellaryview-posting',
@@ -14,6 +15,9 @@ export class GellaryviewPostingComponent {
   postingarray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
+  constructor(private _filterservie: FilterService) {
+
+  }
   makePhoneCall(phoneNumber: string): void {
     console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
@@ -29,21 +33,30 @@ export class GellaryviewPostingComponent {
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
 
-  // Your existing code...
-
-  toggleLike(index: number) {
-    this.isLiked[index] = !this.isLiked[index];
-
-    // Increment the likes count by 1 when liked, otherwise decrement
-    this.likeCountValue[index] = this.isLiked[index] ? this.likeCountValue[index] + 1 : this.likeCountValue[index] - 1;
-
-    // Update the 'likes' property of the corresponding item
-    if (this.isLiked[index]) {
-      this.postingarray[index].likes += 1;
+  likeBusiness(busId: number, index: number) {
+    const bussinessId = this.postingarray[index].business_id
+    const updatedPosts = this.postingarray.filter((post) => post.business_id == bussinessId)
+    console.log(updatedPosts)
+    if (!this.isLiked[index] == true) {
+      this._filterservie.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          updatedPosts.forEach((post, index) => {
+            post.business.likes += 1;
+            this.isLiked[this.postingarray.indexOf(post)] = true
+          })
+        }
+      })
     } else {
-      this.postingarray[index].likes -= 1;
-    }
+      this._filterservie.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false
+          this.postingarray[index].business.likes -= 1
 
+        }
+      })
+    }
   }
   truncateText(content: string, maxLength: number): string {
     if (content.length <= maxLength) {

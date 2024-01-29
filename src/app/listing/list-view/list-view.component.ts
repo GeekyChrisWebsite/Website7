@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ListingData } from '../../interface/listing-data';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-list-view',
@@ -16,8 +17,12 @@ export class ListViewComponent {
   @Input() distances!: any;
   first = 0;
   rows = 10;
-  isLiked: boolean[] = [];
   likeCountValue: number[] = [];
+  isLiked: boolean[] = Array(this.listingArray?.length).fill(false)
+
+  constructor(private filterservice: FilterService) {
+
+  }
 
   makePhoneCall(phoneNumber: string): void {
     console.log('Initiating phone call to:', phoneNumber);
@@ -37,19 +42,27 @@ export class ListViewComponent {
     }
     return content.slice(0, maxLength) + '...';
   }
-  toggleLike(index: number) {
-    this.isLiked[index] = !this.isLiked[index];
-
-    // Increment the likes count by 1 when liked, otherwise decrement
-    this.likeCountValue[index] = this.isLiked[index] ? this.likeCountValue[index] + 1 : this.likeCountValue[index] - 1;
-
-    // Update the 'likes' property of the corresponding item
-    if (this.isLiked[index]) {
-      this.listingArray[index].likes += 1;
+  likeBusiness(busId: number, index: number) {
+    if (!this.isLiked[index] == true) {
+      this.filterservice.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = true
+          this.listingArray[index].likes += 1
+        }
+      })
     } else {
-      this.listingArray[index].likes -= 1;
+      this.filterservice.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false
+          this.listingArray[index].likes -= 1
+
+        }
+      })
     }
   }
+
 
 
 }

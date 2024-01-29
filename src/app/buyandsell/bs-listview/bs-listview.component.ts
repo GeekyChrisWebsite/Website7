@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-bs-listview',
@@ -13,13 +14,13 @@ import { TableModule } from 'primeng/table';
 export class BsListviewComponent {
   maxDescriptionLength: number = 20;
   showFullText: boolean = false;
-  @Input() BuySellArray: any;
+  @Input() BuySellArray: any[] = [];
   @Input() distances!: any;
-
-
-
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
+  constructor(private _filterservie: FilterService) {
+
+  }
   truncateText(content: string, maxLength: number): string {
     if (content.length <= maxLength) {
       return content;
@@ -51,4 +52,31 @@ export class BsListviewComponent {
     }
 
   }
+  likeBusiness(busId: number, index: number) {
+    const businessId = this.BuySellArray[index].business_id;
+    const updatedPosts = this.BuySellArray.filter((post) => post.business_id === businessId);
+
+    console.log(updatedPosts);
+
+    if (!this.isLiked[index]) {
+      this._filterservie.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          updatedPosts.forEach((post, idx) => {
+            post.business.likes += 1;
+            this.isLiked[this.BuySellArray.indexOf(post)] = true;
+          });
+        }
+      });
+    } else {
+      this._filterservie.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false;
+          this.BuySellArray[index].business.likes -= 1;
+        }
+      });
+    }
+  }
+
 }

@@ -11,7 +11,6 @@ export class HomeService {
 
   constructor(private httpClient: HttpClient) { }
   getBusinessesByCategory(category: string): Observable<any> {
-    // Use HttpParams directly in the get request
     return this.httpClient.get<Category[]>(`${environment.BACKEND_DOMAIN}/top-businesses-by-category/`, {
       params: new HttpParams().set('category', category)
     });
