@@ -46,6 +46,8 @@ export class PostingComponent {
   Subscriptions: Subscription[] = []
   currentLocation: any
   distances: any[] = [];
+  isLiked: boolean[] = Array(this.postingarray?.length).fill(false)
+
   filterformposting: FormGroup = new FormGroup({
     categories: new FormControl('', Validators.required),
     states: new FormControl('', Validators.required),
@@ -67,6 +69,11 @@ export class PostingComponent {
       (res: { data: PostingData[] }) => {
         this.loading = false
         this.vippostarray = res.data;
+        const vipWithId = this.vippostarray.map((item, index) => {
+          return { ...item, new: index };
+        });
+        this.vippostarray = vipWithId;
+
         console.log(this.vippostarray)
         console.log(this.vippostarray)
       }
@@ -329,4 +336,18 @@ export class PostingComponent {
     console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
+  likeBusiness(busId: number, index: number) {
+    if (this.isLiked[index] == true) {
+      this._filterservice.dislikeBusinessById(busId).subscribe((response) => {
+        this.isLiked[index] = false;
+        this.vippostarray[index].business.likes! -= 1;
+      });
+    } else {
+      this._filterservice.likeBusinessById(busId).subscribe((response) => {
+        this.isLiked[index] = true;
+        this.vippostarray[index].business.likes! += 1;
+      });
+    }
+  }
+
 }

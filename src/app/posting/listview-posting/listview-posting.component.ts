@@ -55,7 +55,7 @@ export class ListviewPostingComponent {
         next: (res) => {
           console.log(res);
           updatedPosts.forEach((post, idx) => {
-            post.likes += 1;
+            post.business.likes += 1;
             this.isLiked[this.postingarray.indexOf(post)] = true;
           });
         }
@@ -65,7 +65,7 @@ export class ListviewPostingComponent {
         next: (res) => {
           console.log(res);
           this.isLiked[index] = false;
-          this.postingarray[index].likes -= 1;
+          this.postingarray[index].business.likes -= 1;
         }
       });
     }
