@@ -138,7 +138,7 @@
                     (click)="likeBusiness(customer.business_id, rowIndex)" [class.liked]="isLiked[rowIndex]">
                     <i class='bx bxs-like fs-4' id="likeIcon"
                       [style.color]="isLiked[rowIndex] ? '#0069D9' : 'black'"></i>
-                    <p id="likeCount" class="m-0">{{customer.likes}}</p>
+                    <p id="likeCount" class="m-0">{{customer.business.likes}}</p>
                   </div>
 
                 </div>

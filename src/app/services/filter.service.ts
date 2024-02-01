@@ -5,16 +5,25 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../environments/environment.development';
 import { State } from '../interface/state';
 import { ListingData } from '../interface/listing-data';
+import { Subject } from 'rxjs/internal/Subject';
+import { PostingData } from '../interface/posting-data';
+import { BuysellDetalis } from '../interface/buysell-detalis';
+import { PostingService } from './posting.service';
+import { BuySellService } from './buy-sell.service';
+import { ListingService } from './listing.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
   bparm = new BehaviorSubject({})
-  listingService: any;
+  clearListing: Subject<ListingData[]> = new Subject()
+  clearPosting: Subject<PostingData> = new Subject()
+  clearBuySell: Subject<BuysellDetalis> = new Subject()
 
 
-  constructor(public _http: HttpClient) { }
+
+  constructor(public _http: HttpClient, private postingService: PostingService, private _buysell: BuySellService, private listingService: ListingService) { }
 
   GetState(category: string): Observable<any> {
     let params = new HttpParams().set('category', category);
@@ -76,5 +85,28 @@ export class FilterService {
     return this._http.put(`${environment.BACKEND_DOMAIN}/dislike-business-by-bus-id`, body);
   }
 
+  clear() {
+    this.listingService.GetListing().subscribe({
+      next: (res: ListingData[]) => {
+        this.clearListing.next(res)
+        console.log("res", res);
+
+      }
+    });
+    this.postingService.GetPosting().subscribe({
+      next: (res: any) => {
+        this.clearPosting.next(res)
+        console.log("res", res);
+
+      }
+    })
+    this._buysell.getAllBuysell().subscribe({
+      next: (res: any) => {
+        this.clearBuySell.next(res)
+        console.log("buyy", res);
+
+      }
+    })
+  }
 
 }

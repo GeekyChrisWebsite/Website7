@@ -150,7 +150,13 @@ export class ListingComponent {
   //   }
   // }
   ngOnInit(): void {
+    this.filterservice.clearListing.subscribe({
+      next: (res: any) => {
+        this.listingArray = res.data
+        console.log(this.listingArray);
 
+      }
+    })
     this._router.queryParams.subscribe((p: any) => {
       console.log(p);
       if (Object.keys(p).length) {

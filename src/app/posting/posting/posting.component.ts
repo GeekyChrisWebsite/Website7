@@ -144,6 +144,13 @@ export class PostingComponent {
 
 
   ngOnInit(): void {
+    this._filterservice.clearPosting.subscribe({
+      next: (res: any) => {
+        this.postingarray = res.data
+        console.log(this.postingarray);
+
+      }
+    })
     this.responsiveOptions = [
       {
         breakpoint: '1199px',

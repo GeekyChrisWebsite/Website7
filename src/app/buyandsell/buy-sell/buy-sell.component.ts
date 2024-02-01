@@ -57,6 +57,13 @@ export class BuySellComponent {
     this.mapView = false;
   }
   ngOnInit(): void {
+    this._filterservice.clearListing.subscribe({
+      next: (res: any) => {
+        this.BuySellArray = res.data
+        console.log(this.BuySellArray);
+
+      }
+    })
     this._filterservice.bparm.subscribe((res: any) => {
       let state: string;
       if (res.state === undefined) {

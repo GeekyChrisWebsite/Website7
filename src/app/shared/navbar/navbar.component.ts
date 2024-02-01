@@ -132,29 +132,21 @@ export class NavbarComponent implements DoCheck {
     );
   }
 
-  clear() {
-    console.log('Performing clear...');
-    this.filterform.reset();
-    this.category = '';
-    this.state = '';
-    this.city = '';
-    this.listingArray = [];
+  clearfromnav() {
+
+
+    this.sidebarVisible1 = false
+
+    // // this.category = '';
+    // // this.state = '';
+    // // this.city = '';
     this.filterservice.bparm.next({});
     localStorage.removeItem('postingArray');
     localStorage.removeItem('buysellarray');
     localStorage.removeItem('listingArray');
     localStorage.removeItem('filteredBuySellData');
-
-    // Set a flag to hide the component temporarily
-    this.sidebarVisible = false;
-
-    // Use NgZone to run the code in the Angular zone
-    this.zone.runOutsideAngular(() => {
-      // Re-create the component by setting the flag after a short delay
-      setTimeout(() => {
-        this.sidebarVisible = true;
-      });
-    });
+    // this.GetListingdata();
+    this.filterservice.clear()
   }
 
   ngDoCheck(): void {
