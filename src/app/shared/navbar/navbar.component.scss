@@ -177,10 +177,11 @@ li {
     }
 }
 
-.messi {
-    background-color: #000000;
+.line {
+    background-color: #000000 !important;
     width: 30px;
     height: 100%;
+    color: white;
     display: inline-block;
     /* Make it inline block so it takes the height of the parent */
 }

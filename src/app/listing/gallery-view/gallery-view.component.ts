@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { ListingData } from '../../interface/listing-data';
 import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-gallery-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './gallery-view.component.html',
   styleUrl: './gallery-view.component.scss'
 })
@@ -39,7 +40,7 @@ export class GalleryViewComponent {
     }
     return content.slice(0, maxLength) + '...';
   }
-  likeBusiness(busId: number, index: number) {
+  likeBusiness(busId: number, index: number, event: Event) {
     if (!this.isLiked[index] == true) {
       this.filterservice.likeBusinessById(busId).subscribe({
         next: (res) => {
@@ -58,6 +59,7 @@ export class GalleryViewComponent {
         }
       })
     }
+    event.stopPropagation()
   }
 
 }

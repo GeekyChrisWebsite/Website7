@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { PostingData } from '../../interface/posting-data';
 import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-gellaryview-posting',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './gellaryview-posting.component.html',
   styleUrl: './gellaryview-posting.component.scss'
 })
@@ -33,7 +34,7 @@ export class GellaryviewPostingComponent {
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
 
-  likeBusiness(busId: number, index: number) {
+  likeBusiness(busId: number, index: number, event: Event) {
     const bussinessId = this.postingarray[index].business_id
     const updatedPosts = this.postingarray.filter((post) => post.business_id == bussinessId)
     console.log(updatedPosts)
@@ -57,6 +58,8 @@ export class GellaryviewPostingComponent {
         }
       })
     }
+    event.stopPropagation();
+
   }
   truncateText(content: string, maxLength: number): string {
     if (content.length <= maxLength) {

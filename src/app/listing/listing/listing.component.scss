@@ -151,7 +151,7 @@
             gap: 10px;
 
             .clear-btn {
-              background-color: #ff8682;
+              background-color: #ffbf9d;
               color: white;
               border-radius: 4px;
               -webkit-border-radius: 4px;
@@ -205,4 +205,9 @@
 // }
 ul {
   padding: 0px;
+}
+
+i,
+.d-lg-block {
+  cursor: pointer;
 }

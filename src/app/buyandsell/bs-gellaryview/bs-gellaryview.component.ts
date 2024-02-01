@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FilterService } from '../../services/filter.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-bs-gellaryview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './bs-gellaryview.component.html',
   styleUrl: './bs-gellaryview.component.scss'
 })
@@ -41,7 +42,7 @@ export class BsGellaryviewComponent {
     }
     return content.substr(0, maxLength) + '... see more';
   }
-  likeBusiness(busId: number, index: number) {
+  likeBusiness(busId: number, index: number, event: Event) {
     const bussinessId = this.BuySellArray[index].business_id
     const updatedPosts = this.BuySellArray.filter((post) => post.business_id == bussinessId)
     console.log(updatedPosts)
@@ -65,6 +66,9 @@ export class BsGellaryviewComponent {
         }
       })
     }
+    event.stopPropagation();
+
   }
+
 
 }
