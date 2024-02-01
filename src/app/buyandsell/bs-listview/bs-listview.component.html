@@ -280,7 +280,7 @@
                                         <button class="call-now"
                                             (click)="makePhoneCall(customer.phone_number)">Call</button>
                                         <button class="Directions"
-                                            (click)="handleMapClick(customer.geo_direction)">Directions</button>
+                                            (click)="handleMapClick(customer.business.geo_direction)">Directions</button>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center gap-1"
                                         (click)="likeBusiness(customer.business_id, rowIndex)"
