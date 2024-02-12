@@ -1,17 +1,28 @@
 <section class="posting py-5">
-
   <div class="container" *ngIf="datainfo">
     <div class="box-white">
-      <div class="div-info d-flex align-items-center justify-content-start gap-3 py-3">
-        <img src="{{ datainfo.business.logo}}" alt="" width="50" height="50" class="rounded-circle" />
-        <div>
-          <p class="p-0 m-0">{{ datainfo.title}}</p>
-          <div class="d-flex gap-1 justify-content-start align-items-center">
-            <i class='bx bx-world fs-6' style='color:#6b6666'></i>
-            <p class="title-time text-muted m-0">{{datainfo.postTime}}</p>
+      <div class="div-info d-flex align-items-center justify-content-between gap-3 py-3 flex-column flex-lg-row">
+        <div class="d-flex gap-2  flex-lg-row align-items-start justify-content-start">
+          <img src="{{ datainfo.business.logo }}" alt="" width="50" height="50" class="rounded-circle" />
+          <div class="">
+            <p class="p-0 m-0">{{ datainfo.title }}</p>
+            <div class="d-flex gap-1 justify-content-start align-items-center">
+              <i class="bx bx-world fs-6" style="color: #6b6666"></i>
+              <p class="title-time text-muted m-0">{{ datainfo.postTime }}</p>
+            </div>
           </div>
         </div>
-
+        <div class="d-flex gap-1 gap-lg-3 flex-lg-row">
+          <button class="call-now" (click)="makePhoneCall(datainfo.phone_number)">
+            Call
+          </button>
+          <button class="Directions" (click)="handleMapClick(datainfo.geo_direction)">
+            Directions
+          </button>
+          <div *ngIf="datainfo.booking_url !== ''">
+            <button class="book-btn"><a href="{{datainfo.booking_url}}" target="_blank">Book Now</a></button>
+          </div>
+        </div>
       </div>
 
       <div class="justify-content-center align-items-center d-flex">
@@ -22,19 +33,14 @@
           </ng-template>
           <ng-template pTemplate="thumbnail" let-item>
             <div class="d-grid justify-content-center align-items-center d-flex">
-              <img [src]="item" class="img-fluid w-25" height="100" />
+              <img [src]="item" class="w-25 img-fluid" />
             </div>
           </ng-template>
         </p-galleria>
-
       </div>
       <div>
-        <p class="text-start" [innerHTML]="(datainfo?.content)"></p>
+        <p class="text-start" [innerHTML]="datainfo?.content"></p>
       </div>
-
-
     </div>
   </div>
-
-
 </section>

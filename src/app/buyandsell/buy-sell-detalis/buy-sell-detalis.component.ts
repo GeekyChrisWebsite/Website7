@@ -79,5 +79,15 @@ export class BuySellDetalisComponent {
     console.log('Image clicked at index:', index);
     this.displayCustom = true
   }
+  makePhoneCall(phoneNumber: string): void {
+    console.log('Initiating phone call to:', phoneNumber);
+    window.location.href = 'tel:' + phoneNumber;
+  }
+  handleMapClick(geoDirection: { lat: number, lng: number }): void {
+    if (geoDirection && geoDirection.lat !== undefined && geoDirection.lng !== undefined) {
+      const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
+      window.open(link, '_blank');
+    }
+  }
 
 }

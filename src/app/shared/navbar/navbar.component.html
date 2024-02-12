@@ -22,7 +22,7 @@
     </div>
   </div>
 </nav>
-<div class="mobile">
+<div class="mobile fixed-top">
   <div class="container">
     <div class="row justify-content-center align-items-center d-flex">
       <div class="col justify-content-center align-items-center d-flex" *ngIf="isrouteHome">
@@ -38,6 +38,16 @@
 
       </div>
     </div>
+  </div>
+  <div class="container bg-green py-2">
+    <ul class="d-flex gap-5 list-unstyled m-0 justify-content-center align-items-center text-white
+
+    " style="font-size: 15px;">
+      <li routerLink="/home" routerLinkActive="line"><a>Home</a></li>
+      <li routerLink="/listing" routerLinkActive="line"><a>Listing</a></li>
+      <li routerLink="/posting" routerLinkActive="line"><a>Posting</a></li>
+      <li routerLink="/buysell" routerLinkActive="line"><a>Buy & sell</a></li>
+    </ul>
   </div>
 </div>
 <p-sidebar [(visible)]="sidebarVisible1" position="left">

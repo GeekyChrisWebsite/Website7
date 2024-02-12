@@ -1,6 +1,6 @@
 <section class="slider py-5" ngSkipHydration>
-  <div class="container" *ngIf="vippostarray">
-    <h2 class="text-center py-3 h1">VIP Posts</h2>
+  <div class="container py-5" *ngIf="vippostarray">
+    <h2 class="text-center py-5 h1">VIP Posts</h2>
     <div>
       <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
         styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
@@ -37,7 +37,11 @@
                   </div>
                 </div>
                 <div class="btns d-flex justify-content-center align-items-center gap-3 py-1">
-                  <button class="date"><img src="../../../assets/img/posting/image 3.png" alt=""></button>
+                  <button *ngIf="product.business.booking_url !== '' " class="date">
+                    <a [href]="product.business.booking_url" target="_blank">
+                      <img src="../../../assets/img/posting/image 3.png" alt="Image">
+                    </a>
+                  </button>
                   <button class="call" (click)="makePhoneCall(product.business.phone_number)">
                     <img src="../../../assets/img/posting/image 1.png" alt="Call">
                   </button>

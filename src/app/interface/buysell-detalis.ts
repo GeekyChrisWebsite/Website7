@@ -37,6 +37,14 @@ export interface BuysellDetalis {
     websites: null;
     state: string;
     street: string;
+    phone_number: string;
+    booking_url: string;
+    geo_direction: {
+        lat: number;
+        lng: number;
+    },
+    logo: string,
+    name: string
 
 
 }

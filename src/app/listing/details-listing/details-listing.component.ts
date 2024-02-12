@@ -11,11 +11,12 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { of } from 'rxjs/internal/observable/of';
 import { ListingService } from '../../services/listing.service';
 import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
     selector: 'app-details-listing',
     standalone: true,
-    imports: [CommonModule, GalleriaModule, RouterLink, CarouselModule, AsyncPipe, GoogleMapsModule],
+    imports: [CommonModule, GalleriaModule, RouterLink, CarouselModule, AsyncPipe, GoogleMapsModule, ChipModule],
     templateUrl: './details-listing.component.html',
     styleUrl: './details-listing.component.scss',
     encapsulation: ViewEncapsulation.None
@@ -157,5 +158,20 @@ export class DetailsListingComponent {
     makePhoneCall(phoneNumber: string): void {
         console.log('Initiating phone call to:', phoneNumber);
         window.location.href = 'tel:' + phoneNumber;
+    }
+    formatTime(time: string): string {
+        const timeParts = time.split(':');
+        let hours = parseInt(timeParts[0], 10);
+        const minutes = timeParts[1];
+        let amPm = 'AM';
+
+        if (hours >= 12) {
+            if (hours > 12) {
+                hours -= 12;
+            }
+            amPm = 'PM';
+        }
+
+        return `${hours}:${minutes} ${amPm}`;
     }
 }

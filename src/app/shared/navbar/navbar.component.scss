@@ -177,6 +177,21 @@ li {
     }
 }
 
+.fixed-top {
+    .bg-green {
+        background-color: black;
+
+        ul {
+            li {
+                a {
+                    color: white !important;
+
+                }
+            }
+        }
+    }
+}
+
 .line {
     background-color: #000000 !important;
     width: 30px;

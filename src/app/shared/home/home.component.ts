@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 import { DistanceService } from '../../services/distance.service';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-home',
@@ -45,21 +46,9 @@ export class HomeComponent {
     }
     return content.slice(0, maxLength) + '...';
   }
-  toggleLike(index: number) {
-    this.isLiked[index] = !this.isLiked[index];
 
-    // Increment the likes count by 1 when liked, otherwise decrement
-    this.likeCountValue[index] = this.isLiked[index] ? this.likeCountValue[index] + 1 : this.likeCountValue[index] - 1;
 
-    // Update the 'likes' property of the corresponding item
-    if (this.isLiked[index]) {
-      this.RESTAURANTSarray[index].likes += 1;
-    } else {
-      this.RESTAURANTSarray[index].likes -= 1;
-    }
-  }
-
-  constructor(private _homeservice: HomeService, private distanceService: DistanceService) { }
+  constructor(private _homeservice: HomeService, private distanceService: DistanceService, private filterservice: FilterService) { }
   ngOnInit(): void {
     this._homeservice.getBusinessesByCategory('RESTAURANTS').subscribe(data => {
       this.RESTAURANTSarray = data.data;
@@ -162,6 +151,66 @@ export class HomeComponent {
           console.error('Error getting user location:', error);
         }
       );
+    }
+  }
+  likeBusiness(busId: number, index: number) {
+    if (!this.isLiked[index] == true) {
+      this.filterservice.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = true
+          this.RESTAURANTSarray[index].likes += 1
+        }
+      })
+    } else {
+      this.filterservice.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false
+          this.RESTAURANTSarray[index].likes -= 1
+
+        }
+      })
+    }
+  }
+  likeBusiness2(busId: number, index: number) {
+    if (!this.isLiked[index] == true) {
+      this.filterservice.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = true
+          this.MASSAGEarray[index].likes += 1
+        }
+      })
+    } else {
+      this.filterservice.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false
+          this.MASSAGEarray[index].likes -= 1
+
+        }
+      })
+    }
+  }
+  likeBusiness3(busId: number, index: number) {
+    if (!this.isLiked[index] == true) {
+      this.filterservice.likeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = true
+          this.spa[index].likes += 1
+        }
+      })
+    } else {
+      this.filterservice.dislikeBusinessById(busId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.isLiked[index] = false
+          this.spa[index].likes -= 1
+
+        }
+      })
     }
   }
 }
