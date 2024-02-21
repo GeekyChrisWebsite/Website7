@@ -42,9 +42,9 @@ export class ListViewComponent {
     }
     return content.slice(0, maxLength) + '...';
   }
-  likeBusiness(busId: number, index: number) {
+  likeBusiness(busId: string, index: number) {
     if (!this.isLiked[index] == true) {
-      this.filterservice.likeBusinessById(busId).subscribe({
+      this.filterservice.addLike(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = true
@@ -52,7 +52,7 @@ export class ListViewComponent {
         }
       })
     } else {
-      this.filterservice.dislikeBusinessById(busId).subscribe({
+      this.filterservice.addDislikes(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = false

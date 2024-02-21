@@ -14,7 +14,7 @@ export interface PostingData {
     street: string;
     likes: number;
   };
-  business_id: number;
+  business_id: string;
   content: string;
   created_at: string;
   dates: null;

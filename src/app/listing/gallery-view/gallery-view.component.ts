@@ -40,9 +40,9 @@ export class GalleryViewComponent {
     }
     return content.slice(0, maxLength) + '...';
   }
-  likeBusiness(busId: number, index: number, event: Event) {
+  likeBusiness(busId: string, index: number, event: Event) {
     if (!this.isLiked[index] == true) {
-      this.filterservice.likeBusinessById(busId).subscribe({
+      this.filterservice.addLike(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = true
@@ -50,7 +50,7 @@ export class GalleryViewComponent {
         }
       })
     } else {
-      this.filterservice.dislikeBusinessById(busId).subscribe({
+      this.filterservice.addDislikes(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = false

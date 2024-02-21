@@ -1,6 +1,6 @@
 <!-- <section class="slider py-5" ngSkipHydration>
     <div class="container" *ngIf="vippostarray">
-      <h2 class="text-center py-3 h1">VIP Posts</h2>
+      <h2 class="text-center py-3 h1">VIP buysell Posts</h2>
       <div>
         <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
           styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
@@ -63,20 +63,7 @@
         </div>
         <div class="form-group d-none d-lg-block">
           <div class="div-searchBar justify-content-center align-items-center d-flex ">
-            <form [formGroup]="filterformbuyandsell" (ngSubmit)="onSubmit()"
-              class=" justify-content-center align-items-center d-flex gap-3">
-              <p-dropdown formControlName="categories" [options]="categories" placeholder="Select a Category"
-                (onChange)="oncategorychange($event)"></p-dropdown>
-              <p-dropdown formControlName="states" [options]="state" placeholder="Select a State"
-                (onChange)="onstatechange($event)"></p-dropdown>
-              <p-dropdown formControlName="cities" [options]="city" placeholder="Select a City"
-                (onChange)="oncitychange($event)"></p-dropdown>
-
-              <button class="Search-btn" [disabled]="!filterformbuyandsell.valid" (click)="getfilterBuySELL()">Search<i
-                  class="pi pi-search ms-2"></i></button>
-              <button class="clear-btn" (click)="clear()">Clear<i class='bx bx-trash-alt ms-2 fs-5'></i></button>
-
-            </form>
+            <app-filter></app-filter>
 
           </div>
           <p-toast></p-toast>
@@ -110,20 +97,20 @@
   <div class="container">
     @if(listView){
     <div class="view-data">
-      <app-bs-listview [BuySellArray]="BuySellArray" [distances]="distances"></app-bs-listview>
+      <app-bs-listview [BuySellArray]="buySellArray" [distances]="distances"></app-bs-listview>
     </div>
     } @if(galleyView){
     <div class="view-data">
-      <app-bs-gellaryview [BuySellArray]="BuySellArray" [distances]="distances"></app-bs-gellaryview>
+      <app-bs-gellaryview [BuySellArray]="buySellArray" [distances]="distances"></app-bs-gellaryview>
     </div>
     } @if(mapView){
     <div class="view-data ">
-      <app-bs-mapview [BuySellArray]="BuySellArray" [distances]="distances"></app-bs-mapview>
+      <app-bs-mapview [BuySellArray]="buySellArray"></app-bs-mapview>
     </div>
     }
     <div>
       <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
-        [totalRecords]="BuySellArray!.length"></p-paginator>
+        [totalRecords]="buySellArray!.length"></p-paginator>
     </div>
   </div>
 

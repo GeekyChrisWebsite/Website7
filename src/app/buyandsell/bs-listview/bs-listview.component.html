@@ -180,7 +180,12 @@
                                     <p class="title-time text-muted m-0">{{customer.buySellTime}}</p>
                                 </div>
 
-                                <div class="">
+                                <div class="d-none d-lg-block">
+                                    <small class="description"
+                                        [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }"
+                                        [innerHTML]="(customer?.content)"></small>
+                                </div>
+                                <div class="d-lg-none d-block">
                                     <small class="description"
                                         [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
                                         {{ showFullText ? customer?.content : (customer?.content |

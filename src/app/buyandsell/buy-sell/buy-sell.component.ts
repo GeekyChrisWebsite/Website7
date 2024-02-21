@@ -1,8 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { FilterService } from '../../services/filter.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PaginatorModule } from 'primeng/paginator';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { BsGellaryviewComponent } from '../bs-gellaryview/bs-gellaryview.component';
 import { BsListviewComponent } from '../bs-listview/bs-listview.component';
 import { BsMapviewComponent } from '../bs-mapview/bs-mapview.component';
@@ -13,11 +13,15 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DistanceService } from '../../services/distance.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PreviousRouteServiceService } from '../../services/previous-route-service.service';
+import { FilterComponent } from '../../shared/filter/filter.component';
 
 @Component({
   selector: 'app-buy-sell',
   standalone: true,
-  imports: [PaginatorModule, ToastModule, ConfirmDialogModule, CommonModule, BsGellaryviewComponent, BsListviewComponent, BsMapviewComponent, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [PaginatorModule, ToastModule, FilterComponent, ConfirmDialogModule, CommonModule, BsGellaryviewComponent, BsListviewComponent, BsMapviewComponent, RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: './buy-sell.component.html',
   styleUrl: './buy-sell.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -26,77 +30,62 @@ import { ToastModule } from 'primeng/toast';
 
 })
 export class BuySellComponent {
-  BuySellArray: BuysellDetalis[] = [];
+  first = 20;
+  rows = 20;
+  buySellArray: any[];
+  UniqueGeoLocations!: any[];
   galleyView: boolean;
   listView: boolean;
   mapView: boolean;
-  first = 0;
-  rows = 20;
-  state: any[] = [];
-  city: any[] = [];
-  category: string = '';
-  categories: any[] = [];
-  loading: boolean = false
-  currentLocation: any
+  buySellSubscription!: Subscription;
+  filteredBuySellSubscription!: Subscription;
+  FilteredSubscribtion!: Subscription;
+  clearSubscribtion!: Subscription;
+  currentLocation: any;
+  backendLocations: any;
   distances: any[] = [];
-
-  filterformbuyandsell: FormGroup = new FormGroup({
-    categories: new FormControl('', Validators.required),
-    states: new FormControl('', Validators.required),
-    cities: new FormControl('', Validators.required),
-
-
-  });
 
   constructor(private _filterservice: FilterService, private _router: ActivatedRoute, private _BuySellService: BuySellService,
     private _messageService: MessageService,
-    private distanceService: DistanceService,
-    private confirmationService: ConfirmationService) {
+    private distanceService: DistanceService, @Inject(PLATFORM_ID) private platformId: object,
+    private confirmationService: ConfirmationService, private previousRouteService: PreviousRouteServiceService) {
     this.galleyView = false;
     this.listView = true;
     this.mapView = false;
+    this.buySellArray = []
   }
   ngOnInit(): void {
-    this._filterservice.clearListing.subscribe({
-      next: (res: any) => {
-        this.BuySellArray = res.data
-        console.log(this.BuySellArray);
-
-      }
-    })
-    this._filterservice.bparm.subscribe((res: any) => {
-      let state: string;
-      if (res.state === undefined) {
-        state = res.states
+    if (
+      this.previousRouteService.getPreviousUrl() == '/listing' ||
+      this.previousRouteService.getPreviousUrl() == '/posting' ||
+      this.previousRouteService.getPreviousUrl() == '/buysell'
+    ) {
+      if (isPlatformBrowser(this.platformId)) {
+        let filter = localStorage.getItem('filter');
+        let bussines = [];
+        if (filter) {
+          bussines = JSON.parse(filter);
+          console.log(bussines);
+          this.getFilteredBuySell(
+            bussines[0].category,
+            bussines[0].state,
+            bussines[0].city
+          );
+          this.filteredBuySell();
+          this.clearBuysell();
+        } else {
+          this.getBuySell();
+          this.clearBuysell();
+          this.filteredBuySell();
+        }
       } else {
-        state = res.state
+        this.getBuySell();
       }
-      if (Object.keys(res).length) {
-        localStorage.setItem('filterBuySELLParams', JSON.stringify({
-          categories: res.categories,
-          states: state,
-          cities: res.cities,
-        }));
-
-        this.filterBuySell(res.categories, state, res.cities);
-      } else {
-        this.GetAllBuySell();
-      }
-    });
-    const storedParams = localStorage.getItem('filterBuySELLParams');
-    if (storedParams) {
-      const { categories, states, cities } = JSON.parse(storedParams);
-      this.filterBuySell(categories, states, cities);
     } else {
-      // If no stored parameters, call GetAllBuySell
-      this.GetAllBuySell();
+      this.getBuySell();
+      this.clearBuysell();
+      this.filteredBuySell();
     }
-    this.categories = [
-      "BEAUTY SALON SPA",
-      "MASSAGE SPA",
-      "RESTAURANTS"
-
-    ];
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -106,83 +95,105 @@ export class BuySellComponent {
           };
           // console.log('User Location:', this.currentLocation);
 
-          for (const item of this.BuySellArray) {
+          for (const item of this.buySellArray) {
             const businessLocation = {
-              latitude: item.business.geo_direction.lat,
-              longitude: item.business.geo_direction.lng,
+              latitude: item.geo_direction.lat,
+              longitude: item.geo_direction.lng,
             };
 
-            const distance = this.distanceService.calculateDistance(this.currentLocation, businessLocation);
+            const distance = this.distanceService.calculateDistance(
+              this.currentLocation,
+              businessLocation
+            );
 
             this.distances.push(distance);
           }
 
           this.distanceService.setCurrentLocation(this.currentLocation);
 
-          this.distanceService.setDistances(this.distances)
+          this.distanceService
+            .setDistances(this.distances)
             .then(() => {
               // Navigation logic or any other code that depends on setDistances being complete
             })
-            .catch(error => {
-              // console.error('Error setting distances:', error);
+            .catch((error) => {
+              console.error('Error setting distances:', error);
             });
         },
         (error) => {
-          // console.error('Error getting user location:', error);
+          console.error('Error getting user location:', error);
         }
       );
     } else {
+      // console.error('Geolocation is not supported by this browser.');
     }
     const storedDistances = this.distanceService.getDistances();
     if (storedDistances.length > 0) {
       this.distances = storedDistances;
     }
-
   }
-  GetAllBuySell() {
-    this._BuySellService.getAllBuysell().subscribe((res: any) => {
-      this.BuySellArray = res.data
-      localStorage.setItem('allBuySellData', JSON.stringify(this.BuySellArray));
-      console.log(this.BuySellArray)
-
-
-
-    })
+  getBuySell(): void {
+    this.buySellSubscription = this._BuySellService.getBuySell().subscribe({
+      next: (res: { data: any[]; message: string; status: string }) => {
+        console.log(res);
+        this.buySellArray = res.data;
+        this.getGeoLocations();
+      },
+    });
   }
-
-  filterBuySell(categories: string, states: string, cities: string) {
-    this._BuySellService.getBuySells(categories, states, cities).subscribe((res: any) => {
-      this.BuySellArray = res.data.allBuySells
-      localStorage.setItem('filteredBuySellData', JSON.stringify(this.BuySellArray));
-
-
-
-    })
+  getFilteredBuySell(CategoryName: string, state: string, city: string): void {
+    this.filteredBuySellSubscription = this._filterservice
+      .getBuySells(CategoryName, state, city)
+      .subscribe({
+        next: (res: {
+          data: { allBuySells: any[] };
+          message: string;
+          status: string;
+        }) => {
+          console.log(res.data.allBuySells);
+          this.buySellArray = res.data.allBuySells;
+          this.getGeoLocations();
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        },
+      });
   }
-
-
-  selectedCategory: any
-  oncategorychange(event: any) {
-    this.selectedCategory = event.value
-    this._filterservice.GetState(event.value).subscribe((res: any) => {
-      this.state = res?.data?.states
-      console.log(res)
-    })
-
+  filteredBuySell(): void {
+    this.FilteredSubscribtion = this._filterservice.filteredBuySell.subscribe({
+      next: (res: {
+        data: { allBuySells: any[] };
+        message: string;
+        status: string;
+      }) => {
+        console.log('next has come', res);
+        this.buySellArray = res.data.allBuySells;
+        this.getGeoLocations();
+      },
+    });
   }
-  selectedState: any
-  onstatechange(event: any) {
-    this.selectedState = event.value
-    this._filterservice.GetCity(event.value, this.selectedCategory).subscribe((res: any) => {
-      this.city = res.data.cities
-      console.log(res)
-
-    })
-
+  getGeoLocations(): void {
+    const geoLocations = this.buySellArray.map(
+      (location) => location.business.geo_direction
+    );
+    const uniqueValuesSet = new Set(
+      geoLocations.map((obj) => `${obj.lat}_${obj.lng}`)
+    );
+    const result = Array.from(uniqueValuesSet).map((str) => {
+      const [lat, lng] = str.split('_');
+      return { lat: parseFloat(lat), lng: parseFloat(lng) };
+    });
+    this.UniqueGeoLocations = result;
+    console.log(this.UniqueGeoLocations);
   }
-  selectedCity: any
-  oncitychange(event: any) {
-    this.selectedCity = event.value
+  clearBuysell(): void {
+    this.clearSubscribtion = this._filterservice.clearBuysell.subscribe({
+      next: (res: any[]) => {
+        this.buySellArray = res;
+        console.log(res);
+        this.getGeoLocations();
+      },
+    });
   }
 
   showGallery(): void {
@@ -200,43 +211,10 @@ export class BuySellComponent {
     this.galleyView = false;
     this.listView = false;
   }
+
+
   onPageChange(event: any): void {
     this.first = event.first;
   }
-  onSubmit() {
 
-  }
-  getfilterBuySELL() {
-    this._BuySellService.getBuySells(this.selectedCategory, this.selectedState, this.selectedCity).subscribe((res: any) => {
-      this.BuySellArray = res.data.allBuySells
-      console.log(this.BuySellArray)
-      localStorage.setItem('filterBuySELLParams', JSON.stringify({
-        categories: this.selectedCategory,
-        states: this.selectedState,
-        cities: this.selectedCity,
-      }));
-
-      this._filterservice.bparm.next({
-        categories: this.selectedCategory,
-        states: this.selectedState,
-        cities: this.selectedCity,
-      });
-    });
-
-
-  }
-  clear() {
-    this.filterformbuyandsell.reset();
-    this.category = '';
-    this.selectedState = '';
-    this.selectedCity = '';
-    this.BuySellArray = [];
-    this.loading = true;
-    this._filterservice.bparm.next({});
-    localStorage.removeItem('postingArray');
-    localStorage.removeItem('filterBuySELLParams');
-    localStorage.removeItem('listingArray');
-    localStorage.removeItem('filteredBuySellData')
-    this.GetAllBuySell()
-  }
 }

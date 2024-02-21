@@ -1,0 +1,33 @@
+<div class="filters pb-1 d-lg-block d-none">
+
+    <div class="container  p-3">
+        <form [formGroup]="filter" class="d-flex justify-content-between align-items-center">
+            <div class="cat d-flex flex-column">
+                <label>Category</label>
+                <p-dropdown formControlName="cat" optionLabel="name" [options]="categories"
+                    placeholder="Select a Category"
+                    (onChange)="getStates(); setCat(); checkCityDisabledStatus()"></p-dropdown>
+            </div>
+            <div class="state d-flex flex-column">
+                <label>State</label>
+                <p-dropdown formControlName="state" optionLabel="name" [options]="states" placeholder="Select a State"
+                    (onChange)="getCities(); setState(); checkCityDisabledStatus()"></p-dropdown>
+            </div>
+            <div class="city d-flex flex-column">
+                <label>City</label>
+                <p-dropdown formControlName="city" optionLabel="name" [options]="cities" placeholder="Select a City"
+                    (onChange)="setCity(); checkCityDisabledStatus()"></p-dropdown>
+            </div>
+            <div class="submit d-flex gap-4 justify-content-center align-items-center mt-4 align-self-end">
+                <button pButton (click)="filterInService()" [disabled]="disabled" type="submit"
+                    class="text-nowrap p-button-success">
+                    Search
+                </button>
+                <button pButton (click)="clear()" type="button" class="text-nowrap p-button-danger">
+                    Clear
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>

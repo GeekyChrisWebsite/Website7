@@ -153,29 +153,10 @@ export class HomeComponent {
       );
     }
   }
-  likeBusiness(busId: number, index: number) {
-    if (!this.isLiked[index] == true) {
-      this.filterservice.likeBusinessById(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = true
-          this.RESTAURANTSarray[index].likes += 1
-        }
-      })
-    } else {
-      this.filterservice.dislikeBusinessById(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = false
-          this.RESTAURANTSarray[index].likes -= 1
 
-        }
-      })
-    }
-  }
-  likeBusiness2(busId: number, index: number) {
+  likeBusiness2(busId: string, index: number) {
     if (!this.isLiked[index] == true) {
-      this.filterservice.likeBusinessById(busId).subscribe({
+      this.filterservice.addLike(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = true
@@ -183,7 +164,7 @@ export class HomeComponent {
         }
       })
     } else {
-      this.filterservice.dislikeBusinessById(busId).subscribe({
+      this.filterservice.addDislikes(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = false
@@ -193,25 +174,9 @@ export class HomeComponent {
       })
     }
   }
-  likeBusiness3(busId: number, index: number) {
-    if (!this.isLiked[index] == true) {
-      this.filterservice.likeBusinessById(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = true
-          this.spa[index].likes += 1
-        }
-      })
-    } else {
-      this.filterservice.dislikeBusinessById(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = false
-          this.spa[index].likes -= 1
-
-        }
-      })
-    }
+  getStates(category: string): void {
+    localStorage.setItem('filter', JSON.stringify([{ category: category }]));
+    localStorage.setItem('filterCategory', JSON.stringify([category]));
   }
 }
 

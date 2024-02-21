@@ -52,14 +52,14 @@ export class BsListviewComponent {
     }
 
   }
-  likeBusiness(busId: number, index: number) {
+  likeBusiness(busId: string, index: number) {
     const businessId = this.BuySellArray[index].business_id;
     const updatedPosts = this.BuySellArray.filter((post) => post.business_id === businessId);
 
     console.log(updatedPosts);
 
     if (!this.isLiked[index]) {
-      this._filterservie.likeBusinessById(busId).subscribe({
+      this._filterservie.addLike(busId).subscribe({
         next: (res) => {
           console.log(res);
           updatedPosts.forEach((post, idx) => {
@@ -69,7 +69,7 @@ export class BsListviewComponent {
         }
       });
     } else {
-      this._filterservie.dislikeBusinessById(busId).subscribe({
+      this._filterservie.addDislikes(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = false;

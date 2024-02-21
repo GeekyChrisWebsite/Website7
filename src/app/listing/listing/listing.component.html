@@ -3,18 +3,7 @@
     <div class="div-searchBar2 py-2  w-100 justify-content-center align-items-center d-flex">
       <div class="form-group">
         <div class="div-searchBar justify-content-center align-items-center d-flex" style="gap: 0rem">
-          <form *ngIf="filterform" [formGroup]="filterform" (ngSubmit)="onSubmit()">
-
-            <p-dropdown formControlName="categories" [options]="categories" placeholder="Select a Category"
-              (onChange)="oncategorychange($event)"></p-dropdown>
-            <p-dropdown formControlName="states" [options]="states" placeholder="Select a State"
-              (onChange)="onstatechange($event)"></p-dropdown>
-            <p-dropdown formControlName="cities" [options]="cities" placeholder="Select a City"
-              (onChange)="oncitychange($event)"></p-dropdown>
-            <button class="Search-btn ms-5" [disabled]="!filterform.valid" (click)="getDataAll()">Search</button>
-            <button class="clear-btn" (click)="clear()">Clear</button>
-
-          </form>
+          <app-filter></app-filter>
           <p-toast></p-toast>
           <p-confirmDialog></p-confirmDialog>
         </div>

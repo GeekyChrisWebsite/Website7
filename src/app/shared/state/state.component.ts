@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FilterByLettersPipe } from "../../pipe/filter-by-letters.pipe";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { InputTextModule } from 'primeng/inputtext';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-state',
@@ -20,27 +21,52 @@ export class StateComponent {
   statearray: any[] = [];
   category: string = '';
   loading: boolean = false;
-  constructor(public _FilterService: FilterService, public _ActivatedRoute: ActivatedRoute) {
+  filteredStates: any[] = []
+  stateSubscriptions!: Subscription
+  constructor(public _FilterService: FilterService, public _ActivatedRoute: ActivatedRoute, @Inject(PLATFORM_ID) private platformId: Object
+
+  ) {
 
   }
-
-
-  getStates(category: string) {
-    this.loading = true
-    this._FilterService.GetState(category).subscribe((res: any) => {
-      this.loading = false
-      this.statearray = res.data.states
-      console.log(res);
-    });
-  }
-
-
   ngOnInit(): void {
-    this._ActivatedRoute.queryParams.subscribe((p: any) => {
-      this.category = p.category
-      console.log(p.category);
-      this.getStates(p.category);
-
-    })
+    if (isPlatformBrowser(this.platformId)) {
+      let state = localStorage.getItem('filter');
+      console.log(state);
+      let cat = [];
+      if (state) {
+        cat = JSON.parse(state);
+      }
+      console.log(cat);
+      this.getStates(cat[0].category);
+    }
   }
+  getStates(CategoryName: string): void {
+    console.log(CategoryName);
+    this.stateSubscriptions = this._FilterService
+      .getStates(CategoryName)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.statearray = res.data.states;
+          this.filteredStates = this.statearray;
+          console.log(this.statearray);
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem('filterState', JSON.stringify(this.statearray));
+          }
+        },
+      });
+  }
+  getCities(state: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      let filter = localStorage.getItem('filter');
+      let filterArray = [];
+      if (filter) {
+        filterArray = JSON.parse(filter);
+      }
+      filterArray[0].state = state;
+      localStorage.setItem('filter', JSON.stringify(filterArray));
+    }
+  }
+
+
 }

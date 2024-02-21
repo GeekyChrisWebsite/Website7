@@ -5,7 +5,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ListingService } from '../../services/listing.service';
 import { ListingData } from '../../interface/listing-data';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { GalleryViewComponent } from '../gallery-view/gallery-view.component';
 import { MapViewComponent } from '../map-view/map-view.component';
 import { ListViewComponent } from '../list-view/list-view.component';
@@ -15,13 +15,15 @@ import { DistanceService } from '../../services/distance.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { FilterSharedComponent } from '../../shared/filter-shared/filter-shared.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PreviousRouteServiceService } from '../../services/previous-route-service.service';
+import { FilterComponent } from '../../shared/filter/filter.component';
 
 
 @Component({
   selector: 'app-listing',
   standalone: true,
-  imports: [DropdownModule, PaginatorModule, FilterSharedComponent, ConfirmDialogModule, RouterModule, FormsModule, ToastModule, CommonModule, GalleryViewComponent, MapViewComponent, ListViewComponent, ProgressSpinnerModule, ReactiveFormsModule],
+  imports: [DropdownModule, FilterComponent, PaginatorModule, ConfirmDialogModule, RouterModule, FormsModule, ToastModule, CommonModule, GalleryViewComponent, MapViewComponent, ListViewComponent, ProgressSpinnerModule, ReactiveFormsModule],
   templateUrl: './listing.component.html',
   styleUrl: './listing.component.scss',
   providers: [ListingService, MessageService, ConfirmationService],
@@ -44,150 +46,61 @@ export class ListingComponent {
   cities: any[] = [];
   empty: any[] = [];
   loading: boolean = false;
-  filterform: FormGroup = new FormGroup({
-    categories: new FormControl('', Validators.required),
-    states: new FormControl('', Validators.required),
-    cities: new FormControl('', Validators.required),
-  });
+  likess: any
+
   previousUrl: string | undefined;
   currentLocation: any;
   backendLocations: any;
   distances: any[] = [];
+  stateArray: any[] = [];
+
 
   constructor(
     public listingservice: ListingService,
     public _router: ActivatedRoute,
     public filterservice: FilterService,
-    private fb: FormBuilder,
-    private _messageService: MessageService,
-    private distanceService: DistanceService,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService,
-    private cdr: ChangeDetectorRef,
-
-    @Inject(PLATFORM_ID) private platformid: object
-  ) {
+    public distanceService: DistanceService,
+    private previousRouteService: PreviousRouteServiceService,
+    @Inject(PLATFORM_ID) private platformId: object) {
     this.galleyView = false;
     this.listView = true;
     this.mapView = false;
   }
-  ngDoCheck(): void {
-    this._router.queryParams.subscribe((p: any) => {
-      console.log(p);
-    });
-  }
-  updateArray() {
-    // Example: Updating array
-    this.listingArray = [...this.listingArray];
 
-    // Save to local storage
-    localStorage.setItem('listingArray', JSON.stringify(this.listingArray));
-
-    // Trigger change detection
-    this.cdr.detectChanges();
-  }
-
-  GetListingdata() {
-    this.loading = true;
-    this.listingservice.GetListing().subscribe(
-      (res: { data: ListingData[] }) => {
-        console.log(res);
-        this.listingArray = res.data;
-        this.backendLocations = res;
-        this.loading = false;
-        localStorage.setItem('listingArray', JSON.stringify(this.listingArray));
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  filterdatefromhome(category: string, state: string, city: string) {
-    this.loading = true
-    this.filterservice.getbusinessesbycategory(category, state, city).subscribe((res: any) => {
-      this.loading = false
-      this.listingArray = res.data.businessesIds
-      console.log("filterfromhome", res);
-      localStorage.setItem('listingArray', JSON.stringify(this.listingArray)
-      );
-    })
-
-  }
-  getDataAll() {
-    this.loading = true;
-    this.filterservice
-      .getbusinessesbycategory(this.category, this.state, this.city)
-      .subscribe((res: any) => {
-        this.loading = false;
-
-        this.listingArray = res.data.businessesIds;
-        console.log('here', this.listingArray);
-
-        // Save to local storage
-        localStorage.setItem('listingArray', JSON.stringify(this.listingArray));
-
-        this.filterservice.bparm.next({
-          categories: this.category,
-          state: this.state,
-          cities: this.city,
-        });
-      });
-  }
-  // getFilterResults() {
-  //   const bparmValue = this.filterservice.bparm.getValue() as {
-  //     categories?: string;
-  //     states?: string;
-  //     cities?: string;
-  //   };
-
-  //   const categories = bparmValue.categories || '';
-  //   const states = bparmValue.states || '';
-  //   const cities = bparmValue.cities || '';
-
-  //   if (categories && states && cities) {
-  //     this.filterdatefromhome(categories, states, cities);
-  //   }
-  // }
   ngOnInit(): void {
-    this.filterservice.clearListing.subscribe({
-      next: (res: any) => {
-        this.listingArray = res.data
-        console.log(this.listingArray);
-
-      }
-    })
-    this._router.queryParams.subscribe((p: any) => {
-      console.log(p);
-      if (Object.keys(p).length) {
-        this.loading = false;
-        this.filterservice.bparm.next({
-          categories: p.category,
-          states: p.states,
-          cities: p.city
-        });
-        console.log(this.filterservice.bparm, "rania");
-
-        this.filterdatefromhome(p.category, p.states, p.city);
-        console.log(this.category, this.states, this.city);
-      } else {
-        // Check for data in local storage
-        const storedListingArray = localStorage.getItem('listingArray');
-
-        if (storedListingArray) {
-          this.listingArray = JSON.parse(storedListingArray);
-          this.filterservice.updateListingArray(this.listingArray);
+    console.log(this.previousRouteService.getPreviousUrl());
+    if (
+      this.previousRouteService.getPreviousUrl() == '/city' ||
+      this.previousRouteService.getPreviousUrl() == '/posting' ||
+      this.previousRouteService.getPreviousUrl() == '/buysell' ||
+      this.previousRouteService.getPreviousUrl() == '/listing'
+    ) {
+      if (isPlatformBrowser(this.platformId)) {
+        let filter = localStorage.getItem('filter');
+        let bussines = [];
+        if (filter) {
+          bussines = JSON.parse(filter);
+          console.log(bussines);
+          this.getFilteredListing(
+            bussines[0].category,
+            bussines[0].state,
+            bussines[0].city
+          );
+          this.filteredfromService();
+          this.clearListing();
         } else {
-          // If no data in local storage, fetch data
-          this.GetListingdata();
+          this.getListing();
+          this.filteredfromService();
+          this.clearListing();
         }
-        // this.filterservice.bparm.next({});
-
+      } else {
+        this.getListing();
       }
-    });
-
-    this.categories = ['BEAUTY SALON SPA', 'MASSAGE SPA', 'RESTAURANTS'];
-
+    } else {
+      this.getListing();
+      this.filteredfromService();
+      this.clearListing();
+    }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -233,125 +146,63 @@ export class ListingComponent {
     if (storedDistances.length > 0) {
       this.distances = storedDistances;
     }
-
-    this.filterservice.listingArray$.subscribe((listingArray) => {
-      this.listingArray = listingArray;
-      // Add a console.log statement for debugging
-      console.log('Updated Listing Array:', this.listingArray);
-    });
-
   }
-  loadListingArray() {
-    const storedListingArray = localStorage.getItem('listingArray');
-    if (storedListingArray) {
-      this.listingArray = JSON.parse(storedListingArray);
-      this.filterservice.updateListingArray(this.listingArray);
-    } else {
-      this.GetListingdata();
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  oncategorychange(event: any) {
-    this.category = event.value;
-    this.filterservice.GetState(event.value).subscribe((res: any) => {
-      this.states = res?.data?.states;
-      console.log(res);
-      this.filterform.patchValue({
-        category: this.category,
-      });
-    });
-  }
-  onstatechange(event: any) {
-    this.state = event.value;
-    this.filterservice
-      .GetCity(event.value, this.category)
-      .subscribe((res: any) => {
-        this.cities = res?.data.cities;
+  getListing(): void {
+    this.listingservice.GetListing().subscribe({
+      next: (res: { data: ListingData[]; message: string; status: string }) => {
         console.log(res);
-        this.filterform.patchValue({
-          states: this.state,
-        });
+        this.listingArray = res.data;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
+    });
+  }
+  getFilteredListing(CategoryName: string, state: string, city: string): void {
+    this.filterservice
+      .getbussineses(CategoryName, state, city)
+      .subscribe({
+        next: (res: {
+          data: { businessesIds: any[] };
+          message: string;
+          status: string;
+        }) => {
+          console.log(res);
+          this.listingArray = res.data.businessesIds;
+
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        },
       });
   }
-
-  oncitychange(event: any) {
-    this.city = event.value;
-    this.filterform.patchValue({
-      city: this.city,
-    });
-  }
-
-  showError() {
-    this._messageService.add({
-      severity: 'success',
-      summary: 'success',
-      detail: 'File size must be smaller than 5MB',
-    });
-  }
-  onSubmit() { }
-  clear() {
-    this.confirmationService.confirm({
-      message: 'Are you sure that Clear Businesses Filter?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      acceptIcon: 'pi pi-check',
-      rejectIcon: 'pi pi-times',
-      acceptButtonStyleClass: 'p-button-success',
-      rejectButtonStyleClass: 'p-button-danger',
-      acceptLabel: 'Yes',
-      rejectLabel: 'No',
-      accept: () => {
-        // User clicked "Yes", proceed with clearing
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Confirmed',
-          detail: 'Filter is Cleared',
-        });
-
-        // Call the clear logic here
-        this.performClear();
+  clearListing(): void {
+    this.filterservice.clearListings.subscribe({
+      next: (res: { data: any[]; message: string; status: string }) => {
+        this.listingArray = res.data;
+        console.log(res);
       },
-      reject: () => {
-        // User clicked "No", do nothing
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Rejected',
-          detail: 'You have rejected',
-          life: 3000,
-        });
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
       },
     });
   }
-  performClear() {
-    console.log('Performing clear...');
-
-    this.filterform.reset();
-    this.category = '';
-    this.state = '';
-    this.city = '';
-    this.listingArray = [];
-    this.loading = true;
-    this.filterservice.bparm.next({});
-    localStorage.removeItem('postingArray');
-    localStorage.removeItem('buysellarray');
-    localStorage.removeItem('filteredBuySellData');
-
-
-    this.GetListingdata();
-    console.log('get all data');
+  filteredfromService(): void {
+    this.filterservice.filteredListings.subscribe({
+      next: (res: {
+        data: { businessesIds: ListingData[] };
+        message: string;
+        status: string;
+      }) => {
+        console.log(res);
+        this.listingArray = res.data.businessesIds;
+      },
+    });
   }
+
+
+
+
 
 
 
@@ -373,9 +224,5 @@ export class ListingComponent {
   onPageChange(event: any): void {
     this.first = event.first;
   }
-  fetchData() {
-    this.filterservice.fetchData();
-  }
-
 
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               

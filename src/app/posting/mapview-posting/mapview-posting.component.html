@@ -2,7 +2,7 @@
   <div class="map justify-content-center align-items-center d-flex">
     @if (apiLoaded|async){
     <google-map #map>
-      <div *ngFor="let position of postingarray;">
+      <div *ngFor="let position of postingArray;">
         <map-marker [position]="position.business.geo_direction" [options]="options"
           (mapClick)="handleMapClick($event)"></map-marker>
       </div>

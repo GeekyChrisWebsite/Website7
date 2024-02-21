@@ -29,7 +29,7 @@ export class MapviewPostingComponent {
     fullscreenControl: false,
   }
   @ViewChild(GoogleMap) map!: GoogleMap
-  @Input() postingarray!: PostingData[];
+  @Input() postingArray!: PostingData[];
   @Input() filterposts: any;
 
 
@@ -60,7 +60,7 @@ export class MapviewPostingComponent {
   }
 
   sortArrayByUpdatedAt() {
-    this.postingarray.sort((a, b) => {
+    this.postingArray.sort((a, b) => {
       const timeA = new Date(a.updated_at).getTime();
       const timeB = new Date(b.updated_at).getTime();
       return timeB - timeA;
@@ -70,13 +70,13 @@ export class MapviewPostingComponent {
 
   posting() {
     this.postingservice.GetPosting().subscribe((res: any) => {
-      this.postingarray = res.data;
-      console.log(this.postingarray)
+      this.postingArray = res.data;
+      console.log(this.postingArray)
       // this.postingarray = this.filterposts
       this.sortArrayByUpdatedAt();
-      console.log(this.postingarray)
+      console.log(this.postingArray)
 
-      const geoDirections = this.postingarray.map(posting => posting.business?.geo_direction);
+      const geoDirections = this.postingArray.map(posting => posting.business?.geo_direction);
 
       console.log(geoDirections)
       const filteredGeoDirections = geoDirections.filter(direction => direction);
@@ -91,7 +91,7 @@ export class MapviewPostingComponent {
 
   fitBounds() {
     const bounds = new google.maps.LatLngBounds();
-    for (const marker of this.postingarray) {
+    for (const marker of this.postingArray) {
       console.log(this.uniqueArray);
       bounds.extend(
         new google.maps.LatLng(

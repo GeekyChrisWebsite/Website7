@@ -2,9 +2,7 @@
   <div class="container py-5" *ngIf="vippostarray">
     <h2 class="text-center py-5 h1">VIP Posts</h2>
     <div>
-      <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-        styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
-        animationDuration=".5s"></p-progressSpinner>
+
       <p-carousel class="gap-5" [value]="vippostarray" [numVisible]="3" [numScroll]="3" [circular]="true"
         [responsiveOptions]="responsiveOptions" [autoplayInterval]="3000">
         <ng-template let-product pTemplate="item" class="gap-5" let-rowIndex="rowIndex">
@@ -22,7 +20,7 @@
                 <div class="title py-2">
                   <div class="d-flex justify-content-center align-items-center gap-5">
                     <div class="d-flex justify-content-center align-items-center gap-1"
-                      (click)="likeBusiness(product.business_id, product.new)" [class.liked]="isLiked[product.new]">
+                      (click)="likevip(product.business_id, product.new)" [class.liked]="isLiked[product.new]">
                       <i class='bx bxs-like fs-4' id="likeIcon"
                         [style.color]="isLiked[product.new] ? '#0069D9' : 'black'"></i>
                       <p id="likeCount" class="m-0">{{product.business.likes}}</p>
@@ -65,19 +63,7 @@
         </div>
         <div class="form-group d-lg-block d-none">
           <div class="div-searchBar justify-content-start align-items-start d-flex">
-            <form [formGroup]="filterformposting" (ngSubmit)="onSubmit()"
-              class="justify-content-start align-items-start d-flex gap-2">
-              <p-dropdown formControlName="categories" [options]="categories" placeholder="Select a Category"
-                (onChange)="oncategorychange($event)"></p-dropdown>
-              <p-dropdown formControlName="states" [options]="state" placeholder="Select a State"
-                (onChange)="onstatechange($event)"></p-dropdown>
-              <p-dropdown formControlName="cities" [options]="city" placeholder="Select a City"
-                (onChange)="oncitychange($event)"></p-dropdown>
-              <button class="Search-btn" [disabled]="!filterformposting.valid" (click)="getDatafiltedposting()">Search<i
-                  class="pi pi-search ms-2"></i></button>
-              <button class="clear-btn" (click)="clear()">Clear<i class='bx bx-trash-alt ms-2 fs-5'></i></button>
-
-            </form>
+            <app-filter></app-filter>
 
           </div>
         </div>
@@ -108,31 +94,24 @@
   </div>
   @if(listView){
   <div class="view-data  ">
-    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
-      animationDuration=".5s"></p-progressSpinner>
-    <app-listview-posting [postingarray]="postingarray" [filterposts]="filterposts" [distances]="distances">
+
+    <app-listview-posting [postingArray]="postingArray" [distances]="distances">
     </app-listview-posting>
   </div>
   } @if(galleyView){
   <div class="view-data">
-    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
-      animationDuration=".5s"></p-progressSpinner>
-    <app-gellaryview-posting [postingarray]="postingarray" [filterposts]="filterposts"
-      [distances]="distances"></app-gellaryview-posting>
+
+    <app-gellaryview-posting [postingArray]="postingArray" [distances]="distances"></app-gellaryview-posting>
 
   </div>
   } @if(mapView){
   <div class="view-data mx-3">
-    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
-      animationDuration=".5s"></p-progressSpinner>
-    <app-mapview-posting [postingarray]="postingarray" [filterposts]="filterposts"></app-mapview-posting>
+
+    <app-mapview-posting [postingArray]="postingArray"></app-mapview-posting>
   </div>
   }
   <div>
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
-      [totalRecords]="postingarray.length"></p-paginator>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="row"
+      [totalRecords]="postingArray.length"></p-paginator>
   </div>
 </section>

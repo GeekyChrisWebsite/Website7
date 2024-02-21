@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 })
 export class GellaryviewPostingComponent {
   @Input()
-  postingarray!: PostingData[];
+  postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
   constructor(private _filterservie: FilterService) {
@@ -34,26 +34,26 @@ export class GellaryviewPostingComponent {
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
 
-  likeBusiness(busId: number, index: number, event: Event) {
-    const bussinessId = this.postingarray[index].business_id
-    const updatedPosts = this.postingarray.filter((post) => post.business_id == bussinessId)
+  likeBusiness(busId: string, index: number, event: Event) {
+    const bussinessId = this.postingArray[index].business_id
+    const updatedPosts = this.postingArray.filter((post) => post.business_id == bussinessId)
     console.log(updatedPosts)
     if (!this.isLiked[index] == true) {
-      this._filterservie.likeBusinessById(busId).subscribe({
+      this._filterservie.addLike(busId).subscribe({
         next: (res) => {
           console.log(res);
           updatedPosts.forEach((post, index) => {
             post.business.likes += 1;
-            this.isLiked[this.postingarray.indexOf(post)] = true
+            this.isLiked[this.postingArray.indexOf(post)] = true
           })
         }
       })
     } else {
-      this._filterservie.dislikeBusinessById(busId).subscribe({
+      this._filterservie.addDislikes(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = false
-          this.postingarray[index].business.likes -= 1
+          this.postingArray[index].business.likes -= 1
 
         }
       })

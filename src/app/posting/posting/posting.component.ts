@@ -15,184 +15,105 @@ import { FilterService } from '../../services/filter.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DistanceService } from '../../services/distance.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
+import { PreviousRouteServiceService } from '../../services/previous-route-service.service';
+import { FilterComponent } from '../../shared/filter/filter.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-posting',
   standalone: true,
   imports: [MapviewPostingComponent, ListViewComponent, GellaryviewPostingComponent,
     CarouselModule, DropdownModule, RouterModule, PaginatorModule, ListviewPostingComponent,
-    MapviewPostingComponent, GalleryViewComponent, ReactiveFormsModule, ProgressSpinnerModule],
+    MapviewPostingComponent, GalleryViewComponent, ReactiveFormsModule, ProgressSpinnerModule, FilterComponent],
   templateUrl: './posting.component.html',
   styleUrl: './posting.component.scss',
   host: { ngSkipHydration: 'true' },
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 
 })
 export class PostingComponent {
-  first = 0;
-  rows = 20;
-  loading: boolean = false
-  vippostarray: PostingData[] = [];
-  postingarray: PostingData[] = [];
+  first = 20;
+  row = 20;
   responsiveOptions: any[] | undefined;
+  vippostarray: any[] = [];
+  postingArray: any[];
   galleyView: boolean;
   listView: boolean;
   mapView: boolean;
-  state: any[] = [];
-  category: string = ''
-  city: any[] = [];
-  filterposts: any[] = [];
-  categories: any[] = [];
-  Subscriptions: Subscription[] = []
-  currentLocation: any
+  subscribtions!: Subscription;
+  images: string[] = [];
+  UniqueGeoLocations!: any[];
+  clearSubscribtion!: Subscription;
+  FilteredSubscribtion!: Subscription;
+  currentLocation: any;
+  backendLocations: any;
   distances: any[] = [];
-  isLiked: boolean[] = Array(this.postingarray?.length).fill(false)
 
-  filterformposting: FormGroup = new FormGroup({
-    categories: new FormControl('', Validators.required),
-    states: new FormControl('', Validators.required),
-    cities: new FormControl('', Validators.required),
-  });
-  constructor(private postingservice: PostingService,
-    private _filterservice: FilterService,
-    private _router: ActivatedRoute,
-    private distanceService: DistanceService,
-    @Inject(PLATFORM_ID) private plarformid: object) {
-    this.galleyView = false;
-    this.listView = true;
+  constructor(
+    private postingService: PostingService,
+    private previousRouteService: PreviousRouteServiceService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private filterService: FilterService,
+    public distanceService: DistanceService
+  ) {
+    this.galleyView = true;
+    this.listView = false;
     this.mapView = false;
-  }
+    this.postingArray = [];
 
-  GetVipPost() {
-    this.loading = true
-    let vip = this.postingservice.vipposts().subscribe(
-      (res: { data: PostingData[] }) => {
-        this.loading = false
-        this.vippostarray = res.data;
-        const vipWithId = this.vippostarray.map((item, index) => {
-          return { ...item, new: index };
-        });
-        this.vippostarray = vipWithId;
-
-        console.log(this.vippostarray)
-        console.log(this.vippostarray)
-      }
-
-    );
-    this.Subscriptions.push(vip)
-
-  }
-  // posting() {
-  //   this.loading = true
-  //   let posting = this.postingservice.GetPosting().subscribe(
-  //     (res: { data: PostingData[] }) => {
-  //       this.loading = false
-  //       this.postingarray = res.data;
-  //       localStorage.setItem('postingArray', JSON.stringify(res.data));
-  //       this.sortArrayByUpdatedAt();
-  //     });
-  //   this.Subscriptions.push(posting)
-  // }
-  posting() {
-    this.loading = true;
-
-    // Attempt to get data from local storage first
-    const storedPostingArray = localStorage.getItem('postingArray');
-    if (storedPostingArray) {
-      this.postingarray = JSON.parse(storedPostingArray);
-      this.loading = false;  // Set loading to false as data is available locally
-      console.log('Loaded from local storage:', this.postingarray);
-    } else {
-      // If local storage is empty, make the API call
-      this.postingservice.GetPosting().subscribe(
-        (res: { data: PostingData[] }) => {
-          this.loading = false;
-          this.postingarray = res.data;
-
-          // Save the entire array in local storage
-          localStorage.setItem('postingArray', JSON.stringify(res.data));
-
-          // Sort the array by postTime
-          this.sortArrayByPostTime();
-
-          console.log('Loaded from API:', this.postingarray);
-        },
-        (error) => {
-          this.loading = false;
-          console.error('Error loading data:', error);
-        }
-      );
-    }
-  }
-  sortArrayByPostTime() {
-    this.postingarray.sort((a, b) => a.postTime.getTime() - b.postTime.getTime());
-  }
-
-
-  getfilterposts(categories: string, states: string, cities: string) {
-    this.loading = true
-    this._filterservice.getpostsfilter(categories, states, cities)
-      .subscribe((res: any) => {
-        this.loading = false
-        this.postingarray = res.data.posts
-        localStorage.setItem('postingArray', JSON.stringify(res.data.posts));
-
-        console.log("filterprams", res)
-
-      })
-  }
-
-
-  ngOnInit(): void {
-    this._filterservice.clearPosting.subscribe({
-      next: (res: any) => {
-        this.postingarray = res.data
-        console.log(this.postingarray);
-
-      }
-    })
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
         numVisible: 1,
-        numScroll: 1
+        numScroll: 1,
       },
       {
         breakpoint: '991px',
-        numVisible: 1,
-        numScroll: 1
+        numVisible: 2,
+        numScroll: 1,
       },
       {
-        breakpoint: '767px',
+        breakpoint: '768px',
         numVisible: 1,
-        numScroll: 1
-      }
+        numScroll: 1,
+      },
     ];
-
-    this.categories = [
-      "BEAUTY SALON SPA",
-      "MASSAGE SPA",
-      "RESTAURANTS"
-    ];
-
-    this._filterservice.bparm.subscribe((res: any) => {
-      if (Object.keys(res).length) {
-        let state: string;
-        if (res.state === undefined) {
-          state = res.states
+  }
+  ngOnInit(): void {
+    if (
+      this.previousRouteService.getPreviousUrl() == '/listing' ||
+      this.previousRouteService.getPreviousUrl() == '/buysell' ||
+      this.previousRouteService.getPreviousUrl() == '/posting'
+    ) {
+      if (isPlatformBrowser(this.platformId)) {
+        let filter = localStorage.getItem('filter');
+        let bussines = [];
+        if (filter) {
+          bussines = JSON.parse(filter);
+          console.log(bussines);
+          this.getFilteredPostings(
+            bussines[0].category,
+            bussines[0].state,
+            bussines[0].city
+          );
+          this.filteredPosted();
+          this.clearPosting();
         } else {
-          state = res.state
+          this.getPosting();
+          this.clearPosting();
+          this.filteredPosted();
         }
-        this.filterformposting.patchValue({
-          categories: res.categories,
-          states: state,
-          cities: res.cities,
-        });
-        this.getfilterposts(res.categories, state, res.cities);
       } else {
-        this.posting();
+        this.getPosting();
       }
-    });
+    } else {
+      this.getPosting();
+      this.clearPosting();
+      this.filteredPosted();
+    }
+    this.GetVipPost();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -202,10 +123,10 @@ export class PostingComponent {
           };
           // console.log('User Location:', this.currentLocation);
 
-          for (const item of this.postingarray) {
+          for (const item of this.postingArray) {
             const businessLocation = {
-              latitude: item.business.geo_direction.lat,
-              longitude: item.business.geo_direction.lng,
+              latitude: item.geo_direction.lat,
+              longitude: item.geo_direction.lng,
             };
 
             const distance = this.distanceService.calculateDistance(
@@ -238,62 +159,72 @@ export class PostingComponent {
     if (storedDistances.length > 0) {
       this.distances = storedDistances;
     }
-    this.GetVipPost();
+  }
+  getPosting(): void {
+    this.subscribtions = this.postingService.GetPosting().subscribe({
+      next: (res: { data: any[]; message: string; status: string }) => {
+        console.log(':heart::heart::heart:', res);
+        this.postingArray = res.data;
+        this.getGeoLocations();
+      },
+    });
   }
 
-  selectedCategory: any
-  oncategorychange(event: any) {
-    this.selectedCategory = event.value
-    this._filterservice.GetState(event.value).subscribe((res: any) => {
-      this.state = res?.data?.states
-      console.log(res)
-    })
-
+  getGeoLocations(): void {
+    const geoLocations = this.postingArray.map(
+      (location) => location.business.geo_direction
+    );
+    console.log(geoLocations);
+    const uniqueValuesSet = new Set(
+      geoLocations.map((obj) => `${obj.lat}_${obj.lng}`)
+    );
+    const result = Array.from(uniqueValuesSet).map((str) => {
+      const [lat, lng] = str.split('_');
+      return { lat: parseFloat(lat), lng: parseFloat(lng) };
+    });
+    this.UniqueGeoLocations = result;
+    console.log(this.UniqueGeoLocations);
   }
-  selectedState: any
-  onstatechange(event: any) {
-    this.selectedState = event.value
-    this._filterservice.GetCity(event.value, this.selectedCategory).subscribe((res: any) => {
-      this.city = res.data.cities
-      console.log(res)
-
-    })
-
-  }
-  selectedCity: any
-  oncitychange(event: any) {
-    this.selectedCity = event.value
-  }
-
-  getDatafiltedposting() {
-    this.loading = true
-    this._filterservice.getpostsfilter(this.selectedCategory, this.selectedState, this.selectedCity).subscribe(
-      (res: any) => {
-        this.loading = false
-        this.postingarray = res.data.posts
-        localStorage.setItem('postingArray', JSON.stringify(res.data.posts));
+  clearPosting(): void {
+    this.clearSubscribtion = this.filterService.clearPostings.subscribe({
+      next: (res: any[]) => {
+        this.postingArray = res;
         console.log(res);
-
-
-      })
+        this.getGeoLocations();
+      },
+    });
   }
-
-  clear() {
-    this.filterformposting.reset();
-    this.selectedCategory = '';
-    this.selectedState = '';
-    this.selectedCity = '';
-    this.postingarray = [];
-    this.loading = true;
-    this._filterservice.bparm.next({});
-    localStorage.removeItem('postingArray');
-    localStorage.removeItem('buysellarray');
-    localStorage.removeItem('listingArray');
-    localStorage.removeItem('filteredBuySellData')
-
-    this.posting();
+  getFilteredPostings(CategoryName: string, state: string, city: string) {
+    this.subscribtions = this.filterService
+      .getPostings(CategoryName, state, city)
+      .subscribe({
+        next: (res: {
+          data: { posts: any[] };
+          message: string;
+          status: string;
+        }) => {
+          console.log('filtered', res.data.posts);
+          this.postingArray = res.data.posts;
+          this.getGeoLocations();
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        },
+      });
   }
-
+  filteredPosted(): void {
+    this.FilteredSubscribtion = this.filterService.filteredPostings.subscribe({
+      next: (res: {
+        data: { posts: any[] };
+        message: string;
+        status: string;
+      }) => {
+        console.log('next has come', res);
+        this.postingArray = res.data.posts;
+        this.getGeoLocations();
+      },
+    });
+  }
   handleMapClick(geo_direction: any) {
     console.log('Map clicked!', geo_direction);
 
@@ -319,42 +250,49 @@ export class PostingComponent {
     this.galleyView = false;
     this.listView = false;
   }
-  sortArrayByUpdatedAt() {
-    this.postingarray.sort((a, b) => {
-      const timeA = new Date(a.updated_at).getTime();
-      const timeB = new Date(b.updated_at).getTime();
-      return timeB - timeA; // Sorting in descending order
-    });
-  }
   onPageChange(event: any): void {
     this.first = event.first;
   }
   onSubmit() {
   }
+  isLiked: boolean[] = [];
 
-  ngOnDestroy() {
-    for (let Subscription of this.Subscriptions) {
-      Subscription.unsubscribe()
-    }
-
-
-  }
-  makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
-    window.location.href = 'tel:' + phoneNumber;
-  }
-  likeBusiness(busId: number, index: number) {
+  likevip(busId: string, index: number) {
     if (this.isLiked[index] == true) {
-      this._filterservice.dislikeBusinessById(busId).subscribe((response) => {
+      this.filterService.addLike(busId).subscribe((response) => {
         this.isLiked[index] = false;
         this.vippostarray[index].business.likes! -= 1;
       });
     } else {
-      this._filterservice.likeBusinessById(busId).subscribe((response) => {
+      this.filterService.addDislikes(busId).subscribe((response) => {
         this.isLiked[index] = true;
         this.vippostarray[index].business.likes! += 1;
       });
     }
   }
+
+  makePhoneCall(phoneNumber: string): void {
+    console.log('Initiating phone call to:', phoneNumber);
+    window.location.href = 'tel:' + phoneNumber;
+  }
+  GetVipPost() {
+    let vip = this.postingService.vipposts().subscribe(
+      (res: { data: PostingData[] }) => {
+        this.vippostarray = res.data;
+        const vipWithId = this.vippostarray.map((item, index) => {
+          return { ...item, new: index };
+        });
+        this.vippostarray = vipWithId;
+
+        console.log(this.vippostarray)
+        console.log(this.vippostarray)
+      }
+
+    );
+
+  }
+
+
+
 
 }

@@ -42,12 +42,12 @@ export class BsGellaryviewComponent {
     }
     return content.substr(0, maxLength) + '... see more';
   }
-  likeBusiness(busId: number, index: number, event: Event) {
+  likeBusiness(busId: string, index: number, event: Event) {
     const bussinessId = this.BuySellArray[index].business_id
     const updatedPosts = this.BuySellArray.filter((post) => post.business_id == bussinessId)
     console.log(updatedPosts)
     if (!this.isLiked[index] == true) {
-      this._filterservie.likeBusinessById(busId).subscribe({
+      this._filterservie.addLike(busId).subscribe({
         next: (res) => {
           console.log(res);
           updatedPosts.forEach((post, index) => {
@@ -57,7 +57,7 @@ export class BsGellaryviewComponent {
         }
       })
     } else {
-      this._filterservie.dislikeBusinessById(busId).subscribe({
+      this._filterservie.addDislikes(busId).subscribe({
         next: (res) => {
           console.log(res);
           this.isLiked[index] = false

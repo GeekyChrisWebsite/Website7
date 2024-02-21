@@ -5,29 +5,28 @@
       <div class="row align-items-center justify-content-center d-flex gap-5">
         <div class="col-md-3 col-6 top">
           <img src="../../../assets/img/home/Rectangle 88.png" alt="" class="w-100 py-2" routerLink="/state"
-            [queryParams]="{ category: 'RESTAURANTS' }">
+            (click)="getStates('RESTAURANTS')" (click)="getStates('RESTAURANTS')">
           <div class="align-items-center justify-content-center d-flex bg py-3">
 
-            <p class="pt-3 text-center text-white" routerLink="/state" [queryParams]="{ category: 'RESTAURANTS' }">
+            <p class="pt-3 text-center text-white" routerLink="/state" (click)="getStates('RESTAURANTS')">
               Restaurants</p>
           </div>
         </div>
         <div class="col-md-3 col-6 top" routerLink="/state">
           <img src="../../../assets/img/home/Rectangle 7.png" alt="" class="w-100 py-2" routerLink="/state"
-            [queryParams]="{ category: 'MASSAGE SPA' }">
+            (click)="getStates('MASSAGE SPA')">
           <div class="align-items-center justify-content-center d-flex bg">
-            <p class="pt-3 text-center text-white " routerLink="/state" [queryParams]="{ category: 'MASSAGE SPA' }">
+            <p class="pt-3 text-center text-white " routerLink="/state" (click)="getStates('MASSAGE SPA')">
               Massage</p>
 
           </div>
 
         </div>
         <div class="col-md-3 col-6 three top">
-          <img src="../../../assets/img/home/Rectangle 87.png" alt="" class="w-100 py-2" routerLink="/state"
-            [queryParams]="{ category: 'BEAUTY SALON SPA' }">
+          <img src="../../../assets/img/home/Rectangle 87.png" alt="" class="w-100 py-2" routerLink="/state">
           <div class="align-items-center justify-content-center d-flex bg py-3">
 
-            <p class="pt-3 text-center text-white" routerLink="/state" [queryParams]="{ category: 'BEAUTY SALON SPA' }">
+            <p class="pt-3 text-center text-white" routerLink="/state" (click)="getStates('BEAUTY SALON SPA')">
               Spa & Salons</p>
           </div>
 
@@ -89,7 +88,7 @@
                       <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
                     </div>
                     <div class="d-flex justify-content-center align-items-center gap-1"
-                      (click)="likeBusiness(item.id, i)" [class.liked]="isLiked[i]">
+                      (click)="likeBusiness2(item.id, i)" [class.liked]="isLiked[i]">
                       <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
                       <p id="likeCount" class="m-0">{{item.likes}}</p>
                     </div>
@@ -216,7 +215,7 @@
                         <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
                       </div>
                       <div class="d-flex justify-content-center align-items-center gap-1"
-                        (click)="likeBusiness3(item.id, i)" [class.liked]="isLiked[i]">
+                        (click)="likeBusiness2(item.id, i)" [class.liked]="isLiked[i]">
                         <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
                         <p id="likeCount" class="m-0">{{item.likes}}</p>
                       </div>

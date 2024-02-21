@@ -1,5 +1,5 @@
 export interface ListingData {
-    id: number;
+    id: string;
     category: string;
     city1: string;
     city_zip: string;
