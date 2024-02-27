@@ -1,33 +1,35 @@
-
-input{
+input {
     height: 53px;
-   }
+}
 
 @media (max-width: 767px) {
-   .mob{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-   }
+    .mob {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
     .hide-from-web {
         display: none !important;
     }
 
     .p-input-icon-right>.p-inputtext {
-        padding-right:  2.75rem !important;
+        padding-right: 2.75rem !important;
     }
-    .right{
+
+    .right {
         padding: 0px 0px !important;
     }
+
     .p-input-icon-right>.p-inputtext {
         padding-right: .5rem !important;
     }
-   
+
 
 }
 
-button {
-    background-color: black;
+.button-send {
+    background-color: black !important;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -39,14 +41,16 @@ button {
     border: none;
     outline: none;
 }
-.left{
+
+.left {
     height: 100vh;
     background-image: url("../../../assets/img/auth/login.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 35%;
 }
-.right{
+
+.right {
     width: 65%;
     padding: 0px 200px;
 }
@@ -68,9 +72,11 @@ button {
     box-shadow: none;
     border: #000000 solid 1px;
 }
+
 .p-input-icon-right>.p-inputtext {
     padding-right: 20.5rem;
 }
-.sign{
+
+.sign {
     cursor: pointer;
 }

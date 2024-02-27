@@ -20,10 +20,11 @@
                 <div class="title py-2">
                   <div class="d-flex justify-content-center align-items-center gap-5">
                     <div class="d-flex justify-content-center align-items-center gap-1"
-                      (click)="likevip(product.business_id, product.new)" [class.liked]="isLiked[product.new]">
+                      (click)="likeVip(product.business_id, product.new)"
+                      [class.liked]="vippostarray[product.new].liked">
                       <i class='bx bxs-like fs-4' id="likeIcon"
-                        [style.color]="isLiked[product.new] ? '#0069D9' : 'black'"></i>
-                      <p id="likeCount" class="m-0">{{product.business.likes}}</p>
+                        [style.color]="vippostarray[product.new].liked ? 'black' : '#0069D9'"></i>
+                      <p id="likeCount" class="m-0">{{vippostarray[product.new].likes}}</p>
                     </div>
                     <div>
                       <h5 class="gold text-center m-0">{{product.title}}</h5>

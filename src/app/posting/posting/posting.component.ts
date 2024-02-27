@@ -4,7 +4,7 @@ import { ListViewComponent } from '../../listing/list-view/list-view.component';
 import { GellaryviewPostingComponent } from '../gellaryview-posting/gellaryview-posting.component';
 import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PostingService } from '../../services/posting.service';
 import { PaginatorModule } from 'primeng/paginator';
 import { ListviewPostingComponent } from '../listview-posting/listview-posting.component';
@@ -20,6 +20,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { PreviousRouteServiceService } from '../../services/previous-route-service.service';
 import { FilterComponent } from '../../shared/filter/filter.component';
 import { MessageService } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-posting',
@@ -56,7 +57,9 @@ export class PostingComponent {
     private previousRouteService: PreviousRouteServiceService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private filterService: FilterService,
-    public distanceService: DistanceService
+    public distanceService: DistanceService,
+    public _cookieService: CookieService,
+    public router: Router,
   ) {
     this.galleyView = true;
     this.listView = false;
@@ -292,7 +295,35 @@ export class PostingComponent {
 
   }
 
+  likeVip(busId: string, index: number) {
+    const token = this._cookieService.get('token');
 
+    if (!token) {
+      this.router.navigate(['/login']);
+    } else {
+      if (this.vippostarray[index].liked == true) {
+        console.log(this.vippostarray[index].liked);
+
+        this.filterService.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.vippostarray[index].liked = false;
+            this.vippostarray[index].business.likes += 1;
+          },
+        });
+      } else {
+        this.filterService.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, "dislike");
+            this.vippostarray[index].liked = true;
+            this.vippostarray[index].business.likes -= 1;
+          },
+        });
+      }
+    }
+
+
+  }
 
 
 }

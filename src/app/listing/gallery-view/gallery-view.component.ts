@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { ListingData } from '../../interface/listing-data';
 import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-gallery-view',
@@ -16,7 +17,7 @@ export class GalleryViewComponent {
   listingArray!: ListingData[];
   @Input() filterarray: any;
   @Input() distances!: any;
-  constructor(private filterservice: FilterService) {
+  constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router) {
 
   }
   makePhoneCall(phoneNumber: string): void {
@@ -40,26 +41,34 @@ export class GalleryViewComponent {
     }
     return content.slice(0, maxLength) + '...';
   }
-  likeBusiness(busId: string, index: number, event: Event) {
-    if (!this.isLiked[index] == true) {
-      this.filterservice.addLike(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = true
-          this.listingArray[index].likes += 1
-        }
-      })
+
+  likeBusiness(busId: string, index: number) {
+    const token = this._cookieService.get('token');
+
+    if (!token) {
+      this.router.navigate(['/login']);
     } else {
-      this.filterservice.addDislikes(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = false
-          this.listingArray[index].likes -= 1
+      if (this.listingArray[index].liked == true) {
+        console.log(this.listingArray[index].liked);
 
-        }
-      })
+        this.filterservice.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.listingArray[index].liked = false;
+            this.listingArray[index].likes += 1;
+          },
+        });
+      } else {
+        this.filterservice.addDislikes(busId).subscribe({
+          next: (res: any) => {
+            console.log(res, "dislike");
+            this.listingArray[index].liked = true;
+            this.listingArray[index].likes -= 1;
+          },
+        });
+      }
     }
-    event.stopPropagation()
-  }
 
+
+  }
 }

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { FilterService } from '../../services/filter.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-bs-listview',
@@ -18,7 +19,7 @@ export class BsListviewComponent {
   @Input() distances!: any;
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
-  constructor(private _filterservie: FilterService) {
+  constructor(private _filterservie: FilterService, private _cookieService: CookieService, public router: Router) {
 
   }
   truncateText(content: string, maxLength: number): string {
@@ -53,30 +54,32 @@ export class BsListviewComponent {
 
   }
   likeBusiness(busId: string, index: number) {
-    const businessId = this.BuySellArray[index].business_id;
-    const updatedPosts = this.BuySellArray.filter((post) => post.business_id === businessId);
+    const token = this._cookieService.get('token');
 
-    console.log(updatedPosts);
-
-    if (!this.isLiked[index]) {
-      this._filterservie.addLike(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          updatedPosts.forEach((post, idx) => {
-            post.business.likes += 1;
-            this.isLiked[this.BuySellArray.indexOf(post)] = true;
-          });
-        }
-      });
+    if (!token) {
+      this.router.navigate(['/login']);
     } else {
-      this._filterservie.addDislikes(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = false;
-          this.BuySellArray[index].business.likes -= 1;
-        }
-      });
-    }
-  }
+      if (this.BuySellArray[index].liked == true) {
+        console.log(this.BuySellArray[index].liked);
 
+        this._filterservie.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.BuySellArray[index].liked = false;
+            this.BuySellArray[index].business.likes += 1;
+          },
+        });
+      } else {
+        this._filterservie.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, "dislike");
+            this.BuySellArray[index].liked = true;
+            this.BuySellArray[index].business.likes -= 1;
+          },
+        });
+      }
+    }
+
+
+  }
 }

@@ -5,7 +5,7 @@
       <div class="row align-items-center justify-content-center d-flex gap-5">
         <div class="col-md-3 col-6 top">
           <img src="../../../assets/img/home/Rectangle 88.png" alt="" class="w-100 py-2" routerLink="/state"
-            (click)="getStates('RESTAURANTS')" (click)="getStates('RESTAURANTS')">
+            (click)="getStates('RESTAURANTS')">
           <div class="align-items-center justify-content-center d-flex bg py-3">
 
             <p class="pt-3 text-center text-white" routerLink="/state" (click)="getStates('RESTAURANTS')">
@@ -88,9 +88,10 @@
                       <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
                     </div>
                     <div class="d-flex justify-content-center align-items-center gap-1"
-                      (click)="likeBusiness2(item.id, i)" [class.liked]="isLiked[i]">
-                      <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
-                      <p id="likeCount" class="m-0">{{item.likes}}</p>
+                      (click)="likeBusiness1(item.id, i)" [class.liked]="RESTAURANTSarray[i].liked">
+                      <i class='bx bxs-like fs-4' id="likeIcon"
+                        [style.color]="RESTAURANTSarray[i].liked ? 'black' : '#0069D9'"></i>
+                      <p id="likeCount" class="m-0">{{RESTAURANTSarray[i].likes}}</p>
                     </div>
                   </div>
                 </div>
@@ -148,9 +149,10 @@
                         <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
                       </div>
                       <div class="d-flex justify-content-center align-items-center gap-1"
-                        (click)="likeBusiness2(item.id, i)" [class.liked]="isLiked[i]">
-                        <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
-                        <p id="likeCount" class="m-0">{{item.likes}}</p>
+                        (click)="likeBusiness2(item.id, i)" [class.liked]="MASSAGEarray[i].liked">
+                        <i class='bx bxs-like fs-4' id="likeIcon"
+                          [style.color]="MASSAGEarray[i].liked ? 'black' : '#0069D9'"></i>
+                        <p id="likeCount" class="m-0">{{MASSAGEarray[i].likes}}</p>
                       </div>
                     </div>
                   </div>
@@ -215,9 +217,10 @@
                         <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
                       </div>
                       <div class="d-flex justify-content-center align-items-center gap-1"
-                        (click)="likeBusiness2(item.id, i)" [class.liked]="isLiked[i]">
-                        <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
-                        <p id="likeCount" class="m-0">{{item.likes}}</p>
+                        (click)="likeBusiness3(item.id, i)" [class.liked]="MASSAGEarray[i].liked">
+                        <i class='bx bxs-like fs-4' id="likeIcon"
+                          [style.color]="spa[i].liked ? 'black' : '#0069D9'"></i>
+                        <p id="likeCount" class="m-0">{{spa[i].likes}}</p>
                       </div>
                     </div>
                   </div>

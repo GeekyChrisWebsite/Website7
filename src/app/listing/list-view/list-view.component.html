@@ -33,9 +33,10 @@
                   <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
                 </div>
                 <div class="d-flex justify-content-center align-items-center gap-1" (click)="likeBusiness(item.id, i)"
-                  [class.liked]="isLiked[i]">
-                  <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
-                  <p id="likeCount" class="m-0">{{item.likes}}</p>
+                  [class.liked]="listingArray[i].liked">
+                  <i class='bx bxs-like fs-4' id="likeIcon"
+                    [style.color]="listingArray[i].liked ? 'black' : '#0069D9'"></i>
+                  <p id="likeCount" class="m-0">{{listingArray[i].likes}}</p>
                 </div>
               </div>
             </div>

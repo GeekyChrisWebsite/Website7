@@ -26,7 +26,7 @@ import { FilterComponent } from '../../shared/filter/filter.component';
   imports: [DropdownModule, FilterComponent, PaginatorModule, ConfirmDialogModule, RouterModule, FormsModule, ToastModule, CommonModule, GalleryViewComponent, MapViewComponent, ListViewComponent, ProgressSpinnerModule, ReactiveFormsModule],
   templateUrl: './listing.component.html',
   styleUrl: './listing.component.scss',
-  providers: [ListingService, MessageService, ConfirmationService],
+  providers: [ListingService, ConfirmationService],
   encapsulation: ViewEncapsulation.None
 })
 export class ListingComponent {

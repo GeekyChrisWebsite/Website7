@@ -10,5 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './category.component.scss'
 })
 export class CategoryComponent {
-
+  getStates(category: string): void {
+    localStorage.setItem('filter', JSON.stringify([{ category: category }]));
+    localStorage.setItem('filterCategory', JSON.stringify([category]));
+  }
 }

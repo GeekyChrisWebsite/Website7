@@ -15,7 +15,8 @@ export interface ListingData {
     street: string;
     video: string;
     web_site: string;
-    likes: number
+    likes: number;
+    liked: boolean;
 
 }
 interface geo_direction {

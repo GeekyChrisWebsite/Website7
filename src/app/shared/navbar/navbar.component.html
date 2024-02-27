@@ -18,6 +18,9 @@
         <ul class="d-flex gap-5 list-unstyled m-0">
           <li routerLink="/login">Login</li>
           <li routerLink="/register">Sign Up</li>
+          <div *ngIf="user">
+            <span>Welcome, {{ user.username }}!</span>
+          </div>
         </ul>
       </div>
     </div>

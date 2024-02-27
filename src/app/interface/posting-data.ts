@@ -31,6 +31,7 @@ export interface PostingData {
   phone_number: string;
   postTime: Date;
   likes: number;
+  liked: boolean;
 
 
 }

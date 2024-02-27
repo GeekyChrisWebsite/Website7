@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TagModule } from 'primeng/tag';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 import { DistanceService } from '../../services/distance.service';
 import { FilterService } from '../../services/filter.service';
-
+import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -48,7 +49,7 @@ export class HomeComponent {
   }
 
 
-  constructor(private _homeservice: HomeService, private distanceService: DistanceService, private filterservice: FilterService) { }
+  constructor(private _homeservice: HomeService, private distanceService: DistanceService, private filterservice: FilterService, public _cookieService: CookieService, public router: Router, public MessageService: MessageService) { }
   ngOnInit(): void {
     this._homeservice.getBusinessesByCategory('RESTAURANTS').subscribe(data => {
       this.RESTAURANTSarray = data.data;
@@ -154,26 +155,108 @@ export class HomeComponent {
     }
   }
 
-  likeBusiness2(busId: string, index: number) {
-    if (!this.isLiked[index] == true) {
-      this.filterservice.addLike(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = true
-          this.MASSAGEarray[index].likes += 1
-        }
-      })
-    } else {
-      this.filterservice.addDislikes(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = false
-          this.MASSAGEarray[index].likes -= 1
-
-        }
-      })
-    }
+  showError() {
+    this.MessageService.add({
+      severity: 'error',
+      summary: 'Oops!,you are not logged in',
+      detail: `Please login to be able to like businesses`,
+      life: 3000,
+      sticky: false,
+    });
   }
+
+  likeBusiness1(busId: string, index: number) {
+    const token = this._cookieService.get('token');
+
+    if (!token) {
+      this.showError()
+      this.router.navigate(['/login']);
+    } else {
+      if (this.RESTAURANTSarray[index].liked == true) {
+        console.log(this.RESTAURANTSarray[index].liked);
+
+        this.filterservice.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.RESTAURANTSarray[index].liked = false;
+            this.RESTAURANTSarray[index].likes += 1;
+          },
+        });
+      } else {
+        this.filterservice.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, "dislike");
+            this.RESTAURANTSarray[index].liked = true;
+            this.RESTAURANTSarray[index].likes -= 1;
+          },
+        });
+      }
+    }
+
+
+  }
+  likeBusiness2(busId: string, index: number) {
+    const token = this._cookieService.get('token');
+
+    if (!token) {
+      this.showError()
+
+      this.router.navigate(['/login']);
+    } else {
+      if (this.MASSAGEarray[index].liked == true) {
+        console.log(this.MASSAGEarray[index].liked);
+
+        this.filterservice.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.MASSAGEarray[index].liked = false;
+            this.MASSAGEarray[index].likes += 1;
+          },
+        });
+      } else {
+        this.filterservice.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, "dislike");
+            this.MASSAGEarray[index].liked = true;
+            this.MASSAGEarray[index].likes -= 1;
+          },
+        });
+      }
+    }
+
+
+  }
+  likeBusiness3(busId: string, index: number) {
+    const token = this._cookieService.get('token');
+
+    if (!token) {
+      this.showError()
+      this.router.navigate(['/login']);
+    } else {
+      if (this.spa[index].liked == true) {
+        console.log(this.spa[index].liked);
+
+        this.filterservice.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.spa[index].liked = false;
+            this.spa[index].likes += 1;
+          },
+        });
+      } else {
+        this.filterservice.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, "dislike");
+            this.spa[index].liked = true;
+            this.spa[index].likes -= 1;
+          },
+        });
+      }
+    }
+
+
+  }
+
   getStates(category: string): void {
     localStorage.setItem('filter', JSON.stringify([{ category: category }]));
     localStorage.setItem('filterCategory', JSON.stringify([category]));

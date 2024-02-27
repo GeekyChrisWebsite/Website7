@@ -20,10 +20,12 @@
                 <div class="card justify-content-between align-items-center d-flex"
                     routerLink="/BuySelldetails/{{ item.id }}">
                     <div class="d-flex justify-content-center align-items-center gap-1 div-like"
-                        (click)="likeBusiness(item.business_id, i,$event)" [class.liked]="isLiked[i]">
-                        <i class='bx bxs-like fs-4' id="likeIcon" [style.color]="isLiked[i] ? '#0069D9' : 'black'"></i>
+                        (click)="likeBusiness(item.business_id, i) ;$event.stopPropagation()"
+                        [class.liked]="BuySellArray[i].liked">
+                        <i class='bx bxs-like fs-4' id="likeIcon"
+                            [style.color]="BuySellArray[i].liked ? 'black' : '#0069D9'"></i>
                     </div>
-                    <p id="likeCount" class="m-0 likes ">{{item.business.likes}}</p>
+                    <p id="likeCount" class="m-0 likes">{{BuySellArray[i].business.likes}}</p>
 
                     <img src="{{ item.business.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
                     <div class="title py-2">

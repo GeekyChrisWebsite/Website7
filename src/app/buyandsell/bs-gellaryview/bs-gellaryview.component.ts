@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FilterService } from '../../services/filter.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-bs-gellaryview',
@@ -15,7 +16,7 @@ export class BsGellaryviewComponent {
   @Input() distances!: any;
   maxDescriptionLength: number = 40;
   showFullText: boolean = false;
-  constructor(private _filterservie: FilterService) {
+  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router) {
 
   }
 
@@ -42,31 +43,33 @@ export class BsGellaryviewComponent {
     }
     return content.substr(0, maxLength) + '... see more';
   }
-  likeBusiness(busId: string, index: number, event: Event) {
-    const bussinessId = this.BuySellArray[index].business_id
-    const updatedPosts = this.BuySellArray.filter((post) => post.business_id == bussinessId)
-    console.log(updatedPosts)
-    if (!this.isLiked[index] == true) {
-      this._filterservie.addLike(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          updatedPosts.forEach((post, index) => {
-            post.business.likes += 1;
-            this.isLiked[this.BuySellArray.indexOf(post)] = true
-          })
-        }
-      })
-    } else {
-      this._filterservie.addDislikes(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = false
-          this.BuySellArray[index].business.likes -= 1
+  likeBusiness(busId: string, index: number) {
+    const token = this._cookieService.get('token');
 
-        }
-      })
+    if (!token) {
+      this.router.navigate(['/login']);
+    } else {
+      if (this.BuySellArray[index].liked == true) {
+        console.log(this.BuySellArray[index].liked);
+
+        this._filterservie.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.BuySellArray[index].liked = false;
+            this.BuySellArray[index].business.likes += 1;
+          },
+        });
+      } else {
+        this._filterservie.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, "dislike");
+            this.BuySellArray[index].liked = true;
+            this.BuySellArray[index].business.likes -= 1;
+          },
+        });
+      }
     }
-    event.stopPropagation();
+
 
   }
 

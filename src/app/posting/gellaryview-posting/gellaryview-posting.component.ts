@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { PostingData } from '../../interface/posting-data';
 import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-gellaryview-posting',
@@ -16,7 +17,7 @@ export class GellaryviewPostingComponent {
   postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
-  constructor(private _filterservie: FilterService) {
+  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router) {
 
   }
   makePhoneCall(phoneNumber: string): void {
@@ -33,32 +34,33 @@ export class GellaryviewPostingComponent {
   }
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
+  likeBusiness(busId: string, index: number) {
+    const token = this._cookieService.get('token');
 
-  likeBusiness(busId: string, index: number, event: Event) {
-    const bussinessId = this.postingArray[index].business_id
-    const updatedPosts = this.postingArray.filter((post) => post.business_id == bussinessId)
-    console.log(updatedPosts)
-    if (!this.isLiked[index] == true) {
-      this._filterservie.addLike(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          updatedPosts.forEach((post, index) => {
-            post.business.likes += 1;
-            this.isLiked[this.postingArray.indexOf(post)] = true
-          })
-        }
-      })
+    if (!token) {
+      this.router.navigate(['/login']);
     } else {
-      this._filterservie.addDislikes(busId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLiked[index] = false
-          this.postingArray[index].business.likes -= 1
+      if (this.postingArray[index].liked == true) {
+        console.log(this.postingArray[index].liked);
 
-        }
-      })
+        this._filterservie.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, "like");
+            this.postingArray[index].liked = false;
+            this.postingArray[index].business.likes += 1;
+          },
+        });
+      } else {
+        this._filterservie.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, "dislike");
+            this.postingArray[index].liked = true;
+            this.postingArray[index].business.likes -= 1;
+          },
+        });
+      }
     }
-    event.stopPropagation();
+
 
   }
   truncateText(content: string, maxLength: number): string {

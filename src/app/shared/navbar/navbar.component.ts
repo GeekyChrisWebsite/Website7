@@ -22,6 +22,8 @@ import { ListingService } from '../../services/listing.service';
 import { FilterService } from '../../services/filter.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FilterComponent } from '../filter/filter.component';
+import { UserInfoService } from '../../services/user-info.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -38,22 +40,28 @@ import { FilterComponent } from '../filter/filter.component';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   encapsulation: ViewEncapsulation.None,
-  providers: [MessageService, ConfirmationService],
+  providers: [ConfirmationService],
 })
 export class NavbarComponent implements DoCheck {
   sidebarVisible: boolean = false;
   sidebarVisible1: boolean = false;
   sidebarVisible2: boolean = false;
   isrouteHome: boolean = true;
+  user: any;
 
   constructor(
     public listingservice: ListingService,
     public _router: ActivatedRoute,
     public filterservice: FilterService,
-    private route: Router
+    private route: Router,
+    public userService: UserInfoService,
+    public _cookieService: CookieService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+
+  }
 
   ngDoCheck(): void {
     if (this.route.url == '/home') {
@@ -62,4 +70,5 @@ export class NavbarComponent implements DoCheck {
       this.isrouteHome = true;
     }
   }
+
 }
