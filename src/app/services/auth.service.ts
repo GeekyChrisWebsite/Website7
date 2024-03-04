@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,8 +11,11 @@ import { environment } from '../environments/environment.development';
 export class AuthService {
   regsiterbody!: FormGroup;
   loginbody!: FormGroup
-  constructor(private _HttpClient: HttpClient, private cookiesService: CookieService
-  ) { }
+  constructor(private _HttpClient: HttpClient, private cookiesService: CookieService, private HttpBackend: HttpBackend
+  ) {
+    this._HttpClient = new HttpClient(HttpBackend);
+
+  }
 
   addUser(): Observable<any> {
     let body = {

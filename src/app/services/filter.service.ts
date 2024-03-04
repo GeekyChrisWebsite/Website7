@@ -184,22 +184,54 @@ export class FilterService {
       }
     );
   }
+  // addLike(business_id: string): Observable<any> {
+  //   let body = {
+  //     bus_id: business_id,
+  //   };
+  //   return this.httpClient.put(
+  //     `${environment.BACKEND_DOMAIN}/like-business-by-bus-id`,
+  //     body
+  //   );
+  // }
+  // addDislikes(business_id: string): Observable<any> {
+  //   let body = {
+  //     bus_id: business_id,
+  //   };
+  //   return this.httpClient.put(
+  //     `${environment.BACKEND_DOMAIN}/dislike-business-by-bus-id`,
+  //     body
+  //   );
+  // }
+
   addLike(business_id: string): Observable<any> {
+    // const token = this.cookiesService.get('token');
+    // const headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${token}`,
+    // });
+
     let body = {
-      bus_id: business_id,
     };
-    return this.httpClient.put(
-      `${environment.BACKEND_DOMAIN}/like-business-by-bus-id`,
-      body
+
+    return this.httpClient.post(
+      `${environment.BACKEND_DOMAIN}/business/${business_id}/like`,
+      body,
+
     );
   }
+
   addDislikes(business_id: string): Observable<any> {
+    // const token = this.cookiesService.get('token'); // Get the token from cookies
+    // const headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${token}`,
+    // });
+
     let body = {
-      bus_id: business_id,
     };
-    return this.httpClient.put(
-      `${environment.BACKEND_DOMAIN}/dislike-business-by-bus-id`,
-      body
+
+    return this.httpClient.post(
+      `${environment.BACKEND_DOMAIN}/business/${business_id}/dislike`,
+      body,
+
     );
   }
 
