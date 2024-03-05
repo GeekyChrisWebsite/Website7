@@ -15,11 +15,12 @@
         <img src="../../../assets/img/logo/logo.png" alt="" />
       </div>
       <div class="col-2">
-        <ul class="d-flex gap-5 list-unstyled m-0">
+        <ul class="d-flex gap-3 list-unstyled m-0">
           <li routerLink="/login">Login</li>
           <li routerLink="/register">Sign Up</li>
-          <div *ngIf="user">
-            <span>Welcome, {{ user.username }}!</span>
+          <div *ngIf="user" class="d-flex align-items-center justify-content-center  gap-1">
+            <img src="{{imgUser}}" alt="" width="30px" height="30px">
+            <span>{{user }}</span>
           </div>
         </ul>
       </div>

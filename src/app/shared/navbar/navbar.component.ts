@@ -24,6 +24,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { FilterComponent } from '../filter/filter.component';
 import { UserInfoService } from '../../services/user-info.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -48,6 +49,7 @@ export class NavbarComponent implements DoCheck {
   sidebarVisible2: boolean = false;
   isrouteHome: boolean = true;
   user: any;
+  imgUser: any;
 
   constructor(
     public listingservice: ListingService,
@@ -55,12 +57,28 @@ export class NavbarComponent implements DoCheck {
     public filterservice: FilterService,
     private route: Router,
     public userService: UserInfoService,
-    public _cookieService: CookieService
+    public _cookieService: CookieService,
+    public _AuthService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.getUserFromCookies()
 
-
+  }
+  getUserFromCookies() {
+    const token = this._cookieService.get('token');
+    if (token) {
+      this._AuthService.loginUser().subscribe(
+        (res: any) => {
+          console.log('login', res);
+          this.user = res.data.username;
+          this.imgUser = res.data.profile_image
+        },
+        (error) => {
+          console.error('Error fetching user information:', error);
+        }
+      );
+    }
   }
 
   ngDoCheck(): void {
@@ -69,6 +87,9 @@ export class NavbarComponent implements DoCheck {
     } else {
       this.isrouteHome = true;
     }
+
+
   }
+
 
 }

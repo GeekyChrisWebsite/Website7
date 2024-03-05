@@ -206,6 +206,7 @@ export class ListingComponent {
 
 
 
+
   showGallery(): void {
     this.galleyView = true;
     this.listView = false;

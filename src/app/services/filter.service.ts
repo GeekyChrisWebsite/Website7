@@ -41,7 +41,7 @@ export class FilterService {
   clearBuySellSubscription!: Subscription;
   constructor(
     private httpClient: HttpClient,
-    private postingService: PostingService
+    private postingService: PostingService,
   ) { }
   getStates(category: string): Observable<any> {
     let params = new HttpParams();

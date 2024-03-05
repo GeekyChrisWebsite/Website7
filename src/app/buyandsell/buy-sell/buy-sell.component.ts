@@ -26,7 +26,7 @@ import { FilterComponent } from '../../shared/filter/filter.component';
   styleUrl: './buy-sell.component.scss',
   encapsulation: ViewEncapsulation.None,
   host: { ngSkipHydration: 'true' },
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService]
 
 })
 export class BuySellComponent {
