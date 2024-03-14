@@ -146,6 +146,7 @@ export class ListingComponent {
     if (storedDistances.length > 0) {
       this.distances = storedDistances;
     }
+    console.log(this.distances)
   }
   getListing(): void {
     this.listingservice.GetListing().subscribe({

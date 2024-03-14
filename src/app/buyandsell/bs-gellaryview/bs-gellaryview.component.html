@@ -19,22 +19,19 @@
             <div class="col-md-3 col-12 mb-3" *ngFor="let item of BuySellArray; let i = index">
                 <div class="card justify-content-between align-items-center d-flex"
                     routerLink="/BuySelldetails/{{ item.id }}">
-                    <div class="d-flex justify-content-center align-items-center gap-1 div-like"
+                    <!-- <div class="d-flex justify-content-center align-items-center gap-1 div-like"
                         (click)="likeBusiness(item.business_id, i) ;$event.stopPropagation()"
                         [class.liked]="BuySellArray[i].liked">
                         <i class='bx bxs-like fs-4' id="likeIcon"
                             [style.color]="BuySellArray[i].liked ? 'black' : '#0069D9'"></i>
                     </div>
-                    <p id="likeCount" class="m-0 likes">{{BuySellArray[i].business.likes}}</p>
+                    <p id="likeCount" class="m-0 likes">{{BuySellArray[i].business.likes}}</p> -->
 
                     <img src="{{ item.business.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
                     <div class="title py-2">
                         <h5>{{ item.business.name }}</h5>
                     </div>
-                    <div class="d-flex gap-1 py-2">
-                        <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
-                        <small>{{ item.business.state + "," + item.business.st }}</small>
-                    </div>
+
                     <div *ngIf="distances && distances.length > 0" class="py-2">
                         <div class="d-flex justify-content-center align-items-center gap-1">
                             <i class="pi pi-directions fs-4"></i>

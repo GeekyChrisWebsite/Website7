@@ -6,7 +6,7 @@
         </div>
         <div class="row py-4 gap-3 justify-content-center align-items-center d-flex">
             <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/listing"
-                *ngFor="let item of cityarray | filterByLetters : searchText">
+                *ngFor="let item of cityarray | filterByLetters : searchText" (click)="getbuss(item)">
                 <a class="ci" (click)="getbuss(item)" routerLink="/listing">{{ item}}</a>
             </div>
         </div>

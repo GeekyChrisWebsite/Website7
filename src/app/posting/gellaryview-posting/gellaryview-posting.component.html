@@ -4,14 +4,14 @@
             <div class="col-md-3 col-12 mb-3" *ngFor="let item of postingArray; let i = index">
                 <div class="card justify-content-between align-items-center d-flex"
                     routerLink="/postingdetails/{{ item.id }}">
-                    <div class="d-flex justify-content-center align-items-center gap-1 div-like"
+                    <!-- <div class="d-flex justify-content-center align-items-center gap-1 div-like"
                         (click)="likeBusiness(item.business_id, i);$event.stopPropagation()"
                         [class.liked]="postingArray[i].liked">
                         <i class='bx bxs-like fs-4' id="likeIcon"
                             [style.color]="postingArray[i].liked ? 'black' : '#0069D9'"></i>
                     </div>
                     <p id="likeCount" class="m-0 likes">{{postingArray[i].business.likes}}</p>
-
+ -->
 
                     <img src="{{ item.business.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
                     <div class="title py-2">
