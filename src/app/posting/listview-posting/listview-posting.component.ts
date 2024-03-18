@@ -5,14 +5,15 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
+import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
 
 @Component({
   selector: 'app-listview-posting',
   standalone: true,
-  imports: [RouterModule, CommonModule, TableModule],
   templateUrl: './listview-posting.component.html',
   styleUrl: './listview-posting.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  imports: [RouterModule, CommonModule, TableModule, SanatizerPipe]
 })
 export class ListviewPostingComponent {
   first = 0;
@@ -21,7 +22,7 @@ export class ListviewPostingComponent {
   postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
-  maxDescriptionLength: number = 20;
+  maxDescriptionLength: number = 50;
   showFullText: boolean = false;
   likeCountValue: number[] = [];
   isLiked: boolean[] = Array(this.postingArray?.length).fill(false)
@@ -77,6 +78,10 @@ export class ListviewPostingComponent {
     }
 
 
+  }
+
+  isString(value: any): boolean {
+    return typeof value === 'string';
   }
 
 }

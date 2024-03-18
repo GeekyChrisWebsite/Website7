@@ -8,11 +8,12 @@ import { PostingService } from '../../services/posting.service';
 import { map } from 'rxjs/internal/operators/map';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { of } from 'rxjs/internal/observable/of';
+import { GellaryviewPostingComponent } from '../gellaryview-posting/gellaryview-posting.component';
 
 @Component({
   selector: 'app-mapview-posting',
   standalone: true,
-  imports: [GoogleMapsModule, CommonModule],
+  imports: [GoogleMapsModule, CommonModule, GellaryviewPostingComponent],
   templateUrl: './mapview-posting.component.html',
   styleUrl: './mapview-posting.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -31,6 +32,7 @@ export class MapviewPostingComponent {
   @ViewChild(GoogleMap) map!: GoogleMap
   @Input() postingArray!: PostingData[];
   @Input() filterposts: any;
+  @Input() distances: any;
 
 
   constructor(public postingservice: PostingService, private httpClient: HttpClient) {
@@ -118,7 +120,7 @@ export class MapviewPostingComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes)
-    if (changes['postingarray'] && changes['postingarray'].currentValue) {
+    if (changes['postingArray'] && changes['postingArray'].currentValue) {
       console.log("map work")
       if (!this.fisrtChange) {
         this.fitBounds()

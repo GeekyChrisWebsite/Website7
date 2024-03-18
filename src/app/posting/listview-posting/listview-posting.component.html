@@ -38,9 +38,9 @@
                 <div class="d-lg-none d-block">
                   <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
-                    {{ showFullText ? customer?.content : (customer?.content |
-                    slice:0:maxDescriptionLength) }}
-                    <span *ngIf="customer?.content.length > maxDescriptionLength"
+                    {{ showFullText ? customer?.content : (customer?.content ? customer?.content.slice(0,
+                    maxDescriptionLength) : '') | sanatizer }}
+                    <span *ngIf="customer?.content && customer?.content.length > maxDescriptionLength"
                       (click)="showFullText = !showFullText">
                       {{ showFullText ? 'Less' : '...' }}
                     </span>

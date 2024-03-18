@@ -1,24 +1,30 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
 import { ListingData } from '../../interface/listing-data';
 import { CommonModule } from '@angular/common';
+import { ListingService } from '../../services/listing.service';
+import { GalleryViewComponent } from '../gallery-view/gallery-view.component';
 
 @Component({
   selector: 'app-map-view',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule],
+  imports: [CommonModule, GoogleMapsModule, GalleryViewComponent],
   templateUrl: './map-view.component.html',
   styleUrl: './map-view.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class MapViewComponent {
+export class MapViewComponent implements OnChanges {
   @Input()
   listingArray!: ListingData[];
-  @Input() filterarray: any
+  @Input() filterarray: any;
+  @Input() distances!: any;
+
+  sim: any[] = [];
+  id: any
 
   apiLoaded!: Observable<boolean>;
   options: any = {
@@ -26,11 +32,14 @@ export class MapViewComponent {
     streetViewControl: false,
     fullscreenControl: false,
   }
+  fisrtChange: boolean = true;
+
+
   markerOptions: google.maps.MarkerOptions = { draggable: false };
 
   @ViewChild(GoogleMap) map!: GoogleMap
 
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient, public ListingService: ListingService) {
     this.apiLoaded = _httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyAAb4SFQe0Kigpu3EiKhR93nC-OUitTKwM', 'callback')
       .pipe(
         map(() => true),
@@ -39,41 +48,26 @@ export class MapViewComponent {
   }
   ngAfterViewInit() {
     setTimeout(() => {
-      this.fitBounds();
+      this.fitMapBounds();
 
     }, 1000);
   }
-  fitBounds() {
-    const bounds = new google.maps.LatLngBounds();
-    for (const marker of this.listingArray) {
-      console.log(marker.geo_direction.lat);
-      bounds.extend(
-        new google.maps.LatLng(
-          marker.geo_direction.lat,
-          marker.geo_direction.lng
-        )
-      );
-    }
-
-    this.map.fitBounds(bounds);
-  }
-
-  // fitBounds(markers: any[]): void {
-  //   if (markers && markers.length > 0) {
-  //     const bounds = new google.maps.LatLngBounds();
-  //     for (const marker of markers) {
-  //       console.log(marker.geo_direction.lat);
-  //       bounds.extend(
-  //         new google.maps.LatLng(
-  //           marker.geo_direction.lat,
-  //           marker.geo_direction.lng
-  //         )
-  //       );
-  //     }
-
-  //     this.map.fitBounds(bounds);
+  // fitBounds() {
+  //   const bounds = new google.maps.LatLngBounds();
+  //   for (const marker of this.listingArray) {
+  //     console.log(marker.geo_direction.lat);
+  //     bounds.extend(
+  //       new google.maps.LatLng(
+  //         marker.geo_direction.lat,
+  //         marker.geo_direction.lng
+  //       )
+  //     );
   //   }
+
+  //   this.map.fitBounds(bounds);
   // }
+
+
   handleMapClick(event: any) {
     const clickedPosition = event.coords || event.latLng;
 
@@ -82,6 +76,28 @@ export class MapViewComponent {
       window.open(link, '_blank');
     }
   }
+  fitMapBounds(): void {
+    const bounds = new google.maps.LatLngBounds();
+    for (const marker of this.listingArray) {
+      bounds.extend(new google.maps.LatLng(marker.geo_direction.lat, marker.geo_direction.lng));
+    }
+    console.log(bounds)
+    this.map.fitBounds(bounds);
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes, ":ghost::ghost::ghost::ghost::ghost:")
+    if (changes['listingArray'] && changes['listingArray'].currentValue) {
+      console.log("listing array length has changed")
+      if (!this.fisrtChange) {
+        this.fitMapBounds()
+      }
+      this.fisrtChange = false
+    }
+  }
+
+
 
 }
 

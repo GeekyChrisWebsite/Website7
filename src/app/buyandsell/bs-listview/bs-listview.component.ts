@@ -4,16 +4,17 @@ import { Router, RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
+import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
 
 @Component({
   selector: 'app-bs-listview',
   standalone: true,
-  imports: [CommonModule, TableModule, RouterModule],
   templateUrl: './bs-listview.component.html',
-  styleUrl: './bs-listview.component.scss'
+  styleUrl: './bs-listview.component.scss',
+  imports: [CommonModule, TableModule, RouterModule, SanatizerPipe]
 })
 export class BsListviewComponent {
-  maxDescriptionLength: number = 20;
+  maxDescriptionLength: number = 80;
   showFullText: boolean = false;
   @Input() BuySellArray: any[] = [];
   @Input() distances!: any;

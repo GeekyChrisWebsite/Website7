@@ -6,11 +6,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
+import { BsGellaryviewComponent } from '../bs-gellaryview/bs-gellaryview.component';
 
 @Component({
   selector: 'app-bs-mapview',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule],
+  imports: [CommonModule, GoogleMapsModule, BsGellaryviewComponent],
   templateUrl: './bs-mapview.component.html',
   styleUrl: './bs-mapview.component.scss',
   encapsulation: ViewEncapsulation.None

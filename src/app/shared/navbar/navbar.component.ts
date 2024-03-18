@@ -75,7 +75,7 @@ export class NavbarComponent implements DoCheck {
           this.imgUser = res.data.profile_image
         },
         (error) => {
-          console.error('Error fetching user information:', error);
+          console.error('Error:', error);
         }
       );
     }
@@ -91,5 +91,10 @@ export class NavbarComponent implements DoCheck {
 
   }
 
+  logout() {
+    this._cookieService.delete('token');
+    this.user = null;
+    this.imgUser = null;
 
+  }
 }
