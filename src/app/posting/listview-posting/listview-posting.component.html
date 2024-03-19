@@ -46,7 +46,7 @@
                     </span>
                   </small>
                 </div>
-                <div *ngIf="distances && distances.length > 0" class="py-1">
+                <div *ngIf="distances.length > 0" class="py-1">
                   <div class="d-flex justify-content-start align-items-start gap-1">
                     <i class="pi pi-directions fs-4"></i>
                     <p class="p-0 m-0"> Distance: {{ distances[rowIndex] | number:'1.0-0' }} <span
@@ -114,15 +114,15 @@
                 <div class="">
                   <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
-                    {{ showFullText ? customer?.content : (customer?.content |
-                    slice:0:maxDescriptionLength) }}
-                    <span *ngIf="customer?.content.length > maxDescriptionLength"
+                    {{ showFullText ? customer?.content : (customer?.content ? customer?.content.slice(0,
+                    maxDescriptionLength) : '') | sanatizer }}
+                    <span *ngIf="customer?.content && customer?.content.length > maxDescriptionLength"
                       (click)="showFullText = !showFullText">
                       {{ showFullText ? 'Less' : '...' }}
                     </span>
                   </small>
                 </div>
-                <div *ngIf="distances && distances.length > 0" class="py-1">
+                <div *ngIf="distances.length ==0" class="py-1">
                   <div class="d-flex justify-content-start align-items-start gap-1" style="font-size: 13px;">
                     <i class="pi pi-directions fs-6"></i>
                     <p class="p-0 m-0"> Distance: {{ distances[rowIndex] | number:'1.0-0' }} <span

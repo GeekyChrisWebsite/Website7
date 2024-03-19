@@ -124,40 +124,20 @@ export class PostingComponent {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           };
-          // console.log('User Location:', this.currentLocation);
-
-          for (const item of this.postingArray) {
-            const businessLocation = {
-              latitude: item.geo_direction.lat,
-              longitude: item.geo_direction.lng,
-            };
-
-            const distance = this.distanceService.calculateDistance(
-              this.currentLocation,
-              businessLocation
-            );
-
-            this.distances.push(distance);
-          }
-
-          this.distanceService.setCurrentLocation(this.currentLocation);
-
-          this.distanceService
-            .setDistances(this.distances)
-            .then(() => {
-              // Navigation logic or any other code that depends on setDistances being complete
-            })
-            .catch((error) => {
-              console.error('Error setting distances:', error);
-            });
+          // Your existing logic to calculate distances and store them
         },
         (error) => {
           console.error('Error getting user location:', error);
+          // Set current location to null if there's an error
+          this.currentLocation = null;
         }
       );
     } else {
-      // console.error('Geolocation is not supported by this browser.');
+      // Geolocation is not supported by this browser.
+      // Set current location to null if geolocation is not supported
+      this.currentLocation = null;
     }
+
     const storedDistances = this.distanceService.getDistances();
     if (storedDistances.length > 0) {
       this.distances = storedDistances;

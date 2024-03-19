@@ -136,8 +136,14 @@
                                 <div class="">
                                     <small class="description"
                                         [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
-                                        {{ showFullText ? customer?.content : (customer?.content ?
-                                        customer?.content.slice(0, maxDescriptionLength) : '') | sanatizer }}
+                                        <span *ngIf="showFullText; else truncatedContent">
+                                            <div [innerHTML]="customer?.content | sanatizer"></div>
+                                        </span>
+                                        <ng-template #truncatedContent>
+                                            <div
+                                                [innerHTML]="(customer?.content ? customer?.content.slice(0, maxDescriptionLength) : '') | sanatizer">
+                                            </div>
+                                        </ng-template>
                                         <span
                                             *ngIf="customer?.content && customer?.content.length > maxDescriptionLength"
                                             (click)="showFullText = !showFullText">

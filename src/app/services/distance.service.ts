@@ -67,5 +67,13 @@ export class DistanceService {
       return [];
     }
   }
+  setCurrentLocation2(location: { latitude: number; longitude: number } | null) {
+    if (location) {
+      this.currentLocation = location;
+    } else {
+      // If location is null, set latitude and longitude to 0
+      this.currentLocation = { latitude: 0, longitude: 0 };
+    }
 
+  }
 }

@@ -53,7 +53,7 @@ export class ListViewComponent {
       if (this.listingArray[index].liked == true) {
         console.log(this.listingArray[index].liked);
 
-        this.filterservice.addLike(busId).subscribe({
+        this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
             console.log(res, "like");
             this.listingArray[index].liked = false;
@@ -61,7 +61,7 @@ export class ListViewComponent {
           },
         });
       } else {
-        this.filterservice.addDislikes(busId).subscribe({
+        this.filterservice.addLike(busId).subscribe({
           next: (res) => {
             console.log(res, "dislike");
             this.listingArray[index].liked = true;

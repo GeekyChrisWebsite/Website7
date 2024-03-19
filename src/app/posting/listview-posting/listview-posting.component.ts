@@ -22,7 +22,7 @@ export class ListviewPostingComponent {
   postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
-  maxDescriptionLength: number = 50;
+  maxDescriptionLength: number = 100;
   showFullText: boolean = false;
   likeCountValue: number[] = [];
   isLiked: boolean[] = Array(this.postingArray?.length).fill(false)
@@ -80,8 +80,5 @@ export class ListviewPostingComponent {
 
   }
 
-  isString(value: any): boolean {
-    return typeof value === 'string';
-  }
 
 }
