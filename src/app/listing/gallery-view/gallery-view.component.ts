@@ -51,7 +51,7 @@ export class GalleryViewComponent {
       if (this.listingArray[index].liked == true) {
         console.log(this.listingArray[index].liked);
 
-        this.filterservice.addLike(busId).subscribe({
+        this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
             console.log(res, "like");
             this.listingArray[index].liked = false;
@@ -59,16 +59,16 @@ export class GalleryViewComponent {
           },
         });
       } else {
-        this.filterservice.addDislikes(busId).subscribe({
-          next: (res: any) => {
+        this.filterservice.addLike(busId).subscribe({
+          next: (res) => {
             console.log(res, "dislike");
             this.listingArray[index].liked = true;
             this.listingArray[index].likes -= 1;
           },
         });
       }
+
+
     }
-
-
   }
 }

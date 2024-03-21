@@ -45,7 +45,7 @@ export class LoginComponent {
   showuserName() {
     this._MessageService.add({
       severity: 'success',
-      detail: `Welcome To  ${this.NAME}`,
+      detail: `Welcome  ${this.NAME}`,
 
     });
   }
