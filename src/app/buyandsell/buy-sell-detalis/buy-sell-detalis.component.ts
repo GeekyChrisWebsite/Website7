@@ -36,8 +36,8 @@ export class BuySellDetalisComponent {
       (res: { data: BuysellDetalis }) => {
         this.detalisArray = res.data;
         console.log("ddd", res.data)
-        // this.timepost = res.data
-        // this.galleryphotos = res.data.data.images;
+        this.timepost = res.data
+        this.galleryphotos = res.data.images;
       });
     console.log(this.img)
   }
@@ -61,7 +61,7 @@ export class BuySellDetalisComponent {
 
   ngOnInit(): void {
     this.getbuyselldetalis();
-    // this.galleryphotos = this.img;
+    this.galleryphotos = this.img;
 
   }
 
