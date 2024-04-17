@@ -14,7 +14,7 @@ import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
   imports: [CommonModule, TableModule, RouterModule, SanatizerPipe]
 })
 export class BsListviewComponent {
-  maxDescriptionLength: number = 60;
+  maxDescriptionLength: number = 20;
   showFullText: boolean = false;
   @Input() BuySellArray: any[] = [];
   @Input() distances!: any;

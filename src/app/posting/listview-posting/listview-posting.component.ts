@@ -23,7 +23,7 @@ export class ListviewPostingComponent {
   postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
-  maxDescriptionLength: number = 100;
+  maxDescriptionLength: number = 20;
   showFullText: boolean = false;
   likeCountValue: number[] = [];
   isLiked: boolean[] = Array(this.postingArray?.length).fill(false)
