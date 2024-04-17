@@ -6,6 +6,7 @@ import { TableModule } from 'primeng/table';
 import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-listview-posting',
@@ -13,10 +14,10 @@ import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
   templateUrl: './listview-posting.component.html',
   styleUrl: './listview-posting.component.scss',
   encapsulation: ViewEncapsulation.None,
-  imports: [RouterModule, CommonModule, TableModule, SanatizerPipe]
+  imports: [RouterModule, CommonModule, TableModule, SanatizerPipe, PaginatorModule]
 })
 export class ListviewPostingComponent {
-  first = 0;
+  first = 20;
   rows = 20;
   @Input()
   postingArray!: PostingData[];
@@ -78,6 +79,9 @@ export class ListviewPostingComponent {
     }
 
 
+  }
+  onPageChange(event: any): void {
+    this.first = event.first;
   }
 
 

@@ -73,6 +73,10 @@
       </div>
     </ng-template>
   </p-table>
+  <div>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+      [totalRecords]="postingArray.length"></p-paginator>
+  </div>
 </div>
 <div *ngIf="postingArray" class="mobileb-view">
   <p-table [value]="postingArray" sortField="id" sortMode="single" [scrollable]="true" rowGroupMode="subheader"
