@@ -23,7 +23,6 @@ img {
 
 }
 
-
 @media (max-width: 767px) {
     .mobileb-view {
         display: block;
@@ -34,41 +33,12 @@ img {
     }
 
     .call-now {
-        background-color: #0F3D3E;
-        border: none;
-        outline: none;
-        width: 70px !important;
-        height: 40px;
-        border-radius: 4px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -ms-border-radius: 4px;
-        -o-border-radius: 4px;
-        color: white;
-        font-size: 10px;
-
+        width: 45px;
     }
 
     .Directions {
-        background-color: #ffbf9d;
-        border: none;
-        outline: none;
-        width: 130px;
-        height: 40px;
-        border-radius: 4px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -ms-border-radius: 4px;
-        -o-border-radius: 4px;
-        color: black !important;
+        width: 73px;
         font-size: 10px;
     }
-
-    .miles,
-    .Distance {
-        font-size: 13px;
-    }
-
-
 
 }
