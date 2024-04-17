@@ -1,6 +1,6 @@
 <div *ngIf="postingArray" class="web-view">
-  <p-table [value]="postingArray" sortField="id" sortMode="single" [scrollable]="true" rowGroupMode="subheader"
-    groupRowsBy="postTime">
+  <p-table [value]="postingArray" sortField="id" sortMode="single" [scrollable]="true" [rows]="20" [paginator]="true"
+    rowrowGroupMode="subheader" groupRowsBy="postTime">
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
         <td colspan="5" style="padding: 0px;">
@@ -9,7 +9,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
-      <div *ngIf="postingArray" class=" data d-flex gap-2 justify-content-center align-items-center py-3 row px-4">
+      <div *ngIf="postingArray" class=" data d-flex gap-2 justify-content-center align-items-center py-2 row px-4">
         <div class="card my-0 py-0 px-0" style="max-width: 1200px;">
           <div class="row g-0">
             <div class="col-3" style="width: 27%;">
@@ -38,15 +38,15 @@
                 <div class="d-lg-none d-block">
                   <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
-                    {{ showFullText ? customer?.content : (customer?.content ? customer?.content.slice(0,
-                    maxDescriptionLength) : '') | sanatizer }}
-                    <span *ngIf="customer?.content && customer?.content.length > maxDescriptionLength"
+                    {{ showFullText ? customer?.content : (customer?.content |
+                    slice:0:maxDescriptionLength) }}
+                    <span *ngIf="customer?.content.length > maxDescriptionLength"
                       (click)="showFullText = !showFullText">
                       {{ showFullText ? 'Less' : '...' }}
                     </span>
                   </small>
                 </div>
-                <div *ngIf="distances.length > 0" class="py-1">
+                <div *ngIf="distances && distances.length > 0" class="py-1">
                   <div class="d-flex justify-content-start align-items-start gap-1">
                     <i class="pi pi-directions fs-4"></i>
                     <p class="p-0 m-0"> Distance: {{ distances[rowIndex] | number:'1.0-0' }} <span
@@ -65,6 +65,8 @@
                     <p id="likeCount" class="m-0">{{postingArray[rowIndex].business.likes}}</p>
                   </div> -->
 
+
+
                 </div>
               </div>
             </div>
@@ -73,14 +75,12 @@
       </div>
     </ng-template>
   </p-table>
-  <div>
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
-      [totalRecords]="postingArray.length"></p-paginator>
-  </div>
+
+
 </div>
 <div *ngIf="postingArray" class="mobileb-view">
-  <p-table [value]="postingArray" sortField="id" sortMode="single" [scrollable]="true" rowGroupMode="subheader"
-    groupRowsBy="postTime">
+  <p-table [value]="postingArray" sortField="id" [rows]="20" [paginator]="true" sortMode="single" [scrollable]="true"
+    rowGroupMode="subheader" groupRowsBy="postTime">
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
         <td colspan="5" style="padding: 0px;">
@@ -89,7 +89,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex" class="py-3">
-      <div *ngIf="postingArray" class=" data d-flex gap-2 justify-content-center align-items-center py-3 row px-4">
+      <div *ngIf="postingArray" class=" data d-flex gap-2 justify-content-center align-items-center py-2 row px-4">
         <div class="card my-0 py-0 px-0" style="max-width: 1200px;">
           <div class="row g-0">
             <div class="col-3" style="width: 44%;">
@@ -112,21 +112,39 @@
                 </div>
                 <div class="d-none d-lg-block">
                   <small class="description"
-                    [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }"
-                    [innerHTML]="(customer?.content)"></small>
-                </div>
-                <div class="">
-                  <small class="description"
                     [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
-                    {{ showFullText ? customer?.content : (customer?.content ? customer?.content.slice(0,
-                    maxDescriptionLength) : '') | sanatizer }}
+                    <span *ngIf="showFullText; else truncatedContent">
+                      <div [innerHTML]="customer?.content | sanatizer"></div>
+                    </span>
+                    <ng-template #truncatedContent>
+                      <div
+                        [innerHTML]="(customer?.content ? customer?.content.slice(0, maxDescriptionLength) : '') | sanatizer">
+                      </div>
+                    </ng-template>
                     <span *ngIf="customer?.content && customer?.content.length > maxDescriptionLength"
                       (click)="showFullText = !showFullText">
                       {{ showFullText ? 'Less' : '...' }}
                     </span>
                   </small>
                 </div>
-                <div *ngIf="distances.length ==0" class="py-1">
+                <div class="">
+                  <small class="description"
+                    [ngStyle]="{ 'font-weight': customer?.bold ? 'bold' : 'normal', 'font-style': customer?.italic ? 'italic' : 'normal' }">
+                    <span *ngIf="showFullText; else truncatedContent">
+                      <div [innerHTML]="customer?.content | sanatizer"></div>
+                    </span>
+                    <ng-template #truncatedContent>
+                      <div
+                        [innerHTML]="(customer?.content ? customer?.content.slice(0, maxDescriptionLength) : '') | sanatizer">
+                      </div>
+                    </ng-template>
+                    <span *ngIf="customer?.content && customer?.content.length > maxDescriptionLength"
+                      (click)="showFullText = !showFullText">
+                      {{ showFullText ? 'Less' : '...' }}
+                    </span>
+                  </small>
+                </div>
+                <div *ngIf="distances && distances.length > 0" class="py-1">
                   <div class="d-flex justify-content-start align-items-start gap-1" style="font-size: 13px;">
                     <i class="pi pi-directions fs-6"></i>
                     <p class="p-0 m-0"> Distance: {{ distances[rowIndex] | number:'1.0-0' }} <span
@@ -136,8 +154,7 @@
                 <div class="btns justify-content-between align-items-end d-flex gap-1 py-2">
                   <div class="btns d-flex gap-2">
                     <button class="call-now" (click)="makePhoneCall(customer.phone_number)">Call</button>
-                    <button class="Directions"
-                      (click)="handleMapClick(customer.business.geo_direction)">Directions</button>
+                    <button class="Directions" (click)="handleMapClick(customer.geo_direction)">Directions</button>
                   </div>
                   <!-- <div class="d-flex justify-content-center align-items-center gap-1"
                     (click)="likeBusiness(customer.business_id, rowIndex)" [class.liked]="postingArray[rowIndex].liked">
@@ -145,6 +162,8 @@
                       [style.color]="postingArray[rowIndex].liked? 'black' : '#0069D9'"></i>
                     <p id="likeCount" class="m-0">{{postingArray[rowIndex].business.likes}}</p>
                   </div> -->
+
+
 
                 </div>
               </div>
@@ -154,4 +173,5 @@
       </div>
     </ng-template>
   </p-table>
+
 </div>
