@@ -23,7 +23,7 @@ export class ListviewPostingComponent {
   postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
-  maxDescriptionLength: number = 20;
+  maxDescriptionLength: number = 44;
   showFullText: boolean = false;
   likeCountValue: number[] = [];
   isLiked: boolean[] = Array(this.postingArray?.length).fill(false)
@@ -82,6 +82,13 @@ export class ListviewPostingComponent {
   }
   onPageChange(event: any): void {
     this.first = event.first;
+  }
+  truncatename(name: string): string {
+    if (name.length <= 24) {
+      return name;
+    } else {
+      return name.substring(0, 44);
+    }
   }
 
 

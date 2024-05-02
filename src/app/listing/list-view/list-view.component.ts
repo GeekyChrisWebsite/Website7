@@ -18,6 +18,9 @@ export class ListViewComponent {
   @Input() distances!: any;
   first = 0;
   rows = 10;
+  maxDescriptionLength: number = 20;
+  maxname: number = 24;
+
   likeCountValue: number[] = [];
   isLiked: boolean[] = Array(this.listingArray?.length).fill(false)
 
@@ -72,6 +75,20 @@ export class ListViewComponent {
     }
 
 
+  }
+  truncateName(name: string): string {
+    if (name.length <= 24) {
+      return name;
+    } else {
+      return name.substring(0, 24);
+    }
+  }
+  truncatedis(name: string): string {
+    if (name.length <= 44) {
+      return name;
+    } else {
+      return name.substring(0, 44);
+    }
   }
 
 

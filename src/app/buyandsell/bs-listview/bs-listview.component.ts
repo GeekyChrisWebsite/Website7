@@ -14,7 +14,7 @@ import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
   imports: [CommonModule, TableModule, RouterModule, SanatizerPipe]
 })
 export class BsListviewComponent {
-  maxDescriptionLength: number = 20;
+  maxDescriptionLength: number = 44;
   showFullText: boolean = false;
   @Input() BuySellArray: any[] = [];
   @Input() distances!: any;
@@ -27,7 +27,7 @@ export class BsListviewComponent {
     if (content.length <= maxLength) {
       return content;
     }
-    return content.substr(0, maxLength) + '... see more';
+    return content.substr(0, maxLength) + '';
   }
   makePhoneCall(phoneNumber: string): void {
     console.log('Initiating phone call to:', phoneNumber);
@@ -82,5 +82,12 @@ export class BsListviewComponent {
     }
 
 
+  }
+  truncatedname(name: string): string {
+    if (name.length <= 24) {
+      return name;
+    } else {
+      return name.substring(0, 24);
+    }
   }
 }
