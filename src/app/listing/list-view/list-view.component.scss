@@ -124,3 +124,50 @@
   }
 
 }
+
+.imgg {
+  background-color: black;
+}
+
+@media (max-width: 767px) {
+
+  /* Adjust the breakpoint to your needs */
+  .mobile-font-size {
+    font-size: 14px !important;
+    /* Important to override existing styles */
+  }
+
+  .btns {
+    .call-now {
+      width: 72px !important;
+      height: 22px !important;
+      font-size: 10px !important;
+
+    }
+
+    .Directions {
+      width: 72px !important;
+      height: 22px !important;
+      font-size: 10px !important;
+      margin-bottom: 10px;
+
+
+    }
+  }
+
+  .web-v {
+    display: none !important;
+  }
+
+  .mobile-v {
+    display: block !important;
+  }
+}
+
+.web-v {
+  display: block;
+}
+
+.mobile-v {
+  display: none;
+}

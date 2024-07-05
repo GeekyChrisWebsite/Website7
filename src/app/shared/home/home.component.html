@@ -1,45 +1,72 @@
 <section class="Explore d-none d-lg-block py-5">
   <div class="container">
-    <h3 class="text-center py-5 text-white">Find the best Spa’s, Salons and Restaurants around you..</h3>
+    <h3 class="text-center py-5 text-white">
+      Find the best Spa’s, Salons and Restaurants around you..
+    </h3>
     <div class="three-box py-3">
       <div class="row align-items-center justify-content-center d-flex gap-5">
         <div class="col-md-3 col-6 top">
-          <img src="../../../assets/img/home/Rectangle 88.png" alt="" class="w-100 py-2" routerLink="/state"
-            (click)="getStates('RESTAURANTS')">
+          <img
+            src="../../../assets/img/home/Rectangle 88.png"
+            alt=""
+            class="w-100 py-2"
+            routerLink="/state"
+            (click)="getStates('RESTAURANTS')"
+          />
           <div class="align-items-center justify-content-center d-flex bg py-3">
-
-            <p class="pt-3 text-center text-white" routerLink="/state" (click)="getStates('RESTAURANTS')">
-              Restaurants</p>
+            <p
+              class="pt-3 text-center text-white"
+              routerLink="/state"
+              (click)="getStates('RESTAURANTS')"
+            >
+              Restaurants
+            </p>
           </div>
         </div>
         <div class="col-md-3 col-6 top" routerLink="/state">
-          <img src="../../../assets/img/home/Rectangle 7.png" alt="" class="w-100 py-2" routerLink="/state"
-            (click)="getStates('MASSAGE SPA')">
+          <img
+            src="../../../assets/img/home/Rectangle 7.png"
+            alt=""
+            class="w-100 py-2"
+            routerLink="/state"
+            (click)="getStates('MASSAGE SPA')"
+          />
           <div class="align-items-center justify-content-center d-flex bg">
-            <p class="pt-3 text-center text-white " routerLink="/state" (click)="getStates('MASSAGE SPA')">
-              Massage</p>
-
+            <p
+              class="pt-3 text-center text-white"
+              routerLink="/state"
+              (click)="getStates('MASSAGE SPA')"
+            >
+              Massage
+            </p>
           </div>
-
         </div>
         <div class="col-md-3 col-6 three top">
-          <img src="../../../assets/img/home/Rectangle 87.png" alt="" class="w-100 py-2" routerLink="/state"
-            (click)="getStates('BEAUTY SALON SPA')">
+          <img
+            src="../../../assets/img/home/Rectangle 87.png"
+            alt=""
+            class="w-100 py-2"
+            routerLink="/state"
+            (click)="getStates('BEAUTY SALON SPA')"
+          />
           <div class="align-items-center justify-content-center d-flex bg py-3">
-
-            <p class="pt-3 text-center text-white" routerLink="/state" (click)="getStates('BEAUTY SALON SPA')">
-              Spa & Salons</p>
+            <p
+              class="pt-3 text-center text-white"
+              routerLink="/state"
+              (click)="getStates('BEAUTY SALON SPA')"
+            >
+              Spa & Salons
+            </p>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
-
 </section>
-<section class="d-block d-lg-none " style="padding-top: 10rem;">
-  <div class="container justify-content-center align-items-center  flex-column d-flex gap-4 py-5">
+<section class="d-block d-lg-none" style="padding-top: 10rem">
+  <div
+    class="container justify-content-center align-items-center flex-column d-flex gap-4 py-5"
+  >
     <h3>Explore to find your Favorite Spot.</h3>
     <button routerLink="/Category" class="btn-category text-center">
       Choose Your State and City
@@ -49,51 +76,105 @@
 <section class="cards py-2">
   <div class="container">
     <div class="Restaurant py-4">
-
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="py-3">Top Restaurant Listings</h4>
         <a href="" routerLink="/listing">View All</a>
       </div>
-      <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-        <div *ngIf="RESTAURANTSarray" class="rania d-flex gap-4 justify-content-start align-items-center py-3 row">
-          <div *ngFor="let item of RESTAURANTSarray.slice(first, first + rows);let i = index"
-            class="card my-0 py-0 px-0" style="max-width: 600px">
+      <div
+        class="row align-items-start justify-content-center gx-0"
+        style="gap: 1rem"
+      >
+        <div
+          *ngIf="RESTAURANTSarray"
+          class="rania d-flex gap-4 justify-content-start align-items-center py-3 row"
+        >
+          <div
+            *ngFor="
+              let item of RESTAURANTSarray.slice(first, first + rows);
+              let i = index
+            "
+            class="card my-0 py-0 px-0"
+            style="max-width: 580px"
+          >
             <div class="row g-0">
-              <div class="col-5">
-                <img src="{{ item.logo }}" class="img-fluid rounded-start w-100" routerLink="/details/{{ item.id }}"
-                  style="height: 100%;" />
-              </div>
               <div class="col-7">
-                <div class="card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
-                  style="height: 100%">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex justify-content-between align-items-center gap-3">
+                <img
+                  src="{{ item.logo }}"
+                  class="imgg rounded-start"
+                  routerLink="/details/{{ item.id }}"
+                  style="height: 217px; width: 287px; object-fit: contain"
+                />
+              </div>
+              <div class="col-5">
+                <div
+                  class="card-body d-flex flex-column align-items-between justify-content-between px-0 py-0"
+                  style="height: 100%"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center gap-3"
+                    >
                       <div>
-                        <h5 class="me-lg-5 me-0 mobile-font-size">{{ item.name }}</h5>
+                        <h5 class="me-lg-5 me-0 mobile-font-size">
+                          {{ item.name }}
+                        </h5>
                       </div>
-
                     </div>
                     <div></div>
                   </div>
-                  <div class="d-flex gap-1 py-2">
-                    <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
-                    <small>{{ truncateText(item.state,10) + ", " + truncateText(item.street,10) }}</small>
+                  <div class="d-flex gap-1">
+                    <i
+                      class="pi pi-map-marker"
+                      style="color: #101010; font-size: 14px"
+                    ></i>
+                    <small style="font-size: 14px">{{
+                      truncateText(item.state, 5) +
+                        ", " +
+                        truncateText(item.street, 5)
+                    }}</small>
                   </div>
-                  <div class="d-flex justify-content-start align-items-start gap-1">
-                    <i class="pi pi-directions fs-5"></i>
-                    <small>Distance: {{ distances[i] | number:'1.0-0' }} KM</small>
+                  <div
+                    class="d-flex justify-content-start align-items-start gap-1"
+                  >
+                    <i style="font-size: 14px" class="pi pi-directions"></i>
+                    <small style="font-size: 14px"
+                      >Distance: {{ distances[i] | number : "1.0-0" }} KM</small
+                    >
                   </div>
-                  <div class="btns justify-content-between align-items-end d-flex gap-1 py-2">
-
-                    <div class="d-flex justify-content-center align-items-center gap-1"
-                      (click)="likeBusiness1(item.id, i)" [class.liked]="RESTAURANTSarray[i].liked">
-                      <i class='bx bxs-like fs-4' id="likeIcon"
-                        [style.color]="RESTAURANTSarray[i].liked ? 'black' : '#0069D9'"></i>
-                      <p id="likeCount" class="m-0">{{RESTAURANTSarray[i].likes}}</p>
+                  <div
+                    class="btns justify-content-between align-items-center d-flex gap-1"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-1"
+                      (click)="likeBusiness2(item.id, i)"
+                      [class.liked]="MASSAGEarray[i].liked"
+                    >
+                      <i
+                        class="bx bxs-like fs-4"
+                        id="likeIcon"
+                        [style.color]="
+                          MASSAGEarray[i].liked ? 'black' : '#0069D9'
+                        "
+                      ></i>
+                      <p id="likeCount" class="m-0">
+                        {{ MASSAGEarray[i].likes }}
+                      </p>
                     </div>
-                    <div class="btns d-flex flex-column gap-2">
-                      <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call</button>
-                      <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
+                    <div class="btns d-flex flex-column gap-2 px-1 py-1">
+                      <button
+                        class="call-now"
+                        (click)="makePhoneCall(item.phone_number)"
+                      >
+                        Call
+                      </button>
+                      <button
+                        class="Directions"
+                        (click)="handleMapClick(item.geo_direction)"
+                      >
+                        Directions
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -101,149 +182,227 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
       </div>
     </div>
     <div class="Salon py-4">
-
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="py-3">Top Salon’s Listings</h4>
         <a href="" routerLink="/listing">View All</a>
       </div>
-      <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-        <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-          <div *ngIf="MASSAGEarray" class="rania d-flex gap-4 justify-content-start align-items-center py-3 row">
-            <div *ngFor="let item of MASSAGEarray.slice(first, first + rows);let i = index" class="card my-0 py-0 px-0"
-              style="max-width: 600px">
-              <div class="row g-0">
-                <div class="col-5">
-                  <img src="{{ item.logo }}" class="img-fluid rounded-start w-100" routerLink="/details/{{ item.id }}"
-                    style="height: 100%;" />
-                </div>
-                <div class="col-7">
-                  <div class="card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
-                    style="height: 100%">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex justify-content-between align-items-center gap-3">
-                        <div>
-                          <h5 class="me-lg-5 me-0 mobile-font-size">{{ item.name }}</h5>
-                        </div>
 
+      <div
+        class="row align-items-start justify-content-center gx-0"
+        style="gap: 1rem"
+      >
+        <div
+          *ngIf="MASSAGEarray"
+          class="rania d-flex gap-4 justify-content-start align-items-center py-3 row"
+        >
+          <div
+            *ngFor="
+              let item of MASSAGEarray.slice(first, first + rows);
+              let i = index
+            "
+            class="card my-0 py-0 px-0"
+            style="max-width: 580px"
+          >
+            <div class="row g-0">
+              <div class="col-7">
+                <img
+                  src="{{ item.logo }}"
+                  class="imgg rounded-start"
+                  routerLink="/details/{{ item.id }}"
+                  style="height: 217px; width: 287px; object-fit: contain"
+                />
+              </div>
+              <div class="col-5">
+                <div
+                  class="card-body d-flex flex-column align-items-between justify-content-between px-0 py-0"
+                  style="height: 100%"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center gap-3"
+                    >
+                      <div>
+                        <h5 class="me-lg-5 me-0 mobile-font-size">
+                          {{ item.name }}
+                        </h5>
                       </div>
-                      <div></div>
                     </div>
-                    <div class="d-flex gap-1 py-2">
-                      <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
-                      <small>{{ truncateText(item.state,10) + ", " + truncateText(item.street,10) }}</small>
+                    <div></div>
+                  </div>
+                  <div class="d-flex gap-1">
+                    <i
+                      class="pi pi-map-marker"
+                      style="color: #101010; font-size: 14px"
+                    ></i>
+                    <small style="font-size: 14px">{{
+                      truncateText(item.state, 5) +
+                        ", " +
+                        truncateText(item.street, 5)
+                    }}</small>
+                  </div>
+                  <div
+                    class="d-flex justify-content-start align-items-start gap-1"
+                  >
+                    <i style="font-size: 14px" class="pi pi-directions"></i>
+                    <small style="font-size: 14px"
+                      >Distance: {{ distances[i] | number : "1.0-0" }} KM</small
+                    >
+                  </div>
+                  <div
+                    class="btns justify-content-between align-items-center d-flex gap-1"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-1"
+                      (click)="likeBusiness2(item.id, i)"
+                      [class.liked]="MASSAGEarray[i].liked"
+                    >
+                      <i
+                        class="bx bxs-like fs-4"
+                        id="likeIcon"
+                        [style.color]="
+                          MASSAGEarray[i].liked ? 'black' : '#0069D9'
+                        "
+                      ></i>
+                      <p id="likeCount" class="m-0">
+                        {{ MASSAGEarray[i].likes }}
+                      </p>
                     </div>
-                    <div class="d-flex justify-content-start align-items-start gap-1">
-                      <i class="pi pi-directions fs-5"></i>
-                      <small>Distance: {{ distances[i] | number:'1.0-0' }} KM</small>
-                    </div>
-                    <div class="btns justify-content-between align-items-end d-flex gap-1 py-2">
-
-                      <div class="d-flex justify-content-center align-items-center gap-1"
-                        (click)="likeBusiness2(item.id, i)" [class.liked]="MASSAGEarray[i].liked">
-                        <i class='bx bxs-like fs-4' id="likeIcon"
-                          [style.color]="MASSAGEarray[i].liked ? 'black' : '#0069D9'"></i>
-                        <p id="likeCount" class="m-0">{{MASSAGEarray[i].likes}}</p>
-                      </div>
-                      <div class="btns d-flex flex-column  gap-2">
-                        <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call</button>
-                        <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
-                      </div>
+                    <div class="btns d-flex flex-column gap-2 px-1 py-1">
+                      <button
+                        class="call-now"
+                        (click)="makePhoneCall(item.phone_number)"
+                      >
+                        Call
+                      </button>
+                      <button
+                        class="Directions"
+                        (click)="handleMapClick(item.geo_direction)"
+                      >
+                        Directions
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
-
-
         </div>
-
-
-
-
-
-
       </div>
     </div>
-    <div class="Spa py-4">
-
-      <div class="d-flex justify-content-between align-items-center">
-        <h4 class="py-3">Top Spa’s Listings</h4>
-        <a href="" routerLink="/listing">View All</a>
-      </div>
-      <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-        <div class="row align-items-start justify-content-center gx-0" style="gap: 1rem;">
-          <div *ngIf="spa" class="rania d-flex gap-4 justify-content-start align-items-center py-3 row">
-            <div *ngFor="let item of spa.slice(first, first + rows);let i = index" class="card my-0 py-0 px-0"
-              style="max-width: 600px">
-              <div class="row g-0">
-                <div class="col-5">
-                  <img src="{{ item.logo }}" class="img-fluid rounded-start w-100" routerLink="/details/{{ item.id }}"
-                    style="height: 100%;" />
-                </div>
-                <div class="col-7">
-                  <div class="card-body d-flex flex-column align-items-between justify-content-between px-2 py-0"
-                    style="height: 100%">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="d-flex justify-content-between align-items-center gap-3">
-                        <div>
-                          <h5 class="me-lg-5 me-0 mobile-font-size">{{ item.name }}</h5>
-                        </div>
-
+  </div>
+  <div class="Spa py-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="py-3">Top Spa’s Listings</h4>
+      <a href="" routerLink="/listing">View All</a>
+    </div>
+    <div
+      class="row align-items-start justify-content-center gx-0"
+      style="gap: 1rem"
+    >
+      <div
+        class="row align-items-start justify-content-center gx-0"
+        style="gap: 1rem"
+      >
+        <div
+          *ngIf="spa"
+          class="rania d-flex gap-4 justify-content-start align-items-center py-3 row"
+        >
+          <div
+            *ngFor="let item of spa.slice(first, first + rows); let i = index"
+            class="card my-0 py-0 px-0"
+            style="max-width: 580px"
+          >
+            <div class="row g-0">
+              <div class="col-7">
+                <img
+                  src="{{ item.logo }}"
+                  class="imgg rounded-start"
+                  routerLink="/details/{{ item.id }}"
+                  style="height: 217px; width: 287px; object-fit: contain"
+                />
+              </div>
+              <div class="col-5">
+                <div
+                  class="card-body d-flex flex-column align-items-between justify-content-between px-0 py-0"
+                  style="height: 100%"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center gap-3"
+                    >
+                      <div>
+                        <h5 class="me-lg-5 me-0 mobile-font-size">
+                          {{ item.name }}
+                        </h5>
                       </div>
-                      <div></div>
                     </div>
-                    <div class="d-flex gap-1 py-2">
-                      <i class="pi pi-map-marker" style="color: #101010; font-size: 1rem;"></i>
-                      <small>{{ truncateText(item.state,10) + ", " + truncateText(item.street,10) }}</small>
+                    <div></div>
+                  </div>
+                  <div class="d-flex gap-1">
+                    <i
+                      class="pi pi-map-marker"
+                      style="color: #101010; font-size: 14px"
+                    ></i>
+                    <small style="font-size: 14px">{{
+                      truncateText(item.state, 5) +
+                        ", " +
+                        truncateText(item.street, 5)
+                    }}</small>
+                  </div>
+                  <div
+                    class="d-flex justify-content-start align-items-start gap-1"
+                  >
+                    <i style="font-size: 14px" class="pi pi-directions"></i>
+                    <small style="font-size: 14px"
+                      >Distance: {{ distances[i] | number : "1.0-0" }} KM</small
+                    >
+                  </div>
+                  <div
+                    class="btns justify-content-between align-items-center d-flex gap-1"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-1"
+                      (click)="likeBusiness2(item.id, i)"
+                      [class.liked]="MASSAGEarray[i].liked"
+                    >
+                      <i
+                        class="bx bxs-like fs-4"
+                        id="likeIcon"
+                        [style.color]="
+                          MASSAGEarray[i].liked ? 'black' : '#0069D9'
+                        "
+                      ></i>
+                      <p id="likeCount" class="m-0">
+                        {{ MASSAGEarray[i].likes }}
+                      </p>
                     </div>
-                    <div class="d-flex justify-content-start align-items-start gap-1">
-                      <i class="pi pi-directions fs-5"></i>
-                      <small>Distance: {{ distances[i] | number:'1.0-0' }} KM</small>
-                    </div>
-                    <div class="btns justify-content-between align-items-end d-flex gap-1 py-2">
-
-                      <div class="d-flex justify-content-center align-items-center gap-1"
-                        (click)="likeBusiness3(item.id, i)" [class.liked]="MASSAGEarray[i].liked">
-                        <i class='bx bxs-like fs-4' id="likeIcon"
-                          [style.color]="spa[i].liked ? 'black' : '#0069D9'"></i>
-                        <p id="likeCount" class="m-0">{{spa[i].likes}}</p>
-                      </div>
-                      <div class="btns d-flex flex-column gap-2">
-                        <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call</button>
-                        <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
-                      </div>
+                    <div class="btns d-flex flex-column gap-2 px-1 py-1">
+                      <button
+                        class="call-now"
+                        (click)="makePhoneCall(item.phone_number)"
+                      >
+                        Call
+                      </button>
+                      <button
+                        class="Directions"
+                        (click)="handleMapClick(item.geo_direction)"
+                      >
+                        Directions
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
-
-
         </div>
-
-
-
-
-
       </div>
     </div>
   </div>

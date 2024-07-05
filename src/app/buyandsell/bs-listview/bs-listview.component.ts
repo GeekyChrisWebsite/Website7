@@ -5,13 +5,14 @@ import { TableModule } from 'primeng/table';
 import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
+import { TruncateTextPipe } from "../../pipe/truncate-text.pipe";
 
 @Component({
   selector: 'app-bs-listview',
   standalone: true,
   templateUrl: './bs-listview.component.html',
   styleUrl: './bs-listview.component.scss',
-  imports: [CommonModule, TableModule, RouterModule, SanatizerPipe]
+  imports: [CommonModule, TableModule, RouterModule, SanatizerPipe, TruncateTextPipe]
 })
 export class BsListviewComponent {
   maxDescriptionLength: number = 44;
@@ -89,5 +90,14 @@ export class BsListviewComponent {
     } else {
       return name.substring(0, 24);
     }
+  }
+  customer = {
+    id: 1,
+    images: ['../../assets/img/footer/default-image.jpg'] // Replace with actual image URL or empty array
+  };
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = '../../assets/img/footer/default-image.jpg';
   }
 }

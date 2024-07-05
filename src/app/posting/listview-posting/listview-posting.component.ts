@@ -7,6 +7,7 @@ import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
 import { PaginatorModule } from 'primeng/paginator';
+import { TruncateTextPipe } from "../../pipe/truncate-text.pipe";
 
 @Component({
   selector: 'app-listview-posting',
@@ -14,7 +15,7 @@ import { PaginatorModule } from 'primeng/paginator';
   templateUrl: './listview-posting.component.html',
   styleUrl: './listview-posting.component.scss',
   encapsulation: ViewEncapsulation.None,
-  imports: [RouterModule, CommonModule, TableModule, SanatizerPipe, PaginatorModule]
+  imports: [RouterModule, CommonModule, TableModule, SanatizerPipe, PaginatorModule, TruncateTextPipe]
 })
 export class ListviewPostingComponent {
   first = 20;
@@ -91,5 +92,14 @@ export class ListviewPostingComponent {
     }
   }
 
+  customer = {
+    id: 1,
+    images: ['../../assets/img/footer/default-image.jpg'] // Replace with actual image URL or empty array
+  };
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = '../../assets/img/footer/default-image.jpg';
+  }
 
 }
