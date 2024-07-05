@@ -2,23 +2,49 @@
   <div class="container py-5" *ngIf="vippostarray">
     <h2 class="text-center py-5 h1">VIP Posts</h2>
     <div>
-
-      <p-carousel class="gap-5" [value]="vippostarray" [numVisible]="3" [numScroll]="3" [circular]="true"
-        [responsiveOptions]="responsiveOptions" [autoplayInterval]="3000">
-        <ng-template let-product pTemplate="item" class="gap-5" let-rowIndex="rowIndex">
+      <p-carousel
+        class="gap-5"
+        [value]="vippostarray"
+        [numVisible]="3"
+        [numScroll]="3"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+        [autoplayInterval]="3000"
+      >
+        <ng-template
+          let-product
+          pTemplate="item"
+          class="gap-5"
+          let-rowIndex="rowIndex"
+        >
           <div class="row justify-content-center align-items-center gap-5">
-            <div class="col-md-3" style="width: 95%;">
+            <div class="col-md-3" style="width: 95%">
               <div>
-                <img *ngIf="product.images && product.images[0]" src="{{product.images[0]}}" alt=""
-                  class="w-100 rounded-top rounded-2" routerLink="/postingdetails/{{ product.id }}">
-                <img *ngIf="!product.images || !product.images[0]" src="../../../assets/img/listing/missing (2).png"
-                  alt="" class="w-100 rounded-top rounded-2">
+                <img
+                  *ngIf="product.images && product.images[0]"
+                  src="{{ product.images[0] }}"
+                  alt=""
+                  class="w-100 rounded-top rounded-2"
+                  routerLink="/postingdetails/{{ product.id }}"
+                />
+                <img
+                  *ngIf="!product.images || !product.images[0]"
+                  src="../../../assets/img/listing/missing (2).png"
+                  alt=""
+                  class="w-100 rounded-top rounded-2"
+                />
               </div>
-              <img src="../../../assets/img/posting/VIP TAG.png" alt="" class="corner-image">
+              <img
+                src="../../../assets/img/posting/VIP TAG.png"
+                alt=""
+                class="corner-image"
+              />
 
               <div class="body bg-white rounded-bottom py-3">
                 <div class="title py-2">
-                  <div class="d-flex justify-content-center align-items-center gap-5">
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-5"
+                  >
                     <!-- <div class="d-flex justify-content-center align-items-center gap-1"
                       (click)="likeVip(product.business_id, product.new)"
                       [class.liked]="vippostarray[product.new].liked">
@@ -27,24 +53,37 @@
                       <p id="likeCount" class="m-0">{{vippostarray[product.new].likes}}</p>
                     </div> -->
                     <div>
-                      <h5 class="gold text-center ">{{product.title}}</h5>
-
-
-
+                      <h5 class="gold text-center">{{ product.title }}</h5>
                     </div>
                     <div></div>
                   </div>
                 </div>
-                <div class="btns d-flex justify-content-center align-items-center gap-3 py-1">
-                  <button *ngIf="product.business.booking_url !== '' " class="date">
+                <div
+                  class="btns d-flex justify-content-center align-items-center gap-3 py-1"
+                >
+                  <button
+                    *ngIf="product.business.booking_url !== ''"
+                    class="date"
+                  >
                     <a [href]="product.business.booking_url" target="_blank">
-                      <img src="../../../assets/img/posting/image 3.png" alt="Image">
+                      <img
+                        src="../../../assets/img/posting/image 3.png"
+                        alt="Image"
+                      />
                     </a>
                   </button>
-                  <button class="call" (click)="makePhoneCall(product.business.phone_number)">
-                    <img src="../../../assets/img/posting/image 1.png" alt="Call">
+                  <button
+                    class="call"
+                    (click)="makePhoneCall(product.business.phone_number)"
+                  >
+                    <img
+                      src="../../../assets/img/posting/image 1.png"
+                      alt="Call"
+                    />
                   </button>
-                  <button class="location"><img src="../../../assets/img/posting/image 2.png" alt=""></button>
+                  <button class="location">
+                    <img src="../../../assets/img/posting/image 2.png" alt="" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -55,17 +94,17 @@
   </div>
 </section>
 <section class="posting mt-4 py-5">
-  <div class=" box mb-4 mt-lg-0 mt-4">
+  <div class="box mb-4 mt-lg-0 mt-4">
     <div class="container">
       <div class="title mb-4 justify-content-between align-items-center d-flex">
         <div class="">
           <h3>Top businesses in your Area</h3>
-
         </div>
         <div class="form-group d-lg-block d-none">
-          <div class="div-searchBar justify-content-start align-items-start d-flex">
+          <div
+            class="div-searchBar justify-content-start align-items-start d-flex"
+          >
             <app-filter></app-filter>
-
           </div>
         </div>
       </div>
@@ -74,12 +113,20 @@
           <h6 class="m-0">Suggested Results:</h6>
         </div>
         <div class="views d-flex gap-3">
-          <div (click)="showList()" class="box d-flex gap-2" [ngClass]="listView ? 'active' : null">
-            <i class=" pi pi-list fs-4" style="color: black"></i>
+          <div
+            (click)="showList()"
+            class="box d-flex gap-2"
+            [ngClass]="listView ? 'active' : null"
+          >
+            <i class="pi pi-list fs-4" style="color: black"></i>
 
             <p class="m-0 d-none d-lg-block">List View</p>
           </div>
-          <div (click)="showGallery()" class="box d-flex gap-2" [ngClass]="galleyView ? 'active' : null">
+          <div
+            (click)="showGallery()"
+            class="box d-flex gap-2"
+            [ngClass]="galleyView ? 'active' : null"
+          >
             <i class="pi-th-large pi fs-4" style="color: black"></i>
             <p class="m-0 d-none d-lg-block">Gallery View</p>
           </div>
@@ -94,22 +141,19 @@
     </div>
   </div>
   @if(listView){
-  <div class="view-data  ">
-
+  <div class="view-data">
     <app-listview-posting [postingArray]="postingArray" [distances]="distances">
     </app-listview-posting>
   </div>
   } @if(galleyView){
   <div class="view-data">
-
-    <app-gellaryview-posting [postingArray]="postingArray" [distances]="distances"></app-gellaryview-posting>
-
+    <app-gellaryview-posting
+      [postingArray]="postingArray"
+      [distances]="distances"
+    ></app-gellaryview-posting>
   </div>
   } @if(mapView){
-  <div class="view-data mx-3">
-
-    <app-mapview-posting [postingArray]="postingArray"></app-mapview-posting>
-  </div>
+  <div class="view-data mx-3"></div>
   }
   <!-- <div>
     <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="row"
