@@ -1,37 +1,61 @@
 <section class="list-img" *ngIf="listingArray">
-    <div class="container">
-        <div class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0 ">
-            <div class="col-md-3 col-12 mb-3" *ngFor="let item of listingArray; let i = index">
-                <div class="card justify-content-between align-items-center d-flex" routerLink="/details/{{ item.id }}">
-                    <div class="d-flex justify-content-center align-items-center gap-1 div-like"
-                        (click)="likeBusiness(item.id, i);$event.stopPropagation()"
-                        [class.liked]="listingArray[i].liked">
-                        <i class='bx bxs-like fs-4' id="likeIcon"
-                            [style.color]="listingArray[i].liked ? 'black' : '#0069D9'"></i>
-                    </div>
-                    <p id="likeCount" class="m-0 likes">{{listingArray[i].likes}}</p>
+  <div class="container">
+    <div
+      class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0"
+    >
+      <div
+        class="col-md-3 col-12 mb-3"
+        *ngFor="let item of listingArray; let i = index"
+      >
+        <div
+          class="card justify-content-between align-items-center d-flex"
+          routerLink="/details/{{ item.id }}"
+        >
+          <div
+            class="d-flex justify-content-center align-items-center gap-1 div-like"
+            (click)="likeBusiness(item.id, i); $event.stopPropagation()"
+            [class.liked]="listingArray[i].liked"
+          >
+            <i
+              class="bx bxs-like fs-4"
+              id="likeIcon"
+              [style.color]="listingArray[i].liked ? 'black' : '#0069D9'"
+            ></i>
+          </div>
+          <p id="likeCount" class="m-0 likes">{{ listingArray[i].likes }}</p>
 
+          <img src="{{ item.logo }}" alt="" class="border rounded" />
+          <div class="title py-2">
+            <h5>{{ item.name }}</h5>
+          </div>
 
-                    <img src="{{ item.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
-                    <div class="title py-2">
-                        <h5>{{ item.name }}</h5>
-                    </div>
-
-                    <div *ngIf="distances && distances.length > 0" class="py-2">
-                        <div class="d-flex justify-content-center align-items-center gap-1">
-                            <i class="pi pi-directions fs-4"></i>
-                            <p class="p-0 m-0">Distance: {{ distances[i] | number:'1.0-0' }} <span>Miles</span></p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-muted">{{truncateText(item.description,20)}}</p>
-                    </div>
-                    <div class="btns justify-content-start align-items-start d-flex gap-3 py-3">
-                        <button class="call-now" (click)="makePhoneCall(item.phone_number)">Call Now</button>
-                        <button class="Directions" (click)="handleMapClick(item.geo_direction)">Directions</button>
-                    </div>
-                </div>
+          <div *ngIf="distances && distances.length > 0" class="py-2">
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="pi pi-directions fs-4"></i>
+              <p class="p-0 m-0">
+                Distance: {{ distances[i] | number : "1.0-0" }}
+                <span>Miles</span>
+              </p>
             </div>
+          </div>
+          <div>
+            <p class="text-muted">{{ truncateText(item.description, 20) }}</p>
+          </div>
+          <div
+            class="btns justify-content-start align-items-start d-flex gap-3 py-3"
+          >
+            <button class="call-now" (click)="makePhoneCall(item.phone_number)">
+              Call Now
+            </button>
+            <button
+              class="Directions"
+              (click)="handleMapClick(item.geo_direction)"
+            >
+              Directions
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>

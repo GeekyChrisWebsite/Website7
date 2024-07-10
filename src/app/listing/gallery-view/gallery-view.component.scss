@@ -13,7 +13,10 @@
                     box-shadow: 0px 4px 4px 0px #00000040;
 
                     img {
-                        height: 250px;
+                        height: 228px !important;
+                        width: 300px !important;
+                        background-color: black;
+                        object-fit: contain;
                         border-radius: 7px !important;
                         -webkit-border-radius: 7px !important;
                         -moz-border-radius: 7px !important;
