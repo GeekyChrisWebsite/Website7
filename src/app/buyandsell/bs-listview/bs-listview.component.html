@@ -1,8 +1,9 @@
 <div *ngIf="BuySellArray" class="web-view">
   <p-table
     [value]="BuySellArray"
-    sortField="id"
+    sortField="buySellTime"
     sortMode="single"
+    [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
     [scrollable]="true"
@@ -162,8 +163,9 @@
 <div *ngIf="BuySellArray" class="mobileb-view">
   <p-table
     [value]="BuySellArray"
-    sortField="id"
+    sortField="buySellTime"
     sortMode="single"
+    [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
     [scrollable]="true"

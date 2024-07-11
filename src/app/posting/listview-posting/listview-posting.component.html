@@ -1,18 +1,19 @@
 <div *ngIf="postingArray" class="web-view">
   <p-table
     [value]="postingArray"
-    sortField="id"
+    sortField="postTime"
     sortMode="single"
+    [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
     [scrollable]="true"
     rowGroupMode="subheader"
-    groupRowsBy="buySellTime"
+    groupRowsBy="postTime"
   >
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
         <td colspan="5">
-          <h6 class="ms-5 ps-5">{{ row.buySellTime }}</h6>
+          <h6 class="ms-5 ps-5">{{ row.postTime }}</h6>
         </td>
       </tr>
     </ng-template>
@@ -162,13 +163,14 @@
 <div *ngIf="postingArray" class="mobileb-view">
   <p-table
     [value]="postingArray"
-    sortField="id"
+    sortField="postTime"
     sortMode="single"
+    [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
     [scrollable]="true"
     rowGroupMode="subheader"
-    groupRowsBy="buySellTime"
+    groupRowsBy="postTime"
   >
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
