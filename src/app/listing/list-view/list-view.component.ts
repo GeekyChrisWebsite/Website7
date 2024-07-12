@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
+import { DistanceService } from '../../services/distance.service';
 
 @Component({
   selector: 'app-list-view',
@@ -24,7 +25,7 @@ export class ListViewComponent {
   likeCountValue: number[] = [];
   isLiked: boolean[] = Array(this.listingArray?.length).fill(false)
 
-  constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router) {
+  constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router, public distanceService: DistanceService) {
 
   }
 
@@ -93,5 +94,8 @@ export class ListViewComponent {
 
 
 
-
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this.distanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
+  }
 }
