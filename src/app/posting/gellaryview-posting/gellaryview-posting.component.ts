@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { PostingData } from '../../interface/posting-data';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { DistanceService } from '../../services/distance.service';
 
 @Component({
   selector: 'app-gellaryview-posting',
@@ -13,11 +14,14 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrl: './gellaryview-posting.component.scss'
 })
 export class GellaryviewPostingComponent {
+  currentLocation: { latitude: number; longitude: number } | null = null;
+
   @Input()
   postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
-  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router) {
+  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router, private distanceService: DistanceService,
+    @Inject(PLATFORM_ID) private platformId: Object) {
 
   }
   makePhoneCall(phoneNumber: string): void {
@@ -68,5 +72,22 @@ export class GellaryviewPostingComponent {
       return content;
     }
     return content.slice(0, maxLength) + '...';
+  }
+
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this.distanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
+  }
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.distanceService.getCurrentLocation()
+        .then((coords) => {
+          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.distanceService.setCurrentLocationInLocalStorage(coords);
+        })
+        .catch((error) => {
+          console.error('Error getting user location:', error);
+        });
+    }
   }
 }

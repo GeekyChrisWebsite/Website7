@@ -17,7 +17,7 @@ export class ListViewComponent {
   @Input() filterarray: any
   @Input() distances!: any;
   first = 0;
-  rows = 10;
+  rows = 20;
   maxDescriptionLength: number = 20;
   maxname: number = 24;
 

@@ -60,6 +60,9 @@ export class PostingComponent {
     public distanceService: DistanceService,
     public _cookieService: CookieService,
     public router: Router,
+    public _DistanceService: DistanceService,
+
+
   ) {
     this.galleyView = true;
     this.listView = false;
@@ -117,32 +120,45 @@ export class PostingComponent {
       this.filteredPosted();
     }
     this.GetVipPost();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.currentLocation = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          };
-          // Your existing logic to calculate distances and store them
-        },
-        (error) => {
+    if (isPlatformBrowser(this.platformId)) {
+      this.distanceService.getCurrentLocation()
+        .then((coords) => {
+          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.distanceService.setCurrentLocationInLocalStorage(coords);
+        })
+        .catch((error) => {
           console.error('Error getting user location:', error);
-          // Set current location to null if there's an error
-          this.currentLocation = null;
-        }
-      );
-    } else {
-      // Geolocation is not supported by this browser.
-      // Set current location to null if geolocation is not supported
-      this.currentLocation = null;
+        });
     }
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     (position) => {
+    //       this.currentLocation = {
+    //         latitude: position.coords.latitude,
+    //         longitude: position.coords.longitude,
+    //       };
+    //     },
+    //     (error) => {
+    //       console.error('Error getting user location:', error);
+    //       this.currentLocation = null;
+    //     }
+    //   );
+    // } else {
+    //   this.currentLocation = null;
+    // }
 
-    const storedDistances = this.distanceService.getDistances();
-    if (storedDistances.length > 0) {
-      this.distances = storedDistances;
-    }
+    // const storedDistances = this.distanceService.getDistances();
+    // if (storedDistances.length > 0) {
+    //   this.distances = storedDistances;
+    // }
   }
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this.distanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
+  }
+
+
+
   getPosting(): void {
     this.subscribtions = this.postingService.GetPosting().subscribe({
       next: (res: { data: any[]; message: string; status: string }) => {

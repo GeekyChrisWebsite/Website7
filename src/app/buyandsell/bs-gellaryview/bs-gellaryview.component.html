@@ -1,18 +1,3 @@
-<!-- <section class="list-img" *ngIf="BuySellArray">
-    <div class="container">
-        <div class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0 p-5">
-            <div class="col-md-3 col-12 mb-3" *ngFor="let item of BuySellArray">
-                <div class="card justify-content-between align-items-center d-flex">
-                    <img src="{{ item.business.logo }}" alt="" class="w-100 img-fluid object-fit-fill border rounded">
-                    <div class="title py-2">
-                        <h5>{{ item.title }}</h5>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
 <section class="list-img" *ngIf="BuySellArray">
   <div class="container">
     <div
@@ -38,15 +23,18 @@
           <div class="title py-2">
             <h5>{{ item.business.name }}</h5>
           </div>
-
-          <div *ngIf="distances && distances.length > 0" class="py-2">
-            <div class="d-flex justify-content-center align-items-center gap-1">
-              <i class="pi pi-directions fs-4"></i>
-              <p class="p-0 m-0">
-                Distance: {{ distances[i] | number : "1.0-0" }}
-                <span>Miles</span>
-              </p>
-            </div>
+          <div class="d-flex justify-content-center align-items-center gap-1">
+            <i class="pi pi-directions fs-4"></i>
+            <p class="px-1 m-0 distance">
+              Distance:
+              {{
+                calculateDistance(
+                  item.business.geo_direction.lat,
+                  item.business.geo_direction.lng
+                )
+              }}
+              <span>miles</span>
+            </p>
           </div>
           <p
             class="description mx-3 text-center"

@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { FilterService } from '../../services/filter.service';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { DistanceService } from '../../services/distance.service';
 
 @Component({
   selector: 'app-bs-gellaryview',
@@ -12,11 +13,14 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrl: './bs-gellaryview.component.scss'
 })
 export class BsGellaryviewComponent {
+  currentLocation: { latitude: number; longitude: number } | null = null;
+
   @Input() BuySellArray: any[] = [];
   @Input() distances!: any;
   maxDescriptionLength: number = 40;
   showFullText: boolean = false;
-  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router) {
+  constructor(private _filterservie: FilterService, public _cookieService: CookieService,
+    public router: Router, private distanceService: DistanceService, @Inject(PLATFORM_ID) private platformId: Object) {
 
   }
 
@@ -71,6 +75,22 @@ export class BsGellaryviewComponent {
     }
 
 
+  }
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this.distanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
+  }
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.distanceService.getCurrentLocation()
+        .then((coords) => {
+          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.distanceService.setCurrentLocationInLocalStorage(coords);
+        })
+        .catch((error) => {
+          console.error('Error getting user location:', error);
+        });
+    }
   }
 
 

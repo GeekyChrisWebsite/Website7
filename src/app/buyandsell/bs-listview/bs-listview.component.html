@@ -64,9 +64,6 @@
                       'font-style': customer?.italic ? 'italic' : 'normal'
                     }"
                   >
-                    <!-- <span *ngIf="showFullText; else truncatedContent">
-                        <div [innerHTML]="customer?.content | sanatizer"></div>
-                      </span> -->
                     <ng-template #truncatedContent>
                       <div
                         [innerHTML]="
@@ -79,50 +76,23 @@
                     </ng-template>
                   </small>
                 </div>
-                <!-- <div class="d-lg-none d-block">
-                    <small
-                      class="description"
-                      [ngStyle]="{
-                        'font-weight': customer?.bold ? 'bold' : 'normal',
-                        'font-style': customer?.italic ? 'italic' : 'normal'
-                      }"
-                    >
-                      <span *ngIf="showFullText; else truncatedContent">
-                        <div [innerHTML]="customer?.content | sanatizer"></div>
-                      </span>
-                      <ng-template #truncatedContent>
-                        <div
-                          [innerHTML]="
-                            (customer?.content
-                              ? customer?.content.slice(0, maxDescriptionLength)
-                              : ''
-                            ) | sanatizer
-                          "
-                        ></div>
-                      </ng-template>
-                      <span
-                        *ngIf="
-                          customer?.content &&
-                          customer?.content.length > maxDescriptionLength
-                        "
-                        (click)="showFullText = !showFullText"
-                      >
-                        {{ showFullText ? "Less" : "..." }}
-                      </span>
-                    </small>
-                  </div> -->
+
                 <p
                   class="m-0"
                   [innerHTML]="customer.content | truncateText : 50 | sanatizer"
                 ></p>
                 <div *ngIf="distances" class="py-1">
-                  <div
-                    class="d-flex justify-content-start align-items-start gap-1"
-                  >
+                  <div class="d-flex justify-content-start align-items-start">
                     <i class="pi pi-directions fs-4"></i>
-                    <p class="p-0 m-0">
-                      Distance: {{ distances[rowIndex] | number : "1.0-0" }}
-                      <span class="miles">Miles</span>
+                    <p class="px-1 m-0 distance">
+                      Distance:
+                      {{
+                        calculateDistance(
+                          customer.business.geo_direction.lat,
+                          customer.business.geo_direction.lng
+                        )
+                      }}
+                      <span>miles</span>
                     </p>
                   </div>
                 </div>
@@ -228,9 +198,15 @@
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
                     <i class="pi pi-directions fs-6"></i>
-                    <p class="p-0 m-0" style="font-size: 10px">
-                      Distance: {{ distances[rowIndex] | number : "1.0-0" }}
-                      <span class="miles" style="font-size: 10px">Miles</span>
+                    <p class="px-1 m-0 distance" style="font-size: 8px">
+                      Distance:
+                      {{
+                        calculateDistance(
+                          customer.business.geo_direction.lat,
+                          customer.business.geo_direction.lng
+                        )
+                      }}
+                      <span>miles</span>
                     </p>
                   </div>
                 </div>
@@ -251,13 +227,6 @@
                       Directions
                     </button>
                   </div>
-                  <!-- <div class="d-flex justify-content-center align-items-center gap-1"
-                                            (click)="likeBusiness(customer.business_id, rowIndex)"
-                                            [class.liked]="BuySellArray[rowIndex].liked">
-                                            <i class="bx bxs-like fs-4" id="likeIcon"
-                                                [style.color]="BuySellArray[rowIndex].liked? 'black' : '#0069D9'"></i>
-                                            <p id="likeCount" class="m-0">{{BuySellArray[rowIndex].business.likes}}</p>
-                                        </div> -->
                 </div>
               </div>
             </div>

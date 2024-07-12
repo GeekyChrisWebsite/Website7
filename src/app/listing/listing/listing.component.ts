@@ -33,7 +33,7 @@ export class ListingComponent {
   listingArray: ListingData[] = [];
   filterarray: any[] = [];
   first = 0;
-  rows = 4;
+  rows = 20;
   searchQuery: string = '';
   galleyView: boolean;
   listView: boolean;
@@ -101,53 +101,63 @@ export class ListingComponent {
       this.filteredfromService();
       this.clearListing();
     }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.currentLocation = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          };
-          // console.log('User Location:', this.currentLocation);
 
-          for (const item of this.listingArray) {
-            const businessLocation = {
-              latitude: item.geo_direction.lat,
-              longitude: item.geo_direction.lng,
-            };
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     (position) => {
+    //       this.currentLocation = {
+    //         latitude: position.coords.latitude,
+    //         longitude: position.coords.longitude,
+    //       };
+    //       // console.log('User Location:', this.currentLocation);
 
-            const distance = this.distanceService.calculateDistance(
-              this.currentLocation,
-              businessLocation
-            );
+    //       // Clear previous distances
+    //       this.distances = [];
 
-            this.distances.push(distance);
-          }
+    //       for (const item of this.listingArray) {
+    //         const businessLocation = {
+    //           latitude: item.geo_direction.lat,
+    //           longitude: item.geo_direction.lng,
+    //         };
 
-          this.distanceService.setCurrentLocation(this.currentLocation);
+    //         const distanceInMiles = this.distanceService.calculateDistance(
+    //           this.currentLocation,
+    //           businessLocation
+    //         );
 
-          this.distanceService
-            .setDistances(this.distances)
-            .then(() => {
-              // Navigation logic or any other code that depends on setDistances being complete
-            })
-            .catch((error) => {
-              console.error('Error setting distances:', error);
-            });
-        },
-        (error) => {
-          console.error('Error getting user location:', error);
-        }
-      );
-    } else {
-      // console.error('Geolocation is not supported by this browser.');
-    }
-    const storedDistances = this.distanceService.getDistances();
-    if (storedDistances.length > 0) {
-      this.distances = storedDistances;
-    }
-    console.log(this.distances)
+    //         this.distances.push(distanceInMiles);
+    //       }
+
+    //       this.distanceService.setCurrentLocation(this.currentLocation);
+
+    //       this.distanceService
+    //         .setDistances(this.distances)
+    //         .then(() => {
+    //           // Navigation logic or any other code that depends on setDistances being complete
+    //         })
+    //         .catch((error) => {
+    //           console.error('Error setting distances:', error);
+    //         });
+    //     },
+    //     (error) => {
+    //       console.error('Error getting user location:', error);
+    //     }
+    //   );
+    // } else {
+    //   console.error('Geolocation is not supported by this browser.');
+    // }
+
+    // const storedDistances = this.distanceService.getDistances();
+    // if (storedDistances.length > 0) {
+    //   this.distances = storedDistances;
+    // }
+    // console.log(this.distances);
   }
+
+
+
+
+
   getListing(): void {
     this.listingservice.GetListing().subscribe({
       next: (res: { data: ListingData[]; message: string; status: string }) => {

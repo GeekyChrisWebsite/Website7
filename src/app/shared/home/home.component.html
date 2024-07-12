@@ -139,9 +139,16 @@
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
                     <i style="font-size: 14px" class="pi pi-directions"></i>
-                    <small style="font-size: 14px"
-                      >Distance: {{ distances[i] | number : "1.0-0" }} KM</small
-                    >
+                    <p class="m-0 distance" style="font-size: 14px">
+                      Distance:
+                      {{
+                        calculateDistance(
+                          item.geo_direction.lat,
+                          item.geo_direction.lng
+                        )
+                      }}
+                      <span>miles</span>
+                    </p>
                   </div>
                   <div
                     class="btns justify-content-between align-items-center d-flex gap-1"
@@ -249,9 +256,16 @@
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
                     <i style="font-size: 14px" class="pi pi-directions"></i>
-                    <small style="font-size: 14px"
-                      >Distance: {{ distances[i] | number : "1.0-0" }} KM</small
-                    >
+                    <p class="m-0 distance" style="font-size: 14px">
+                      Distance:
+                      {{
+                        calculateDistance(
+                          item.geo_direction.lat,
+                          item.geo_direction.lng
+                        )
+                      }}
+                      <span>miles</span>
+                    </p>
                   </div>
                   <div
                     class="btns justify-content-between align-items-center d-flex gap-1"
@@ -359,10 +373,16 @@
                       class="d-flex justify-content-start align-items-start gap-1"
                     >
                       <i style="font-size: 14px" class="pi pi-directions"></i>
-                      <small style="font-size: 14px"
-                        >Distance:
-                        {{ distances[i] | number : "1.0-0" }} KM</small
-                      >
+                      <p class="m-0 distance" style="font-size: 14px">
+                        Distance:
+                        {{
+                          calculateDistance(
+                            item.geo_direction.lat,
+                            item.geo_direction.lng
+                          )
+                        }}
+                        <span>miles</span>
+                      </p>
                     </div>
                     <div
                       class="btns justify-content-between align-items-center d-flex gap-1"

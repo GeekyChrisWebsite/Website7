@@ -120,9 +120,19 @@
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
                     <i class="pi pi-directions fs-4"></i>
-                    <p class="p-0 m-0">
+                    <!-- <p class="p-0 m-0">
                       Distance: {{ distances[rowIndex] | number : "1.0-0" }}
                       <span class="miles">Miles</span>
+                    </p> -->
+                    <p class="px-3 m-0 distance">
+                      Distance:
+                      {{
+                        calculateDistance(
+                          customer.business.geo_direction.lat,
+                          customer.business.geo_direction.lng
+                        )
+                      }}
+                      <span>miles</span>
                     </p>
                   </div>
                 </div>

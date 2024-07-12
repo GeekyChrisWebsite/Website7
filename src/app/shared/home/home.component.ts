@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TagModule } from 'primeng/tag';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
@@ -9,6 +9,7 @@ import { DistanceService } from '../../services/distance.service';
 import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
+import { GeoLocationService } from '../../services/geo-location.service';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -49,12 +50,13 @@ export class HomeComponent {
   }
 
 
-  constructor(private _homeservice: HomeService, private distanceService: DistanceService, private filterservice: FilterService, public _cookieService: CookieService, public router: Router, public MessageService: MessageService) { }
+  constructor(private _homeservice: HomeService, private filterservice: FilterService, public _cookieService: CookieService, public router: Router, public MessageService: MessageService, public _GeoLocationService: GeoLocationService, private distanceService: DistanceService,
+    @Inject(PLATFORM_ID) private platformId: Object) { }
   ngOnInit(): void {
     this._homeservice.getBusinessesByCategory('RESTAURANTS').subscribe(data => {
       this.RESTAURANTSarray = data.data;
       console.log('RESTAURANTS', this.RESTAURANTSarray);
-      this.calculateDistances(this.RESTAURANTSarray);
+
 
 
     });
@@ -62,98 +64,68 @@ export class HomeComponent {
     this._homeservice.getBusinessesByCategory('MASSAGE SPA').subscribe(data => {
       console.log('MASSAGE SPA', data);
       this.MASSAGEarray = data.data;
-      this.calculateDistances(this.MASSAGEarray);
 
     });
 
     this._homeservice.getBusinessesByCategory('BEAUTY SALON SPA').subscribe(data => {
       console.log('BEAUTY SALON SPA', data);
       this.spa = data.data;
-      this.calculateDistances(this.spa);
 
 
     });
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(
-    //     (position) => {
-    //       this.currentLocation = {
-    //         latitude: position.coords.latitude,
-    //         longitude: position.coords.longitude,
-    //       };
-
-    //       // Loop through each business to calculate distance
-    //       for (const item of this.RESTAURANTSarray) {
-    //         const businessLocation = {
-    //           latitude: item.geo_direction.lat,
-    //           longitude: item.geo_direction.lng,
-    //         };
-
-    //         const distance = this.distanceService.calculateDistance(
-    //           this.currentLocation,
-    //           businessLocation
-    //         );
-
-    //         this.distances.push(distance);
-    //       }
-
-    //       this.distanceService.setCurrentLocation(this.currentLocation);
-
-    //       this.distanceService
-    //         .setDistances(this.distances)
-    //         .then(() => {
-    //           // Navigation logic or any other code that depends on setDistances being complete
-    //         })
-    //         .catch((error) => {
-    //           console.error('Error setting distances:', error);
-    //         });
-    //     },
-    //     (error) => {
-    //       console.error('Error getting user location:', error);
-    //     }
-    //   );
-    // }
-  }
-  private calculateDistances(array: any[]) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.currentLocation = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          };
-
-          // Loop through each business to calculate distance
-          for (const item of array) {
-            const businessLocation = {
-              latitude: item.geo_direction.lat,
-              longitude: item.geo_direction.lng,
-            };
-
-            const distance = this.distanceService.calculateDistance(
-              this.currentLocation,
-              businessLocation
-            );
-
-            this.distances.push(distance);
-          }
-
-          this.distanceService.setCurrentLocation(this.currentLocation);
-
-          this.distanceService
-            .setDistances(this.distances)
-            .then(() => {
-              // Navigation logic or any other code that depends on setDistances being complete
-            })
-            .catch((error) => {
-              console.error('Error setting distances:', error);
-            });
-        },
-        (error) => {
+    if (isPlatformBrowser(this.platformId)) {
+      this.distanceService.getCurrentLocation()
+        .then((coords) => {
+          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.distanceService.setCurrentLocationInLocalStorage(coords);
+        })
+        .catch((error) => {
           console.error('Error getting user location:', error);
-        }
-      );
+        });
     }
   }
+  // private calculateDistances(array: any[]) {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         this.currentLocation = {
+  //           latitude: position.coords.latitude,
+  //           longitude: position.coords.longitude,
+  //         };
+
+  //         // Loop through each business to calculate distance
+  //         for (const item of array) {
+  //           const businessLocation = {
+  //             latitude: item.geo_direction.lat,
+  //             longitude: item.geo_direction.lng,
+  //           };
+
+  //           const distanceInMiles = this.distanceService.calculateDistance(
+  //             this.currentLocation,
+  //             businessLocation
+  //           );
+
+  //           this.distances.push(distanceInMiles);
+  //         }
+
+  //         this.distanceService.setCurrentLocation(this.currentLocation);
+
+  //         this.distanceService
+  //           .setDistances(this.distances)
+  //           .then(() => {
+  //             // Navigation logic or any other code that depends on setDistances being complete
+  //           })
+  //           .catch((error) => {
+  //             console.error('Error setting distances:', error);
+  //           });
+  //       },
+  //       (error) => {
+  //         console.error('Error getting user location:', error);
+  //       }
+  //     );
+  //   }
+  // }
+
 
   showError() {
     this.MessageService.add({
@@ -261,7 +233,13 @@ export class HomeComponent {
     localStorage.setItem('filter', JSON.stringify([{ category: category }]));
     localStorage.setItem('filterCategory', JSON.stringify([category]));
   }
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this.distanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
+  }
+
 }
+
 
 
 

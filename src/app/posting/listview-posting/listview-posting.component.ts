@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SanatizerPipe } from "../../pipe/sanatizer.pipe";
 import { PaginatorModule } from 'primeng/paginator';
 import { TruncateTextPipe } from "../../pipe/truncate-text.pipe";
+import { DistanceService } from '../../services/distance.service';
 
 @Component({
   selector: 'app-listview-posting',
@@ -29,7 +30,9 @@ export class ListviewPostingComponent {
   likeCountValue: number[] = [];
   isLiked: boolean[] = Array(this.postingArray?.length).fill(false)
 
-  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router) {
+  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router, public _DistanceService: DistanceService,
+
+  ) {
 
   }
   truncateText(content: string, maxLength: number): string {
@@ -100,6 +103,10 @@ export class ListviewPostingComponent {
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
     target.src = '../../assets/img/footer/default-image.jpg';
+  }
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this._DistanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
   }
 
 }

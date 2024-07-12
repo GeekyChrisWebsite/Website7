@@ -86,51 +86,20 @@ export class BuySellComponent {
       this.clearBuysell();
       this.filteredBuySell();
     }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.currentLocation = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          };
-          // console.log('User Location:', this.currentLocation);
-
-          for (const item of this.buySellArray) {
-            const businessLocation = {
-              latitude: item.geo_direction.lat,
-              longitude: item.geo_direction.lng,
-            };
-
-            const distance = this.distanceService.calculateDistance(
-              this.currentLocation,
-              businessLocation
-            );
-
-            this.distances.push(distance);
-          }
-
-          this.distanceService.setCurrentLocation(this.currentLocation);
-
-          this.distanceService
-            .setDistances(this.distances)
-            .then(() => {
-              // Navigation logic or any other code that depends on setDistances being complete
-            })
-            .catch((error) => {
-              console.error('Error setting distances:', error);
-            });
-        },
-        (error) => {
+    if (isPlatformBrowser(this.platformId)) {
+      this.distanceService.getCurrentLocation()
+        .then((coords) => {
+          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.distanceService.setCurrentLocationInLocalStorage(coords);
+        })
+        .catch((error) => {
           console.error('Error getting user location:', error);
-        }
-      );
-    } else {
-      // console.error('Geolocation is not supported by this browser.');
+        });
     }
-    const storedDistances = this.distanceService.getDistances();
-    if (storedDistances.length > 0) {
-      this.distances = storedDistances;
-    }
+  }
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this.distanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
   }
   getBuySell(): void {
     this.buySellSubscription = this._BuySellService.getBuySell().subscribe({
