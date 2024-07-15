@@ -132,7 +132,7 @@
                           customer.business.geo_direction.lng
                         )
                       }}
-                      <span>miles</span>
+                      Miles
                     </p>
                   </div>
                 </div>
@@ -238,9 +238,15 @@
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
                     <i class="pi pi-directions fs-6"></i>
-                    <p class="p-0 m-0" style="font-size: 10px">
-                      Distance: {{ distances[rowIndex] | number : "1.0-0" }}
-                      <span class="miles" style="font-size: 10px">Miles</span>
+                    <p class="m-0 distance">
+                      Distance:
+                      {{
+                        calculateDistance(
+                          customer.business.geo_direction.lat,
+                          customer.business.geo_direction.lng
+                        )
+                      }}
+                      Miles
                     </p>
                   </div>
                 </div>
