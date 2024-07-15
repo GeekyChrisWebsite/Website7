@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { DistanceService } from '../../services/distance.service';
 
 @Component({
   selector: 'app-gallery-view',
@@ -17,7 +18,7 @@ export class GalleryViewComponent {
   listingArray!: ListingData[];
   @Input() filterarray: any;
   @Input() distances!: any;
-  constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router) {
+  constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router, public distanceService: DistanceService) {
 
   }
   makePhoneCall(phoneNumber: string): void {
@@ -70,5 +71,9 @@ export class GalleryViewComponent {
 
 
     }
+  }
+  calculateDistance(lat: number, lng: number): string {
+    const distance = this.distanceService.calculateDistance(lat, lng);
+    return distance !== null ? distance.toFixed(0) : 'N/A';
   }
 }

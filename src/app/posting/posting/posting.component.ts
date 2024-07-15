@@ -130,27 +130,7 @@ export class PostingComponent {
           console.error('Error getting user location:', error);
         });
     }
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(
-    //     (position) => {
-    //       this.currentLocation = {
-    //         latitude: position.coords.latitude,
-    //         longitude: position.coords.longitude,
-    //       };
-    //     },
-    //     (error) => {
-    //       console.error('Error getting user location:', error);
-    //       this.currentLocation = null;
-    //     }
-    //   );
-    // } else {
-    //   this.currentLocation = null;
-    // }
-
-    // const storedDistances = this.distanceService.getDistances();
-    // if (storedDistances.length > 0) {
-    //   this.distances = storedDistances;
-    // }
+ 
   }
   calculateDistance(lat: number, lng: number): string {
     const distance = this.distanceService.calculateDistance(lat, lng);

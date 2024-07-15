@@ -50,7 +50,12 @@ export class HomeComponent {
   }
 
 
-  constructor(private _homeservice: HomeService, private filterservice: FilterService, public _cookieService: CookieService, public router: Router, public MessageService: MessageService, public _GeoLocationService: GeoLocationService, private distanceService: DistanceService,
+  constructor(private _homeservice: HomeService,
+    private filterservice: FilterService,
+    public _cookieService: CookieService,
+    public router: Router,
+    public MessageService: MessageService,
+    public _GeoLocationService: GeoLocationService, private distanceService: DistanceService,
     @Inject(PLATFORM_ID) private platformId: Object) { }
   ngOnInit(): void {
     this._homeservice.getBusinessesByCategory('RESTAURANTS').subscribe(data => {
@@ -84,47 +89,6 @@ export class HomeComponent {
         });
     }
   }
-  // private calculateDistances(array: any[]) {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         this.currentLocation = {
-  //           latitude: position.coords.latitude,
-  //           longitude: position.coords.longitude,
-  //         };
-
-  //         // Loop through each business to calculate distance
-  //         for (const item of array) {
-  //           const businessLocation = {
-  //             latitude: item.geo_direction.lat,
-  //             longitude: item.geo_direction.lng,
-  //           };
-
-  //           const distanceInMiles = this.distanceService.calculateDistance(
-  //             this.currentLocation,
-  //             businessLocation
-  //           );
-
-  //           this.distances.push(distanceInMiles);
-  //         }
-
-  //         this.distanceService.setCurrentLocation(this.currentLocation);
-
-  //         this.distanceService
-  //           .setDistances(this.distances)
-  //           .then(() => {
-  //             // Navigation logic or any other code that depends on setDistances being complete
-  //           })
-  //           .catch((error) => {
-  //             console.error('Error setting distances:', error);
-  //           });
-  //       },
-  //       (error) => {
-  //         console.error('Error getting user location:', error);
-  //       }
-  //     );
-  //   }
-  // }
 
 
   showError() {
