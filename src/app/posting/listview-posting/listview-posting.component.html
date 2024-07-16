@@ -44,7 +44,7 @@
                 >
                   <div class="m-0">
                     <h5 class="title-name m-0">
-                      {{ customer.title }}
+                      {{ customer.business.name }}
                     </h5>
                   </div>
                 </div>
@@ -215,7 +215,7 @@
                 >
                   <div class="">
                     <p class="title-name m-0" style="font-size: 13px">
-                      {{ customer.title | truncateText : 10 }}
+                      {{ customer.business.name | truncateText : 10 }}
                     </p>
                   </div>
                 </div>
