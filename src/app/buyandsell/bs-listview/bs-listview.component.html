@@ -29,7 +29,7 @@
                 src="{{ customer.images[0] }}"
                 class="rounded-start black"
                 alt="..."
-                style="height: 195px; width: 258px; object-fit: contain"
+                style="height: 195px; width: 258px; object-fit: cover"
                 routerLink="/BuySelldetails/{{ customer.id }}"
                 (error)="onImageError($event)"
               />
@@ -161,7 +161,7 @@
                 src="{{ customer.images[0] }}"
                 class="rounded-start black"
                 alt="..."
-                style="height: 134px; width: 176px; object-fit: contain"
+                style="height: 134px; width: 176px; object-fit: cover"
                 routerLink="/BuySelldetails/{{ customer.id }}"
                 (error)="onImageError($event)"
               />
