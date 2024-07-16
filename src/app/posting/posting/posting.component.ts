@@ -130,16 +130,7 @@ export class PostingComponent {
           console.error('Error getting user location:', error);
         });
     }
-    this.postingArray = this.postingArray.map(item => ({
-      ...item,
-      updated_at: new Date(item.updated_at).toISOString().split("T")[0],
-      datePart: item.updated_at
-    }));
-    console.log("ANA", this.postingArray);
-    this.postingArray.sort(
-      (a, b) =>
-        new Date(b.datePart).getTime() - new Date(a.datePart).getTime()
-    );
+
 
   }
   calculateDistance(lat: number, lng: number): string {
