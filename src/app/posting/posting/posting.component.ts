@@ -146,18 +146,18 @@ export class PostingComponent {
         console.log(':heart::heart::heart:', res);
         this.postingArray = res.data;
         this.getGeoLocations();
+        this.postingArray = this.postingArray.map(item => ({
+          ...item,
+          updated_at: new Date(item.updated_at).toISOString().split("T")[0],
+          datePart: item.updated_at
+        }));
+        this.postingArray.sort(
+          (a, b) =>
+            new Date(b.datePart).getTime() - new Date(a.datePart).getTime()
+        );
       },
     });
-    this.postingArray = this.postingArray.map(item => ({
-      ...item,
-      updated_at: new Date(item.updated_at).toISOString().split("T")[0],
-      datePart: item.updated_at
-    }));
-    console.log("ANA", this.postingArray);
-    this.postingArray.sort(
-      (a, b) =>
-        new Date(b.datePart).getTime() - new Date(a.datePart).getTime()
-    );
+
   }
 
   getGeoLocations(): void {

@@ -108,18 +108,19 @@ export class BuySellComponent {
         console.log(res);
         this.buySellArray = res.data;
         this.getGeoLocations();
+        this.buySellArray = this.buySellArray.map(item => ({
+          ...item,
+          updated_at: new Date(item.updated_at).toISOString().split("T")[0],
+          datePart: item.updated_at
+        }));
+
+        this.buySellArray.sort(
+          (a, b) =>
+            new Date(b.datePart).getTime() - new Date(a.datePart).getTime()
+        );
       },
     });
-    this.buySellArray = this.buySellArray.map(item => ({
-      ...item,
-      updated_at: new Date(item.updated_at).toISOString().split("T")[0],
-      datePart: item.updated_at
-    }));
 
-    this.buySellArray.sort(
-      (a, b) =>
-        new Date(b.datePart).getTime() - new Date(a.datePart).getTime()
-    );
   }
   getFilteredBuySell(CategoryName: string, state: string, city: string): void {
     this.filteredBuySellSubscription = this._filterservice
