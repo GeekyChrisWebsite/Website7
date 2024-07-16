@@ -1,19 +1,19 @@
 <div *ngIf="postingArray" class="web-view">
   <p-table
     [value]="postingArray"
-    sortField="postTime"
+    sortField="updated_at"
     sortMode="single"
     [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
-    [scrollable]="true"
+    [scrollable]="false"
     rowGroupMode="subheader"
-    groupRowsBy="postTime"
+    groupRowsBy="updated_at"
   >
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
         <td colspan="5">
-          <h6 class="ms-5 ps-5">{{ row.postTime }}</h6>
+          <h6 class="ms-5 ps-5">{{ row.updated_at | date : "MM/dd/yyyy" }}</h6>
         </td>
       </tr>
     </ng-template>
@@ -173,19 +173,19 @@
 <div *ngIf="postingArray" class="mobileb-view">
   <p-table
     [value]="postingArray"
-    sortField="postTime"
+    sortField="updated_at"
     sortMode="single"
     [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
-    [scrollable]="true"
+    [scrollable]="false"
     rowGroupMode="subheader"
-    groupRowsBy="postTime"
+    groupRowsBy="updated_at"
   >
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
         <td colspan="5">
-          <h6 class="ms-5 ps-5">{{ row.postTime }}</h6>
+          <h6 class="ms-5 ps-5">{{ row.updated_at | date : "MM/dd/yyyy" }}</h6>
         </td>
       </tr>
     </ng-template>

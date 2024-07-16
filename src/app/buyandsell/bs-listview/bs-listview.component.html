@@ -1,19 +1,19 @@
 <div *ngIf="BuySellArray" class="web-view">
   <p-table
     [value]="BuySellArray"
-    sortField="buySellTime"
+    sortField="updated_at"
     sortMode="single"
     [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
     [scrollable]="true"
     rowGroupMode="subheader"
-    groupRowsBy="buySellTime"
+    groupRowsBy="updated_at"
   >
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
         <td colspan="5">
-          <h6 class="ms-5 ps-5">{{ row.buySellTime }}</h6>
+          <h6 class="ms-5 ps-5">{{ row.updated_at | date : "MM/dd/yyyy" }}</h6>
         </td>
       </tr>
     </ng-template>
@@ -133,19 +133,19 @@
 <div *ngIf="BuySellArray" class="mobileb-view">
   <p-table
     [value]="BuySellArray"
-    sortField="buySellTime"
+    sortField="updated_at"
     sortMode="single"
     [sortOrder]="-1"
     [rows]="20"
     [paginator]="true"
     [scrollable]="true"
     rowGroupMode="subheader"
-    groupRowsBy="buySellTime"
+    groupRowsBy="updated_at"
   >
     <ng-template pTemplate="groupheader" let-row let-rowIndex="rowIndex">
       <tr class="p-rowgroup-header">
         <td colspan="5">
-          <h6 class="ms-5 ps-5">{{ row.buySellTime }}</h6>
+          <h6 class="ms-5 ps-5">{{ row.updated_at | date : "MM/dd/yyyy" }}</h6>
         </td>
       </tr>
     </ng-template>

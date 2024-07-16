@@ -96,6 +96,18 @@ export class BuySellComponent {
           console.error('Error getting user location:', error);
         });
     }
+    this.buySellArray = this.buySellArray.map(item => ({
+      ...item,
+      updated_at: new Date(item.updated_at).toISOString().split("T")[0],
+      datePart: item.updated_at
+    }));
+
+
+
+    this.buySellArray.sort(
+      (a, b) =>
+        new Date(b.datePart).getTime() - new Date(a.datePart).getTime()
+    );
   }
   calculateDistance(lat: number, lng: number): string {
     const distance = this.distanceService.calculateDistance(lat, lng);
