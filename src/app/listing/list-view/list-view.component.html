@@ -208,4 +208,10 @@
       </div>
     </div>
   </div>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="listingArray.length"
+  ></p-paginator>
 </section>

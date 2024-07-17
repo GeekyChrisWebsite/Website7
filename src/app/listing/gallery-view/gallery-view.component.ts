@@ -5,11 +5,12 @@ import { FilterService } from '../../services/filter.service';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DistanceService } from '../../services/distance.service';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-gallery-view',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PaginatorModule],
   templateUrl: './gallery-view.component.html',
   styleUrl: './gallery-view.component.scss'
 })
@@ -18,6 +19,9 @@ export class GalleryViewComponent {
   listingArray!: ListingData[];
   @Input() filterarray: any;
   @Input() distances!: any;
+  first = 0;
+  rows = 5;
+  totalRecords: number | undefined;
   constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router, public distanceService: DistanceService) {
 
   }
@@ -76,4 +80,12 @@ export class GalleryViewComponent {
     const distance = this.distanceService.calculateDistance(lat, lng);
     return distance !== null ? distance.toFixed(0) : 'N/A';
   }
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
+  ngOnInit() {
+    this.totalRecords = this.listingArray.length;
+  }
+
 }

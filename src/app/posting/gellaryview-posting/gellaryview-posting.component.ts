@@ -5,17 +5,21 @@ import { FilterService } from '../../services/filter.service';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DistanceService } from '../../services/distance.service';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-gellaryview-posting',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PaginatorModule],
   templateUrl: './gellaryview-posting.component.html',
   styleUrl: './gellaryview-posting.component.scss'
 })
 export class GellaryviewPostingComponent {
   currentLocation: { latitude: number; longitude: number } | null = null;
+  totalRecords!: number;
 
+  first = 0;
+  rows = 15;
   @Input()
   postingArray!: PostingData[];
   @Input() filterposts: any;
@@ -89,5 +93,12 @@ export class GellaryviewPostingComponent {
           console.error('Error getting user location:', error);
         });
     }
+    this.totalRecords = this.postingArray.length;
+
   }
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
+
 }

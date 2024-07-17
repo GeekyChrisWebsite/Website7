@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
 import { DistanceService } from '../../services/distance.service';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-list-view',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, PaginatorModule],
   templateUrl: './list-view.component.html',
   styleUrl: './list-view.component.scss'
 })
@@ -17,8 +18,10 @@ export class ListViewComponent {
   @Input() listingArray!: ListingData[];
   @Input() filterarray: any
   @Input() distances!: any;
+  totalRecords: number | undefined;
+
   first = 0;
-  rows = 20;
+  rows = 6;
   maxDescriptionLength: number = 20;
   maxname: number = 24;
 
@@ -98,4 +101,14 @@ export class ListViewComponent {
     const distance = this.distanceService.calculateDistance(lat, lng);
     return distance !== null ? distance.toFixed(0) : 'N/A';
   }
+  ngOnInit() {
+    this.totalRecords = this.listingArray.length;
+  }
+
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
+
+
 }

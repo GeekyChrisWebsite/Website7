@@ -5,7 +5,10 @@
     >
       <div
         class="col-md-3 col-12 mb-3"
-        *ngFor="let item of BuySellArray; let i = index"
+        *ngFor="
+          let item of BuySellArray.slice(first, first + rows);
+          let i = index
+        "
       >
         <div
           class="card justify-content-between align-items-center d-flex"
@@ -71,5 +74,11 @@
         </div>
       </div>
     </div>
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="BuySellArray.length"
+    ></p-paginator>
   </div>
 </section>

@@ -4,17 +4,21 @@ import { FilterService } from '../../services/filter.service';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DistanceService } from '../../services/distance.service';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-bs-gellaryview',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PaginatorModule],
   templateUrl: './bs-gellaryview.component.html',
   styleUrl: './bs-gellaryview.component.scss'
 })
 export class BsGellaryviewComponent {
   currentLocation: { latitude: number; longitude: number } | null = null;
+  totalRecords!: number;
 
+  first = 0;
+  rows = 10;
   @Input() BuySellArray: any[] = [];
   @Input() distances!: any;
   maxDescriptionLength: number = 40;
@@ -91,7 +95,12 @@ export class BsGellaryviewComponent {
           console.error('Error getting user location:', error);
         });
     }
+    this.totalRecords = this.BuySellArray.length;
+
   }
 
-
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
 }
