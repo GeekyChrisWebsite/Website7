@@ -1,6 +1,10 @@
 <div class="similars">
   <div class="row">
-    <div class="card d-flex flex-row p-0 my-4" *ngFor="let item of data">
+    <div
+      class="card d-flex flex-row p-0 my-4"
+      routerLink="/postingdetails/{{ item.id }}"
+      *ngFor="let item of data"
+    >
       <img [src]="item.business.logo" alt="" />
       <div class="content py-4">
         <h2 class="fw-bold fs-5 px-3 m-0">{{ item.title }}</h2>
