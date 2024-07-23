@@ -1,5 +1,11 @@
 <section>
   <div class="container">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="listingArray.length"
+    ></p-paginator>
     <div
       *ngIf="listingArray"
       class="rania d-flex gap-4 justify-content-start align-items-center py-3 row web-v"

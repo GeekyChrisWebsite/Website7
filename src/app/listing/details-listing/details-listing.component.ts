@@ -12,11 +12,12 @@ import { of } from 'rxjs/internal/observable/of';
 import { ListingService } from '../../services/listing.service';
 import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { ChipModule } from 'primeng/chip';
+import { SimilarWorkComponent } from "../../shared/similar-work/similar-work.component";
 
 @Component({
     selector: 'app-details-listing',
     standalone: true,
-    imports: [CommonModule, GalleriaModule, RouterLink, CarouselModule, AsyncPipe, GoogleMapsModule, ChipModule],
+    imports: [CommonModule, GalleriaModule, RouterLink, CarouselModule, AsyncPipe, GoogleMapsModule, ChipModule, SimilarWorkComponent],
     templateUrl: './details-listing.component.html',
     styleUrl: './details-listing.component.scss',
     encapsulation: ViewEncapsulation.None
@@ -138,22 +139,22 @@ export class DetailsListingComponent {
         })
 
     }
-    ngAfterViewInit() {
-        setTimeout(() => {
-            if (this.apiLoaded) {
-                this.fitBounds();
-            }
-        }, 1000);
-    }
+    // ngAfterViewInit() {
+    //     setTimeout(() => {
+    //         if (this.apiLoaded) {
+    //             this.fitBounds();
+    //         }
+    //     }, 1000);
+    // }
 
 
-    fitBounds() {
-        const bounds = new google.maps.LatLngBounds();
-        bounds.extend(
-            new google.maps.LatLng(this.datainfo.geo_direction.lat, this.datainfo.geo_direction.lng)
-        );
-        this.map.fitBounds(bounds);
-    }
+    // fitBounds() {
+    //     const bounds = new google.maps.LatLngBounds();
+    //     bounds.extend(
+    //         new google.maps.LatLng(this.datainfo.geo_direction.lat, this.datainfo.geo_direction.lng)
+    //     );
+    //     this.map.fitBounds(bounds);
+    // }
 
     makePhoneCall(phoneNumber: string): void {
         console.log('Initiating phone call to:', phoneNumber);

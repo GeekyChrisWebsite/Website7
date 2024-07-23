@@ -1,202 +1,159 @@
 <section class="details py-5">
-    <div class="container" *ngIf="datainfo">
-        <div class=" card-info py-4">
-            <div class="row justify-content-between">
-                <div class="col-8 rate-container  ">
-                    <div class=" justify-content-start align-items-start">
-                        <div class="title d-flex align-items-center justify-content-start rate-flex-box">
-                            <h4 class="d-inline">{{datainfo.name}}</h4>
-
-                        </div>
-
-
-
-                    </div>
-                </div>
-
-
-
+  <div class="container" *ngIf="datainfo">
+    <div class="card-info py-4">
+      <div class="row justify-content-between">
+        <div class="col-8 rate-container">
+          <div class="justify-content-start align-items-start">
+            <div
+              class="title d-flex align-items-center justify-content-start rate-flex-box"
+            >
+              <h3 class="d-inline">{{ datainfo.name }}</h3>
             </div>
-
-            <div class="row card-info-2 justify-content-between align-items-center gap-5">
-                <div class="col-md-4">
-                    <ul>
-                        <li>
-                            <div class="d-flex gap-1 py-1">
-                                <img src="../../../assets/img/listing/location.png" width="30" height="30">
-                                <p class="p-0 m-0"> 1036 Cambell St, Rapid City, South Dakota,57701</p>
-
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="d-flex gap-1 py-1">
-
-                                <img src="../../../assets/img/listing/earth.png" alt="" width="30" height="30">
-                                <p class="p-0 m-0 ">{{datainfo.email}}</p>
-
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="d-flex gap-1 py-1">
-                                <img src="../../../assets/img/listing/telephone.png" alt="" width="30" height="30">
-                                <p class="p-0 m-0 ">{{datainfo.phone_number}}</p>
-
-                            </div>
-
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="col-md-5">
-                    <div class="d-flex gap-3 align-items-center justify-content-center">
-                        <i class='bx bx-heart heart-btn'></i>
-                        <button class="call-btn" (click)="makePhoneCall(datainfo.phone_number)">Call Now</button>
-                        <div *ngIf="datainfo.booking_url !== null && datainfo.booking_url.trim() !== ''">
-                            <button class="book-btn"><a href="{{datainfo.booking_url}}" target="_blank">Book
-                                    Now</a></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+          </div>
         </div>
-        <div class="div-photos justify-content-center align-items-center">
-            <div class="row gap-2 justify-content-center align-items-center d-flex" *ngIf="imgs.length == 1">
-                <div class="col-md-5">
-                    <img class="w-100 rounded-start" height="" src="{{datainfo.logo}}" alt="">
+      </div>
 
-                </div>
-                <div class="col-md-5" *ngFor="let img of imgs">
-                    <img class="w-100 rounded-end" width="" height="" src="{{img}}" alt="">
-
-                </div>
-            </div>
-            <div class="d-flex gap-2" *ngIf="imgs.length == 2">
-                <div class="div">
-                    <img class="rounded-start" height="460" width="700" src="{{datainfo.logo}}" alt="">
-
-                </div>
-                <div class="">
-                    <div *ngIf="imgs.length == 2" class=" flex-wrap d-flex gap-3 flex-column">
-                        <ng-container *ngFor="let img of imgs">
-                            <img class="rounded-end" height="220" width="500" src="{{img}}" alt="" class="">
-                        </ng-container>
-                    </div>
-                    <div class="div42"> </div>
-                </div>
-
-            </div>
-            <div class="d-flex gap-2" *ngIf="imgs.length == 3">
-                <div class="div">
-                    <img class="rounded-start" height="430" width="500" src="{{datainfo.logo}}" alt="">
-
-                </div>
-                <div class="">
-                    <div *ngIf="imgs.length == 3" class=" flex-wrap d-flex gap-1">
-                        <ng-container *ngFor="let img of imgs">
-                            <img class="rounded-end" height="213" width="350" src="{{img}}" alt="" class="">
-                        </ng-container>
-                    </div>
-                    <div class="div42"> </div>
-                </div>
-
-            </div>
-            <div class="d-flex gap-2" *ngIf="imgs.length >= 4">
-                <div class="div">
-                    <img class="rounded-start" height="405" width="500" src="{{datainfo.logo}}" alt="">
-
-                </div>
-                <div class="">
-                    <div *ngIf="imgs.length >= 4" class=" flex-wrap d-flex gap-1">
-                        <ng-container *ngFor="let img of imgs.slice(0, displayCount)">
-                            <img class="rounded-end" height="200" width="350" src="{{img}}" alt="" class="">
-                        </ng-container>
-                    </div>
-                    <div class="div42"> </div>
-                </div>
-
-            </div>
-
-
+      <div
+        class="row card-info-2 justify-content-between align-items-center gap-5"
+      >
+        <div class="col-md-4">
+          <ul>
+            <li>
+              <div class="d-flex gap-1 py-1">
+                <img
+                  src="../../../assets/img/detalis-info/location.png"
+                  width="30"
+                  height="30"
+                />
+                <p class="p-0 m-0">
+                  1036 Cambell St, Rapid City, South Dakota,57701
+                </p>
+              </div>
+            </li>
+            <li>
+              <div class="d-flex gap-1 py-1">
+                <img
+                  src="../../../assets/img/detalis-info/earth.png"
+                  alt=""
+                  width="30"
+                  height="30"
+                />
+                <p class="p-0 m-0">{{ datainfo.email }}</p>
+              </div>
+            </li>
+            <li>
+              <div class="d-flex gap-1 py-1">
+                <img
+                  src="../../../assets/img/detalis-info/telephone.png"
+                  alt=""
+                  width="30"
+                  height="30"
+                />
+                <p class="p-0 m-0">{{ datainfo.phone_number }}</p>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="mobilebs">
-            <div class="row gap-2">
-                <div class="col-12" *ngFor="let item of imgs.slice(0,3)">
-                    <img src="{{item}}" alt="" class="w-100">
-                </div>
+        <div class="col-md-5">
+          <div class="d-flex gap-3 align-items-center justify-content-center">
+            <i class="bx bx-heart heart-btn"></i>
+            <div
+              *ngIf="
+                datainfo.booking_url !== null &&
+                datainfo.booking_url.trim() !== ''
+              "
+            >
+              <button class="book-btn">
+                <a href="{{ datainfo.booking_url }}" target="_blank"
+                  >Book Now</a
+                >
+              </button>
             </div>
+          </div>
         </div>
-        <div class="parent-div d-flex justify-content-around align-items-end ms-3 py-3">
-            <button class="view-button" (click)="displayBasic = true">View all photos</button>
-            <p-galleria [value]="galleryphotos" [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions"
-                [containerStyle]="{ 'max-width': '850px' }" [numVisible]="7" [circular]="true" [fullScreen]="true"
-                [showItemNavigators]="true" [showThumbnails]="false">
-                <ng-template pTemplate="item" let-item>
-                    <img [src]="item" style="width: 100%; display: block;" />
-                </ng-template>
-            </p-galleria>
-
-
-
-
-
-
-        </div>
-        <div class="Description">
-            <h5 class="py-4">Description</h5>
-            <p>{{datainfo.description}}</p>
-        </div>
-
-
-        <section class="workHour py-3">
-            <div class="container">
-                <div class="row justify-content-between align-items-between d-flex flex-lg-row flex-column">
-                    <!-- 
-                    <div class="col-md-5">
-                        <h5 class="">Location/Map</h5>
-                        <div class="container-map" *ngIf="(apiLoaded | async) as isApiLoaded">
-                            <google-map #map>
-                                <div *ngIf="isApiLoaded">
-                                    <div *ngFor="let position of datainfo;">
-                                        <map-marker [position]="position.geo_direction"
-                                            [options]="options"></map-marker>
-                                    </div>
-                                </div>
-                            </google-map>
-                        </div>
-                    </div> -->
-                    <div class="col-md-5">
-                        <h5 class="py-2"> Working Hours:</h5>
-                        <div *ngFor="let day of datainfo.working_hours" class="d-flex gap-3">
-                            <div>
-                                <p class="div-days justify-content-center align-items-center d-flex">{{ day.day }}</p>
-                            </div>
-                            <div class=" justify-content-center align-items-center d-flex">
-                                <p class=" div-time justify-content-center align-items-center d-flex">
-                                    {{ day.open_24h ? 'Open All Day' : formatTime(day.start_time) + ' - ' +
-                                    formatTime(day.end_time) }}
-                                </p>
-                            </div>
-                        </div>
-                        <h3 class="">Tags</h3>
-
-                        <div class=" flex-wrap d-flex gap-2">
-                            @for (item of datainfo.tags; track item.datainfo) {
-                            <p-chip label="{{item}}" class=""></p-chip>
-                            } @empty {
-                            <p class="m-0 p-0"> There is no Tags for this bussiness </p>
-                            }
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </section>
-
-
+      </div>
     </div>
+
+    <div class="row justify-content-center align-items-center d-flex">
+      <p-galleria
+        [value]="galleryphotos"
+        [showItemNavigators]="true"
+        [responsiveOptions]="responsiveOptions"
+        [circular]="true"
+        [numVisible]="5"
+      >
+        <ng-template pTemplate="item" let-item>
+          <img
+            [src]="item"
+            class="img-fluid"
+            style="max-height: 800px; max-width: 100%"
+          />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+          <div class="grid grid-nogutter justify-content-center gap-2">
+            <img
+              [src]="item"
+              class="img-thumbnail"
+              style="max-height: 160px; max-width: 100%"
+            />
+          </div>
+        </ng-template>
+      </p-galleria>
+    </div>
+
+    <div class="Description">
+      <h3 class="py-4">Description</h3>
+      <p>{{ datainfo.description }}</p>
+    </div>
+
+    <section class="workHour py-3">
+      <div class="container">
+        <div
+          class="row justify-content-between align-items-between d-flex flex-lg-row flex-column"
+        >
+          <div class="col-md-5">
+            <h3 class="py-2">Working Hours:</h3>
+            <div
+              *ngFor="let day of datainfo.working_hours"
+              class="d-flex gap-3"
+            >
+              <div>
+                <p
+                  class="div-days justify-content-center align-items-center d-flex"
+                >
+                  {{ day.day }}
+                </p>
+              </div>
+              <div class="justify-content-center align-items-center d-flex">
+                <p
+                  class="div-time justify-content-center align-items-center d-flex"
+                >
+                  {{
+                    day.open_24h
+                      ? "Open All Day"
+                      : formatTime(day.start_time) +
+                        " - " +
+                        formatTime(day.end_time)
+                  }}
+                </p>
+              </div>
+            </div>
+            <h3 class="">Keywords</h3>
+
+            <div class="flex-wrap d-flex gap-2">
+              @for (item of datainfo.tags; track item.datainfo) {
+              <p-chip label="{{ item }}" class=""></p-chip>
+              } @empty {
+              <p class="m-0 p-0">There is no Keywords for this bussiness</p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h3 style="margin-left: 17px">Posting</h3>
+    </section>
+    <app-similar-work></app-similar-work>
+  </div>
 </section>

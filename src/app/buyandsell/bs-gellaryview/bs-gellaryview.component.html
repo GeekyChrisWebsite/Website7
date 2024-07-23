@@ -1,5 +1,11 @@
 <section class="list-img" *ngIf="BuySellArray">
   <div class="container">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="BuySellArray.length"
+    ></p-paginator>
     <div
       class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0"
     >

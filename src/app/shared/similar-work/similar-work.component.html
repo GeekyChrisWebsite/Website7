@@ -1,0 +1,20 @@
+<div class="similars">
+  <div class="row">
+    <div class="card d-flex flex-row p-0 my-4" *ngFor="let item of data">
+      <img [src]="item.business.logo" alt="" />
+      <div class="content py-4">
+        <h2 class="fw-bold fs-5 px-3 m-0">{{ item.title }}</h2>
+        <h6 class="text-black-50 fw-normal px-3">{{ item.postTime }}</h6>
+        <p
+          class="p-3 my-3 text"
+          [ngStyle]="{
+            'font-weight': item?.bold ? 'bold' : 'normal',
+            'font-style': item?.italic ? 'italic' : 'normal'
+          }"
+        >
+          {{ item.content }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

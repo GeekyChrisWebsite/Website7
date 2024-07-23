@@ -61,17 +61,21 @@
                 <div
                   class="btns d-flex justify-content-center align-items-center gap-3 py-1"
                 >
-                  <button
-                    *ngIf="product.business.booking_url !== ''"
-                    class="date"
+                  <div
+                    *ngIf="
+                      product.business.booking_url !== null &&
+                      product.business.booking_url.trim() !== ''
+                    "
                   >
-                    <a [href]="product.business.booking_url" target="_blank">
-                      <img
-                        src="../../../assets/img/posting/image 3.png"
-                        alt="Image"
-                      />
-                    </a>
-                  </button>
+                    <button class="date">
+                      <a [href]="product.business.booking_url" target="_blank">
+                        <img
+                          src="../../../assets/img/posting/image 3.png"
+                          alt="Image"
+                        />
+                      </a>
+                    </button>
+                  </div>
                   <button
                     class="call"
                     (click)="makePhoneCall(product.business.phone_number)"
@@ -155,8 +159,4 @@
   } @if(mapView){
   <div class="view-data mx-3"></div>
   }
-  <!-- <div>
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="row"
-      [totalRecords]="postingArray.length"></p-paginator>
-  </div> -->
 </section>

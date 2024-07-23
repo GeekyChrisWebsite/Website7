@@ -1,0 +1,55 @@
+.similars {
+  .row {
+    .card {
+      img {
+        width: 23%;
+        height: 250px
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .similars {
+    .row {
+      .card {
+        img {
+          width: 40%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .similars {
+    .row {
+      padding: 10px;
+
+      .card {
+        img {
+          width: 50%;
+          height: 160px;
+        }
+
+        .content {
+
+          h3,
+          p {
+            font-size: 15px !important;
+          }
+
+          .text {
+            width: 150px;
+            padding: 15px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0 !important;
+            padding: 0 5px !important;
+          }
+        }
+      }
+    }
+  }
+}
