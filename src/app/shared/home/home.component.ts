@@ -31,11 +31,9 @@ export class HomeComponent {
   distances: any[] = [];
 
   makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
   handleMapClick(dir: { lat: Number, lng: Number }) {
-    console.log(dir)
 
     if (dir) {
       const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
@@ -60,20 +58,17 @@ export class HomeComponent {
   ngOnInit(): void {
     this._homeservice.getBusinessesByCategory('RESTAURANTS').subscribe(data => {
       this.RESTAURANTSarray = data.data;
-      console.log('RESTAURANTS', this.RESTAURANTSarray);
 
 
 
     });
 
     this._homeservice.getBusinessesByCategory('MASSAGE SPA').subscribe(data => {
-      console.log('MASSAGE SPA', data);
       this.MASSAGEarray = data.data;
 
     });
 
     this._homeservice.getBusinessesByCategory('BEAUTY SALON SPA').subscribe(data => {
-      console.log('BEAUTY SALON SPA', data);
       this.spa = data.data;
 
 
@@ -85,7 +80,6 @@ export class HomeComponent {
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
         .catch((error) => {
-          console.error('Error getting user location:', error);
         });
     }
   }
@@ -109,11 +103,9 @@ export class HomeComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.RESTAURANTSarray[index].liked == true) {
-        console.log(this.RESTAURANTSarray[index].liked);
 
         this.filterservice.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
             this.RESTAURANTSarray[index].liked = false;
             this.RESTAURANTSarray[index].likes += 1;
           },
@@ -121,7 +113,6 @@ export class HomeComponent {
       } else {
         this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
             this.RESTAURANTSarray[index].liked = true;
             this.RESTAURANTSarray[index].likes -= 1;
           },
@@ -140,11 +131,9 @@ export class HomeComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.MASSAGEarray[index].liked == true) {
-        console.log(this.MASSAGEarray[index].liked);
 
         this.filterservice.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
             this.MASSAGEarray[index].liked = false;
             this.MASSAGEarray[index].likes += 1;
           },
@@ -152,7 +141,6 @@ export class HomeComponent {
       } else {
         this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
             this.MASSAGEarray[index].liked = true;
             this.MASSAGEarray[index].likes -= 1;
           },
@@ -170,11 +158,9 @@ export class HomeComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.spa[index].liked == true) {
-        console.log(this.spa[index].liked);
 
         this.filterservice.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
             this.spa[index].liked = false;
             this.spa[index].likes += 1;
           },
@@ -182,7 +168,6 @@ export class HomeComponent {
       } else {
         this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
             this.spa[index].liked = true;
             this.spa[index].likes -= 1;
           },

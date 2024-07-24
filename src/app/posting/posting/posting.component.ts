@@ -98,7 +98,6 @@ export class PostingComponent {
         let bussines = [];
         if (filter) {
           bussines = JSON.parse(filter);
-          console.log(bussines);
           this.getFilteredPostings(
             bussines[0].category,
             bussines[0].state,
@@ -127,7 +126,6 @@ export class PostingComponent {
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
         .catch((error) => {
-          console.error('Error getting user location:', error);
         });
     }
 
@@ -143,7 +141,6 @@ export class PostingComponent {
   getPosting(): void {
     this.subscribtions = this.postingService.GetPosting().subscribe({
       next: (res: { data: any[]; message: string; status: string }) => {
-        console.log(':heart::heart::heart:', res);
         this.postingArray = res.data;
         this.getGeoLocations();
         this.postingArray = this.postingArray.map(item => ({
@@ -164,7 +161,6 @@ export class PostingComponent {
     const geoLocations = this.postingArray.map(
       (location) => location.business.geo_direction
     );
-    console.log(geoLocations);
     const uniqueValuesSet = new Set(
       geoLocations.map((obj) => `${obj.lat}_${obj.lng}`)
     );
@@ -173,13 +169,11 @@ export class PostingComponent {
       return { lat: parseFloat(lat), lng: parseFloat(lng) };
     });
     this.UniqueGeoLocations = result;
-    console.log(this.UniqueGeoLocations);
   }
   clearPosting(): void {
     this.clearSubscribtion = this.filterService.clearPostings.subscribe({
       next: (res: any[]) => {
         this.postingArray = res;
-        console.log(res);
         this.getGeoLocations();
       },
     });
@@ -193,12 +187,10 @@ export class PostingComponent {
           message: string;
           status: string;
         }) => {
-          console.log('filtered', res.data.posts);
           this.postingArray = res.data.posts;
           this.getGeoLocations();
         },
         error: (err: HttpErrorResponse) => {
-          console.log(err);
         },
       });
   }
@@ -209,14 +201,12 @@ export class PostingComponent {
         message: string;
         status: string;
       }) => {
-        console.log('next has come', res);
         this.postingArray = res.data.posts;
         this.getGeoLocations();
       },
     });
   }
   handleMapClick(geo_direction: any) {
-    console.log('Map clicked!', geo_direction);
 
     const clickedPosition = geo_direction.coords || geo_direction.latLng;
 
@@ -262,7 +252,6 @@ export class PostingComponent {
   }
 
   makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
   GetVipPost() {
@@ -274,8 +263,7 @@ export class PostingComponent {
         });
         this.vippostarray = vipWithId;
 
-        console.log(this.vippostarray)
-        console.log(this.vippostarray)
+
       }
 
     );
@@ -289,11 +277,9 @@ export class PostingComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.vippostarray[index].liked == true) {
-        console.log(this.vippostarray[index].liked);
 
         this.filterService.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
             this.vippostarray[index].liked = false;
             this.vippostarray[index].business.likes += 1;
           },
@@ -301,7 +287,6 @@ export class PostingComponent {
       } else {
         this.filterService.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
             this.vippostarray[index].liked = true;
             this.vippostarray[index].business.likes -= 1;
           },

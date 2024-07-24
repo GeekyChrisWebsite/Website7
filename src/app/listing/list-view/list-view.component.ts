@@ -33,11 +33,9 @@ export class ListViewComponent {
   }
 
   makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
   handleMapClick(dir: { lat: Number, lng: Number }) {
-    console.log(dir)
 
     if (dir) {
       const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
@@ -58,11 +56,9 @@ export class ListViewComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.listingArray[index].liked == true) {
-        console.log(this.listingArray[index].liked);
 
         this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
             this.listingArray[index].liked = false;
             this.listingArray[index].likes += 1;
           },
@@ -70,7 +66,6 @@ export class ListViewComponent {
       } else {
         this.filterservice.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
             this.listingArray[index].liked = true;
             this.listingArray[index].likes -= 1;
           },

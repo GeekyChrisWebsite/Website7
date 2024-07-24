@@ -25,12 +25,10 @@ export class CityComponent {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       let state = localStorage.getItem('filter');
-      console.log(state);
       let cat = [];
       if (state) {
         cat = JSON.parse(state);
       }
-      console.log(cat);
       this.getCities(cat[0].category, cat[0].state);
     }
   }
@@ -39,10 +37,8 @@ export class CityComponent {
       .getCities(CategoryName, state)
       .subscribe({
         next: (res: any) => {
-          console.log(res);
           this.cityarray = res.data.cities;
           this.filteredCities = this.cityarray;
-          console.log(this.cityarray);
           if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem('filterCity', JSON.stringify(this.cityarray));
           }

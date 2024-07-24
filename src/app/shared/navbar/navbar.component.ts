@@ -70,12 +70,10 @@ export class NavbarComponent implements DoCheck {
     if (token) {
       this._AuthService.loginUser().subscribe(
         (res: any) => {
-          console.log('login', res);
           this.user = res.data.username;
           this.imgUser = res.data.profile_image
         },
         (error) => {
-          console.error('Error:', error);
         }
       );
     }

@@ -62,9 +62,6 @@ export class FilterComponent {
       this.filter.controls['cat'].setValue(
         this.categories.find((cat) => cat.name === filterCategoryArray[0])
       );
-      console.log(
-        this.categories.find((cat) => cat.name === filterCategoryArray[0])
-      );
       this.cat = { name: filterCategoryArray[0] };
       this.filter.controls['state'].setValue({ name: filterstateArray[0] });
       this.filter.controls['city'].setValue({ name: filterCityArray[0] });
@@ -81,7 +78,6 @@ export class FilterComponent {
     const cityControl = this.filter.get('city') as FormControl;
     const isCityDisabled = cityControl.disabled;
     this.disabled = isCityDisabled;
-    console.log('Is city control disabled?', isCityDisabled);
   }
   clear() {
     this.filter.reset();
@@ -105,10 +101,8 @@ export class FilterComponent {
       this.filter.controls['city'].value.name
     );
     const filterVlaue = localStorage.getItem('filter');
-    console.log(filterVlaue);
     let filterValueArray = [];
     if (filterVlaue) filterValueArray = JSON.parse(filterVlaue);
-    console.log('before', filterValueArray);
     filterValueArray = filterValueArray.map((obj: any, index: number) =>
       index === 0
         ? {
@@ -130,7 +124,6 @@ export class FilterComponent {
       .getStates(this.filter.controls['cat'].value.name)
       .subscribe({
         next: (res: any) => {
-          console.log(res.data.states);
           this.filter.get('state')?.enable();
           if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem(
@@ -140,11 +133,9 @@ export class FilterComponent {
             this.states = res.data.states.map((value: any, index: any) => ({
               name: value,
             }));
-            console.log(this.states);
           }
         },
         error: (err: HttpErrorResponse) => {
-          console.log(err);
         },
         complete: () => { },
       });
@@ -157,18 +148,15 @@ export class FilterComponent {
       )
       .subscribe({
         next: (res: any) => {
-          console.log(res.data.cities);
           this.filter.get('city')?.enable();
           if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem('filterCity', JSON.stringify(res.data.cities));
             this.cities = res.data.cities.map((value: any, index: any) => ({
               name: value,
             }));
-            console.log(this.cities);
           }
         },
         error: (err: any) => {
-          console.log(err);
         },
         complete: () => { },
       });
@@ -198,7 +186,6 @@ export class FilterComponent {
     localStorage.setItem('filter', JSON.stringify(filterArray));
   }
   ngDoCheck(): void {
-    // console.log(this.filter.value);
   }
   ngOnInit(): void {
     this.checkCityDisabledStatus();

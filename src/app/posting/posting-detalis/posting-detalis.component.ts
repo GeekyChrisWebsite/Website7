@@ -72,16 +72,13 @@ export class PostingDetalisComponent {
       this.loading = false
       this.datainfo = res.data;
       this.imgs = res.data.images;
-      console.log(this.imgs)
     });
   }
 
   imageClick(index: number): void {
-    console.log('Image clicked at index:', index);
     this.displayCustom = true
   }
   makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
   handleMapClick(geoDirection: { lat: number, lng: number }): void {

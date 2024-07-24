@@ -68,7 +68,6 @@ export class ListingComponent {
   }
 
   ngOnInit(): void {
-    console.log(this.previousRouteService.getPreviousUrl());
     if (
       this.previousRouteService.getPreviousUrl() == '/city' ||
       this.previousRouteService.getPreviousUrl() == '/posting' ||
@@ -80,7 +79,6 @@ export class ListingComponent {
         let bussines = [];
         if (filter) {
           bussines = JSON.parse(filter);
-          console.log(bussines);
           this.getFilteredListing(
             bussines[0].category,
             bussines[0].state,
@@ -101,57 +99,6 @@ export class ListingComponent {
       this.filteredfromService();
       this.clearListing();
     }
-
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(
-    //     (position) => {
-    //       this.currentLocation = {
-    //         latitude: position.coords.latitude,
-    //         longitude: position.coords.longitude,
-    //       };
-    //       // console.log('User Location:', this.currentLocation);
-
-    //       // Clear previous distances
-    //       this.distances = [];
-
-    //       for (const item of this.listingArray) {
-    //         const businessLocation = {
-    //           latitude: item.geo_direction.lat,
-    //           longitude: item.geo_direction.lng,
-    //         };
-
-    //         const distanceInMiles = this.distanceService.calculateDistance(
-    //           this.currentLocation,
-    //           businessLocation
-    //         );
-
-    //         this.distances.push(distanceInMiles);
-    //       }
-
-    //       this.distanceService.setCurrentLocation(this.currentLocation);
-
-    //       this.distanceService
-    //         .setDistances(this.distances)
-    //         .then(() => {
-    //           // Navigation logic or any other code that depends on setDistances being complete
-    //         })
-    //         .catch((error) => {
-    //           console.error('Error setting distances:', error);
-    //         });
-    //     },
-    //     (error) => {
-    //       console.error('Error getting user location:', error);
-    //     }
-    //   );
-    // } else {
-    //   console.error('Geolocation is not supported by this browser.');
-    // }
-
-    // const storedDistances = this.distanceService.getDistances();
-    // if (storedDistances.length > 0) {
-    //   this.distances = storedDistances;
-    // }
-    // console.log(this.distances);
   }
 
 
@@ -161,11 +108,9 @@ export class ListingComponent {
   getListing(): void {
     this.listingservice.GetListing().subscribe({
       next: (res: { data: ListingData[]; message: string; status: string }) => {
-        console.log(res);
         this.listingArray = res.data;
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err);
       },
     });
   }
@@ -178,12 +123,10 @@ export class ListingComponent {
           message: string;
           status: string;
         }) => {
-          console.log(res);
           this.listingArray = res.data.businessesIds;
 
         },
         error: (err: HttpErrorResponse) => {
-          console.log(err);
         },
       });
   }
@@ -191,10 +134,8 @@ export class ListingComponent {
     this.filterservice.clearListings.subscribe({
       next: (res: { data: any[]; message: string; status: string }) => {
         this.listingArray = res.data;
-        console.log(res);
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err);
       },
     });
   }
@@ -205,7 +146,6 @@ export class ListingComponent {
         message: string;
         status: string;
       }) => {
-        console.log(res);
         this.listingArray = res.data.businessesIds;
       },
     });

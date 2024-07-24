@@ -55,7 +55,6 @@ export class MapViewComponent implements OnChanges {
   // fitBounds() {
   //   const bounds = new google.maps.LatLngBounds();
   //   for (const marker of this.listingArray) {
-  //     console.log(marker.geo_direction.lat);
   //     bounds.extend(
   //       new google.maps.LatLng(
   //         marker.geo_direction.lat,
@@ -81,15 +80,12 @@ export class MapViewComponent implements OnChanges {
     for (const marker of this.listingArray) {
       bounds.extend(new google.maps.LatLng(marker.geo_direction.lat, marker.geo_direction.lng));
     }
-    console.log(bounds)
     this.map.fitBounds(bounds);
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes, ":ghost::ghost::ghost::ghost::ghost:")
     if (changes['listingArray'] && changes['listingArray'].currentValue) {
-      console.log("listing array length has changed")
       if (!this.fisrtChange) {
         this.fitMapBounds()
       }

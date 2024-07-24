@@ -29,11 +29,9 @@ export class GellaryviewPostingComponent {
 
   }
   makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
   handleMapClick(dir: { lat: Number, lng: Number }) {
-    console.log(dir)
 
     if (dir) {
       const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
@@ -49,11 +47,9 @@ export class GellaryviewPostingComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.postingArray[index].liked == true) {
-        console.log(this.postingArray[index].liked);
 
         this._filterservie.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
             this.postingArray[index].liked = false;
             this.postingArray[index].business.likes += 1;
           },
@@ -61,7 +57,6 @@ export class GellaryviewPostingComponent {
       } else {
         this._filterservie.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
             this.postingArray[index].liked = true;
             this.postingArray[index].business.likes -= 1;
           },
@@ -90,7 +85,6 @@ export class GellaryviewPostingComponent {
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
         .catch((error) => {
-          console.error('Error getting user location:', error);
         });
     }
     this.totalRecords = this.postingArray.length;

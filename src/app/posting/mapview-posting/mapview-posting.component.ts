@@ -57,7 +57,6 @@ export class MapviewPostingComponent {
   ngAfterViewInit() {
     setTimeout(() => {
       this.fitBounds();
-      console.log("ssss")
     }, 1000);
   }
 
@@ -73,20 +72,14 @@ export class MapviewPostingComponent {
   posting() {
     this.postingservice.GetPosting().subscribe((res: any) => {
       this.postingArray = res.data;
-      console.log(this.postingArray)
-      // this.postingarray = this.filterposts
       this.sortArrayByUpdatedAt();
-      console.log(this.postingArray)
 
       const geoDirections = this.postingArray.map(posting => posting.business?.geo_direction);
 
-      console.log(geoDirections)
       const filteredGeoDirections = geoDirections.filter(direction => direction);
 
-      console.log(filteredGeoDirections)
       this.uniqueArray = this.removeDuplicates(filteredGeoDirections);
 
-      console.log('Unique Array:', this.uniqueArray);
 
     });
   }
@@ -94,7 +87,6 @@ export class MapviewPostingComponent {
   fitBounds() {
     const bounds = new google.maps.LatLngBounds();
     for (const marker of this.postingArray) {
-      console.log(this.uniqueArray);
       bounds.extend(
         new google.maps.LatLng(
           marker.business.geo_direction.lat,
@@ -119,9 +111,7 @@ export class MapviewPostingComponent {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
     if (changes['postingArray'] && changes['postingArray'].currentValue) {
-      console.log("map work")
       if (!this.fisrtChange) {
         this.fitBounds()
       }

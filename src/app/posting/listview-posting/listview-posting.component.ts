@@ -42,7 +42,6 @@ export class ListviewPostingComponent {
     return content.substr(0, maxLength) + '...';
   }
   makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
   handleMapClick(geoDirection: { lat: number, lng: number }): void {
@@ -61,11 +60,9 @@ export class ListviewPostingComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.postingArray[index].liked == true) {
-        console.log(this.postingArray[index].liked);
 
         this._filterservie.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
             this.postingArray[index].liked = false;
             this.postingArray[index].business.likes += 1;
           },
@@ -73,7 +70,6 @@ export class ListviewPostingComponent {
       } else {
         this._filterservie.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
             this.postingArray[index].liked = true;
             this.postingArray[index].business.likes -= 1;
           },

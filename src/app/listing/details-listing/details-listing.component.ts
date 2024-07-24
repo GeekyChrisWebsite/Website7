@@ -96,7 +96,6 @@ export class DetailsListingComponent {
             if (this.imgs.length == 2) {
                 this.twoImgs = true;
             }
-            console.log(this.galleryphotos);
         });
     }
 
@@ -125,7 +124,6 @@ export class DetailsListingComponent {
     getPosts(id: number) {
         this.listingservice.GetListingByID(id).subscribe((res: any) => {
             this.posts = res.data;
-            console.log("rania", this.posts)
         })
     }
 
@@ -157,7 +155,6 @@ export class DetailsListingComponent {
     // }
 
     makePhoneCall(phoneNumber: string): void {
-        console.log('Initiating phone call to:', phoneNumber);
         window.location.href = 'tel:' + phoneNumber;
     }
     formatTime(time: string): string {
