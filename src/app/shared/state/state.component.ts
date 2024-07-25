@@ -31,25 +31,20 @@ export class StateComponent {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       let state = localStorage.getItem('filter');
-      console.log(state);
       let cat = [];
       if (state) {
         cat = JSON.parse(state);
       }
-      console.log(cat);
       this.getStates(cat[0].category);
     }
   }
   getStates(CategoryName: string): void {
-    console.log(CategoryName);
     this.stateSubscriptions = this._FilterService
       .getStates(CategoryName)
       .subscribe({
         next: (res: any) => {
-          console.log(res);
           this.statearray = res.data.states;
           this.filteredStates = this.statearray;
-          console.log(this.statearray);
           if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem('filterState', JSON.stringify(this.statearray));
           }
