@@ -1,47 +1,75 @@
 <section class="posting py-5">
-    <div class="container" *ngIf="detalisArray">
-        <div class="box-white">
-            <div class="div-info d-flex align-items-center justify-content-between gap-3 py-3 flex-column flex-lg-row">
-                <div class="d-flex gap-2  flex-lg-row align-items-start justify-content-start">
-                    <img src="{{ detalisArray.business.logo }}" alt="" width="50" height="50" class="rounded-circle" />
-                    <div class="">
-                        <p class="p-0 m-0">{{ detalisArray.title }}</p>
-                        <div class="d-flex gap-1 justify-content-start align-items-center">
-                            <i class="bx bx-world fs-6" style="color: #6b6666"></i>
-                            <p class="title-time text-muted m-0">{{ detalisArray.buySellTime }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex gap-1 gap-lg-3 flex-lg-row">
-                    <button class="call-now" (click)="makePhoneCall(detalisArray.phone_number)">
-                        Call
-                    </button>
-                    <button class="Directions" (click)="handleMapClick(detalisArray.geo_direction)">
-                        Directions
-                    </button>
-                    <div *ngIf="detalisArray.booking_url !== ''">
-                        <button class="book-btn"><a href="{{detalisArray.booking_url}}"
-                                target="_blank">Book</a></button>
-                    </div>
-                </div>
+  <div class="container" *ngIf="detalisArray">
+    <div class="box-white">
+      <div
+        class="div-info d-flex align-items-center justify-content-between gap-3 py-3 flex-column flex-lg-row"
+      >
+        <div
+          class="d-flex gap-2 flex-lg-row align-items-start justify-content-start"
+        >
+          <img
+            src="{{ detalisArray.business.logo }}"
+            alt=""
+            width="50"
+            height="50"
+            class="rounded-circle"
+          />
+          <div class="">
+            <p class="p-0 m-0">{{ detalisArray.title }}</p>
+            <div class="d-flex gap-1 justify-content-start align-items-center">
+              <i class="bx bx-world fs-6" style="color: #6b6666"></i>
+              <p class="title-time text-muted m-0">
+                {{ detalisArray.buySellTime }}
+              </p>
             </div>
-
-            <div class="justify-content-center align-items-center d-flex">
-                <p-galleria [value]="galleryphotos" [showItemNavigators]="true" [responsiveOptions]="responsiveOptions"
-                    [circular]="true" [numVisible]="5" [showThumbnailNavigators]="false">
-                    <ng-template pTemplate="item" let-item>
-                        <img [src]="item" class="w-100" />
-                    </ng-template>
-                    <ng-template pTemplate="thumbnail" let-item>
-                        <div class="d-grid justify-content-center align-items-center d-flex">
-                            <img [src]="item" class="w-25 img-fluid" />
-                        </div>
-                    </ng-template>
-                </p-galleria>
-            </div>
-            <div>
-                <p class="text-start" [innerHTML]="detalisArray.content"></p>
-            </div>
+          </div>
         </div>
+        <div class="d-flex gap-1 gap-lg-3 flex-lg-row">
+          <button
+            class="call-now"
+            (click)="makePhoneCall(detalisArray.phone_number)"
+          >
+            Call
+          </button>
+          <button
+            class="Directions"
+            (click)="handleMapClick(detalisArray.geo_direction)"
+          >
+            Directions
+          </button>
+          <div *ngIf="detalisArray.booking_url !== ''">
+            <button class="book-btn">
+              <a href="{{ detalisArray.booking_url }}" target="_blank">Book</a>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="justify-content-center align-items-center d-flex">
+        <p-galleria
+          [value]="galleryphotos"
+          [showItemNavigators]="true"
+          [responsiveOptions]="responsiveOptions"
+          [circular]="true"
+          [numVisible]="5"
+          [showThumbnailNavigators]="false"
+          [autoPlay]="true"
+        >
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item" class="w-100" />
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+            <div
+              class="d-grid justify-content-center align-items-center d-flex"
+            >
+              <img [src]="item" class="w-25 img-fluid" />
+            </div>
+          </ng-template>
+        </p-galleria>
+      </div>
+      <div>
+        <p class="text-start" [innerHTML]="detalisArray.content"></p>
+      </div>
     </div>
+  </div>
 </section>

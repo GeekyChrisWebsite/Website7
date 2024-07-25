@@ -1,9 +1,19 @@
 <section class="posting py-5">
   <div class="container" *ngIf="datainfo">
     <div class="box-white">
-      <div class="div-info d-flex align-items-center justify-content-between gap-3 py-3 flex-column flex-lg-row">
-        <div class="d-flex gap-2  flex-lg-row align-items-start justify-content-start">
-          <img src="{{ datainfo.business.logo }}" alt="" width="50" height="50" class="rounded-circle" />
+      <div
+        class="div-info d-flex align-items-center justify-content-between gap-3 py-3 flex-column flex-lg-row"
+      >
+        <div
+          class="d-flex gap-2 flex-lg-row align-items-start justify-content-start"
+        >
+          <img
+            src="{{ datainfo.business.logo }}"
+            alt=""
+            width="50"
+            height="50"
+            class="rounded-circle"
+          />
           <div class="">
             <p class="p-0 m-0">{{ datainfo.title }}</p>
             <div class="d-flex gap-1 justify-content-start align-items-center">
@@ -13,26 +23,43 @@
           </div>
         </div>
         <div class="d-flex gap-1 gap-lg-3 flex-lg-row">
-          <button class="call-now" (click)="makePhoneCall(datainfo.phone_number)">
+          <button
+            class="call-now"
+            (click)="makePhoneCall(datainfo.phone_number)"
+          >
             Call
           </button>
-          <button class="Directions" (click)="handleMapClick(datainfo.geo_direction)">
+          <button
+            class="Directions"
+            (click)="handleMapClick(datainfo.geo_direction)"
+          >
             Directions
           </button>
           <div *ngIf="datainfo.booking_url !== ''">
-            <button class="book-btn"><a href="{{datainfo.booking_url}}" target="_blank">Book Now</a></button>
+            <button class="book-btn">
+              <a href="{{ datainfo.booking_url }}" target="_blank">Book Now</a>
+            </button>
           </div>
         </div>
       </div>
 
       <div class="justify-content-center align-items-center d-flex">
-        <p-galleria [value]="galleryphotos" [showItemNavigators]="true" [responsiveOptions]="responsiveOptions"
-          [circular]="true" [numVisible]="5" [showThumbnailNavigators]="false">
+        <p-galleria
+          [value]="galleryphotos"
+          [showItemNavigators]="true"
+          [responsiveOptions]="responsiveOptions"
+          [circular]="true"
+          [numVisible]="5"
+          [showThumbnailNavigators]="false"
+          [autoPlay]="true"
+        >
           <ng-template pTemplate="item" let-item>
             <img [src]="item" class="w-100" />
           </ng-template>
           <ng-template pTemplate="thumbnail" let-item>
-            <div class="d-grid justify-content-center align-items-center d-flex">
+            <div
+              class="d-grid justify-content-center align-items-center d-flex"
+            >
               <img [src]="item" class="w-25 img-fluid" />
             </div>
           </ng-template>
