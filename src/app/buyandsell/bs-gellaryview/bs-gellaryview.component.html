@@ -28,7 +28,11 @@
                     </div>
                     <p id="likeCount" class="m-0 likes">{{BuySellArray[i].business.likes}}</p> -->
 
-          <img src="{{ item.business.logo }}" alt="" class="border rounded" />
+          <img
+            src="{{ item.business.images[0] }}"
+            alt=""
+            class="border rounded"
+          />
           <div class="title py-2">
             <h5>{{ item.business.name }}</h5>
           </div>
