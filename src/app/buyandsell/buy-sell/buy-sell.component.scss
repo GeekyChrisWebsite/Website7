@@ -8,6 +8,152 @@
 
 }
 
+.slider {
+    background-color: rgb(241, 243, 244);
+
+    .container {
+        .h1 {
+            color: rgba(221, 172, 23, 1);
+            line-height: 48.76px;
+            font-weight: 700;
+        }
+
+        .gold {
+            color: rgba(221, 172, 23, 1);
+        }
+    }
+
+    .row {
+        position: relative;
+    }
+
+    .corner-image {
+        position: absolute;
+        top: -1px;
+        right: 7px;
+    }
+
+    .text-loction {
+        font-family: "Lato", sans-serif;
+    }
+
+    .p-carousel-item-start,
+    .p-carousel-item-end {
+        transform: scale(0.8);
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        -o-transform: scale(0.8);
+    }
+
+    .date {
+        background: linear-gradient(180deg,
+                rgba(255, 216, 101, 0.5) 0%,
+                rgba(255, 216, 101, 0.186535) 62.69%,
+                rgba(255, 216, 101, 0) 100%);
+        width: 72px;
+        height: 40px;
+        outline: none;
+        border: none;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 3px;
+    }
+
+    .call {
+        background: linear-gradient(180deg,
+                rgba(16, 148, 51, 0.5) 0%,
+                rgba(52, 168, 83, 0) 100%);
+        width: 72px;
+        height: 40px;
+        outline: none;
+        border: none;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 3px;
+    }
+
+    .location {
+        background: linear-gradient(180deg,
+                rgba(0, 110, 253, 0.5) 0%,
+                rgba(24, 119, 242, 0) 100%);
+
+        width: 72px;
+        height: 40px;
+        outline: none;
+        border: none;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 3px;
+    }
+
+    .searchBar {
+        .container {
+            .div-searchBar2 {
+                .form-group {
+                    flex: 1;
+                    /* Adjust the flex value as needed */
+                    position: relative;
+                    margin: 0;
+                    padding: 0;
+
+                    .div-searchBar {
+                        form {
+                            display: flex !important;
+                            /* or inline-flex if you want it inline */
+                            justify-content: center !important;
+                            align-items: center !important;
+                            gap: 10rem;
+                            margin-right: 228px;
+
+                            .p-dropdown {
+                                border: none;
+                                width: 100%;
+                                background-color: transparent;
+                                margin: 0 15px;
+                            }
+
+                            input,
+                            input:focus,
+                            input:active {
+                                border: none;
+                                outline: none;
+                            }
+
+                            small {
+                                white-space: nowrap;
+                                font-family: "Lato", sans-serif;
+                                font-size: 14px !important;
+                            }
+
+                            .Search-btn {
+                                background-color: #0f3d3e;
+                                color: #ffff;
+                                position: absolute;
+                                right: -6px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                -moz-border-radius: 12px;
+                                -ms-border-radius: 12px;
+                                -o-border-radius: 12px;
+                                width: 100px;
+                                height: 38px;
+                            }
+
+                            small {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .searchBar {
+            display: none;
+        }
+    }
+}
+
 .div-searchBar {
 
     form {

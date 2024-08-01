@@ -17,11 +17,12 @@ import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PreviousRouteServiceService } from '../../services/previous-route-service.service';
 import { FilterComponent } from '../../shared/filter/filter.component';
+import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-buy-sell',
   standalone: true,
-  imports: [PaginatorModule, ToastModule, FilterComponent, ConfirmDialogModule, CommonModule, BsGellaryviewComponent, BsListviewComponent, BsMapviewComponent, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [PaginatorModule, ToastModule, FilterComponent, CarouselModule, ConfirmDialogModule, CommonModule, BsGellaryviewComponent, BsListviewComponent, BsMapviewComponent, RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: './buy-sell.component.html',
   styleUrl: './buy-sell.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -33,6 +34,7 @@ export class BuySellComponent {
   first = 20;
   rows = 20;
   buySellArray: any[];
+  vipBuysellArray: any;
   UniqueGeoLocations!: any[];
   galleyView: boolean;
   listView: boolean;
@@ -44,6 +46,7 @@ export class BuySellComponent {
   currentLocation: any;
   backendLocations: any;
   distances: any[] = [];
+  responsiveOptions: any[] | undefined;
 
   constructor(private _filterservice: FilterService, private _router: ActivatedRoute, private _BuySellService: BuySellService,
     private _messageService: MessageService,
@@ -55,6 +58,29 @@ export class BuySellComponent {
     this.buySellArray = []
   }
   ngOnInit(): void {
+    this.vipBuysell();
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 3,
+        numScroll: 3,
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '576px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
     if (
       this.previousRouteService.getPreviousUrl() == '/listing' ||
       this.previousRouteService.getPreviousUrl() == '/posting' ||
@@ -196,6 +222,16 @@ export class BuySellComponent {
 
   onPageChange(event: any): void {
     this.first = event.first;
+  }
+  vipBuysell(): void {
+    this._BuySellService.getVipBuySell().subscribe((res: any) => {
+      this.vipBuysellArray = res.data;
+      console.log(this.vipBuysellArray);
+    })
+  }
+  makePhoneCall(phoneNumber: string): void {
+    console.log('Initiating phone call to:', phoneNumber);
+    window.location.href = 'tel:' + phoneNumber;
   }
 
 }

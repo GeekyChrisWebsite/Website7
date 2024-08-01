@@ -21,4 +21,8 @@ export class BuySellService {
       `${environment.BACKEND_DOMAIN}/get-buysell-website_request/${id}`
     );
   }
+  getVipBuySell(): Observable<any> {
+    return this.httpClient.get(
+      `${environment.BACKEND_DOMAIN}/vip-buysells`);
+  }
 }
