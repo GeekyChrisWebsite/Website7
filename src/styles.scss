@@ -49,3 +49,14 @@ li a {
 .p-galleria-item-wrapper {
     background-color: black !important;
 }
+
+.p-paginator-last,
+.p-paginator-first {
+    display: none;
+}
+
+
+
+.p-paginator {
+    padding: 0px;
+}
