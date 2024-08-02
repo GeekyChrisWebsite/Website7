@@ -1,28 +1,26 @@
-<section class="list-img" *ngIf="listingArray">
-  <div class="container">
-    <p-paginator
-      (onPageChange)="onPageChange($event)"
-      [first]="first"
-      [rows]="rows"
-      [totalRecords]="listingArray.length"
-    ></p-paginator>
+<div class="container">
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="listingArray.length"
+  ></p-paginator>
+  <div class="row py-2">
     <div
-      class="row justify-content-start align-items-center d-flex flex-wrap gap-3 py-3 gap-lg-0"
+      class="col-md-3 col-12 mb-3"
+      *ngFor="
+        let item of listingArray.slice(first, first + rows);
+        let i = index
+      "
     >
-      <div
-        class="col-md-3 col-12 mb-3"
-        *ngFor="
-          let item of listingArray.slice(first, first + rows);
-          let i = index
-        "
-      >
-        <div
-          class="card justify-content-between align-items-center d-flex"
-          routerLink="/details/{{ item.id }}"
-        >
+      <p-card [style]="{ width: '100%' }">
+        <ng-template pTemplate="header">
+          <img alt="Card" class="w-100" src="{{ item.logo }}" />
+        </ng-template>
+        <div class="card-body">
           <div
-            class="d-flex justify-content-center align-items-center gap-1 div-like"
-            (click)="likeBusiness(item.id, i); $event.stopPropagation()"
+            class="div-like"
+            (click)="likeBusiness(item.id, i)"
             [class.liked]="listingArray[i].liked"
           >
             <i
@@ -31,27 +29,35 @@
               [style.color]="listingArray[i].liked ? 'black' : '#0069D9'"
             ></i>
           </div>
-          <p id="likeCount" class="m-0 likes">{{ listingArray[i].likes }}</p>
-
-          <img src="{{ item.logo }}" alt="" class="border rounded" />
-          <div class="title py-2">
+          <p id="likeCount" class="m-0 likes">
+            {{ listingArray[i].likes }}
+          </p>
+          <div class="title py-2 text-center">
             <h5>{{ item.name }}</h5>
           </div>
-
-          <div *ngIf="distances && distances.length > 0" class="py-2">
+          <div class="py-2">
             <div class="d-flex justify-content-center align-items-center gap-1">
               <i class="pi pi-directions fs-4"></i>
-              <p class="p-0 m-0">
-                Distance: {{ distances[i] | number : "1.0-0" }}
-                <span>Miles</span>
+              <p class="m-0 distance text-center">
+                Distance:
+                {{
+                  calculateDistance(
+                    item.geo_direction.lat,
+                    item.geo_direction.lng
+                  )
+                }}
+                <span>miles</span>
               </p>
             </div>
           </div>
           <div>
-            <p class="text-muted">{{ truncateText(item.description, 20) }}</p>
+            <p class="text-muted"></p>
+            <p class="text-muted text-center">
+              {{ truncateText(item.description, 20) }}
+            </p>
           </div>
           <div
-            class="btns justify-content-start align-items-start d-flex gap-3 py-3"
+            class="btns justify-content-center align-items-center d-flex gap-3 py-3"
           >
             <button class="call-now" (click)="makePhoneCall(item.phone_number)">
               Call Now
@@ -64,7 +70,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </p-card>
     </div>
   </div>
   <p-paginator
@@ -73,4 +79,4 @@
     [rows]="rows"
     [totalRecords]="listingArray.length"
   ></p-paginator>
-</section>
+</div>

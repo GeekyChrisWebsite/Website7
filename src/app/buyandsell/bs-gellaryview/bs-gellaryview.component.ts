@@ -5,11 +5,12 @@ import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DistanceService } from '../../services/distance.service';
 import { PaginatorModule } from 'primeng/paginator';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-bs-gellaryview',
   standalone: true,
-  imports: [CommonModule, RouterModule, PaginatorModule],
+  imports: [CommonModule, RouterModule, PaginatorModule, CardModule],
   templateUrl: './bs-gellaryview.component.html',
   styleUrl: './bs-gellaryview.component.scss'
 })
