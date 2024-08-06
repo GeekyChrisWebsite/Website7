@@ -32,11 +32,20 @@ export class GellaryviewPostingComponent {
   makePhoneCall(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(dir: { lat: Number, lng: Number }) {
+  // handleMapClick(dir: { lat: Number, lng: Number }) {
 
-    if (dir) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
-      window.open(link, '_blank');
+  //   if (dir) {
+  //     const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
+  //     window.open(link, '_blank');
+  //   }
+  // }
+  handleMapClick(geoDirection: { lat: number, lng: number }): void {
+    if (geoDirection && geoDirection.lat !== undefined && geoDirection.lng !== undefined) {
+      const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
+      const anchor = document.createElement('a');
+      anchor.href = link;
+      anchor.target = '_blank';
+      anchor.click();
     }
   }
   isLiked: boolean[] = [];

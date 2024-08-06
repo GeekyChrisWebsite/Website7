@@ -53,6 +53,7 @@ export class ListviewPostingComponent {
 
 
 
+
   likeBusiness(busId: string, index: number) {
     const token = this._cookieService.get('token');
 

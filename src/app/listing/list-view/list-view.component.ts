@@ -35,11 +35,13 @@ export class ListViewComponent {
   makePhoneCall(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(dir: { lat: Number, lng: Number }) {
-
+  handleMapClick(dir: { lat: number, lng: number }) {
     if (dir) {
       const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
-      window.open(link, '_blank');
+      const anchor = document.createElement('a');
+      anchor.href = link;
+      anchor.target = '_blank';
+      anchor.click();
     }
   }
   truncateText(content: string, maxLength: number): string {

@@ -32,8 +32,19 @@ export class BsListviewComponent {
     return content.substr(0, maxLength) + '';
   }
   makePhoneCall(phoneNumber: string): void {
-    console.log('Initiating phone call to:', phoneNumber);
-    window.location.href = 'tel:' + phoneNumber;
+    if (phoneNumber) {
+      console.log('Initiating phone call to:', phoneNumber);
+
+      // Ensure phone number is clean and properly formatted
+      const cleanNumber = phoneNumber.replace(/\D/g, ''); // Remove non-numeric characters
+      if (cleanNumber) {
+        window.location.href = 'tel:' + cleanNumber;
+      } else {
+        console.error('Invalid phone number');
+      }
+    } else {
+      console.error('No phone number provided');
+    }
   }
   handleMapClick(geoDirection: { lat: number, lng: number }): void {
     if (geoDirection && geoDirection.lat !== undefined && geoDirection.lng !== undefined) {
