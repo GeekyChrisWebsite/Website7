@@ -103,13 +103,13 @@
                   <div class="btns d-flex flex-column gap-2">
                     <button
                       class="call-now"
-                      (click)="makePhoneCall(customer.phone_number)"
+                      (click)="makePhoneCall(customer.business.phone_number)"
                     >
                       Call
                     </button>
                     <button
                       class="Directions"
-                      (click)="handleMapClick(customer.geo_direction)"
+                      (click)="handleMapClick(customer.business.geo_direction)"
                     >
                       Directions
                     </button>
@@ -218,13 +218,13 @@
                   <div class="btns d-flex flex-column gap-2">
                     <button
                       class="call-now"
-                      (click)="makePhoneCall(customer.phone_number)"
+                      (click)="makePhoneCall(customer.business.phone_number)"
                     >
                       Call
                     </button>
                     <button
                       class="Directions"
-                      (click)="handleMapClick(customer.geo_direction)"
+                      (click)="handleMapClick(customer.business.geo_direction)"
                     >
                       Directions
                     </button>
