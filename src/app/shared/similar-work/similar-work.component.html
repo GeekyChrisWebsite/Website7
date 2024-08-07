@@ -6,18 +6,14 @@
       *ngFor="let item of data"
     >
       <img [src]="item.business.logo" alt="" />
-      <div class="content py-4">
+      <div class="content py-1">
         <h2 class="fw-bold fs-5 px-3 m-0">{{ item.title }}</h2>
         <h6 class="text-black-50 fw-normal px-3">{{ item.postTime }}</h6>
+
         <p
-          class="p-3 my-3 text"
-          [ngStyle]="{
-            'font-weight': item?.bold ? 'bold' : 'normal',
-            'font-style': item?.italic ? 'italic' : 'normal'
-          }"
-        >
-          {{ item.content }}
-        </p>
+          class="m-0"
+          [innerHTML]="item.content | truncateText : 50 | sanatizer"
+        ></p>
       </div>
     </div>
   </div>
