@@ -219,6 +219,7 @@ export class PostingComponent {
     this.galleyView = true;
     this.listView = false;
     this.mapView = false;
+
   }
   showList(): void {
     this.listView = true;
