@@ -12,8 +12,26 @@
 
         <p
           class="m-0"
-          [innerHTML]="item.content | truncateText : 50 | sanatizer"
+          [innerHTML]="item.content | truncateText : 30 | sanatizer"
         ></p>
+        <div
+          class="btns justify-content-between align-items-end d-flex gap-1 py-2"
+        >
+          <div class="btns d-flex flex-column gap-2">
+            <button
+              class="call-now"
+              (click)="makePhoneCall(item.business.phone_number)"
+            >
+              Call
+            </button>
+            <button
+              class="Directions"
+              (click)="handleMapClick(item.business.geo_direction)"
+            >
+              Directions
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
