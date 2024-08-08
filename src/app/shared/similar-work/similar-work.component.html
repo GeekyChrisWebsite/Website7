@@ -22,13 +22,19 @@
           <div class="btns d-flex gap-2">
             <button
               class="call-now"
-              (click)="makePhoneCall(item.business.phone_number)"
+              (click)="
+                makePhoneCall(item.business.phone_number);
+                $event.stopPropagation()
+              "
             >
               Call
             </button>
             <button
               class="Directions"
-              (click)="handleMapClick(item.business.geo_direction)"
+              (click)="
+                handleMapClick(item.business.geo_direction);
+                $event.stopPropagation()
+              "
             >
               Directions
             </button>
