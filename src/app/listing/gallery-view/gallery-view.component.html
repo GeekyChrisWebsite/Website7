@@ -13,9 +13,14 @@
         let i = index
       "
     >
-      <p-card [style]="{ width: '100%' }">
+      <p-card [style]="{ width: '100%' }" routerLink="/details/{{ item.id }}">
         <ng-template pTemplate="header">
-          <img alt="Card" class="w-100" src="{{ item.logo }}" />
+          <img
+            alt="Card"
+            class="w-100"
+            src="{{ item.logo }}"
+            routerLink="/details/{{ item.id }}"
+          />
         </ng-template>
         <div class="card-body">
           <div

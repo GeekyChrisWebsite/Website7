@@ -85,7 +85,10 @@
                       alt="Call"
                     />
                   </button>
-                  <button class="location">
+                  <button
+                    class="location"
+                    (click)="handleMapClick(product.business.geo_direction)"
+                  >
                     <img src="../../../assets/img/posting/image 2.png" alt="" />
                   </button>
                 </div>

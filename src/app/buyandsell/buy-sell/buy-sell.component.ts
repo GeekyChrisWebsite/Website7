@@ -1,4 +1,9 @@
-import { Component, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FilterService } from '../../services/filter.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PaginatorModule } from 'primeng/paginator';
@@ -7,7 +12,13 @@ import { BsGellaryviewComponent } from '../bs-gellaryview/bs-gellaryview.compone
 import { BsListviewComponent } from '../bs-listview/bs-listview.component';
 import { BsMapviewComponent } from '../bs-mapview/bs-mapview.component';
 import { BuySellService } from '../../services/buy-sell.service';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { BuysellDetalis } from '../../interface/buysell-detalis';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DistanceService } from '../../services/distance.service';
@@ -22,13 +33,25 @@ import { CarouselModule } from 'primeng/carousel';
 @Component({
   selector: 'app-buy-sell',
   standalone: true,
-  imports: [PaginatorModule, ToastModule, FilterComponent, CarouselModule, ConfirmDialogModule, CommonModule, BsGellaryviewComponent, BsListviewComponent, BsMapviewComponent, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    PaginatorModule,
+    ToastModule,
+    FilterComponent,
+    CarouselModule,
+    ConfirmDialogModule,
+    CommonModule,
+    BsGellaryviewComponent,
+    BsListviewComponent,
+    BsMapviewComponent,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './buy-sell.component.html',
   styleUrl: './buy-sell.component.scss',
   encapsulation: ViewEncapsulation.None,
   host: { ngSkipHydration: 'true' },
-  providers: [ConfirmationService]
-
+  providers: [ConfirmationService],
 })
 export class BuySellComponent {
   first = 20;
@@ -48,14 +71,20 @@ export class BuySellComponent {
   distances: any[] = [];
   responsiveOptions: any[] | undefined;
 
-  constructor(private _filterservice: FilterService, private _router: ActivatedRoute, private _BuySellService: BuySellService,
+  constructor(
+    private _filterservice: FilterService,
+    private _router: ActivatedRoute,
+    private _BuySellService: BuySellService,
     private _messageService: MessageService,
-    private distanceService: DistanceService, @Inject(PLATFORM_ID) private platformId: object,
-    private confirmationService: ConfirmationService, private previousRouteService: PreviousRouteServiceService) {
+    private distanceService: DistanceService,
+    @Inject(PLATFORM_ID) private platformId: object,
+    private confirmationService: ConfirmationService,
+    private previousRouteService: PreviousRouteServiceService
+  ) {
     this.galleyView = false;
     this.listView = true;
     this.mapView = false;
-    this.buySellArray = []
+    this.buySellArray = [];
   }
   ngOnInit(): void {
     this.vipBuysell();
@@ -113,16 +142,19 @@ export class BuySellComponent {
       this.filteredBuySell();
     }
     if (isPlatformBrowser(this.platformId)) {
-      this.distanceService.getCurrentLocation()
+      this.distanceService
+        .getCurrentLocation()
         .then((coords) => {
-          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.currentLocation = {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+          };
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
         .catch((error) => {
           console.error('Error getting user location:', error);
         });
     }
-
   }
   calculateDistance(lat: number, lng: number): string {
     const distance = this.distanceService.calculateDistance(lat, lng);
@@ -134,10 +166,10 @@ export class BuySellComponent {
         console.log(res);
         this.buySellArray = res.data;
         this.getGeoLocations();
-        this.buySellArray = this.buySellArray.map(item => ({
+        this.buySellArray = this.buySellArray.map((item) => ({
           ...item,
-          updated_at: new Date(item.updated_at).toISOString().split("T")[0],
-          datePart: item.updated_at
+          updated_at: new Date(item.updated_at).toISOString().split('T')[0],
+          datePart: item.updated_at,
         }));
 
         this.buySellArray.sort(
@@ -146,7 +178,6 @@ export class BuySellComponent {
         );
       },
     });
-
   }
   getFilteredBuySell(CategoryName: string, state: string, city: string): void {
     this.filteredBuySellSubscription = this._filterservice
@@ -219,7 +250,6 @@ export class BuySellComponent {
     this.listView = false;
   }
 
-
   onPageChange(event: any): void {
     this.first = event.first;
   }
@@ -227,11 +257,20 @@ export class BuySellComponent {
     this._BuySellService.getVipBuySell().subscribe((res: any) => {
       this.vipBuysellArray = res.data;
       console.log(this.vipBuysellArray);
-    })
+    });
   }
   makePhoneCall(phoneNumber: string): void {
     console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
-
+  handleMapClick(geoDirection: { lat: number; lng: number }): void {
+    if (
+      geoDirection &&
+      geoDirection.lat !== undefined &&
+      geoDirection.lng !== undefined
+    ) {
+      const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
+      window.open(link, '_blank');
+    }
+  }
 }

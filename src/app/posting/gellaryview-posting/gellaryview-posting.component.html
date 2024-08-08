@@ -13,9 +13,17 @@
         let i = index
       "
     >
-      <p-card [style]="{ width: '100%' }">
+      <p-card
+        [style]="{ width: '100%' }"
+        routerLink="/postingdetails/{{ item.id }}"
+      >
         <ng-template pTemplate="header">
-          <img alt="Card" class="w-100" src="{{ item.images[0] }}" />
+          <img
+            alt="Card"
+            class="w-100"
+            src="{{ item.images[0] }}"
+            routerLink="/postingdetails/{{ item.id }}"
+          />
         </ng-template>
         <div class="card-body">
           <div class="title py-2 text-center">
