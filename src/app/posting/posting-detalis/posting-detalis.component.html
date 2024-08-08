@@ -25,19 +25,21 @@
         <div class="d-flex gap-1 gap-lg-3 flex-lg-row">
           <button
             class="call-now"
-            (click)="makePhoneCall(datainfo.phone_number)"
+            (click)="makePhoneCall(datainfo.business.phone_number)"
           >
             Call
           </button>
           <button
             class="Directions"
-            (click)="handleMapClick(datainfo.geo_direction)"
+            (click)="handleMapClick(datainfo.business.geo_direction)"
           >
             Directions
           </button>
           <div *ngIf="datainfo.booking_url !== ''">
             <button class="book-btn">
-              <a href="{{ datainfo.booking_url }}" target="_blank">Book Now</a>
+              <a href="{{ datainfo.business.booking_url }}" target="_blank"
+                >Book Now</a
+              >
             </button>
           </div>
         </div>
