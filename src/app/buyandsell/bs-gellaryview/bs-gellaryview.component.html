@@ -52,7 +52,7 @@
           >
             <button
               class="call-now"
-              (click)="makePhoneCall(item.business.phone_number)"
+              (click)="makePhoneCall(item.business.phone_number);$event.stopPropagation()"
             >
               Call Now
             </button>

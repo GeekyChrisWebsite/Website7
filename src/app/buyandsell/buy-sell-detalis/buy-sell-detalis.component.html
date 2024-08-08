@@ -33,13 +33,15 @@
           </button>
           <button
             class="Directions"
-            (click)="handleMapClick(detalisArray.geo_direction)"
+            (click)="handleMapClick(detalisArray.business.geo_direction)"
           >
             Directions
           </button>
           <div *ngIf="detalisArray.booking_url !== ''">
             <button class="book-btn">
-              <a href="{{ detalisArray.booking_url }}" target="_blank">Book</a>
+              <a href="{{ detalisArray.business.booking_url }}" target="_blank"
+                >Book</a
+              >
             </button>
           </div>
         </div>
