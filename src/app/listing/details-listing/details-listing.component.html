@@ -24,9 +24,12 @@
                   src="../../../assets/img/detalis-info/location.png"
                   width="30"
                   height="30"
-                  alt="img"
                 />
-                <p class="p-0 m-0">
+                <p
+                  style="cursor: pointer; color: blue"
+                  class="p-0 m-0"
+                  (click)="handleMapClick(datainfo.geo_direction)"
+                >
                   1036 Cambell St, Rapid City, South Dakota,57701
                 </p>
               </div>
@@ -39,7 +42,7 @@
                   width="30"
                   height="30"
                 />
-                <p class="p-0 m-0">{{ datainfo.email }}</p>
+                <p class="p-0 m-0" style="color: blue">{{ datainfo.email }}</p>
               </div>
             </li>
             <li>
@@ -50,15 +53,24 @@
                   width="30"
                   height="30"
                 />
-                <p class="p-0 m-0">{{ datainfo.phone_number }}</p>
+                <p
+                  style="cursor: pointer; color: blue"
+                  class="p-0 m-0"
+                  (click)="
+                    makePhoneCall(datainfo.phone_number);
+                    $event.stopPropagation()
+                  "
+                >
+                  {{ datainfo.phone_number }}
+                </p>
               </div>
             </li>
           </ul>
         </div>
         <div class="col-md-5">
           <div class="d-flex gap-3 align-items-center justify-content-center">
-            <i class="bx bx-heart heart-btn"></i>
             <div
+              class="d-flex gap-4"
               *ngIf="
                 datainfo.booking_url !== null &&
                 datainfo.booking_url.trim() !== ''
