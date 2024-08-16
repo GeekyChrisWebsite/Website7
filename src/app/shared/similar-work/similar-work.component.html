@@ -6,7 +6,7 @@
       *ngFor="let item of data"
     >
       <img [src]="item.business.logo" alt="" />
-      <div class="content py-1 ms-3">
+      <div class="content py-1 ms-4">
         <h4 class="fw-bold fs-5 px-3 m-0">
           {{ item.title | truncateText : 15 }}
         </h4>
