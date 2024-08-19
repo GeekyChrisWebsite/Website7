@@ -1,112 +1,82 @@
 <section class="slider py-5" ngSkipHydration>
-  <div class="container py-1" *ngIf="vipBuysellArray">
-    <h2 class="text-center pb-5 h1" style="padding-top: 95px">VIP Buy&sell</h2>
+  <div class="container py-5" *ngIf="vipBuysellArray">
+    <h2 class="text-center py-5 h1">VIP Buy&Sell</h2>
     <div>
       <p-carousel
-        class="gap-5"
+        #carousel
         [value]="vipBuysellArray"
         [numVisible]="3"
-        [numScroll]="3"
-        [circular]="true"
+        [numScroll]="1"
         [responsiveOptions]="responsiveOptions"
+        [circular]="true"
         [autoplayInterval]="2000"
       >
-        <ng-template
-          let-product
-          pTemplate="item"
-          class="gap-5"
-          let-rowIndex="rowIndex"
-        >
-          <div class="row justify-content-center align-items-center gap-5">
-            <div class="col-md-3" style="width: 95%">
-              <div>
-                <img
-                  *ngIf="product.images && product.images[0]"
-                  src="{{ product.images[0] }}"
-                  alt=""
-                  class="w-100 rounded-top rounded-2"
-                  routerLink="/BuySelldetails/{{ product.id }}"
-                />
-                <img
-                  *ngIf="!product.images || !product.images[0]"
-                  src="../../../assets/img/listing/missing (2).png"
-                  alt=""
-                  class="w-25 rounded-top rounded-2"
-                />
-              </div>
+        <ng-template let-product pTemplate="item">
+          <section class="card">
+            <div
+              class="mb-3 imagesdiv d-flex"
+              routerLink="/BuySelldetails/{{ product.id }}"
+            >
               <img
-                src="../../../assets/img/posting/VIP TAG.png"
-                alt=""
-                class="corner-image"
+                width="400"
+                height="450"
+                src="{{
+                  product.images[0] ||
+                    '../../../../assets/6-post-image-834823.png'
+                }}"
+                class="vip-img img-fluid flex-grow-1"
               />
-
-              <div class="body bg-white rounded-bottom py-3">
-                <div class="title py-2">
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-5"
-                  >
-                    <!-- <div
-                        class="d-flex justify-content-center align-items-center gap-1"
-                        (click)="likeVip(product.business_id, product.new)"
-                        [class.liked]="vippostarray[product.new].liked"
-                      >
-                        <i
-                          class="bx bxs-like fs-4"
-                          id="likeIcon"
-                          [style.color]="
-                            vippostarray[product.new].liked ? 'black' : '#0069D9'
-                          "
-                        ></i>
-                        <p id="likeCount" class="m-0">
-                          {{ vippostarray[product.new].likes }}
-                        </p>
-                      </div> -->
-                    <div
-                      class="d-flex justify-content-center align-items-center gap-5"
-                    >
-                      <h5 class="gold text-center m-0">{{ product.title }}</h5>
-                      <h5 class="gold text-center m-0">{{ product.price }}$</h5>
-                    </div>
-                    <div></div>
-                  </div>
-                </div>
-                <div
-                  class="btns d-flex justify-content-center align-items-center gap-3 py-1"
+            </div>
+            <div class="d-flex align-items-center justify-content-around mx-2">
+              <div class="author mb-1 d-flex flex-column align-items-center">
+                <h6 class="m-0 text-center">{{ product.title }}</h6>
+              </div>
+              <h6>{{ product.business.price }}</h6>
+            </div>
+            <div class="body bg-white rounded-bottom py-3">
+              <div
+                class="btns d-flex justify-content-center align-items-center gap-3 py-1"
+              >
+                <button
+                  *ngIf="
+                    product.business.booking_url !== null &&
+                    product.business.booking_url.trim() !== ''
+                  "
+                  class="date"
                 >
-                  <button
-                    *ngIf="
-                      product.business.booking_url !== null &&
-                      product.business.booking_url.trim() !== ''
-                    "
-                    class="date"
-                  >
-                    <a [href]="product.business.booking_url" target="_blank">
-                      <img
-                        src="../../../assets/img/posting/image 3.png"
-                        alt="Image"
-                      />
-                    </a>
-                  </button>
-                  <button
-                    class="call"
-                    (click)="makePhoneCall(product.business.phone_number)"
-                  >
+                  <a [href]="product.business.booking_url" target="_blank">
                     <img
-                      src="../../../assets/img/posting/image 1.png"
-                      alt="Call"
+                      src="../../../assets/img/posting/image 3.png"
+                      alt="Image"
                     />
-                  </button>
+                  </a>
+                </button>
+                <button
+                  class="call"
+                  (click)="
+                    makePhoneCall(product.business.phone_number);
+                    $event.stopPropagation()
+                  "
+                >
+                  <img
+                    src="../../../assets/img/posting/image 1.png"
+                    alt="Call"
+                  />
+                </button>
 
-                  <button
+                <button
                   class="location"
                   (click)="handleMapClick(product.business.geo_direction)"
                 >
                   <img src="../../../assets/img/posting/image 2.png" alt="" />
                 </button>
-                </div>
               </div>
             </div>
-          </div>
+
+            <div class="position-absolute label">
+              <span class="my-2">VIP</span>
+            </div>
+          </section>
         </ng-template>
       </p-carousel>
     </div>
