@@ -174,19 +174,24 @@ export class DetailsListingComponent {
     window.location.href = 'tel:' + phoneNumber;
   }
   formatTime(time: string): string {
-    const timeParts = time.split(':');
-    let hours = parseInt(timeParts[0], 10);
-    const minutes = timeParts[1];
-    let amPm = 'AM';
+    console.log({ time: time });
+    if (!time) {
+      return '00';
+    } else {
+      const timeParts = time.split(':');
+      let hours = parseInt(timeParts[0], 10);
+      const minutes = timeParts[1];
+      let amPm = 'AM';
 
-    if (hours >= 12) {
-      if (hours > 12) {
-        hours -= 12;
+      if (hours >= 12) {
+        if (hours > 12) {
+          hours -= 12;
+        }
+        amPm = 'PM';
       }
-      amPm = 'PM';
-    }
 
-    return `${hours}:${minutes} ${amPm}`;
+      return `${hours}:${minutes || '00'} ${amPm}`;
+    }
   }
 
   handleMapClick(geoDirection: { lat: number; lng: number }): void {

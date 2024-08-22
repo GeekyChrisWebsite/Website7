@@ -145,9 +145,9 @@
                   {{
                     day.open_24h
                       ? "Open All Day"
-                      : formatTime(day.start_time) +
+                      : formatTime(day?.start_time || "0") +
                         " - " +
-                        formatTime(day.end_time)
+                        formatTime(day?.end_time || "0")
                   }}
                 </p>
               </div>
