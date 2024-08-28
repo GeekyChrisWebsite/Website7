@@ -55,9 +55,7 @@
           >
             <button
               class="call-now"
-              (click)="
-                makePhoneCall(item.phone_number); $event.stopPropagation()
-              "
+              (click)="makePhoneCall(item.business.phone_number)"
             >
               Call Now
             </button>
