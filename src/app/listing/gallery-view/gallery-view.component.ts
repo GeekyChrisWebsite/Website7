@@ -7,14 +7,20 @@ import { CookieService } from 'ngx-cookie-service';
 import { DistanceService } from '../../services/distance.service';
 import { PaginatorModule } from 'primeng/paginator';
 import { CardModule } from 'primeng/card';
-import { TruncateTextPipe } from "../../pipe/truncate-text.pipe";
+import { TruncateTextPipe } from '../../pipe/truncate-text.pipe';
 
 @Component({
   selector: 'app-gallery-view',
   standalone: true,
-  imports: [CommonModule, RouterModule, PaginatorModule, CardModule, TruncateTextPipe],
+  imports: [
+    CommonModule,
+    RouterModule,
+    PaginatorModule,
+    CardModule,
+    TruncateTextPipe,
+  ],
   templateUrl: './gallery-view.component.html',
-  styleUrl: './gallery-view.component.scss'
+  styleUrl: './gallery-view.component.scss',
 })
 export class GalleryViewComponent {
   @Input()
@@ -24,20 +30,18 @@ export class GalleryViewComponent {
   first = 0;
   rows = 5;
   totalRecords: number | undefined;
-  constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router, public distanceService: DistanceService) {
-
-  }
+  constructor(
+    private filterservice: FilterService,
+    private _cookieService: CookieService,
+    public router: Router,
+    public distanceService: DistanceService
+  ) {}
   makePhoneCall(phoneNumber: string): void {
+    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
-  // handleMapClick(dir: { lat: Number, lng: Number }) {
 
-  //   if (dir) {
-  //     const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
-  //     window.open(link, '_blank');
-  //   }
-  // }
-  handleMapClick(dir: { lat: number, lng: number }) {
+  handleMapClick(dir: { lat: number; lng: number }) {
     if (dir) {
       const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
       const anchor = document.createElement('a');
@@ -63,7 +67,6 @@ export class GalleryViewComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.listingArray[index].liked == true) {
-
         this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
             this.listingArray[index].liked = false;
@@ -78,8 +81,6 @@ export class GalleryViewComponent {
           },
         });
       }
-
-
     }
   }
   calculateDistance(lat: number, lng: number): string {
@@ -93,5 +94,4 @@ export class GalleryViewComponent {
   ngOnInit() {
     this.totalRecords = this.listingArray.length;
   }
-
 }
