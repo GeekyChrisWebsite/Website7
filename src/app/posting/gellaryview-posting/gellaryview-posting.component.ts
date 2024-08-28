@@ -13,7 +13,7 @@ import { CardModule } from 'primeng/card';
   standalone: true,
   imports: [CommonModule, RouterModule, PaginatorModule, CardModule],
   templateUrl: './gellaryview-posting.component.html',
-  styleUrl: './gellaryview-posting.component.scss'
+  styleUrl: './gellaryview-posting.component.scss',
 })
 export class GellaryviewPostingComponent {
   currentLocation: { latitude: number; longitude: number } | null = null;
@@ -25,11 +25,15 @@ export class GellaryviewPostingComponent {
   postingArray!: PostingData[];
   @Input() filterposts: any;
   @Input() distances: any[] = [];
-  constructor(private _filterservie: FilterService, public _cookieService: CookieService, public router: Router, private distanceService: DistanceService,
-    @Inject(PLATFORM_ID) private platformId: Object) {
-
-  }
+  constructor(
+    private _filterservie: FilterService,
+    public _cookieService: CookieService,
+    public router: Router,
+    private distanceService: DistanceService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
   makePhoneCall(phoneNumber: string): void {
+    console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
   // handleMapClick(dir: { lat: Number, lng: Number }) {
@@ -39,8 +43,12 @@ export class GellaryviewPostingComponent {
   //     window.open(link, '_blank');
   //   }
   // }
-  handleMapClick(geoDirection: { lat: number, lng: number }): void {
-    if (geoDirection && geoDirection.lat !== undefined && geoDirection.lng !== undefined) {
+  handleMapClick(geoDirection: { lat: number; lng: number }): void {
+    if (
+      geoDirection &&
+      geoDirection.lat !== undefined &&
+      geoDirection.lng !== undefined
+    ) {
       const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
       const anchor = document.createElement('a');
       anchor.href = link;
@@ -57,7 +65,6 @@ export class GellaryviewPostingComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.postingArray[index].liked == true) {
-
         this._filterservie.addLike(busId).subscribe({
           next: (res) => {
             this.postingArray[index].liked = false;
@@ -73,8 +80,6 @@ export class GellaryviewPostingComponent {
         });
       }
     }
-
-
   }
   truncateText(content: string, maxLength: number): string {
     if (content.length <= maxLength) {
@@ -89,20 +94,21 @@ export class GellaryviewPostingComponent {
   }
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.distanceService.getCurrentLocation()
+      this.distanceService
+        .getCurrentLocation()
         .then((coords) => {
-          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.currentLocation = {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+          };
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     }
     this.totalRecords = this.postingArray.length;
-
   }
   onPageChange(event: any) {
     this.first = event.first;
     this.rows = event.rows;
   }
-
 }
