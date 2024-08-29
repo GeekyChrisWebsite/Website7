@@ -46,7 +46,14 @@
       </div>
 
       <div class="justify-content-center align-items-center d-flex">
+        <!-- Display a single image if the array length is 1 -->
+        <div *ngIf="galleryphotos.length === 1">
+          <img [src]="galleryphotos[0]" class="w-100 img-fluid" />
+        </div>
+
+        <!-- Display the galleria if the array length is greater than 1 -->
         <p-galleria
+          *ngIf="galleryphotos.length > 1"
           [value]="galleryphotos"
           [showItemNavigators]="true"
           [responsiveOptions]="responsiveOptions"
@@ -67,6 +74,7 @@
           </ng-template>
         </p-galleria>
       </div>
+
       <div>
         <p class="text-start" [innerHTML]="datainfo?.content"></p>
       </div>
