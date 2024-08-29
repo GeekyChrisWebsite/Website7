@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { GalleriaModule } from 'primeng/galleria';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -13,6 +13,8 @@ import { ListingService } from '../../services/listing.service';
 import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { ChipModule } from 'primeng/chip';
 import { SimilarWorkComponent } from '../../shared/similar-work/similar-work.component';
+import { CookieService } from 'ngx-cookie-service';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-details-listing',
@@ -60,7 +62,10 @@ export class DetailsListingComponent {
   constructor(
     public listingservice: ListingService,
     private route: ActivatedRoute,
-    private _httpClient: HttpClient
+    private _httpClient: HttpClient,
+    public _cookieService: CookieService,
+    private filterService: FilterService,
+    public router: Router
   ) {
     this.id = route.snapshot.paramMap.get('id');
     this.apiLoaded = _httpClient
@@ -202,6 +207,31 @@ export class DetailsListingComponent {
     ) {
       const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
       window.open(link, '_blank');
+    }
+  }
+  likeBusiness(busId: string) {
+    const token = this._cookieService.get('token');
+
+    if (!token) {
+      this.router.navigate(['/login']);
+    } else {
+      if (this.datainfo.liked) {
+        this.filterService.addDislikes(busId).subscribe({
+          next: (res) => {
+            console.log(res, 'dislike');
+            this.datainfo.liked = false;
+            this.datainfo.likes -= 1; // Decrease likes count on dislike
+          },
+        });
+      } else {
+        this.filterService.addLike(busId).subscribe({
+          next: (res) => {
+            console.log(res, 'like');
+            this.datainfo.liked = true;
+            this.datainfo.likes += 1; // Increase likes count on like
+          },
+        });
+      }
     }
   }
 }
