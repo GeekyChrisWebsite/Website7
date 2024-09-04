@@ -92,6 +92,6 @@ export class NavbarComponent implements DoCheck {
   }
 
   closeSidebar() {
-    this.sidebarVisible1 = false; // Close the sidebar
+    this.sidebarVisible1 = true; // Close the sidebar
   }
 }
