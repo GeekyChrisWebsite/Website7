@@ -50,6 +50,7 @@ export class NavbarComponent implements DoCheck {
   isrouteHome: boolean = true;
   user: any;
   imgUser: any;
+  visible: boolean = false;
 
   constructor(
     public listingservice: ListingService,
@@ -63,6 +64,9 @@ export class NavbarComponent implements DoCheck {
 
   ngOnInit(): void {
     this.getUserFromCookies();
+    this.filterservice.sidebarVisible$.subscribe(
+      (visible) => (this.visible = visible)
+    );
   }
   getUserFromCookies() {
     const token = this._cookieService.get('token');

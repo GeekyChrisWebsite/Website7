@@ -5,10 +5,10 @@ import { environment } from '../environments/environment.development';
 import { ListingData } from '../interface/listing-data';
 import { Subject } from 'rxjs/internal/Subject';
 import { PostingService } from './posting.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FilterService {
   filteredListings = new Subject<{
@@ -41,8 +41,8 @@ export class FilterService {
   clearBuySellSubscription!: Subscription;
   constructor(
     private httpClient: HttpClient,
-    private postingService: PostingService,
-  ) { }
+    private postingService: PostingService
+  ) {}
   getStates(category: string): Observable<any> {
     let params = new HttpParams();
     params = params.set('category', category);
@@ -209,13 +209,11 @@ export class FilterService {
     //   'Authorization': `Bearer ${token}`,
     // });
 
-    let body = {
-    };
+    let body = {};
 
     return this.httpClient.post(
       `${environment.BACKEND_DOMAIN}/business/${business_id}/like`,
-      body,
-
+      body
     );
   }
 
@@ -225,14 +223,25 @@ export class FilterService {
     //   'Authorization': `Bearer ${token}`,
     // });
 
-    let body = {
-    };
+    let body = {};
 
     return this.httpClient.post(
       `${environment.BACKEND_DOMAIN}/business/${business_id}/dislike`,
-      body,
-
+      body
     );
   }
+  private sidebarVisibility = new BehaviorSubject<boolean>(false);
+  sidebarVisible$ = this.sidebarVisibility.asObservable();
 
+  hideSidebar() {
+    this.sidebarVisibility.next(false);
+  }
+
+  showSidebar() {
+    this.sidebarVisibility.next(true);
+  }
+
+  toggleSidebar() {
+    this.sidebarVisibility.next(!this.sidebarVisibility.value);
+  }
 }

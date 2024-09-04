@@ -1,8 +1,6 @@
 import {
   Component,
-  EventEmitter,
   Inject,
-  Output,
   PLATFORM_ID,
   ViewEncapsulation,
 } from '@angular/core';
@@ -37,9 +35,6 @@ export class FilterComponent {
   filterState: string = '';
   filterCity: string = '';
   cat!: { name: String };
-  @Output() searchClicked = new EventEmitter<void>();
-  sidebarVisible1: boolean = false;
-
   filter: FormGroup = new FormGroup({
     cat: new FormControl({ name: '' }, [Validators.required]),
     state: new FormControl(
@@ -128,7 +123,6 @@ export class FilterComponent {
         : obj
     );
     localStorage.setItem('filter', JSON.stringify(filterValueArray));
-    this.searchClicked.emit(); // Emit the event when Search is clicked
   }
   getStates() {
     localStorage.setItem(
@@ -202,9 +196,7 @@ export class FilterComponent {
   ngOnInit(): void {
     this.checkCityDisabledStatus();
   }
-
-  closeSidebar() {
-    console.log('Closing sidebar');
-    this.sidebarVisible1 = true;
+  close() {
+    this.filterService.hideSidebar(); // Close the sidebar
   }
 }

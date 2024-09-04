@@ -39,7 +39,7 @@
       >
         <button
           pButton
-          (click)="filterInService()"
+          (click)="filterInService(); close()"
           [disabled]="disabled"
           type="submit"
           class="text-nowrap p-button-success"
@@ -90,7 +90,7 @@
       >
         <button
           pButton
-          (click)="filterInService(); closeSidebar()"
+          (click)="filterInService(); close()"
           [disabled]="disabled"
           type="submit"
           class="text-nowrap p-button-success"
