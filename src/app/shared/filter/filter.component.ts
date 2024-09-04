@@ -1,5 +1,15 @@
-import { Component, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  Component,
+  Inject,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { CardModule } from 'primeng/card';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,7 +23,7 @@ import { isPlatformBrowser } from '@angular/common';
   imports: [DropdownModule, ReactiveFormsModule, CardModule],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class FilterComponent {
   categories: any[];
@@ -25,6 +35,8 @@ export class FilterComponent {
   filterState: string = '';
   filterCity: string = '';
   cat!: { name: String };
+  sidebarVisible: any; // Assuming sidebar is visible initially
+
   filter: FormGroup = new FormGroup({
     cat: new FormControl({ name: '' }, [Validators.required]),
     state: new FormControl(
@@ -38,8 +50,7 @@ export class FilterComponent {
   });
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private filterService: FilterService,
-
+    private filterService: FilterService
   ) {
     this.categories = [
       { name: 'BEAUTY SALON SPA', value: 'BEAUTY SALON SPA' },
@@ -106,11 +117,11 @@ export class FilterComponent {
     filterValueArray = filterValueArray.map((obj: any, index: number) =>
       index === 0
         ? {
-          ...obj,
-          category: this.filter.controls['cat'].value.name,
-          state: this.filter.controls['state'].value.name,
-          city: this.filter.controls['city'].value.name,
-        }
+            ...obj,
+            category: this.filter.controls['cat'].value.name,
+            state: this.filter.controls['state'].value.name,
+            city: this.filter.controls['city'].value.name,
+          }
         : obj
     );
     localStorage.setItem('filter', JSON.stringify(filterValueArray));
@@ -135,9 +146,8 @@ export class FilterComponent {
             }));
           }
         },
-        error: (err: HttpErrorResponse) => {
-        },
-        complete: () => { },
+        error: (err: HttpErrorResponse) => {},
+        complete: () => {},
       });
   }
   getCities() {
@@ -156,9 +166,8 @@ export class FilterComponent {
             }));
           }
         },
-        error: (err: any) => {
-        },
-        complete: () => { },
+        error: (err: any) => {},
+        complete: () => {},
       });
   }
   setCat(): void {
@@ -185,8 +194,7 @@ export class FilterComponent {
     filterArray[0].city = this.filter.controls['city'].value.name;
     localStorage.setItem('filter', JSON.stringify(filterArray));
   }
-  ngDoCheck(): void {
-  }
+  ngDoCheck(): void {}
   ngOnInit(): void {
     this.checkCityDisabledStatus();
   }
