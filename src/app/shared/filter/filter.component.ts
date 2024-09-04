@@ -205,6 +205,6 @@ export class FilterComponent {
 
   closeSidebar() {
     console.log('Closing sidebar');
-    this.sidebarVisible1 = false;
+    this.sidebarVisible1 = true;
   }
 }
