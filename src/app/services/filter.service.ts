@@ -230,18 +230,10 @@ export class FilterService {
       body
     );
   }
-  private sidebarVisibility = new BehaviorSubject<boolean>(false);
-  sidebarVisible$ = this.sidebarVisibility.asObservable();
+  private sidebarVisible = new BehaviorSubject<boolean>(false);
+  sidebarVisible$ = this.sidebarVisible.asObservable();
 
-  hideSidebar() {
-    this.sidebarVisibility.next(false);
-  }
-
-  showSidebar() {
-    this.sidebarVisibility.next(true);
-  }
-
-  toggleSidebar() {
-    this.sidebarVisibility.next(!this.sidebarVisibility.value);
+  setSidebarVisible(visible: boolean) {
+    this.sidebarVisible.next(visible);
   }
 }

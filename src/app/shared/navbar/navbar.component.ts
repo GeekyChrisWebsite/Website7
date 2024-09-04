@@ -60,7 +60,11 @@ export class NavbarComponent implements DoCheck {
     public userService: UserInfoService,
     public _cookieService: CookieService,
     public _AuthService: AuthService
-  ) {}
+  ) {
+    this.filterservice.sidebarVisible$.subscribe(
+      (visible) => (this.sidebarVisible1 = visible)
+    );
+  }
 
   ngOnInit(): void {
     this.getUserFromCookies();

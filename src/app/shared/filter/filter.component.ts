@@ -123,6 +123,7 @@ export class FilterComponent {
         : obj
     );
     localStorage.setItem('filter', JSON.stringify(filterValueArray));
+    this.filterService.setSidebarVisible(false);
   }
   getStates() {
     localStorage.setItem(
@@ -195,8 +196,5 @@ export class FilterComponent {
   ngDoCheck(): void {}
   ngOnInit(): void {
     this.checkCityDisabledStatus();
-  }
-  close() {
-    this.filterService.hideSidebar(); // Close the sidebar
   }
 }
