@@ -59,11 +59,10 @@ export class NavbarComponent implements DoCheck {
     public userService: UserInfoService,
     public _cookieService: CookieService,
     public _AuthService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.getUserFromCookies()
-
+    this.getUserFromCookies();
   }
   getUserFromCookies() {
     const token = this._cookieService.get('token');
@@ -71,10 +70,9 @@ export class NavbarComponent implements DoCheck {
       this._AuthService.loginUser().subscribe(
         (res: any) => {
           this.user = res.data.username;
-          this.imgUser = res.data.profile_image
+          this.imgUser = res.data.profile_image;
         },
-        (error) => {
-        }
+        (error) => {}
       );
     }
   }
@@ -85,14 +83,15 @@ export class NavbarComponent implements DoCheck {
     } else {
       this.isrouteHome = true;
     }
-
-
   }
 
   logout() {
     this._cookieService.delete('token');
     this.user = null;
     this.imgUser = null;
+  }
 
+  closeSidebar() {
+    this.sidebarVisible1 = false; // Close the sidebar
   }
 }

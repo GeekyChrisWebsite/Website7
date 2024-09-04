@@ -15,16 +15,25 @@
         <img src="../../../assets/img/logo/logo.png" alt="" />
       </div>
       <div class="col-2">
-        <ul class="d-flex gap-3 list-unstyled m-0 justify-content-center align-items-center">
+        <ul
+          class="d-flex gap-3 list-unstyled m-0 justify-content-center align-items-center"
+        >
           <li *ngIf="!user"><a routerLink="/login">Login</a></li>
           <li *ngIf="!user"><a routerLink="/register">Sign Up</a></li>
-          <div *ngIf="user" class="d-flex align-items-center justify-content-center gap-1">
-            <img *ngIf="imgUser" [src]="imgUser" alt="" width="30px" height="30px">
-            <span>{{user}}</span>
+          <div
+            *ngIf="user"
+            class="d-flex align-items-center justify-content-center gap-1"
+          >
+            <img
+              *ngIf="imgUser"
+              [src]="imgUser"
+              alt=""
+              width="30px"
+              height="30px"
+            />
+            <span>{{ user }}</span>
           </div>
           <li *ngIf="user"><a (click)="logout()">Logout</a></li>
-
-
         </ul>
       </div>
     </div>
@@ -33,20 +42,35 @@
 <div class="mobile fixed-top">
   <div class="container">
     <div class="row justify-content-center align-items-center d-flex">
-      <div class="col justify-content-center align-items-center d-flex" *ngIf="isrouteHome">
-        <p-button type="button" class="" (click)="sidebarVisible1 = true" icon="pi pi-filter fs-1"></p-button>
+      <div
+        class="col justify-content-center align-items-center d-flex"
+        *ngIf="isrouteHome"
+      >
+        <p-button
+          type="button"
+          class=""
+          (click)="sidebarVisible1 = true"
+          icon="pi pi-filter fs-1"
+        ></p-button>
       </div>
       <div class="col justify-content-center align-items-center d-flex">
         <img src="../../../assets/img/logo/logo.png" alt="logo" class="" />
       </div>
       <div class="col justify-content-center align-items-center d-flex">
-        <p-button type="button" class="" (click)="sidebarVisible2 = true" icon="pi pi-align-justify fs-1"></p-button>
+        <p-button
+          type="button"
+          class=""
+          (click)="sidebarVisible2 = true"
+          icon="pi pi-align-justify fs-1"
+        ></p-button>
       </div>
     </div>
   </div>
   <div class="container bg-green py-2">
-    <ul class="d-flex gap-5 list-unstyled m-0 justify-content-center align-items-center text-white"
-      style="font-size: 15px">
+    <ul
+      class="d-flex gap-5 list-unstyled m-0 justify-content-center align-items-center text-white"
+      style="font-size: 15px"
+    >
       <li routerLink="/home" routerLinkActive="line"><a>Home</a></li>
       <li routerLink="/listing" routerLinkActive="line"><a>Listing</a></li>
       <li routerLink="/posting" routerLinkActive="line"><a>Posting</a></li>
@@ -54,7 +78,11 @@
     </ul>
   </div>
 </div>
-<p-sidebar [(visible)]="sidebarVisible1" position="left">
+<p-sidebar
+  [(visible)]="sidebarVisible1"
+  (searchClicked)="closeSidebar()"
+  position="left"
+>
   <app-filter></app-filter>
 </p-sidebar>
 <p-sidebar [(visible)]="sidebarVisible2" position="right">
@@ -62,16 +90,23 @@
     <div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
         <li class="nav-item justify-content-center align-items-center d-flex">
-          <a class="nav-link py-4" routerLink="/home" routerLinkActive="bg">Home</a>
+          <a class="nav-link py-4" routerLink="/home" routerLinkActive="bg"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link py-4" routerLink="/listing" routerLinkActive="bg">Listing</a>
+          <a class="nav-link py-4" routerLink="/listing" routerLinkActive="bg"
+            >Listing</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link py-4" routerLink="/posting" routerLinkActive="bg">Posting</a>
+          <a class="nav-link py-4" routerLink="/posting" routerLinkActive="bg"
+            >Posting</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link py-4" routerLinkActive="bg" routerLink="/buysell">Buy & Sell
+          <a class="nav-link py-4" routerLinkActive="bg" routerLink="/buysell"
+            >Buy & Sell
           </a>
         </li>
       </ul>
