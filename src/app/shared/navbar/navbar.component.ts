@@ -90,9 +90,4 @@ export class NavbarComponent implements DoCheck {
     this.user = null;
     this.imgUser = null;
   }
-
-  closeSidebar() {
-    console.log('Closing sidebar');
-    this.sidebarVisible1 = false;
-  }
 }

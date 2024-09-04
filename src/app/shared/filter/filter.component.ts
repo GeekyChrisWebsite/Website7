@@ -38,6 +38,7 @@ export class FilterComponent {
   filterCity: string = '';
   cat!: { name: String };
   @Output() searchClicked = new EventEmitter<void>();
+  sidebarVisible1: boolean = false;
 
   filter: FormGroup = new FormGroup({
     cat: new FormControl({ name: '' }, [Validators.required]),
@@ -200,5 +201,10 @@ export class FilterComponent {
   ngDoCheck(): void {}
   ngOnInit(): void {
     this.checkCityDisabledStatus();
+  }
+
+  closeSidebar() {
+    console.log('Closing sidebar');
+    this.sidebarVisible1 = false;
   }
 }

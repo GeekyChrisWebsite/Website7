@@ -78,11 +78,7 @@
     </ul>
   </div>
 </div>
-<p-sidebar
-  [(visible)]="sidebarVisible1"
-  (searchClicked)="closeSidebar()"
-  position="left"
->
+<p-sidebar [(visible)]="sidebarVisible1" position="left">
   <app-filter></app-filter>
 </p-sidebar>
 <p-sidebar [(visible)]="sidebarVisible2" position="right">

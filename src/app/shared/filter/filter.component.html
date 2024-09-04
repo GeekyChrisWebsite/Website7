@@ -90,7 +90,7 @@
       >
         <button
           pButton
-          (click)="filterInService()"
+          (click)="filterInService(); closeSidebar()"
           [disabled]="disabled"
           type="submit"
           class="text-nowrap p-button-success"
