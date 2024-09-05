@@ -109,7 +109,12 @@
                     </button>
                     <button
                       class="Directions"
-                      (click)="handleMapClick(customer.business.geo_direction)"
+                      (click)="
+                        handleMapClick(
+                          customer.business.street,
+                          customer.business.state
+                        )
+                      "
                     >
                       Directions
                     </button>
@@ -224,7 +229,12 @@
                     </button>
                     <button
                       class="Directions"
-                      (click)="handleMapClick(customer.business.geo_direction)"
+                      (click)="
+                        handleMapClick(
+                          customer.business.street,
+                          customer.business.state
+                        )
+                      "
                     >
                       Directions
                     </button>

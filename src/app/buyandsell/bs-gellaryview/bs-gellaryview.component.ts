@@ -12,7 +12,7 @@ import { CardModule } from 'primeng/card';
   standalone: true,
   imports: [CommonModule, RouterModule, PaginatorModule, CardModule],
   templateUrl: './bs-gellaryview.component.html',
-  styleUrl: './bs-gellaryview.component.scss'
+  styleUrl: './bs-gellaryview.component.scss',
 })
 export class BsGellaryviewComponent {
   currentLocation: { latitude: number; longitude: number } | null = null;
@@ -24,25 +24,26 @@ export class BsGellaryviewComponent {
   @Input() distances!: any;
   maxDescriptionLength: number = 40;
   showFullText: boolean = false;
-  constructor(private _filterservie: FilterService, public _cookieService: CookieService,
-    public router: Router, private distanceService: DistanceService, @Inject(PLATFORM_ID) private platformId: Object) {
-
-  }
+  constructor(
+    private _filterservie: FilterService,
+    public _cookieService: CookieService,
+    public router: Router,
+    private distanceService: DistanceService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   makePhoneCall(phoneNumber: string): void {
     console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(dir: { lat: Number, lng: Number }) {
-    console.log(dir)
-
-    if (dir) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
       window.open(link, '_blank');
     }
   }
-
-
 
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
@@ -63,7 +64,7 @@ export class BsGellaryviewComponent {
 
         this._filterservie.addLike(busId).subscribe({
           next: (res) => {
-            console.log(res, "like");
+            console.log(res, 'like');
             this.BuySellArray[index].liked = false;
             this.BuySellArray[index].business.likes += 1;
           },
@@ -71,15 +72,13 @@ export class BsGellaryviewComponent {
       } else {
         this._filterservie.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, "dislike");
+            console.log(res, 'dislike');
             this.BuySellArray[index].liked = true;
             this.BuySellArray[index].business.likes -= 1;
           },
         });
       }
     }
-
-
   }
   calculateDistance(lat: number, lng: number): string {
     const distance = this.distanceService.calculateDistance(lat, lng);
@@ -87,9 +86,13 @@ export class BsGellaryviewComponent {
   }
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.distanceService.getCurrentLocation()
+      this.distanceService
+        .getCurrentLocation()
         .then((coords) => {
-          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.currentLocation = {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+          };
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
         .catch((error) => {
@@ -97,7 +100,6 @@ export class BsGellaryviewComponent {
         });
     }
     this.totalRecords = this.BuySellArray.length;
-
   }
 
   onPageChange(event: any) {

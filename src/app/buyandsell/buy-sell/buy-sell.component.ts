@@ -263,13 +263,11 @@ export class BuySellComponent {
     console.log('Initiating phone call to:', phoneNumber);
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(geoDirection: { lat: number; lng: number }): void {
-    if (
-      geoDirection &&
-      geoDirection.lat !== undefined &&
-      geoDirection.lng !== undefined
-    ) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
       window.open(link, '_blank');
     }
   }
