@@ -210,10 +210,10 @@ export class DetailsListingComponent {
   //     window.open(link, '_blank');
   //   }
   // }
-  handleMapClick(geoAddress: { street: string; state: string }): void {
-    if (geoAddress && geoAddress.street && geoAddress.state) {
-      const encodedStreet = encodeURIComponent(geoAddress.street);
-      const encodedState = encodeURIComponent(geoAddress.state);
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
       const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
       window.open(link, '_blank');
     }

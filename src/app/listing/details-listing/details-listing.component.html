@@ -42,7 +42,7 @@
                 <p
                   style="cursor: pointer; color: blue"
                   class="p-0 m-0"
-                  (click)="handleMapClick(datainfo.geo_direction)"
+                  (click)="handleMapClick(datainfo.street, datainfo.state)"
                 >
                   {{ datainfo.street + ", " + datainfo.state }}
                 </p>
@@ -136,10 +136,11 @@
     </div>
 
     <div
-      class="Video py-5 justify-content-center align-items-center d-flex"
+      class="Video py-5 justify-content-center align-items-center d-flex flex-column"
       *ngIf="datainfo.video"
     >
       <h3>Video</h3>
+
       <video width="1300" height="800" controls autoplay>
         <source src="{{ datainfo.video }}" type="video/mp4" />
         Error Message
