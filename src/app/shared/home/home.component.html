@@ -365,11 +365,20 @@
                         class="pi pi-map-marker"
                         style="color: #101010; font-size: 14px"
                       ></i>
-                      <small style="font-size: 14px">{{
+                      <!-- <small style="font-size: 14px">{{
                         truncateText(item.street, 15) +
                           ", " +
                           truncateText(item.state, 15)
-                      }}</small>
+                      }}</small> -->
+                      {{
+                        item.street +
+                          ", " +
+                          item.city1 +
+                          ", " +
+                          item.state +
+                          ", " +
+                          item.city_zip
+                      }}
                     </div>
                     <div
                       class="d-flex justify-content-start align-items-start gap-1"
