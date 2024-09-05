@@ -1,4 +1,9 @@
-import { Component, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MapviewPostingComponent } from '../mapview-posting/mapview-posting.component';
 import { ListViewComponent } from '../../listing/list-view/list-view.component';
 import { GellaryviewPostingComponent } from '../gellaryview-posting/gellaryview-posting.component';
@@ -10,7 +15,12 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ListviewPostingComponent } from '../listview-posting/listview-posting.component';
 import { PostingData } from '../../interface/posting-data';
 import { GalleryViewComponent } from '../../listing/gallery-view/gallery-view.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -25,14 +35,25 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-posting',
   standalone: true,
-  imports: [MapviewPostingComponent, ListViewComponent, GellaryviewPostingComponent,
-    CarouselModule, DropdownModule, RouterModule, PaginatorModule, ListviewPostingComponent,
-    MapviewPostingComponent, GalleryViewComponent, ReactiveFormsModule, ProgressSpinnerModule, FilterComponent],
+  imports: [
+    MapviewPostingComponent,
+    ListViewComponent,
+    GellaryviewPostingComponent,
+    CarouselModule,
+    DropdownModule,
+    RouterModule,
+    PaginatorModule,
+    ListviewPostingComponent,
+    MapviewPostingComponent,
+    GalleryViewComponent,
+    ReactiveFormsModule,
+    ProgressSpinnerModule,
+    FilterComponent,
+  ],
   templateUrl: './posting.component.html',
   styleUrl: './posting.component.scss',
   host: { ngSkipHydration: 'true' },
   encapsulation: ViewEncapsulation.None,
-
 })
 export class PostingComponent {
   first = 20;
@@ -60,9 +81,7 @@ export class PostingComponent {
     public distanceService: DistanceService,
     public _cookieService: CookieService,
     public router: Router,
-    public _DistanceService: DistanceService,
-
-
+    public _DistanceService: DistanceService
   ) {
     this.galleyView = true;
     this.listView = false;
@@ -120,33 +139,32 @@ export class PostingComponent {
     }
     this.GetVipPost();
     if (isPlatformBrowser(this.platformId)) {
-      this.distanceService.getCurrentLocation()
+      this.distanceService
+        .getCurrentLocation()
         .then((coords) => {
-          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.currentLocation = {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+          };
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     }
-
-
   }
   calculateDistance(lat: number, lng: number): string {
     const distance = this.distanceService.calculateDistance(lat, lng);
     return distance !== null ? distance.toFixed(0) : 'N/A';
   }
 
-
-
   getPosting(): void {
     this.subscribtions = this.postingService.GetPosting().subscribe({
       next: (res: { data: any[]; message: string; status: string }) => {
         this.postingArray = res.data;
         this.getGeoLocations();
-        this.postingArray = this.postingArray.map(item => ({
+        this.postingArray = this.postingArray.map((item) => ({
           ...item,
-          updated_at: new Date(item.updated_at).toISOString().split("T")[0],
-          datePart: item.updated_at
+          updated_at: new Date(item.updated_at).toISOString().split('T')[0],
+          datePart: item.updated_at,
         }));
         this.postingArray.sort(
           (a, b) =>
@@ -154,7 +172,6 @@ export class PostingComponent {
         );
       },
     });
-
   }
 
   getGeoLocations(): void {
@@ -190,8 +207,7 @@ export class PostingComponent {
           this.postingArray = res.data.posts;
           this.getGeoLocations();
         },
-        error: (err: HttpErrorResponse) => {
-        },
+        error: (err: HttpErrorResponse) => {},
       });
   }
   filteredPosted(): void {
@@ -206,12 +222,11 @@ export class PostingComponent {
       },
     });
   }
-  handleMapClick(geo_direction: any) {
-
-    const clickedPosition = geo_direction.coords || geo_direction.latLng;
-
-    if (clickedPosition) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${clickedPosition.lat},${clickedPosition.lng}`;
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
       window.open(link, '_blank');
     }
   }
@@ -219,7 +234,6 @@ export class PostingComponent {
     this.galleyView = true;
     this.listView = false;
     this.mapView = false;
-
   }
   showList(): void {
     this.listView = true;
@@ -234,8 +248,7 @@ export class PostingComponent {
   onPageChange(event: any): void {
     this.first = event.first;
   }
-  onSubmit() {
-  }
+  onSubmit() {}
   isLiked: boolean[] = [];
 
   likevip(busId: string, index: number) {
@@ -256,19 +269,15 @@ export class PostingComponent {
     window.location.href = 'tel:' + phoneNumber;
   }
   GetVipPost() {
-    let vip = this.postingService.vipposts().subscribe(
-      (res: { data: PostingData[] }) => {
+    let vip = this.postingService
+      .vipposts()
+      .subscribe((res: { data: PostingData[] }) => {
         this.vippostarray = res.data;
         const vipWithId = this.vippostarray.map((item, index) => {
           return { ...item, new: index };
         });
         this.vippostarray = vipWithId;
-
-
-      }
-
-    );
-
+      });
   }
 
   likeVip(busId: string, index: number) {
@@ -278,7 +287,6 @@ export class PostingComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.vippostarray[index].liked == true) {
-
         this.filterService.addLike(busId).subscribe({
           next: (res) => {
             this.vippostarray[index].liked = false;
@@ -294,9 +302,5 @@ export class PostingComponent {
         });
       }
     }
-
-
   }
-
-
 }
