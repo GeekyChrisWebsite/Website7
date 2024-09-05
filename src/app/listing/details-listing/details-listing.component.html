@@ -134,13 +134,15 @@
         </ng-template>
       </p-galleria>
     </div>
-    <div>
-      <div class="Video" *ngIf="datainfo.video">
-        <video width="320" height="240" controls>
-          <source src="{{ datainfo.video }}" type="video/mp4" />
-          Error Message
-        </video>
-      </div>
+
+    <div
+      class="Video py-5 justify-content-center align-items-center d-flex"
+      *ngIf="datainfo.video"
+    >
+      <video width="320" height="240" controls autoplay>
+        <source src="{{ datainfo.video }}" type="video/mp4" />
+        Error Message
+      </video>
     </div>
 
     <div class="Description">
