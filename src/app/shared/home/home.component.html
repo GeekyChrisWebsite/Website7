@@ -97,7 +97,7 @@
             style="max-width: 580px"
           >
             <div class="row g-0">
-              <div class="col-7">
+              <div class="col-6">
                 <img
                   src="{{ item.logo }}"
                   class="imgg rounded-start"
@@ -129,11 +129,17 @@
                       class="pi pi-map-marker"
                       style="color: #101010; font-size: 14px"
                     ></i>
-                    <small style="font-size: 14px">{{
-                      truncateText(item.street, 20) +
-                        ", " +
-                        truncateText(item.state, 20)
-                    }}</small>
+                    <small style="color: #101010; font-size: 16px">
+                      {{
+                        item.street +
+                          ", " +
+                          item.city1 +
+                          ", " +
+                          item.state +
+                          ", " +
+                          item.city_zip
+                      }}</small
+                    >
                   </div>
                   <div
                     class="d-flex justify-content-start align-items-start gap-1"
@@ -178,7 +184,7 @@
                       </button>
                       <button
                         class="Directions"
-                        (click)="handleMapClick(item.geo_direction)"
+                        (click)="handleMapClick(item.street, item.state)"
                       >
                         Directions
                       </button>
@@ -215,7 +221,7 @@
             style="max-width: 580px"
           >
             <div class="row g-0">
-              <div class="col-7">
+              <div class="col-6">
                 <img
                   src="{{ item.logo }}"
                   class="imgg rounded-start"
@@ -247,11 +253,17 @@
                       class="pi pi-map-marker"
                       style="color: #101010; font-size: 14px"
                     ></i>
-                    <small style="font-size: 14px">{{
-                      truncateText(item.street, 15) +
-                        ", " +
-                        truncateText(item.state, 15)
-                    }}</small>
+                    <small style="color: #101010; font-size: 16px">
+                      {{
+                        item.street +
+                          ", " +
+                          item.city1 +
+                          ", " +
+                          item.state +
+                          ", " +
+                          item.city_zip
+                      }}</small
+                    >
                   </div>
                   <div
                     class="d-flex justify-content-start align-items-start gap-1"
@@ -296,7 +308,7 @@
                       </button>
                       <button
                         class="Directions"
-                        (click)="handleMapClick(item.geo_direction)"
+                        (click)="handleMapClick(item.street, item.state)"
                       >
                         Directions
                       </button>
@@ -333,7 +345,7 @@
               style="max-width: 580px"
             >
               <div class="row g-0">
-                <div class="col-7">
+                <div class="col-6">
                   <img
                     src="{{ item.logo }}"
                     class="imgg rounded-start"
@@ -363,22 +375,20 @@
                     <div class="d-flex gap-1">
                       <i
                         class="pi pi-map-marker"
-                        style="color: #101010; font-size: 8px"
+                        style="color: #101010; font-size: 14px"
                       ></i>
-                      <!-- <small style="font-size: 14px">{{
-                        truncateText(item.street, 15) +
-                          ", " +
-                          truncateText(item.state, 15)
-                      }}</small> -->
-                      {{
-                        item.street +
-                          ", " +
-                          item.city1 +
-                          ", " +
-                          item.state +
-                          ", " +
-                          item.city_zip
-                      }}
+
+                      <small style="color: #101010; font-size: 16px">
+                        {{
+                          item.street +
+                            ", " +
+                            item.city1 +
+                            ", " +
+                            item.state +
+                            ", " +
+                            item.city_zip
+                        }}</small
+                      >
                     </div>
                     <div
                       class="d-flex justify-content-start align-items-start gap-1"
@@ -399,21 +409,21 @@
                       class="btns justify-content-between align-items-center d-flex gap-1"
                     >
                       <!-- <div
-                        class="d-flex justify-content-center align-items-center gap-1"
-                        (click)="likeBusiness2(item.id, i)"
-                        [class.liked]="MASSAGEarray[i].liked"
-                      >
-                        <i
-                          class="bx bxs-like fs-4"
-                          id="likeIcon"
-                          [style.color]="
-                            MASSAGEarray[i].liked ? 'black' : '#0069D9'
-                          "
-                        ></i>
-                        <p id="likeCount" class="m-0">
-                          {{ MASSAGEarray[i].likes }}
-                        </p>
-                      </div> -->
+                      class="d-flex justify-content-center align-items-center gap-1"
+                      (click)="likeBusiness2(item.id, i)"
+                      [class.liked]="MASSAGEarray[i].liked"
+                    >
+                      <i
+                        class="bx bxs-like fs-4"
+                        id="likeIcon"
+                        [style.color]="
+                          MASSAGEarray[i].liked ? 'black' : '#0069D9'
+                        "
+                      ></i>
+                      <p id="likeCount" class="m-0">
+                        {{ MASSAGEarray[i].likes }}
+                      </p>
+                    </div> -->
                       <div class="btns d-flex flex-column gap-2 px-1 py-1">
                         <button
                           class="call-now"
@@ -423,7 +433,7 @@
                         </button>
                         <button
                           class="Directions"
-                          (click)="handleMapClick(item.geo_direction)"
+                          (click)="handleMapClick(item.street, item.state)"
                         >
                           Directions
                         </button>

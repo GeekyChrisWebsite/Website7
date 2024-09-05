@@ -1,4 +1,9 @@
-import { Component, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TagModule } from 'primeng/tag';
 import { DropdownModule } from 'primeng/dropdown';
@@ -16,7 +21,7 @@ import { GeoLocationService } from '../../services/geo-location.service';
   imports: [CommonModule, TagModule, DropdownModule, ButtonModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent {
   RESTAURANTSarray: any[] = [];
@@ -33,10 +38,18 @@ export class HomeComponent {
   makePhoneCall(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(dir: { lat: Number, lng: Number }) {
+  // handleMapClick(dir: { lat: Number, lng: Number }) {
 
-    if (dir) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
+  //   if (dir) {
+  //     const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
+  //     window.open(link, '_blank');
+  //   }
+  // }
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
       window.open(link, '_blank');
     }
   }
@@ -47,43 +60,47 @@ export class HomeComponent {
     return content.slice(0, maxLength) + '...';
   }
 
-
-  constructor(private _homeservice: HomeService,
+  constructor(
+    private _homeservice: HomeService,
     private filterservice: FilterService,
     public _cookieService: CookieService,
     public router: Router,
     public MessageService: MessageService,
-    public _GeoLocationService: GeoLocationService, private distanceService: DistanceService,
-    @Inject(PLATFORM_ID) private platformId: Object) { }
+    public _GeoLocationService: GeoLocationService,
+    private distanceService: DistanceService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
   ngOnInit(): void {
-    this._homeservice.getBusinessesByCategory('RESTAURANTS').subscribe(data => {
-      this.RESTAURANTSarray = data.data;
+    this._homeservice
+      .getBusinessesByCategory('RESTAURANTS')
+      .subscribe((data) => {
+        this.RESTAURANTSarray = data.data;
+      });
 
+    this._homeservice
+      .getBusinessesByCategory('MASSAGE SPA')
+      .subscribe((data) => {
+        this.MASSAGEarray = data.data;
+      });
 
-
-    });
-
-    this._homeservice.getBusinessesByCategory('MASSAGE SPA').subscribe(data => {
-      this.MASSAGEarray = data.data;
-
-    });
-
-    this._homeservice.getBusinessesByCategory('BEAUTY SALON SPA').subscribe(data => {
-      this.spa = data.data;
-
-
-    });
+    this._homeservice
+      .getBusinessesByCategory('BEAUTY SALON SPA')
+      .subscribe((data) => {
+        this.spa = data.data;
+      });
     if (isPlatformBrowser(this.platformId)) {
-      this.distanceService.getCurrentLocation()
+      this.distanceService
+        .getCurrentLocation()
         .then((coords) => {
-          this.currentLocation = { latitude: coords.latitude, longitude: coords.longitude };
+          this.currentLocation = {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+          };
           this.distanceService.setCurrentLocationInLocalStorage(coords);
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     }
   }
-
 
   showError() {
     this.MessageService.add({
@@ -99,11 +116,10 @@ export class HomeComponent {
     const token = this._cookieService.get('token');
 
     if (!token) {
-      this.showError()
+      this.showError();
       this.router.navigate(['/login']);
     } else {
       if (this.RESTAURANTSarray[index].liked == true) {
-
         this.filterservice.addLike(busId).subscribe({
           next: (res) => {
             this.RESTAURANTSarray[index].liked = false;
@@ -119,19 +135,16 @@ export class HomeComponent {
         });
       }
     }
-
-
   }
   likeBusiness2(busId: string, index: number) {
     const token = this._cookieService.get('token');
 
     if (!token) {
-      this.showError()
+      this.showError();
 
       this.router.navigate(['/login']);
     } else {
       if (this.MASSAGEarray[index].liked == true) {
-
         this.filterservice.addLike(busId).subscribe({
           next: (res) => {
             this.MASSAGEarray[index].liked = false;
@@ -147,18 +160,15 @@ export class HomeComponent {
         });
       }
     }
-
-
   }
   likeBusiness3(busId: string, index: number) {
     const token = this._cookieService.get('token');
 
     if (!token) {
-      this.showError()
+      this.showError();
       this.router.navigate(['/login']);
     } else {
       if (this.spa[index].liked == true) {
-
         this.filterservice.addLike(busId).subscribe({
           next: (res) => {
             this.spa[index].liked = false;
@@ -174,8 +184,6 @@ export class HomeComponent {
         });
       }
     }
-
-
   }
 
   getStates(category: string): void {
@@ -186,9 +194,4 @@ export class HomeComponent {
     const distance = this.distanceService.calculateDistance(lat, lng);
     return distance !== null ? distance.toFixed(0) : 'N/A';
   }
-
 }
-
-
-
-

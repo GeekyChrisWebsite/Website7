@@ -12,11 +12,11 @@ import { PaginatorModule } from 'primeng/paginator';
   standalone: true,
   imports: [RouterModule, CommonModule, PaginatorModule],
   templateUrl: './list-view.component.html',
-  styleUrl: './list-view.component.scss'
+  styleUrl: './list-view.component.scss',
 })
 export class ListViewComponent {
   @Input() listingArray!: ListingData[];
-  @Input() filterarray: any
+  @Input() filterarray: any;
   @Input() distances!: any;
   totalRecords: number | undefined;
 
@@ -26,22 +26,33 @@ export class ListViewComponent {
   maxname: number = 24;
 
   likeCountValue: number[] = [];
-  isLiked: boolean[] = Array(this.listingArray?.length).fill(false)
+  isLiked: boolean[] = Array(this.listingArray?.length).fill(false);
 
-  constructor(private filterservice: FilterService, private _cookieService: CookieService, public router: Router, public distanceService: DistanceService) {
-
-  }
+  constructor(
+    private filterservice: FilterService,
+    private _cookieService: CookieService,
+    public router: Router,
+    public distanceService: DistanceService
+  ) {}
 
   makePhoneCall(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(dir: { lat: number, lng: number }) {
-    if (dir) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
-      const anchor = document.createElement('a');
-      anchor.href = link;
-      anchor.target = '_blank';
-      anchor.click();
+  // handleMapClick(dir: { lat: number, lng: number }) {
+  //   if (dir) {
+  //     const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
+  //     const anchor = document.createElement('a');
+  //     anchor.href = link;
+  //     anchor.target = '_blank';
+  //     anchor.click();
+  //   }
+  // }
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
+      window.open(link, '_blank');
     }
   }
   truncateText(content: string, maxLength: number): string {
@@ -58,7 +69,6 @@ export class ListViewComponent {
       this.router.navigate(['/login']);
     } else {
       if (this.listingArray[index].liked == true) {
-
         this.filterservice.addDislikes(busId).subscribe({
           next: (res) => {
             this.listingArray[index].liked = false;
@@ -74,8 +84,6 @@ export class ListViewComponent {
         });
       }
     }
-
-
   }
   truncateName(name: string): string {
     if (name.length <= 24) {
@@ -92,8 +100,6 @@ export class ListViewComponent {
     }
   }
 
-
-
   calculateDistance(lat: number, lng: number): string {
     const distance = this.distanceService.calculateDistance(lat, lng);
     return distance !== null ? distance.toFixed(0) : 'N/A';
@@ -106,6 +112,4 @@ export class ListViewComponent {
     this.first = event.first;
     this.rows = event.rows;
   }
-
-
 }
