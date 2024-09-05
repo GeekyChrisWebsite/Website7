@@ -135,9 +135,9 @@
       </p-galleria>
     </div>
     <div>
-      <div class="Video">
+      <div class="Video" *ngIf="datainfo.video">
         <video width="320" height="240" controls>
-          <source src="datainfo.video" type="video/mp4" />
+          <source src="{{ datainfo.video }}" type="video/mp4" />
           Error Message
         </video>
       </div>
