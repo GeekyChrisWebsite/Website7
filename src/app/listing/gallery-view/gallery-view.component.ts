@@ -41,13 +41,12 @@ export class GalleryViewComponent {
     window.location.href = 'tel:' + phoneNumber;
   }
 
-  handleMapClick(dir: { lat: number; lng: number }) {
-    if (dir) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${dir.lat},${dir.lng}`;
-      const anchor = document.createElement('a');
-      anchor.href = link;
-      anchor.target = '_blank';
-      anchor.click();
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
+      window.open(link, '_blank');
     }
   }
   isLiked: boolean[] = [];
