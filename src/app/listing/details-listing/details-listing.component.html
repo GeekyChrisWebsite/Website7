@@ -134,13 +134,12 @@
         </ng-template>
       </p-galleria>
     </div>
+    <h3>Video</h3>
 
     <div
       class="Video py-5 justify-content-center align-items-center d-flex flex-column"
       *ngIf="datainfo.video"
     >
-      <h3 class="text-start">Video</h3>
-
       <video width="1300" height="800" controls autoplay muted playsInline>
         <source src="{{ datainfo.video }}" type="video/mp4" />
         Error Message
