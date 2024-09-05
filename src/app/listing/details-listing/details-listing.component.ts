@@ -1,4 +1,9 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -50,6 +55,8 @@ export class DetailsListingComponent {
   itemId: any;
   posts: any[] = [];
   apiLoaded?: Observable<boolean>;
+  @ViewChild('videoPlayer') videoPlayer!: ElementRef;
+
   options: any = {
     mapTypeControl: false,
     streetViewControl: false,
@@ -217,6 +224,10 @@ export class DetailsListingComponent {
       const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
       window.open(link, '_blank');
     }
+  }
+
+  ngAfterViewInit() {
+    this.videoPlayer.nativeElement.play();
   }
   likeBusiness(busId: string) {
     const token = this._cookieService.get('token');
