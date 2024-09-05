@@ -113,6 +113,7 @@ export class DetailsListingComponent {
       this.datainfo = res.data;
       this.galleryphotos = res.data.images;
       this.imgs = res.data.images;
+      console.log(this.datainfo);
 
       if (this.imgs.length == 2) {
         this.twoImgs = true;
