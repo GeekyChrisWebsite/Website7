@@ -200,13 +200,21 @@ export class DetailsListingComponent {
     }
   }
 
-  handleMapClick(geoDirection: { lat: number; lng: number }): void {
-    if (
-      geoDirection &&
-      geoDirection.lat !== undefined &&
-      geoDirection.lng !== undefined
-    ) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
+  // handleMapClick(geoDirection: { lat: number; lng: number }): void {
+  //   if (
+  //     geoDirection &&
+  //     geoDirection.lat !== undefined &&
+  //     geoDirection.lng !== undefined
+  //   ) {
+  //     const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
+  //     window.open(link, '_blank');
+  //   }
+  // }
+  handleMapClick(geoAddress: { street: string; state: string }): void {
+    if (geoAddress && geoAddress.street && geoAddress.state) {
+      const encodedStreet = encodeURIComponent(geoAddress.street);
+      const encodedState = encodeURIComponent(geoAddress.state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
       window.open(link, '_blank');
     }
   }
