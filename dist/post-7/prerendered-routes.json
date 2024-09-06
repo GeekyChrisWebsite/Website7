@@ -1,0 +1,18 @@
+{
+  "routes": [
+    "/",
+    "/buysell",
+    "/Category",
+    "/city",
+    "/contact-us",
+    "/forget",
+    "/home",
+    "/listing",
+    "/login",
+    "/posting",
+    "/register",
+    "/reset",
+    "/state",
+    "/terms"
+  ]
+}

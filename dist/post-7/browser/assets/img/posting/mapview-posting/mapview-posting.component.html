@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="map">
+    @if (apiLoaded|async){
+    <google-map #map>
+      <div *ngFor="let position of uniqueArray;">
+        <map-marker [position]="position" [options]="options"></map-marker>
+      </div>
+    </google-map>
+    }
+  </div>
+</div>
