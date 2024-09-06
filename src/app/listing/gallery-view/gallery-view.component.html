@@ -40,40 +40,51 @@
           <div class="title py-2 text-center">
             <h5>{{ item.name }}</h5>
           </div>
-          <div class="py-2">
-            <div class="d-flex justify-content-center align-items-center gap-1">
-              <i class="pi pi-directions fs-4"></i>
-              <p class="m-0 distance text-center">
-                Distance:
-                {{
-                  calculateDistance(
-                    item.geo_direction.lat,
-                    item.geo_direction.lng
-                  )
-                }}
-                <span>Miles</span>
-              </p>
-            </div>
-          </div>
-          <div>
-            <p class="text-muted"></p>
-            <p class="text-muted text-center">
-              {{ truncateText(item.description, 20) }}
+          <i
+            class="pi pi-map-marker"
+            style="color: #101010; font-size: 14px"
+          ></i>
+          <small class="text-center" style="color: #101010">
+            {{ truncateText(item.street, 30) }}
+          </small>
+          <br />
+          <small class="text-center" style="color: #101010">
+            {{
+              item.city1 +
+                "," +
+                item.state +
+                (item.city_zip ? " " + item.city_zip : "")
+            }}
+          </small>
+        </div>
+        <div class="py-2">
+          <div class="d-flex justify-content-center align-items-center gap-1">
+            <i class="pi pi-directions fs-4"></i>
+            <p class="m-0 distance text-center">
+              Distance:
+              {{
+                calculateDistance(
+                  item.geo_direction.lat,
+                  item.geo_direction.lng
+                )
+              }}
+              <span>Miles</span>
             </p>
           </div>
-          <div
-            class="btns justify-content-center align-items-center d-flex gap-3 py-3"
+        </div>
+
+        <div
+          class="btns justify-content-center align-items-center d-flex gap-3 py-3"
+        >
+          <button class="call-now" (click)="makePhoneCall(item.phone_number)">
+            Call Now
+          </button>
+          <button
+            class="Directions"
+            (click)="handleMapClick(item.street, item.state)"
           >
-            <button class="call-now" (click)="makePhoneCall(item.phone_number)">
-              Call Now
-            </button>
-            <button
-              class="Directions"
-              (click)="handleMapClick(item.street, item.state)"
-            >
-              Directions
-            </button>
-          </div>
+            Directions
+          </button>
         </div>
       </p-card>
     </div>
