@@ -44,15 +44,10 @@
                   class="p-0 m-0"
                   (click)="handleMapClick(datainfo.street, datainfo.state)"
                 >
-                  {{
-                    datainfo.street +
-                      ", " +
-                      datainfo.city1 +
-                      ", " +
-                      datainfo.state +
-                      ", " +
-                      datainfo.city_zip
+                  {{ datainfo.street.trim() }}, {{ datainfo.city1 }},{{
+                    datainfo.state
                   }}
+                  {{ datainfo.city_zip }}
                 </p>
               </div>
             </li>
@@ -143,7 +138,6 @@
       </p-galleria>
     </div>
     <h3 class="py-3">Video</h3>
-
     <div
       class="Video py-3 justify-content-center align-items-center d-flex flex-column"
       *ngIf="datainfo.video"
