@@ -124,23 +124,28 @@
                     </div>
                     <div></div>
                   </div>
-                  <div class="d-flex gap-1">
+                  <div
+                    class="d-flex justify-content-start align-items-center gap-1"
+                  >
                     <i
                       class="pi pi-map-marker"
-                      style="color: #101010; font-size: 14px"
+                      style="color: #101010; font-size: 16px"
                     ></i>
                     <small style="color: #101010; font-size: 16px">
-                      {{
-                        item.street +
-                          ", " +
-                          item.city1 +
-                          ", " +
-                          item.state +
-                          ", " +
-                          item.city_zip
-                      }}</small
+                      {{ item.street }}</small
                     >
                   </div>
+
+                  <small
+                    style="color: #101010; font-size: 16px; margin-left: 21px"
+                  >
+                    {{
+                      item.city1 +
+                        "," +
+                        item.state +
+                        (item.city_zip ? " " + item.city_zip : "")
+                    }}
+                  </small>
                   <div
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
@@ -248,23 +253,28 @@
                     </div>
                     <div></div>
                   </div>
-                  <div class="d-flex gap-1">
+                  <div
+                    class="d-flex justify-content-start align-items-center gap-1"
+                  >
                     <i
                       class="pi pi-map-marker"
-                      style="color: #101010; font-size: 14px"
+                      style="color: #101010; font-size: 16px"
                     ></i>
                     <small style="color: #101010; font-size: 16px">
-                      {{
-                        item.street +
-                          ", " +
-                          item.city1 +
-                          ", " +
-                          item.state +
-                          ", " +
-                          item.city_zip
-                      }}</small
+                      {{ item.street }}</small
                     >
                   </div>
+
+                  <small
+                    style="color: #101010; font-size: 16px; margin-left: 21px"
+                  >
+                    {{
+                      item.city1 +
+                        "," +
+                        item.state +
+                        (item.city_zip ? " " + item.city_zip : "")
+                    }}
+                  </small>
                   <div
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
@@ -372,24 +382,28 @@
                       </div>
                       <div></div>
                     </div>
-                    <div class="d-flex gap-1">
+                    <div
+                      class="d-flex justify-content-start align-items-center gap-1"
+                    >
                       <i
                         class="pi pi-map-marker"
-                        style="color: #101010; font-size: 14px"
+                        style="color: #101010; font-size: 16px"
                       ></i>
-
                       <small style="color: #101010; font-size: 16px">
-                        {{
-                          item.street +
-                            ", " +
-                            item.city1 +
-                            ", " +
-                            item.state +
-                            ", " +
-                            item.city_zip
-                        }}</small
+                        {{ item.street }}</small
                       >
                     </div>
+
+                    <small
+                      style="color: #101010; font-size: 16px; margin-left: 21px"
+                    >
+                      {{
+                        item.city1 +
+                          "," +
+                          item.state +
+                          (item.city_zip ? " " + item.city_zip : "")
+                      }}
+                    </small>
                     <div
                       class="d-flex justify-content-start align-items-start gap-1"
                     >

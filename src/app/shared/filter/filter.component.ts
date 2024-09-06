@@ -92,6 +92,7 @@ export class FilterComponent {
     this.filter.reset();
     this.filterService.clearListing();
     localStorage.removeItem('filter');
+    this.filterService.setSidebarVisible(false);
   }
   filterInService() {
     this.filterService.filterInService(
