@@ -44,26 +44,23 @@
                 </div>
                 <div></div>
               </div>
-              <div
-                class="d-flex justify-content-start align-items-center gap-1"
-              >
+              <div class="d-flex gap-1 py-2">
                 <i
                   class="pi pi-map-marker"
-                  style="color: #101010; font-size: 16px"
+                  style="color: #101010; font-size: 1rem"
                 ></i>
                 <small style="color: #101010; font-size: 16px">
-                  {{ item.street }}</small
+                  {{
+                    item.street +
+                      ", " +
+                      item.city1 +
+                      ", " +
+                      item.state +
+                      ", " +
+                      item.city_zip
+                  }}</small
                 >
               </div>
-
-              <small style="color: #101010; font-size: 16px; margin-left: 21px">
-                {{
-                  item.city1 +
-                    "," +
-                    item.state +
-                    (item.city_zip ? " " + item.city_zip : "")
-                }}
-              </small>
               <div class="d-flex justify-content-start align-items-start gap-1">
                 <i class="pi pi-directions fs-5"></i>
                 <p class="m-0 distance">
@@ -155,53 +152,58 @@
               </div>
               <div></div>
             </div>
-            <div class="d-flex justify-content-start align-items-start">
+            <div class="d-flex gap-1">
               <i
                 class="pi pi-map-marker"
-                style="color: #101010; font-size: 14px"
+                style="color: #101010"
+                style="font-size: 10px"
               ></i>
-              <small style="color: #101010; font-size: 10px">
-                {{ item.street }}</small
-              >
+              <div class="d-flex gap-1 py-2">
+                <i
+                  class="pi pi-map-marker"
+                  style="color: #101010; font-size: 1rem"
+                ></i>
+                <small style="color: #101010; font-size: 16px">
+                  {{ item.street + ", " }}</small
+                >
+                <small>{{
+                  item.city1 + ", " + item.state + ", " + item.city_zip
+                }}</small>
+              </div>
             </div>
-
-            <small style="color: #101010; font-size: 10px; margin-left: 3px">
-              {{
-                item.city1 +
-                  "," +
-                  item.state +
-                  (item.city_zip ? " " + item.city_zip : "")
-              }}
-            </small>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start align-items-start gap-1">
-          <i class="pi pi-directions" style="font-size: 10px"></i>
-          <p class="m-0 distance">
-            Distance:
-            {{
-              calculateDistance(item.geo_direction.lat, item.geo_direction.lng)
-            }}
-            <span>miles</span>
-          </p>
-        </div>
-        <div
-          class="btns justify-content-between align-items-baseline d-flex gap-1"
-        >
-          <div class="btns flex-column d-flex gap-2">
-            <button class="call-now" (click)="makePhoneCall(item.phone_number)">
-              Call
-            </button>
-            <button
-              class="Directions"
-              (click)="handleMapClick(item.street, item.state)"
+            <div class="d-flex justify-content-start align-items-start gap-1">
+              <i class="pi pi-directions" style="font-size: 10px"></i>
+              <p class="m-0 distance">
+                Distance:
+                {{
+                  calculateDistance(
+                    item.geo_direction.lat,
+                    item.geo_direction.lng
+                  )
+                }}
+                <span>miles</span>
+              </p>
+            </div>
+            <div
+              class="btns justify-content-between align-items-baseline d-flex gap-1"
             >
-              Directions
-            </button>
-          </div>
-          <div>
-            <div>
-              <!-- <div
+              <div class="btns flex-column d-flex gap-2">
+                <button
+                  class="call-now"
+                  (click)="makePhoneCall(item.phone_number)"
+                >
+                  Call
+                </button>
+                <button
+                  class="Directions"
+                  (click)="handleMapClick(item.street, item.state)"
+                >
+                  Directions
+                </button>
+              </div>
+              <div>
+                <div>
+                  <!-- <div
                     class="d-flex justify-content-center align-items-center gap-1"
                     (click)="likeBusiness(item.id, i)"
                     [class.liked]="listingArray[i].liked"
@@ -217,13 +219,14 @@
                       {{ listingArray[i].likes }}
                     </p>
                   </div> -->
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <p-paginator
     (onPageChange)="onPageChange($event)"
     [first]="first"
