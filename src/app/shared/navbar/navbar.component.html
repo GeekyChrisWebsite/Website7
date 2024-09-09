@@ -122,6 +122,11 @@
       <img *ngIf="imgUser" [src]="imgUser" alt="" width="30px" height="30px" />
       <span>{{ user }}</span>
     </div>
-    <li class="list-unstyled" *ngIf="user"><a (click)="logout()">Logout</a></li>
+    <div class="d-flex gap-2">
+      <i class="pi pi-sign-out"></i>
+      <li class="list-unstyled" *ngIf="user">
+        <a (click)="logout()">Logout</a>
+      </li>
+    </div>
   </div>
 </p-sidebar>
