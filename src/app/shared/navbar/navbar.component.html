@@ -117,11 +117,11 @@
     </div>
     <div
       *ngIf="user"
-      class="d-flex align-items-center justify-content-center gap-1"
+      class="d-flex align-items-center justify-content-center gap-1 mt-5"
     >
       <img *ngIf="imgUser" [src]="imgUser" alt="" width="30px" height="30px" />
       <span>{{ user }}</span>
     </div>
-    <li *ngIf="user"><a (click)="logout()">Logout</a></li>
+    <li class="list-unstyled" *ngIf="user"><a (click)="logout()">Logout</a></li>
   </div>
 </p-sidebar>
