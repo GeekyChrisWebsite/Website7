@@ -107,7 +107,7 @@
         </li>
       </ul>
     </div>
-    <div class="mt-5 justify-content-center align-items-center">
+    <div *ngIf="!user" class="mt-5 justify-content-center align-items-center">
       <div class="py-1 mt-5">
         <button class="btn-1" routerLink="/login">Log In</button>
       </div>
@@ -115,5 +115,13 @@
         <button class="btn-2" routerLink="/register">Sign Up</button>
       </div>
     </div>
+    <div
+      *ngIf="user"
+      class="d-flex align-items-center justify-content-center gap-1"
+    >
+      <img *ngIf="imgUser" [src]="imgUser" alt="" width="30px" height="30px" />
+      <span>{{ user }}</span>
+    </div>
+    <li *ngIf="user"><a (click)="logout()">Logout</a></li>
   </div>
 </p-sidebar>
