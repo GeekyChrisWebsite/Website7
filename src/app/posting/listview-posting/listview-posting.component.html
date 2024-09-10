@@ -179,7 +179,7 @@
                   class="d-flex gap-1 justify-content-between align-items-center"
                 >
                   <div class="">
-                    <p class="title-name m-0" style="font-size: 13px">
+                    <p class="title-name m-0" style="font-size: 14px">
                       {{ customer.business.name | truncateText : 20 }}
                     </p>
                   </div>
@@ -188,23 +188,22 @@
                   class="d-flex gap-1 justify-content-start align-items-center"
                 >
                   <i class="bx bx-world fs-6" style="color: #6b6666"></i>
-                  <p class="title-time text-muted m-0" style="font-size: 8px">
+                  <p class="title-time text-muted m-0" style="font-size: 12px">
                     {{ customer.postTime }}
                   </p>
                 </div>
 
-                <!-- <p
-                  style="font-size: 8px"
+                <p
+                  style="font-size: 12px"
                   class="m-0"
                   [innerHTML]="customer.content | truncateText : 10"
-                ></p> -->
+                ></p>
                 <div *ngIf="distances" class="py-1">
                   <div
                     class="d-flex justify-content-start align-items-start gap-1"
                   >
                     <i class="pi pi-directions fs-6"></i>
                     <p class="m-0 distance">
-                      Distance:
                       {{
                         calculateDistance(
                           customer.business.geo_direction.lat,
