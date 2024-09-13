@@ -35,6 +35,7 @@ export class ListviewPostingComponent {
   maxDescriptionLength: number = 44;
   showFullText: boolean = false;
   likeCountValue: number[] = [];
+  maxDescriptionLengthmpo: number = 15;
   isLiked: boolean[] = Array(this.postingArray?.length).fill(false);
 
   constructor(

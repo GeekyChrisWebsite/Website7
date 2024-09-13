@@ -31,11 +31,6 @@
     display: flex;
 }
 
-.imgg {
-
-    background-color: black;
-
-}
 
 @media (max-width: 767px) {
     .header {
@@ -47,7 +42,7 @@
     }
 
     .mobile-font-size {
-        font-size: 13px;
+        font-size: 16px;
     }
 
     .bg {
@@ -62,16 +57,13 @@
 
     i,
     small {
-        font-size: 8px !important;
+        font-size: 12px !important;
     }
 
-    .m {
-        margin-left: 12px !important;
 
-    }
 
     .distance {
-        font-size: 10px !important;
+        font-size: 12px !important;
     }
 
 
@@ -79,14 +71,14 @@
 
         i,
         small {
-            font-size: 10px !important;
+            font-size: 12px !important;
         }
 
         .btns {
             .call-now {
                 width: 120px !important;
                 height: 22px !important;
-                font-size: 12px !important;
+                font-size: 14px !important;
                 color: black !important;
 
 
@@ -95,7 +87,7 @@
             .Directions {
                 width: 120px !important;
                 height: 22px !important;
-                font-size: 11px !important;
+                font-size: 14px !important;
                 color: black !important;
 
             }
@@ -103,13 +95,13 @@
     }
 
     .imgg {
-        height: 133px !important;
-        width: 174px !important;
+        height: 140px !important;
+        width: 184px !important;
     }
-
-
-
 }
+
+
+
 
 @media (min-width:768px) and (max-width:1400px) {
     .header {

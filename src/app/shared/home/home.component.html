@@ -1,8 +1,8 @@
-<section class="Explore d-none d-lg-block py-5">
-  <div class="container py-4">
-    <h3 class="text-center py-5 text-white">
+<section class="Explore d-none d-lg-block py-3">
+  <div class="container py-2">
+    <h4 class="text-center py-2 text-white">
       Find the best Spa’s, Salons and Restaurants around you..
-    </h3>
+    </h4>
     <div class="three-box py-3">
       <div class="row align-items-center justify-content-center d-flex gap-5">
         <div class="col-md-3 col-6 top">
@@ -65,7 +65,7 @@
 </section>
 <section class="d-block d-lg-none" style="padding-top: 10rem">
   <div
-    class="container justify-content-center align-items-center flex-column d-flex gap-4 py-5"
+    class="container justify-content-center align-items-center flex-column d-flex gap-4 py-3"
   >
     <h3>Explore to find your Favorite Spot.</h3>
     <button routerLink="/Category" class="btn-category text-center">
@@ -94,15 +94,17 @@
               let i = index
             "
             class="card my-0 py-0 px-0"
-            style="max-width: 580px"
+            style="max-width: 500px"
           >
             <div class="row g-0">
-              <div class="col-7">
+              <div
+                class="col-7 justify-content-center align-items-center d-flex"
+              >
                 <img
                   src="{{ item.logo }}"
                   class="imgg rounded-start"
                   routerLink="/details/{{ item.id }}"
-                  style="height: 190px; width: 275px; object-fit: cover"
+                  style="height: 190px; width: 275px; object-fit: contain"
                 />
               </div>
               <div class="col-5">
@@ -117,8 +119,8 @@
                       class="d-flex justify-content-between align-items-center gap-3"
                     >
                       <div>
-                        <h5 class="me-lg-5 me-0 mobile-font-size">
-                          {{ item.name }}
+                        <h5 class="me-lg-5 m-0 p-0 mobile-font-size">
+                          {{ item.name | truncateText : 15 }}
                         </h5>
                       </div>
                     </div>
@@ -127,39 +129,33 @@
                   <div
                     class="d-flex justify-content-start align-items-center gap-1"
                   >
-                    <i
-                      class="pi pi-map-marker"
-                      style="color: #101010; font-size: 16px"
-                    ></i>
                     <small style="color: #101010; font-size: 16px">
-                      {{ item.street }}</small
+                      {{ item.street | truncateText : 17 }}</small
                     >
                   </div>
 
-                  <small
-                    class="m"
-                    style="color: #101010; font-size: 16px; margin-left: 21px"
-                  >
+                  <small class="" style="color: #101010; font-size: 16px">
                     {{
                       item.city1 +
                         "," +
                         item.state +
+                        "
+                         " +
                         (item.city_zip ? " " + item.city_zip : "")
                     }}
                   </small>
                   <div
-                    class="d-flex justify-content-start align-items-start gap-1"
+                    class="d-flex justify-content-start align-items-center gap-1"
                   >
                     <i style="font-size: 14px" class="pi pi-directions"></i>
                     <p class="m-0 distance" style="font-size: 14px">
-                      Distance:
                       {{
                         calculateDistance(
                           item.geo_direction.lat,
                           item.geo_direction.lng
                         )
                       }}
-                      <span>miles</span>
+                      <span>Miles</span>
                     </p>
                   </div>
                   <div
@@ -181,7 +177,7 @@
                         {{ MASSAGEarray[i].likes }}
                       </p>
                     </div> -->
-                    <div class="btns d-flex flex-column gap-2 px-1 py-1">
+                    <div class="btns d-flex flex-column gap-2 py-1">
                       <button
                         class="call-now"
                         (click)="makePhoneCall(item.phone_number)"
@@ -224,15 +220,17 @@
               let i = index
             "
             class="card my-0 py-0 px-0"
-            style="max-width: 580px"
+            style="max-width: 500px"
           >
             <div class="row g-0">
-              <div class="col-7">
+              <div
+                class="col-7 justify-content-center align-items-center d-flex"
+              >
                 <img
                   src="{{ item.logo }}"
                   class="imgg rounded-start"
                   routerLink="/details/{{ item.id }}"
-                  style="height: 190px; width: 275px; object-fit: cover"
+                  style="height: 190px; width: 275px; object-fit: contain"
                 />
               </div>
               <div class="col-5">
@@ -247,8 +245,8 @@
                       class="d-flex justify-content-between align-items-center gap-3"
                     >
                       <div>
-                        <h5 class="me-lg-5 me-0 mobile-font-size">
-                          {{ item.name }}
+                        <h5 class="me-lg-5 m-0 p-0 mobile-font-size">
+                          {{ item.name | truncateText : 15 }}
                         </h5>
                       </div>
                     </div>
@@ -257,39 +255,32 @@
                   <div
                     class="d-flex justify-content-start align-items-center gap-1"
                   >
-                    <i
-                      class="pi pi-map-marker"
-                      style="color: #101010; font-size: 16px"
-                    ></i>
                     <small style="color: #101010; font-size: 16px">
-                      {{ item.street }}</small
+                      {{ item.street | truncateText : 15 }}</small
                     >
                   </div>
 
-                  <small
-                    class="m"
-                    style="color: #101010; font-size: 16px; margin-left: 21px"
-                  >
+                  <small style="color: #101010; font-size: 16px">
                     {{
                       item.city1 +
                         "," +
                         item.state +
+                        "" +
                         (item.city_zip ? " " + item.city_zip : "")
                     }}
                   </small>
                   <div
-                    class="d-flex justify-content-start align-items-start gap-1"
+                    class="d-flex justify-content-start align-items-center gap-1"
                   >
                     <i style="font-size: 14px" class="pi pi-directions"></i>
                     <p class="m-0 distance" style="font-size: 14px">
-                      Distance:
                       {{
                         calculateDistance(
                           item.geo_direction.lat,
                           item.geo_direction.lng
                         )
                       }}
-                      <span>miles</span>
+                      <span>Miles</span>
                     </p>
                   </div>
                   <div
@@ -311,7 +302,7 @@
                         {{ MASSAGEarray[i].likes }}
                       </p>
                     </div> -->
-                    <div class="btns d-flex flex-column gap-2 px-1 py-1">
+                    <div class="btns d-flex flex-column gap-2 py-1">
                       <button
                         class="call-now"
                         (click)="makePhoneCall(item.phone_number)"
@@ -354,15 +345,17 @@
             <div
               *ngFor="let item of spa.slice(first, first + rows); let i = index"
               class="card my-0 py-0 px-0"
-              style="max-width: 580px"
+              style="max-width: 550px"
             >
               <div class="row g-0">
-                <div class="col-7">
+                <div
+                  class="col-7 justify-content-center align-items-center d-flex"
+                >
                   <img
                     src="{{ item.logo }}"
                     class="imgg rounded-start"
                     routerLink="/details/{{ item.id }}"
-                    style="height: 190px; width: 275px; object-fit: cover"
+                    style="height: 190px; width: 275px; object-fit: contain"
                   />
                 </div>
                 <div class="col-5">
@@ -377,8 +370,8 @@
                         class="d-flex justify-content-between align-items-center gap-3"
                       >
                         <div>
-                          <h5 class="me-lg-5 me-0 mobile-font-size">
-                            {{ item.name }}
+                          <h5 class="me-lg-5 m-0 p-0 mobile-font-size">
+                            {{ item.name | truncateText : 15 }}
                           </h5>
                         </div>
                       </div>
@@ -387,39 +380,32 @@
                     <div
                       class="d-flex justify-content-start align-items-center gap-1"
                     >
-                      <i
-                        class="pi pi-map-marker"
-                        style="color: #101010; font-size: 16px"
-                      ></i>
                       <small style="color: #101010; font-size: 16px">
-                        {{ item.street }}</small
+                        {{ item.street | truncateText : 17 }}</small
                       >
                     </div>
 
-                    <small
-                      class="m"
-                      style="color: #101010; font-size: 16px; margin-left: 21px"
-                    >
+                    <small style="color: #101010; font-size: 16px">
                       {{
                         item.city1 +
                           "," +
                           item.state +
+                          "" +
                           (item.city_zip ? " " + item.city_zip : "")
                       }}
                     </small>
                     <div
-                      class="d-flex justify-content-start align-items-start gap-1"
+                      class="d-flex justify-content-start align-items-center gap-1"
                     >
                       <i style="font-size: 14px" class="pi pi-directions"></i>
                       <p class="m-0 distance" style="font-size: 14px">
-                        Distance:
                         {{
                           calculateDistance(
                             item.geo_direction.lat,
                             item.geo_direction.lng
                           )
                         }}
-                        <span>miles</span>
+                        <span>Miles</span>
                       </p>
                     </div>
                     <div
@@ -441,7 +427,7 @@
                         {{ MASSAGEarray[i].likes }}
                       </p>
                     </div> -->
-                      <div class="btns d-flex flex-column gap-2 px-1 py-1">
+                      <div class="btns d-flex flex-column gap-2 py-1">
                         <button
                           class="call-now"
                           (click)="makePhoneCall(item.phone_number)"

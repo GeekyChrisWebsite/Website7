@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { ListingData } from '../../interface/listing-data';
 import { CommonModule } from '@angular/common';
 import { FilterService } from '../../services/filter.service';

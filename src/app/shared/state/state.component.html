@@ -1,22 +1,28 @@
-<section class=" state">
-    <div class="container py-5">
-        <h2 class="h1 text-center">Select State</h2>
-        <div class="justify-content-center align-items-center d-flex py-2">
-            <input type="text" id="myInput" [(ngModel)]="searchText" class="w-50" placeholder="Search for States ">
-
-        </div>
-        <div class="row py-4 gap-3 justify-content-center align-items-center d-flex">
-            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word "
-                *ngFor="let item of statearray | filterByLetters : searchText" routerLink="/city"
-                (click)="getCities(item)">
-                <a class="ci" routerLink="/city" (click)="getCities(item)">{{ item }}</a>
-            </div>
-        </div>
-        <div *ngIf="loading" class="justify-content-center align-items-center d-flex">
-            <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-                styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--maskbg)"
-                animationDuration=".5s"></p-progressSpinner>
-        </div>
+<section class="state">
+  <div class="container py-5">
+    <h2 class="h1 text-center">Select State</h2>
+    <div class="justify-content-center align-items-center d-flex py-2">
+      <input
+        type="text"
+        id="myInput"
+        [(ngModel)]="searchText"
+        class="w-50"
+        placeholder="Search for States "
+      />
     </div>
-
+    <div
+      class="row py-4 gap-3 justify-content-center align-items-center d-flex"
+    >
+      <div
+        class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word"
+        *ngFor="let item of statearray | filterByLetters : searchText"
+        routerLink="/city"
+        (click)="getCities(item)"
+      >
+        <a class="ci" routerLink="/city" (click)="getCities(item)">{{
+          item
+        }}</a>
+      </div>
+    </div>
+  </div>
 </section>

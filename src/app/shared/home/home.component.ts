@@ -15,10 +15,18 @@ import { FilterService } from '../../services/filter.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { GeoLocationService } from '../../services/geo-location.service';
+import { TruncateTextPipe } from '../../pipe/truncate-text.pipe';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TagModule, DropdownModule, ButtonModule, RouterLink],
+  imports: [
+    CommonModule,
+    TagModule,
+    DropdownModule,
+    ButtonModule,
+    RouterLink,
+    TruncateTextPipe,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   encapsulation: ViewEncapsulation.None,

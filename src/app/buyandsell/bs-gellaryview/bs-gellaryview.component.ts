@@ -1,5 +1,11 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Input,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FilterService } from '../../services/filter.service';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';

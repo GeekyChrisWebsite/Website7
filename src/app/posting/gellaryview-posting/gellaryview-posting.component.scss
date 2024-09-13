@@ -68,7 +68,7 @@ i {
 }
 
 img {
-    height: 257px;
+    height: 250px;
     width: 300px;
     background-color: black;
     border-radius: 7px !important;
@@ -76,4 +76,12 @@ img {
     -moz-border-radius: 7px !important;
     -ms-border-radius: 7px !important;
     -o-border-radius: 7px !important;
+}
+
+.p-card .p-card-content {
+    padding: 10px !important;
+}
+
+.p-card .p-card-body {
+    padding: 0px !important;
 }

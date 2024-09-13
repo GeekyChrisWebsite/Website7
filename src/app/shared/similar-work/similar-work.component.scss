@@ -1,88 +1,31 @@
-.similars {
-  .row {
-    .card {
-      img {
-        width: 23%;
-        height: 250px
-      }
-    }
-  }
+.call-now {
+  background-color: black;
+  color: white !important;
+  width: 184px !important;
+  height: 32px !important;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  font-size: 15px;
+
 }
 
-@media only screen and (max-width: 768px) {
-  .similars {
-    .row {
-      .card {
-        img {
-          width: 40%;
-        }
-      }
-    }
-  }
+.Directions {
+  background-color: #ffbf9d;
+  width: 184px !important;
+  height: 32px !important;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  color: black;
+  font-size: 15px;
 
-  .call-now {
-    background-color: #0F3D3E;
-    border: none;
-    outline: none;
-    width: 71px !important;
-    height: 25px !important;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    font-size: 10px;
-    color: black !important;
-
-
-
-  }
-
-  .Directions {
-    background-color: #ffbf9d;
-    border: none;
-    outline: none;
-    width: 71px !important;
-    height: 25px !important;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    color: black !important;
-    font-size: 10px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .similars {
-    .row {
-      padding: 10px;
-
-      .card {
-        img {
-          width: 50%;
-          height: 160px;
-        }
-
-        .content {
-
-          h3,
-          p {
-            font-size: 15px !important;
-          }
-
-          .text {
-            width: 150px;
-            padding: 15px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin: 0 !important;
-            padding: 0 5px !important;
-          }
-        }
-      }
-    }
-  }
 }

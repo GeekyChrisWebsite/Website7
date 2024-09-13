@@ -11,7 +11,6 @@ import { TruncateTextPipe } from '../../pipe/truncate-text.pipe';
   imports: [CommonModule, RouterLink, SanatizerPipe, TruncateTextPipe],
   templateUrl: './similar-work.component.html',
   styleUrl: './similar-work.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class SimilarWorkComponent {
   data: any;
@@ -38,18 +37,12 @@ export class SimilarWorkComponent {
   makePhoneCall(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(geoDirection: { lat: number; lng: number }): void {
-    if (
-      geoDirection &&
-      geoDirection.lat !== undefined &&
-      geoDirection.lng !== undefined
-    ) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
-      const anchor = document.createElement('a');
-      anchor.href = link;
-      anchor.target = '_blank';
-      anchor.click();
+  handleMapClick(street: string, state: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
+      window.open(link, '_blank');
     }
-    console.log(geoDirection);
   }
 }

@@ -1,22 +1,31 @@
 <section class="Category py-5">
-    <div class="container py-5">
-        <h3 class="text-center py-5">Select Category</h3>
+  <div class="container py-5">
+    <h3 class="text-center py-5">Select Category</h3>
 
-        <div class="row py-4 gap-3 justify-content-center align-items-center d-flex flex-column">
-            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/state"
-                (click)="getStates('RESTAURANTS')">
-                <h6>RESTAURANTS</h6>
-            </div>
-            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/state"
-                (click)="getStates('MASSAGE SPA')">
-                <h6>MASSAGE SPA</h6>
-            </div>
-            <div class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word" routerLink="/state"
-                (click)="getStates('BEAUTY SALON SPA')">
-                <h6>Spa & Salons</h6>
-            </div>
-
-
-        </div>
+    <div
+      class="row py-4 gap-3 justify-content-center align-items-center d-flex flex-column"
+    >
+      <div
+        class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word"
+        routerLink="/state"
+        (click)="getStates('RESTAURANTS')"
+      >
+        <h6>RESTAURANTS</h6>
+      </div>
+      <div
+        class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word"
+        routerLink="/state"
+        (click)="getStates('MASSAGE SPA')"
+      >
+        <h6>MASSAGE SPA</h6>
+      </div>
+      <div
+        class="col-md-3 col-4 justify-content-center align-items-center d-flex bg-word"
+        routerLink="/state"
+        (click)="getStates('BEAUTY SALON SPA')"
+      >
+        <h6>BEAUTY SALON SPA</h6>
+      </div>
     </div>
+  </div>
 </section>

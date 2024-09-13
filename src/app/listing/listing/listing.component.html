@@ -1,8 +1,13 @@
 <section class="searchBar py-5">
   <div class="container">
-    <div class="div-searchBar2 py-2  w-100 justify-content-center align-items-center d-flex">
+    <div
+      class="div-searchBar2 py-2 w-100 justify-content-center align-items-center d-flex"
+    >
       <div class="form-group">
-        <div class="div-searchBar justify-content-center align-items-center d-flex" style="gap: 0rem">
+        <div
+          class="div-searchBar justify-content-center align-items-center d-flex"
+          style="gap: 0rem"
+        >
           <app-filter></app-filter>
           <p-toast></p-toast>
           <p-confirmDialog></p-confirmDialog>
@@ -15,19 +20,40 @@
   <div class="spas">
     <div class="container">
       <div class="title">
-        <h3 class="py-1"> Top businesses in your Area</h3>
+        <h3 class="py-1">Top businesses in your Area</h3>
+        <div
+          class="d-lg-none d-block d-flex align-items-center justify-content-center"
+          *ngIf="filter && filter.length > 0"
+        >
+          <p>
+            <i class="pi pi-filter-fill" style="color: #8dd3bb"></i
+            >{{ filter[0]?.category }} >
+          </p>
+
+          <p>{{ filter[0]?.state }} ></p>
+
+          <p>{{ filter[0]?.city }}</p>
+        </div>
       </div>
       <div class="view d-flex justify-content-between">
         <div class="suggest">
           <h6 class="m-0">Suggested Results:</h6>
         </div>
         <div class="views d-flex gap-3">
-          <div (click)="showList()" class="box d-flex gap-2" [ngClass]="listView ? 'active' : null">
-            <i class="pi  pi-list" style="font-size: 1.5rem"></i>
+          <div
+            (click)="showList()"
+            class="box d-flex gap-2"
+            [ngClass]="listView ? 'active' : null"
+          >
+            <i class="pi pi-list" style="font-size: 1.5rem"></i>
 
             <p class="m-0 d-none d-lg-block">List View</p>
           </div>
-          <div (click)="showGallery()" class="box d-flex gap-2" [ngClass]="galleyView ? 'active' : null">
+          <div
+            (click)="showGallery()"
+            class="box d-flex gap-2"
+            [ngClass]="galleyView ? 'active' : null"
+          >
             <i class="pi pi-image" style="font-size: 1.5rem"></i>
 
             <p class="m-0 d-none d-lg-block">Gallery View</p>
@@ -44,26 +70,51 @@
   </div>
   @if(listView){
   <div class="view-data">
-    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
-      animationDuration=".5s"></p-progressSpinner>
+    <p-progressSpinner
+      class="justify-content-center align-items-center d-flex"
+      *ngIf="loading"
+      styleClass="w-2rem h-2rem"
+      strokeWidth="3"
+      fill="var(--surface-ground)"
+      animationDuration=".5s"
+    ></p-progressSpinner>
 
-    <app-list-view [listingArray]="listingArray" [filterarray]="filterarray" [distances]="distances"></app-list-view>
+    <app-list-view
+      [listingArray]="listingArray"
+      [filterarray]="filterarray"
+      [distances]="distances"
+    ></app-list-view>
   </div>
   } @if(galleyView){
   <div class="view-data">
-    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
-      animationDuration=".5s"></p-progressSpinner>
-    <app-gallery-view [listingArray]="listingArray" [filterarray]="filterarray"
-      [distances]="distances"></app-gallery-view>
+    <p-progressSpinner
+      class="justify-content-center align-items-center d-flex"
+      *ngIf="loading"
+      styleClass="w-2rem h-2rem"
+      strokeWidth="3"
+      fill="var(--surface-ground)"
+      animationDuration=".5s"
+    ></p-progressSpinner>
+    <app-gallery-view
+      [listingArray]="listingArray"
+      [filterarray]="filterarray"
+      [distances]="distances"
+    ></app-gallery-view>
   </div>
   } @if(mapView){
   <div class="view-data">
-    <p-progressSpinner class="justify-content-center align-items-center d-flex" *ngIf="loading"
-      styleClass="w-2rem h-2rem" strokeWidth="3" fill="var(--surface-ground)"
-      animationDuration=".5s"></p-progressSpinner>
-    <app-map-view [listingArray]="listingArray" [filterarray]="filterarray"></app-map-view>
+    <p-progressSpinner
+      class="justify-content-center align-items-center d-flex"
+      *ngIf="loading"
+      styleClass="w-2rem h-2rem"
+      strokeWidth="3"
+      fill="var(--surface-ground)"
+      animationDuration=".5s"
+    ></p-progressSpinner>
+    <app-map-view
+      [listingArray]="listingArray"
+      [filterarray]="filterarray"
+    ></app-map-view>
   </div>
   }
 </section>

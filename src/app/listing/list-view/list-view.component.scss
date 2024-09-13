@@ -102,20 +102,18 @@
 
 
 
-.imgg {
-  background-color: black;
-}
+
 
 @media (max-width: 767px) {
 
   /* Adjust the breakpoint to your needs */
   .mobile-font-size {
-    font-size: 14px !important;
+    font-size: 15px !important;
     /* Important to override existing styles */
   }
 
   .distance {
-    font-size: 10px !important;
+    font-size: 12px !important;
   }
 
 
@@ -123,7 +121,7 @@
     .call-now {
       width: 120px !important;
       height: 22px !important;
-      font-size: 10px !important;
+      font-size: 14px !important;
       color: black !important;
 
     }
@@ -131,7 +129,7 @@
     .Directions {
       width: 120px !important;
       height: 22px !important;
-      font-size: 10px !important;
+      font-size: 14px !important;
       margin-bottom: 10px;
       color: black !important;
 

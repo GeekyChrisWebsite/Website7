@@ -188,12 +188,13 @@ export class DetailsListingComponent {
   }
   formatTime(time: string): string {
     console.log({ time: time });
-    if (!time) {
-      return '00';
+
+    if (!time || time === 'undefined' || time === '00:00') {
+      return 'Closed'; // Return 'Closed' for invalid time
     } else {
       const timeParts = time.split(':');
       let hours = parseInt(timeParts[0], 10);
-      const minutes = timeParts[1];
+      const minutes = timeParts[1] || '00';
       let amPm = 'AM';
 
       if (hours >= 12) {
@@ -203,7 +204,7 @@ export class DetailsListingComponent {
         amPm = 'PM';
       }
 
-      return `${hours}:${minutes || '00'} ${amPm}`;
+      return `${hours === 0 ? '12' : hours}:${minutes} ${amPm}`;
     }
   }
 

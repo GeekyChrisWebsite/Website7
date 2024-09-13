@@ -1,10 +1,24 @@
-import { ChangeDetectorRef, Component, Inject, Input, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DropdownModule } from 'primeng/dropdown';
 import { PaginatorModule } from 'primeng/paginator';
 import { ListingService } from '../../services/listing.service';
 import { ListingData } from '../../interface/listing-data';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { GalleryViewComponent } from '../gallery-view/gallery-view.component';
 import { MapViewComponent } from '../map-view/map-view.component';
@@ -19,15 +33,28 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PreviousRouteServiceService } from '../../services/previous-route-service.service';
 import { FilterComponent } from '../../shared/filter/filter.component';
 
-
 @Component({
   selector: 'app-listing',
   standalone: true,
-  imports: [DropdownModule, FilterComponent, PaginatorModule, ConfirmDialogModule, RouterModule, FormsModule, ToastModule, CommonModule, GalleryViewComponent, MapViewComponent, ListViewComponent, ProgressSpinnerModule, ReactiveFormsModule],
+  imports: [
+    DropdownModule,
+    FilterComponent,
+    PaginatorModule,
+    ConfirmDialogModule,
+    RouterModule,
+    FormsModule,
+    ToastModule,
+    CommonModule,
+    GalleryViewComponent,
+    MapViewComponent,
+    ListViewComponent,
+    ProgressSpinnerModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './listing.component.html',
   styleUrl: './listing.component.scss',
   providers: [ListingService, ConfirmationService],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ListingComponent {
   listingArray: ListingData[] = [];
@@ -46,7 +73,8 @@ export class ListingComponent {
   cities: any[] = [];
   empty: any[] = [];
   loading: boolean = false;
-  likess: any
+  likess: any;
+  filter: any;
 
   previousUrl: string | undefined;
   currentLocation: any;
@@ -54,14 +82,14 @@ export class ListingComponent {
   distances: any[] = [];
   stateArray: any[] = [];
 
-
   constructor(
     public listingservice: ListingService,
     public _router: ActivatedRoute,
     public filterservice: FilterService,
     public distanceService: DistanceService,
     private previousRouteService: PreviousRouteServiceService,
-    @Inject(PLATFORM_ID) private platformId: object) {
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
     this.galleyView = false;
     this.listView = true;
     this.mapView = false;
@@ -99,44 +127,39 @@ export class ListingComponent {
       this.filteredfromService();
       this.clearListing();
     }
+    const storedFilter = localStorage.getItem('filter');
+    if (storedFilter) {
+      this.filter = JSON.parse(storedFilter);
+    }
+    this.loadFilter();
   }
-
-
-
-
 
   getListing(): void {
     this.listingservice.GetListing().subscribe({
       next: (res: { data: ListingData[]; message: string; status: string }) => {
         this.listingArray = res.data;
       },
-      error: (err: HttpErrorResponse) => {
-      },
+      error: (err: HttpErrorResponse) => {},
     });
   }
   getFilteredListing(CategoryName: string, state: string, city: string): void {
-    this.filterservice
-      .getbussineses(CategoryName, state, city)
-      .subscribe({
-        next: (res: {
-          data: { businessesIds: any[] };
-          message: string;
-          status: string;
-        }) => {
-          this.listingArray = res.data.businessesIds;
-
-        },
-        error: (err: HttpErrorResponse) => {
-        },
-      });
+    this.filterservice.getbussineses(CategoryName, state, city).subscribe({
+      next: (res: {
+        data: { businessesIds: any[] };
+        message: string;
+        status: string;
+      }) => {
+        this.listingArray = res.data.businessesIds;
+      },
+      error: (err: HttpErrorResponse) => {},
+    });
   }
   clearListing(): void {
     this.filterservice.clearListings.subscribe({
       next: (res: { data: any[]; message: string; status: string }) => {
         this.listingArray = res.data;
       },
-      error: (err: HttpErrorResponse) => {
-      },
+      error: (err: HttpErrorResponse) => {},
     });
   }
   filteredfromService(): void {
@@ -150,13 +173,6 @@ export class ListingComponent {
       },
     });
   }
-
-
-
-
-
-
-
 
   showGallery(): void {
     this.galleyView = true;
@@ -176,5 +192,10 @@ export class ListingComponent {
   onPageChange(event: any): void {
     this.first = event.first;
   }
-
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+  loadFilter(): void {
+    const storedFilter = localStorage.getItem('filter');
+    if (storedFilter) {
+      this.filter = JSON.parse(storedFilter);
+    }
+  }
+}

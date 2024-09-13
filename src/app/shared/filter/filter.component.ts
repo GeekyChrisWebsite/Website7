@@ -125,6 +125,7 @@ export class FilterComponent {
     );
     localStorage.setItem('filter', JSON.stringify(filterValueArray));
     this.filterService.setSidebarVisible(false);
+    window.location.reload();
   }
   getStates() {
     localStorage.setItem(

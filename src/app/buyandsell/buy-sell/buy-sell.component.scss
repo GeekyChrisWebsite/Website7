@@ -20,6 +20,7 @@
 
         .gold {
             color: rgba(221, 172, 23, 1);
+            font-size: 16px;
         }
     }
 
@@ -148,100 +149,10 @@
     }
 
     @media (max-width: 767px) {
-
-
         .searchBar {
             display: none;
-
         }
     }
-}
-
-.div-searchBar {
-
-    form {
-        border-radius: 12px;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        background-color: rgb(249, 247, 247);
-        padding: 11px;
-
-        .p-dropdown {
-            border: none;
-            width: 100%;
-            background-color: transparent;
-            margin: 0 10px;
-        }
-
-        input,
-        input:focus,
-        input:active {
-            border: none;
-            outline: none;
-        }
-
-        small {
-            white-space: nowrap;
-            font-family: 'Lato', sans-serif;
-            font-size: 14px !important;
-
-        }
-
-        .Search-btn {
-            background-color: black;
-            color: #ffff;
-            border-radius: 12px;
-            -webkit-border-radius: 12px;
-            -moz-border-radius: 12px;
-            -ms-border-radius: 12px;
-            -o-border-radius: 12px;
-            width: 90px;
-            height: 38px;
-        }
-
-        .clear-btn {
-            background-color: #ffbf9d;
-            color: #ffff;
-            border-radius: 12px;
-            -webkit-border-radius: 12px;
-            -moz-border-radius: 12px;
-            -ms-border-radius: 12px;
-            -o-border-radius: 12px;
-            width: 90px;
-            height: 38px;
-            outline: none;
-            border: none;
-        }
-
-        small {
-            font-size: 12px;
-        }
-
-        ul {
-            padding-left: 0rem !important;
-            margin: 0px !important;
-
-
-        }
-
-        .p-dropdown-panel .p-dropdown-items {
-            padding: 0px;
-        }
-
-
-
-
-
-    }
-}
-
-.p-datatable>.p-datatable-wrapper {
-    overflow: hidden !important;
-}
-
-i {
-    cursor: pointer;
 }
 
 .p-carousel-item-start,
@@ -452,4 +363,20 @@ h3 {
 i,
 .d-lg-block {
     cursor: pointer;
+}
+
+.p-carousel-indicators {
+    padding-left: 27px;
+}
+
+@media (max-width: 767px) {
+
+    .p-carousel-item-start,
+    .p-carousel-item-end {
+        transform: none !important;
+        -webkit-transform: none !important;
+        -moz-transform: none !important;
+        -ms-transform: none !important;
+        -o-transform: none !important;
+    }
 }

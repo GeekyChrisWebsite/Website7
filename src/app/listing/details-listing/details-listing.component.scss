@@ -112,3 +112,11 @@ a {
   width: 123px;
   background-color: #ffbf9d;
 }
+
+.btn-red {
+  color: red !important;
+  /* Optional: make text more readable */
+  padding: 5px;
+  border-radius: 4px;
+  font-weight: 600;
+}

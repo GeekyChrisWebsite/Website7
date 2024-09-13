@@ -1,46 +1,48 @@
-<div class="similars">
-  <div class="row">
-    <div
-      class="card d-flex flex-row p-0 my-4"
-      routerLink="/postingdetails/{{ item.id }}"
-      *ngFor="let item of data"
-    >
-      <img [src]="item.business.logo" alt="" />
-      <div class="content py-1 ms-4">
-        <h4 class="fw-bold fs-5 px-3 m-0">
-          {{ item.title | truncateText : 15 }}
-        </h4>
-        <h6 class="text-black-50 fw-normal px-3">{{ item.postTime }}</h6>
+<div class="container">
+  <div class="row gap-1 justify-content-start align-items-start">
+    @for (item of data; track item.data) {
 
-        <p
+    <div
+      class="border d-flex py-2 px-2"
+      routerLink="/postingdetails/{{ item.id }}"
+    >
+      <div class="col-md-5 col-lg-2">
+        <img
+          src="{{ item.business.logo }}"
+          style="object-fit: cover; width: 150px; height: 150px"
+        />
+      </div>
+      <div class="col-md-5 col-lg-10">
+        <p class="m-0 p-0">{{ item.title | truncateText : 20 }}</p>
+        <small
           class="m-0"
-          [innerHTML]="item.content | truncateText : 30 | sanatizer"
-        ></p>
-        <div
-          class="btns justify-content-between align-items-end d-flex gap-1 py-2"
-        >
-          <div class="btns d-flex gap-2">
-            <button
-              class="call-now"
-              (click)="
-                makePhoneCall(item.business.phone_number);
-                $event.stopPropagation()
-              "
-            >
-              Call
-            </button>
-            <button
-              class="Directions"
-              (click)="
-                handleMapClick(item.business.geo_direction);
-                $event.stopPropagation()
-              "
-            >
-              Directions
-            </button>
-          </div>
+          [innerHTML]="item.content | truncateText : 20 | sanatizer"
+        ></small>
+
+        <div class="btns d-flex flex-column gap-2">
+          <button
+            class="call-now"
+            (click)="
+              makePhoneCall(item.business.phone_number);
+              $event.stopPropagation()
+            "
+          >
+            Call
+          </button>
+          <button
+            class="Directions"
+            (click)="
+              handleMapClick(item.business.street, item.business.state);
+              $event.stopPropagation()
+            "
+          >
+            Directions
+          </button>
         </div>
       </div>
     </div>
+    } @empty {
+    <p class="ms-3 p-0">There is no Posting for this bussiness</p>
+    }
   </div>
 </div>

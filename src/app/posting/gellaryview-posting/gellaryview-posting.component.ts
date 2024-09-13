@@ -1,4 +1,10 @@
-import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Input,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { PostingData } from '../../interface/posting-data';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FilterService } from '../../services/filter.service';
