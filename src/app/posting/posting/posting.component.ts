@@ -72,6 +72,7 @@ export class PostingComponent {
   currentLocation: any;
   backendLocations: any;
   distances: any[] = [];
+  filter: any;
 
   constructor(
     private postingService: PostingService,
@@ -150,6 +151,11 @@ export class PostingComponent {
         })
         .catch((error) => {});
     }
+    const storedFilter = localStorage.getItem('filter');
+    if (storedFilter) {
+      this.filter = JSON.parse(storedFilter);
+    }
+    this.loadFilter();
   }
   calculateDistance(lat: number, lng: number): string {
     const distance = this.distanceService.calculateDistance(lat, lng);
@@ -301,6 +307,12 @@ export class PostingComponent {
           },
         });
       }
+    }
+  }
+  loadFilter(): void {
+    const storedFilter = localStorage.getItem('filter');
+    if (storedFilter) {
+      this.filter = JSON.parse(storedFilter);
     }
   }
 }

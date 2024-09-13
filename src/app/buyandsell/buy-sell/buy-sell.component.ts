@@ -56,6 +56,7 @@ import { CarouselModule } from 'primeng/carousel';
 export class BuySellComponent {
   first = 20;
   rows = 20;
+  filter: any;
   buySellArray: any[];
   vipBuysellArray: any;
   UniqueGeoLocations!: any[];
@@ -154,6 +155,17 @@ export class BuySellComponent {
         .catch((error) => {
           console.error('Error getting user location:', error);
         });
+    }
+    const storedFilter = localStorage.getItem('filter');
+    if (storedFilter) {
+      this.filter = JSON.parse(storedFilter);
+    }
+    this.loadFilter();
+  }
+  loadFilter(): void {
+    const storedFilter = localStorage.getItem('filter');
+    if (storedFilter) {
+      this.filter = JSON.parse(storedFilter);
     }
   }
   calculateDistance(lat: number, lng: number): string {
