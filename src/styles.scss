@@ -60,3 +60,7 @@ li a {
 .p-paginator {
     padding: 0px;
 }
+
+.p-datatable>.p-datatable-wrapper {
+    overflow: hidden !important;
+}

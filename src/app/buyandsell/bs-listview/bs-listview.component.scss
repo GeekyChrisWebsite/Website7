@@ -82,3 +82,11 @@ img {
 
 
 }
+
+.p-datatable .p-datatable-tbody>tr>td {
+    padding: 12px !important;
+}
+
+.p-datatable>.p-datatable-wrapper {
+    overflow: hidden;
+}

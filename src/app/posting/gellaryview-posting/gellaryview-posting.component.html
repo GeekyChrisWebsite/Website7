@@ -27,7 +27,7 @@
         </ng-template>
         <div class="card-body">
           <div class="title py-2 text-center">
-            <h5>{{ item.business.name }}</h5>
+            <h5>{{ truncateText(item.business.name, 17) }}</h5>
           </div>
           <div class="py-2">
             <div class="d-flex justify-content-center align-items-center gap-1">
@@ -47,7 +47,7 @@
           <div>
             <p
               class="text-muted text-center"
-              [innerHTML]="truncateText(item.content, 17)"
+              [innerHTML]="truncateText(item.content, 30)"
             ></p>
           </div>
           <div
