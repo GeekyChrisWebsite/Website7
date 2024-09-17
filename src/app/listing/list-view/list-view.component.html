@@ -52,6 +52,7 @@
                   item.city1 +
                     "," +
                     item.state +
+                    "" +
                     " " +
                     (item.city_zip ? " " + item.city_zip : "")
                 }}
@@ -133,7 +134,14 @@
           </div>
 
           <small style="color: #101010; font-size: 12px">
-            {{ item.city1 + "," + " " + item.state }}
+            {{
+              item.city1 +
+                "," +
+                item.state +
+                "" +
+                " " +
+                (item.city_zip ? " " + item.city_zip : "")
+            }}
           </small>
 
           <div class="d-flex justify-content-start align-items-center gap-1">
