@@ -1,34 +1,57 @@
 <section>
-   <div class=" d-flex mob">
-      <div class="left hide-from-web">
-         <h2 class="text-center py-5">Find the best Spa’s, <br> Salons and Restaurants <br> around you.</h2>
+  <div class="d-flex mob">
+    <div class="left hide-from-web">
+      <h2 class="text-center py-5">
+        Find the best Spa’s, <br />
+        Salons and Restaurants <br />
+        around you.
+      </h2>
+    </div>
+    <div class="right">
+      <div class="justify-content-center align-items-center d-flex">
+        <img src="../../../assets/img/auth/bg.png" alt="" class="w-100" />
       </div>
-      <div class="right">
-         <div class="justify-content-center align-items-center d-flex">
-            <img src="../../../assets/img/auth/bg.png" alt="" class="w-100">
-         </div>
-         <h2 class="py-5 text-center">Welcome Back!</h2>
-         <h2 class=" p-0 mb-3 ">Login</h2>
-         <form [formGroup]="loginform" (ngSubmit)="loginuser()">
-            <div class="py-1 w-100">
-               <p class="m-1 p-1">Email :</p>
-               <input pInputText id="email" class="form-control" placeholder="" formControlName="email" />
-            </div>
-            <div class="py-1 w-100">
-               <p class="m-1 p-1">Password :</p>
-               <p-password [toggleMask]="true" class="form-control" formControlName="password"></p-password>
-            </div>
-            <p class="text-end Forget" routerLink="/auth/forgetpassword"> Forget Password ?</p>
-
-            <div class="justify-content-center align-items-center d-flex py-3 w-100">
-               <button class=" w-100 button-send" [disabled]="loginform.invalid">Send</button>
-            </div>
-
-         </form>
-         <p class="text-center pointer" routerLink="/register">Don’t have an account? <span class="sign">Sign up</span>
-         </p>
+      <div class="py-1">
+        <i class="pi pi-arrow-left" style="cursor: pointer" routerLink="/home">
+          Back to Home</i
+        >
       </div>
-   </div>
+      <h2 class="py-5 text-center">Welcome Back!</h2>
+      <h2 class="p-0 mb-3">Login</h2>
+      <form [formGroup]="loginform" (ngSubmit)="loginuser()">
+        <div class="py-1 w-100">
+          <p class="m-1 p-1">Email :</p>
+          <input
+            pInputText
+            id="email"
+            class="form-control"
+            placeholder=""
+            formControlName="email"
+          />
+        </div>
+        <div class="py-1 w-100">
+          <p class="m-1 p-1">Password :</p>
+          <p-password
+            [toggleMask]="true"
+            class="form-control"
+            formControlName="password"
+          ></p-password>
+        </div>
+        <p class="text-end Forget" routerLink="/auth/forgetpassword">
+          Forget Password ?
+        </p>
 
-
+        <div
+          class="justify-content-center align-items-center d-flex py-3 w-100"
+        >
+          <button class="w-100 button-send" [disabled]="loginform.invalid">
+            Send
+          </button>
+        </div>
+      </form>
+      <p class="text-center pointer" routerLink="/register">
+        Don’t have an account? <span class="sign">Sign up</span>
+      </p>
+    </div>
+  </div>
 </section>

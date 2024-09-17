@@ -10,8 +10,8 @@
           <img
             src="{{ datainfo.business.logo }}"
             alt=""
-            width="100"
-            height="80"
+            width="80"
+            height="60"
             class="rounded-circle"
           />
           <div class="">
@@ -35,7 +35,7 @@
           >
             Directions
           </button>
-          <div *ngIf="datainfo.booking_url !== ''">
+          <div *ngIf="datainfo.booking_url == ''">
             <button class="book-btn">
               <a href="{{ datainfo.business.booking_url }}" target="_blank"
                 >Book</a
