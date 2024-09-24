@@ -28,7 +28,7 @@ export class BsListviewComponent {
   @Input() distances!: any;
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
-  maxDescriptionLengthmpo: number = 14;
+  maxDescriptionLengthmpo: number = 18;
   constructor(
     private _filterservie: FilterService,
     private _cookieService: CookieService,

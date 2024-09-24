@@ -14,8 +14,9 @@ li a {
 
 .btns {
     .call-now {
-        background-color: #aefcc9;
+        background-color: black;
         width: 170px;
+        color: white;
         height: 30px;
         border: none;
         outline: none;
@@ -27,8 +28,10 @@ li a {
     }
 
     .Directions {
-        background-color: #ffbf9d;
+        background-color: transparent;
         width: 170px;
+        border: 2px solid black !important;
+        color: black;
         height: 30px;
         border: none;
         outline: none;
@@ -63,4 +66,34 @@ li a {
 
 .p-datatable>.p-datatable-wrapper {
     overflow: hidden !important;
+}
+
+.call-now {
+    background-color: black;
+    width: 170px;
+    color: white !important;
+    height: 26px !important;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.Directions {
+    background-color: transparent;
+    width: 170px;
+    border: 2px solid black !important;
+    color: black !important;
+    height: 26px !important;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+
 }
