@@ -10,7 +10,7 @@
           <img
             src="{{ detalisArray.business.logo }}"
             alt=""
-            width="50"
+            width="60"
             height="50"
             class="rounded-circle"
           />
@@ -37,7 +37,7 @@
           >
             Directions
           </button>
-          <div *ngIf="detalisArray.booking_url !== ''">
+          <div *ngIf="detalisArray.booking_url == ''">
             <button class="book-btn">
               <a href="{{ detalisArray.business.booking_url }}" target="_blank"
                 >Book</a

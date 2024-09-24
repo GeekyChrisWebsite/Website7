@@ -153,8 +153,8 @@
         class="d-flex gap-2 justify-content-center align-items-center py-3 row px-4"
       >
         <div class="card my-0 py-0 px-0">
-          <div class="row g-0">
-            <div class="col-7">
+          <div class="row g-4">
+            <div class="col-6">
               <img
                 src="{{ customer.images[0] }}"
                 class="rounded-start black"
@@ -164,7 +164,7 @@
                 (error)="onImageError($event)"
               />
             </div>
-            <div class="col-4">
+            <div class="col-6">
               <div
                 class="card-body card-body d-flex flex-column align-items-between justify-content-between px-0 py-0"
               >
@@ -179,7 +179,7 @@
                 <p
                   style="font-size: 12px"
                   class="m-0"
-                  [innerHTML]="customer.content | truncateText : 17"
+                  [innerHTML]="customer.content | truncateText : 25"
                 ></p>
                 <div *ngIf="distances" class="py-1">
                   <div

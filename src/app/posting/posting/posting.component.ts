@@ -84,8 +84,8 @@ export class PostingComponent {
     public router: Router,
     public _DistanceService: DistanceService
   ) {
-    this.galleyView = true;
-    this.listView = false;
+    this.galleyView = false;
+    this.listView = true;
     this.mapView = false;
     this.postingArray = [];
 
