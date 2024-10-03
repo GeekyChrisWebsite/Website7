@@ -92,8 +92,12 @@ export class FilterComponent {
     this.filter.reset();
     this.filterService.clearListing();
     localStorage.removeItem('filter');
+    localStorage.removeItem('filterCategory');
+    localStorage.removeItem('filterState');
+    localStorage.removeItem('filterCity');
     this.filterService.setSidebarVisible(false);
     window.location.reload();
+    this.filterInService();
   }
   filterInService() {
     this.filterService.filterInService(
