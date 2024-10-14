@@ -184,12 +184,14 @@
                   class="div-time justify-content-center align-items-center d-flex"
                   [ngClass]="{
                     'btn-red':
+                      !day?.open ||
                       !day?.end_time ||
                       day?.end_time === 'undefined' ||
                       day?.end_time === null
                   }"
                 >
                   {{
+                    !day?.open ||
                     !day?.start_time ||
                     !day?.end_time ||
                     day?.start_time === "00:00" ||
