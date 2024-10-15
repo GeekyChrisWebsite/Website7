@@ -43,6 +43,9 @@ export class HomeComponent {
   backendLocations: any;
   distances: any[] = [];
 
+  trackByFn(index: number, item: any): number {
+    return item.id; // or whichever unique identifier each restaurant item has
+  }
   makePhoneCall(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }
