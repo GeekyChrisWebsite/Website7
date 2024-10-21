@@ -42,7 +42,13 @@
                 <p
                   style="cursor: pointer; color: blue"
                   class="p-0 m-0"
-                  (click)="handleMapClick(datainfo.street, datainfo.state)"
+                  (click)="
+                    handleMapClick(
+                      datainfo.street,
+                      datainfo.state,
+                      datainfo.title_for_map
+                    )
+                  "
                 >
                   {{ datainfo.street.trim() }}, {{ datainfo.city1 }},
                   {{ datainfo.state }}

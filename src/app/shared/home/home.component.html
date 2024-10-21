@@ -187,7 +187,13 @@
                       </button>
                       <button
                         class="Directions"
-                        (click)="handleMapClick(item.street, item.state)"
+                        (click)="
+                          handleMapClick(
+                            item.street,
+                            item.state,
+                            item.title_for_map
+                          )
+                        "
                       >
                         Directions
                       </button>
@@ -314,7 +320,13 @@
                       </button>
                       <button
                         class="Directions"
-                        (click)="handleMapClick(item.street, item.state)"
+                        (click)="
+                          handleMapClick(
+                            item.street,
+                            item.state,
+                            item.title_for_map
+                          )
+                        "
                       >
                         Directions
                       </button>
@@ -444,7 +456,13 @@
                         </button>
                         <button
                           class="Directions"
-                          (click)="handleMapClick(item.street, item.state)"
+                          (click)="
+                            handleMapClick(
+                              item.street,
+                              item.state,
+                              item.title_for_map
+                            )
+                          "
                         >
                           Directions
                         </button>

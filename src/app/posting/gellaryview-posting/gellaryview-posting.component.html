@@ -65,7 +65,11 @@
             <button
               class="Directions"
               (click)="
-                handleMapClick(item.business.street, item.business.state);
+                handleMapClick(
+                  item.business.street,
+                  item.business.state,
+                  item.title_for_map
+                );
                 $event.stopPropagation()
               "
             >

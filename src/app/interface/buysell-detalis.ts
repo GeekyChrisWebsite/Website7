@@ -53,4 +53,5 @@ export interface business {
   logo: string;
   name: string;
   booking_url: string;
+  title_for_map: string;
 }

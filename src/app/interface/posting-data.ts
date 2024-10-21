@@ -32,7 +32,5 @@ export interface PostingData {
   postTime: Date;
   likes: number;
   liked: boolean;
-
-
+  title_for_map: string;
 }
-

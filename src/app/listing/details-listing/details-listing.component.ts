@@ -218,15 +218,20 @@ export class DetailsListingComponent {
   //     window.open(link, '_blank');
   //   }
   // }
-  handleMapClick(street: string, state: string): void {
+  handleMapClick(street: string, state: string, title_for_map: string): void {
     if (street && state) {
       const encodedStreet = encodeURIComponent(street);
       const encodedState = encodeURIComponent(state);
-      const link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState}`;
+      let link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState},+${title_for_map}`;
+
+      if (title_for_map) {
+        const encodedTitle = encodeURIComponent(title_for_map);
+        link += `&query_place_id=${encodedTitle}`;
+      }
+
       window.open(link, '_blank');
     }
   }
-
   ngAfterViewInit() {
     this.videoPlayer.nativeElement.play();
   }
