@@ -13,6 +13,7 @@ export interface PostingData {
     state: string;
     street: string;
     likes: number;
+    title_for_map: any;
   };
   business_id: string;
   content: string;
