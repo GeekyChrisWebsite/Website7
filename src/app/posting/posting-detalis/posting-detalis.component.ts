@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   imports: [GalleriaModule, CommonModule],
   templateUrl: './posting-detalis.component.html',
   styleUrl: './posting-detalis.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class PostingDetalisComponent {
   id: any;
@@ -25,18 +25,20 @@ export class PostingDetalisComponent {
   displayCustom: boolean = true;
   activeIndex: number = 0;
   timepost: any;
-  loading: boolean = false
-  displayBasic: boolean = true
+  loading: boolean = false;
+  displayBasic: boolean = true;
 
-  constructor(private _postingservice: PostingService, private route: ActivatedRoute) {
+  constructor(
+    private _postingservice: PostingService,
+    private route: ActivatedRoute
+  ) {
     this.id = route.snapshot.paramMap.get('id');
   }
-
 
   getdetalisId() {
     this._postingservice.GetPostingByID(this.id).subscribe((res: any) => {
       this.datainfo = res.data;
-      this.timepost = res.data.dates
+      this.timepost = res.data.dates;
       this.galleryphotos = res.data.images;
       this.imgs = res.data.images;
     });
@@ -45,47 +47,55 @@ export class PostingDetalisComponent {
   responsiveOptions: any[] = [
     {
       breakpoint: '1500px',
-      numVisible: 5
-    }, {
+      numVisible: 5,
+    },
+    {
       breakpoint: '1024px',
-      numVisible: 3
-    }, {
+      numVisible: 3,
+    },
+    {
       breakpoint: '768px',
-      numVisible: 2
-    }, {
+      numVisible: 2,
+    },
+    {
       breakpoint: '560px',
-      numVisible: 2
+      numVisible: 2,
     },
   ];
 
-
   ngOnInit(): void {
     this.getdetalisId();
-    this.getImages()
+    this.getImages();
     this.galleryphotos = this.img;
-
   }
 
   getImages(): void {
-    this.loading = true
+    this.loading = true;
     this._postingservice.GetPostingByID(this.id).subscribe((res: any) => {
-      this.loading = false
+      this.loading = false;
       this.datainfo = res.data;
       this.imgs = res.data.images;
     });
   }
 
   imageClick(index: number): void {
-    this.displayCustom = true
+    this.displayCustom = true;
   }
   makePhoneCall(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }
-  handleMapClick(geoDirection: { lat: number, lng: number }): void {
-    if (geoDirection && geoDirection.lat !== undefined && geoDirection.lng !== undefined) {
-      const link = `https://www.google.com/maps/search/?api=1&query=${geoDirection.lat},${geoDirection.lng}`;
+  handleMapClick(street: string, state: string, title_for_map: string): void {
+    if (street && state) {
+      const encodedStreet = encodeURIComponent(street);
+      const encodedState = encodeURIComponent(state);
+      let link = `https://www.google.com/maps/search/?api=1&query=${encodedStreet},+${encodedState},+${title_for_map}`;
+
+      if (title_for_map) {
+        const encodedTitle = encodeURIComponent(title_for_map);
+        link += `&query_place_id=${encodedTitle}`;
+      }
+
       window.open(link, '_blank');
     }
   }
-
 }
