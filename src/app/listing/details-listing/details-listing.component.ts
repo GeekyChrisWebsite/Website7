@@ -162,7 +162,7 @@ export class DetailsListingComponent {
   ngOnInit(): void {
     this.galleryphotos = this.img;
     this.route.params.subscribe((params: any) => {
-      console.log(params);
+      // console.log(params);
       this.getdetalisId(params.id);
       this.getPosts(this.id);
     });
@@ -244,7 +244,6 @@ export class DetailsListingComponent {
       if (this.datainfo.liked) {
         this.filterService.addDislikes(busId).subscribe({
           next: (res) => {
-            console.log(res, 'dislike');
             this.datainfo.liked = false;
             this.datainfo.likes -= 1; // Decrease likes count on dislike
           },
