@@ -150,6 +150,7 @@
                     p {
                         font-family: 'Lato', sans-serif;
                         font-weight: 800;
+                        font-size: 12px;
                     }
 
                     small {
@@ -246,6 +247,10 @@
         width: 95px !important;
         font-size: 13px;
     }
+
+    h5 {
+        font-size: 14px;
+    }
 }
 
 .p-galleria-item {
@@ -294,4 +299,22 @@ pre {
     text-wrap: balance !important;
     font-family: 'Sarabun', sans-serif !important;
 
+}
+
+.btn-contact {
+    background-color: black;
+    border: #259193 1px solid !important;
+    outline: none;
+    color: white;
+    border: none;
+    width: 120px;
+    width: 175px;
+    height: 50px;
+    font-size: 19px;
+
+
+}
+
+.p-galleria-thumbnail-wrapper {
+    display: none;
 }

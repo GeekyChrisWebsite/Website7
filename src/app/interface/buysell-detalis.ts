@@ -54,4 +54,8 @@ export interface business {
   name: string;
   booking_url: string;
   title_for_map: string;
+  city1: string;
+  state: string;
+  phone_number: string;
+  city_zip: string;
 }

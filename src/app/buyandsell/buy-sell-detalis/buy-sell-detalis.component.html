@@ -1,22 +1,25 @@
-<section class="posting py-5">
-  <div class="container" *ngIf="detalisArray">
-    <div class="box-white">
+<section class="posting py-5" ngSkipHydration>
+  <div class="container" *ngIf="detalisArray" style="position: relative">
+    <!-- <div class="box-white">
       <div
-        class="div-info d-flex align-items-center justify-content-between gap-3 py-3 flex-column flex-lg-row"
+        class="div-info d-flex align-items-center justify-content-between py-3 flex-column flex-lg-row"
       >
         <div
-          class="d-flex gap-2 flex-lg-row align-items-start justify-content-start"
+          class="d-flex flex-lg-row align-items-center justify-content-center"
         >
           <img
             src="{{ detalisArray.business.logo }}"
             alt=""
-            width="60"
-            height="50"
+            width="100"
+            height="80"
             class="rounded-circle"
+            style="object-fit: contain"
           />
-          <div class="">
+          <div
+            class="justify-content-center align-items-center d-flex flex-column"
+          >
             <p class="p-0 m-0">{{ detalisArray.title }}</p>
-            <div class="d-flex gap-1 justify-content-start align-items-center">
+            <div class="d-flex gap-1 justify-content-center align-items-center">
               <i class="bx bx-world fs-6" style="color: #6b6666"></i>
               <p class="title-time text-muted m-0">
                 {{ detalisArray.buySellTime }}
@@ -24,24 +27,24 @@
             </div>
           </div>
         </div>
-        <div class="d-flex gap-1 gap-lg-3 flex-lg-row">
+        <div
+          class="d-flex gap-1 gap-lg-3 flex-lg-row justify-content-between align-items-center"
+        >
           <button
             class="call-now"
-            (click)="makePhoneCall(detalisArray.phone_number)"
+            (click)="makePhoneCall(detalisArray.business.phone_number)"
           >
             Call
           </button>
           <button
-            class="Directions"
+            class="Directions text-center"
             (click)="handleMapClick(detalisArray.business.geo_direction)"
           >
             Directions
           </button>
           <div *ngIf="detalisArray.booking_url == ''">
             <button class="book-btn">
-              <a href="{{ detalisArray.business.booking_url }}" target="_blank"
-                >Book</a
-              >
+              <a href="{{ detalisArray.booking_url }}" target="_blank">Book</a>
             </button>
           </div>
         </div>
@@ -56,6 +59,7 @@
           [numVisible]="5"
           [showThumbnailNavigators]="false"
           [autoPlay]="true"
+          style="background-color: black"
         >
           <ng-template pTemplate="item" let-item>
             <img [src]="item" class="w-100" />
@@ -71,6 +75,193 @@
       </div>
       <div>
         <pre class="text-start" [innerHTML]="detalisArray.content"></pre>
+      </div>
+    </div> -->
+    <h2 class="text-center mt-3">{{ detalisArray.business.name }}</h2>
+    <h6 class="fw-bold text-center py-3">
+      {{
+        detalisArray.business.city1 +
+          "," +
+          " " +
+          detalisArray.business.state +
+          " " +
+          (detalisArray.business.city_zip
+            ? " " + detalisArray.business.city_zip
+            : "")
+      }}
+    </h6>
+    <div class="row justify-content-start align-items-start d-flex gap-3">
+      <div class="col-md-8">
+        <p-galleria
+          [value]="galleryphotos"
+          [showItemNavigators]="true"
+          [responsiveOptions]="responsiveOptions"
+          [circular]="true"
+        >
+          <ng-template pTemplate="item" let-image>
+            <img
+              [src]="image"
+              class="w-100"
+              style="height: 300px; object-fit: cover"
+              alt="Image"
+            />
+          </ng-template>
+        </p-galleria>
+        <div
+          class="row justify-content-between d-flex align-items-center flex-wrap"
+        >
+          <div
+            class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
+          >
+            <h5 class="">Asking Price:</h5>
+            <h5 class="fw-bold">1555$</h5>
+          </div>
+          <div
+            class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
+          >
+            <h5 class="">Cash Flow:</h5>
+            <h5 class="fw-bold">1555$</h5>
+          </div>
+        </div>
+        <div
+          class="row justify-content-between d-flex align-items-center flex-wrap"
+        >
+          <div
+            class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
+          >
+            <h5 class="">Gross Revenue:</h5>
+            <h5 class="fw-bold">27000$</h5>
+          </div>
+          <div
+            class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
+          >
+            <h5 class="">Inventory:</h5>
+            <h5 class="fw-bold">35,000$</h5>
+          </div>
+        </div>
+        <div
+          class="row justify-content-between d-flex align-items-center flex-wrap"
+        >
+          <div
+            class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
+          >
+            <h5 class="">Rent:</h5>
+            <h5 class="fw-bold">$2,700/Month</h5>
+          </div>
+          <div
+            class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
+          >
+            <h5 class="">FF&E:</h5>
+            <h5 class="fw-bold">$145,000</h5>
+          </div>
+          <div
+            class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
+          >
+            <h5 class="">Established Year:</h5>
+            <h5 class="fw-bold">2020</h5>
+          </div>
+        </div>
+      </div>
+      <div
+        style="position: sticky; top: 40px"
+        class="col-md-3 border justify-content-center align-items-center d-flex"
+      >
+        <div class="m-3">
+          <h5>Sharlene Gonzales</h5>
+          <h6 class="py-3"><i class="pi pi-phone m-1 fs-6"></i>Phone Number</h6>
+          <button class="btn-contact">
+            <i class="pi pi-envelope m-1 fs-6" style="color: white"></i>Contact
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="py-3">
+      <h3 class="fw-bold">BUSINESS DESCRIPTION</h3>
+      <h6>PRICE REDUCED for immediate sale</h6>
+
+      <pre class="text-start" [innerHTML]="detalisArray.content"></pre>
+      <hr />
+      <h3 class="fw-bold">DETAILED INFORMATION</h3>
+
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Location</h5>
+          <h5 class="fw-bold">Coral Springs, FL</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Inventory</h5>
+          <h5 class="fw-bold">Included in asking price</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Real Estate</h5>
+          <h5 class="fw-bold">Leased</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Building SF</h5>
+          <h5 class="fw-bold">1,500</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Lease Expiration</h5>
+          <h5 class="fw-bold">30/04/2025</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Furnitures, Fixture & Equipment(FF&E)</h5>
+          <h5 class="fw-bold">Included in Asking Price</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Employees</h5>
+          <h5 class="fw-bold">5</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Financing</h5>
+          <h5 class="fw-bold">$25,000 is financed for 12 M at 7%</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Support & Training</h5>
+          <h5 class="fw-bold">2 weeks at no cost.</h5>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between d-flex align-items-center flex-wrap"
+      >
+        <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
+          <h5 class="">Reason for Selling</h5>
+          <h5 class="fw-bold">Retirement</h5>
+        </div>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { FilterService } from '../../services/filter.service';
@@ -7,18 +7,21 @@ import { CookieService } from 'ngx-cookie-service';
 import { SanatizerPipe } from '../../pipe/sanatizer.pipe';
 import { TruncateTextPipe } from '../../pipe/truncate-text.pipe';
 import { DistanceService } from '../../services/distance.service';
+import { GalleriaModule } from 'primeng/galleria';
 
 @Component({
   selector: 'app-bs-listview',
   standalone: true,
   templateUrl: './bs-listview.component.html',
   styleUrl: './bs-listview.component.scss',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
     TableModule,
     RouterModule,
     SanatizerPipe,
     TruncateTextPipe,
+    GalleriaModule,
   ],
 })
 export class BsListviewComponent {
@@ -29,12 +32,33 @@ export class BsListviewComponent {
   isLiked: boolean[] = [];
   likeCountValue: number[] = [];
   maxDescriptionLengthmpo: number = 18;
+  text: number = 200;
+  responsiveOptions;
+
   constructor(
     private _filterservie: FilterService,
     private _cookieService: CookieService,
     public router: Router,
     public distanceService: DistanceService
-  ) {}
+  ) {
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
+  }
   truncateText(content: string, maxLength: number): string {
     if (content.length <= maxLength) {
       return content;
