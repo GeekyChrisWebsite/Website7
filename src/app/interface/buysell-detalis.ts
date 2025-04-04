@@ -44,6 +44,18 @@ export interface BuysellDetalis {
   };
   logo: string;
   name: string;
+  buysell_contact_email: string;
+  buysell_contact_phone: string;
+  buysell_asking_price: number;
+  buysell_annual_revenue: number;
+  buysell_established_year: number;
+  buysell_cash_flow: number;
+  buysell_inventory_value: number;
+  buysell_building_sqft: string;
+
+  buysell_employee_count: number;
+  buysell_reason_for_sale: string;
+  buysell_assets_included: string;
 }
 export interface business {
   geo_direction: {

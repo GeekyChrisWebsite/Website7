@@ -99,4 +99,9 @@ export class BuySellDetalisComponent {
       window.open(link, '_blank');
     }
   }
+  openEmail(email: string) {
+    if (email) {
+      window.location.href = `mailto:${email}`;
+    }
+  }
 }

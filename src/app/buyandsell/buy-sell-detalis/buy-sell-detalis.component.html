@@ -114,13 +114,13 @@
             class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
           >
             <h5 class="">Asking Price:</h5>
-            <h5 class="fw-bold">1555$</h5>
+            <h5 class="fw-bold">{{ detalisArray.buysell_asking_price }}$</h5>
           </div>
           <div
             class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
           >
             <h5 class="">Cash Flow:</h5>
-            <h5 class="fw-bold">1555$</h5>
+            <h5 class="fw-bold">{{ detalisArray.buysell_cash_flow }}$</h5>
           </div>
         </div>
         <div
@@ -130,13 +130,13 @@
             class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
           >
             <h5 class="">Gross Revenue:</h5>
-            <h5 class="fw-bold">27000$</h5>
+            <h5 class="fw-bold">{{ detalisArray.buysell_annual_revenue }}$</h5>
           </div>
           <div
             class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
           >
             <h5 class="">Inventory:</h5>
-            <h5 class="fw-bold">35,000$</h5>
+            <h5 class="fw-bold">{{ detalisArray.buysell_inventory_value }}$</h5>
           </div>
         </div>
         <div
@@ -152,13 +152,17 @@
             class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
           >
             <h5 class="">FF&E:</h5>
-            <h5 class="fw-bold">$145,000</h5>
+            <h5 class="fw-bold">
+              {{ detalisArray.buysell_assets_included }}
+            </h5>
           </div>
           <div
             class="py-2 d-flex gap-md-5 gap-2 col-6 justify-content-between d-flex"
           >
             <h5 class="">Established Year:</h5>
-            <h5 class="fw-bold">2020</h5>
+            <h5 class="fw-bold">
+              {{ detalisArray.buysell_established_year }}
+            </h5>
           </div>
         </div>
       </div>
@@ -167,9 +171,21 @@
         class="col-md-3 border justify-content-center align-items-center d-flex"
       >
         <div class="m-3">
-          <h5>Sharlene Gonzales</h5>
-          <h6 class="py-3"><i class="pi pi-phone m-1 fs-6"></i>Phone Number</h6>
-          <button class="btn-contact">
+          <h5>{{ detalisArray.author }}</h5>
+          <h6 style="cursor: pointer" class="py-3">
+            <i
+              class="pi pi-phone m-1 fs-6"
+              (click)="
+                makePhoneCall(detalisArray.buysell_contact_phone);
+                $event.stopPropagation()
+              "
+            ></i
+            >Phone Number
+          </h6>
+          <button
+            class="btn-contact"
+            (click)="openEmail(detalisArray.buysell_contact_email)"
+          >
             <i class="pi pi-envelope m-1 fs-6" style="color: white"></i>Contact
           </button>
         </div>
@@ -188,7 +204,18 @@
       >
         <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
           <h5 class="">Location</h5>
-          <h5 class="fw-bold">Coral Springs, FL</h5>
+          <h5 class="fw-bold">
+            {{
+              detalisArray.business.city1 +
+                "," +
+                " " +
+                detalisArray.business.state +
+                " " +
+                (detalisArray.business.city_zip
+                  ? " " + detalisArray.business.city_zip
+                  : "")
+            }}
+          </h5>
         </div>
       </div>
       <div
@@ -212,7 +239,9 @@
       >
         <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
           <h5 class="">Building SF</h5>
-          <h5 class="fw-bold">1,500</h5>
+          <h5 class="fw-bold">
+            {{ detalisArray.buysell_building_sqft }}
+          </h5>
         </div>
       </div>
       <div
@@ -220,7 +249,9 @@
       >
         <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
           <h5 class="">Lease Expiration</h5>
-          <h5 class="fw-bold">30/04/2025</h5>
+          <h5 class="fw-bold">
+            {{ detalisArray.days_until_expiration }}
+          </h5>
         </div>
       </div>
       <div
@@ -228,7 +259,9 @@
       >
         <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
           <h5 class="">Furnitures, Fixture & Equipment(FF&E)</h5>
-          <h5 class="fw-bold">Included in Asking Price</h5>
+          <h5 class="fw-bold">
+            {{ detalisArray.buysell_assets_included }}
+          </h5>
         </div>
       </div>
       <div
@@ -236,7 +269,9 @@
       >
         <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
           <h5 class="">Employees</h5>
-          <h5 class="fw-bold">5</h5>
+          <h5 class="fw-bold">
+            {{ detalisArray.buysell_employee_count }}
+          </h5>
         </div>
       </div>
       <div
@@ -260,7 +295,9 @@
       >
         <div class="py-2 d-flex gap-0 col-md-6 justify-content-between d-flex">
           <h5 class="">Reason for Selling</h5>
-          <h5 class="fw-bold">Retirement</h5>
+          <h5 class="fw-bold">
+            {{ detalisArray.buysell_reason_for_sale }}
+          </h5>
         </div>
       </div>
     </div>

@@ -146,4 +146,9 @@ export class BsListviewComponent {
     const distance = this.distanceService.calculateDistance(lat, lng);
     return distance !== null ? distance.toFixed(0) : 'N/A';
   }
+  openEmail(email: string) {
+    if (email) {
+      window.location.href = `mailto:${email}`;
+    }
+  }
 }
